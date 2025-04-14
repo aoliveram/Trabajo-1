@@ -131,8 +131,8 @@ recode_close <- function(x) {
   })
 }
 
-GSS_2004_EGO_recoded <- GSS_2004_EGO
-GSS_2004_EGO_recoded[col_alters_net] <- lapply(GSS_2004_EGO[col_alters_net], recode_close)
+GSS_2004_EGO_bin <- GSS_2004_EGO
+GSS_2004_EGO_bin[col_alters_net] <- lapply(GSS_2004_EGO[col_alters_net], recode_close)
 
 # 11. Graficar la red alter-alter para un ego
 
@@ -161,10 +161,10 @@ plot_ego_network <- function(row, close_cols) {
 }
 
 # Graficamos redes únicas
-plot_ego_network(GSS_2004_EGO_recoded[3, ], col_alters_net)
+plot_ego_network(GSS_2004_EGO_bin[3, ], col_alters_net)
 
 # 12. Histograma de densidad de redes Alter-Alter (lazos máximos 5x4/2 = 10)
-densidades <- rowSums(GSS_2004_EGO_recoded[, col_alters_net], na.rm = TRUE) / 10
+densidades <- rowSums(GSS_2004_EGO_bin[, col_alters_net], na.rm = TRUE) / 10
 
 hist(densidades,
      breaks = seq(0, 1, by = 0.1),
@@ -192,13 +192,13 @@ calc_density <- function(row, close_cols) {
 }
 
 # Aplica la función a cada fila
-densidades_corregidas <- apply(GSS_2004_EGO_recoded, 1, calc_density, close_cols = col_alters_net)
+densidades_corregidas <- apply(GSS_2004_EGO_bin, 1, calc_density, close_cols = col_alters_net)
 
 # Filtra densidades válidas (no NA)
 densidades_validas <- densidades_corregidas[!is.na(densidades_corregidas)]
-
-# Número total de redes válidas
-num_redes_validas <- length(densidades_validas)
+length(densidades_validas)/length(densidades_corregidas)
+length(densidades_validas) # 789 obs tienen red Alter-Alter válida (pero habíamos filtrado ya las no-validas 
+                                # ??????????????????????? )
 
 # Histograma con eje-y ajustado
 hist(densidades_validas,
@@ -209,4 +209,4 @@ hist(densidades_validas,
      xlab = "Densidad corregida",
      ylab = "Frecuencia",
      xlim = c(0, 1),
-     ylim = c(0, num_redes_validas))
+     ylim = c(0, length(densidades_validas)))
