@@ -28,6 +28,8 @@ Missing	1340
 
 # ---------------------------------------------------------------------------
 
+# Alter Network -------------------------------------------------------------
+
 261) CLOSE12
 From time to time, most people discuss important matters with other people. Closeness of first and second persons
 262) CLOSE13
@@ -39,6 +41,8 @@ From time to time, most people discuss important matters with other people. Clos
 268) CLOSE34
 269) CLOSE35
 270) CLOSE45
+
+# Alter Attrs -------------------------------------------------------------
 
 271) SEX1
 From time to time, most people discuss important matters with other people. Sex of first person
@@ -53,6 +57,29 @@ From time to time, most people discuss important matters with other people. Race
 278) RACE3
 279) RACE4
 280) RACE5
+
+341) EDUC1
+From time to time, most people discuss important matters with other people. This card lists general levels of education. As far as you know, what is (name)'s highest level of education? Education of first person
+342) EDUC2
+343) EDUC3
+344) EDUC4
+345) EDUC5
+
+346) AGE1
+From time to time, most people discuss important matters with other people. Age of first person
+347) AGE2
+348) AGE3
+349) AGE4
+350) AGE5
+
+351) RELIG1
+From time to time, most people discuss important matters with other people. What is (name)'s religious preference? Is it Protestant, Catholic, Jewish, some other religion or no religion? Religion of first person
+352) RELIG2
+353) RELIG3
+354) RELIG4
+355) RELIG5
+
+# Alter Status -------------------------------------------------------------
 
 281) SPOUSE1
 282) SPOUSE2
@@ -137,23 +164,3 @@ From time to time, most people discuss important matters with other people. Thin
 339) TALKTO4
 340) TALKTO5
 
-341) EDUC1
-From time to time, most people discuss important matters with other people. This card lists general levels of education. As far as you know, what is (name)'s highest level of education? Education of first person
-342) EDUC2
-343) EDUC3
-344) EDUC4
-345) EDUC5
-
-346) AGE1
-From time to time, most people discuss important matters with other people. Age of first person
-347) AGE2
-348) AGE3
-349) AGE4
-350) AGE5
-
-351) RELIG1
-From time to time, most people discuss important matters with other people. What is (name)'s religious preference? Is it Protestant, Catholic, Jewish, some other religion or no religion? Religion of first person
-352) RELIG2
-353) RELIG3
-354) RELIG4
-355) RELIG5
