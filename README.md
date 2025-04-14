@@ -1,4 +1,4 @@
-# README
+## README
 
 Repositorio del Trabajo 1. En constante trabajo..
 
