@@ -183,10 +183,9 @@ sum(densidades > 0)
 calc_density <- function(row, close_cols) {
   n <- row[["numgiven"]]
   if (is.na(n) || n < 2) return(NA) # No se puede calcular densidad con menos de 2 alters
-  # Selecciona solo los lazos posibles entre los alters reportados
-  # Los lazos posibles son los primeros choose(n, 2) de close_cols
+  # Calculamos número máximo de links n(n-1)/2 .
   possible_links <- choose(n, 2)
-  # Extrae los valores de los lazos relevantes
+  # Extrae los valores de los lazos relevantes. Ej: close12, close13, close23
   links <- as.numeric(row[close_cols][1:possible_links])
   observed_links <- sum(links, na.rm = TRUE)
   return(observed_links / possible_links)
