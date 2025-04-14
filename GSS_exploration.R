@@ -39,18 +39,35 @@ col_alters_attr <- c(
   paste0("sex", 1:5), paste0("race", 1:5), paste0("educ", 1:5), 
   paste0("age", 1:5), paste0("relig", 1:5)
 )
+
 col_alters_net <- paste0("close", c("12", "13", "14", "15", "23", "24", "25", "34", "35", "45"))
+
+col_alters_status <- c(
+  paste0("spouse", 1:5),
+  paste0("parent", 1:5),
+  paste0("sibling", 1:5),
+  paste0("child", 1:5),
+  paste0("othfam", 1:5),
+  paste0("cowork", 1:5),
+  paste0("memgrp", 1:5),
+  paste0("neighbr", 1:5),
+  paste0("friend", 1:5),
+  paste0("advisor", 1:5),
+  paste0("other", 1:5),
+  paste0("talkto", 1:5)
+)
 
 # 3. Filtrar solo casos con numgiven no nulo
 GSS_2004_EGO <- GSS_2004 %>% filter(!is.na(numgiven))
 
 # 4. Seleccionar columnas relevantes (atributos + red)
-selected_columns <- c(col_alters_attr, col_alters_net)
+selected_columns <- c(col_alters_attr, col_alters_net, col_alters_status)
 GSS_2004_EGO <- GSS_2004_EGO %>% select(all_of(selected_columns))
 
 # 5. Guardar etiquetas originales
 labels_list_attr <- lapply(GSS_2004_EGO[col_alters_attr], val_labels)
 labels_list_net  <- lapply(GSS_2004_EGO[col_alters_net],  val_labels)
+labels_list_status <- lapply(GSS_2004_EGO[col_alters_status], val_labels)
 
 # 6. Convertir a data frame base R 
 GSS_2004_EGO <- GSS_2004_EGO %>% mutate(across(everything(), ~ as.integer(.)))
@@ -97,3 +114,100 @@ GSS_2004_EGO <- read.csv('B - Surveys Data/GSS 2004/GSS_2004_EGO.csv')
 
 # ----------------- NETWORK ------------
 
+# 9. Cuantificar casos '7 = refused'
+refused_count <- sum(sapply(GSS_2004_EGO[col_alters_net], function(x) sum(x == 7, na.rm = TRUE)))
+cat("Cantidad de casos '7 = refused':", refused_count, "\n")
+
+# 10. Recodificar lazos alter-alter
+set.seed(123) # Para reproducibilidad
+
+recode_close <- function(x) {
+  sapply(x, function(val) {
+    if (is.na(val)) return(0)           # NA --> 0 (no lazo)
+    if (val == 3) return(0)             # 'total strangers' --> 0
+    if (val %in% c(1, 2)) return(1)     # 'especially close' 'know each other' --> 1
+    if (val == 7) return(sample(c(0, 1), 1)) # 'refused' --> random (0,1)
+    return(NA)
+  })
+}
+
+GSS_2004_EGO_recoded <- GSS_2004_EGO
+GSS_2004_EGO_recoded[col_alters_net] <- lapply(GSS_2004_EGO[col_alters_net], recode_close)
+
+# 11. Graficar la red alter-alter para un ego
+
+library(igraph)
+
+plot_ego_network <- function(row, close_cols) {
+  adj <- matrix(0, nrow = 5, ncol = 5)
+  colnames(adj) <- rownames(adj) <- paste0("Alter", 1:5)
+  alter_pairs <- list(
+    c(1,2), c(1,3), c(1,4), c(1,5),
+    c(2,3), c(2,4), c(2,5),
+    c(3,4), c(3,5),
+    c(4,5)
+  )
+  for (i in seq_along(close_cols)) {
+    val <- as.numeric(row[[close_cols[i]]])
+    if (!is.na(val) && val == 1) {
+      a <- alter_pairs[[i]][1]
+      b <- alter_pairs[[i]][2]
+      adj[a, b] <- 1
+      adj[b, a] <- 1
+    }
+  }
+  g <- graph_from_adjacency_matrix(adj, mode = "undirected", diag = FALSE)
+  plot(g, main = "Red alter-alter (un ego)", vertex.size = 30)
+}
+
+# Graficamos redes únicas
+plot_ego_network(GSS_2004_EGO_recoded[3, ], col_alters_net)
+
+# 12. Histograma de densidad de redes Alter-Alter (lazos máximos 5x4/2 = 10)
+densidades <- rowSums(GSS_2004_EGO_recoded[, col_alters_net], na.rm = TRUE) / 10
+
+hist(densidades,
+     breaks = seq(0, 1, by = 0.1),
+     col = "cyan",
+     border = "black",
+     main = "Histograma de densidades de red (5 alters)",
+     xlab = "Densidad",
+     ylab = "Frecuencia",
+     xlim = c(0, 1))
+
+# redes con densidad mayor a 0
+sum(densidades > 0)
+
+# 13. Histograma con densidad corregida por Alter reportados. Eje-y considera número de redes con al menos 2 Alters.
+
+calc_density <- function(row, close_cols) {
+  n <- row[["numgiven"]]
+  if (is.na(n) || n < 2) return(NA) # No se puede calcular densidad con menos de 2 alters
+  # Selecciona solo los lazos posibles entre los alters reportados
+  # Los lazos posibles son los primeros choose(n, 2) de close_cols
+  possible_links <- choose(n, 2)
+  # Extrae los valores de los lazos relevantes
+  links <- as.numeric(row[close_cols][1:possible_links])
+  observed_links <- sum(links, na.rm = TRUE)
+  return(observed_links / possible_links)
+}
+
+# Aplica la función a cada fila
+densidades_corregidas <- apply(GSS_2004_EGO_recoded, 1, calc_density, close_cols = col_alters_net)
+
+# Filtra densidades válidas (no NA)
+densidades_validas <- densidades_corregidas[!is.na(densidades_corregidas)]
+
+# Número total de redes válidas
+num_redes_validas <- length(densidades_validas)
+
+# Histograma con eje-y ajustado
+hist(densidades_validas,
+     breaks = seq(0, 1, by = 0.1),
+     col = "cyan",
+     border = "black",
+     main = "Histograma de densidades de red (corrigido por alters reportados)",
+     xlab = "Densidad corregida",
+     ylab = "Frecuencia",
+     xlim = c(0, 1),
+     ylim = c(0, num_redes_validas))
