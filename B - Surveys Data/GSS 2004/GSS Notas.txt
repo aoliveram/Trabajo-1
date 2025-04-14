@@ -1,0 +1,159 @@
+Data from:
+
+https://gss.norc.org/us/en/gss/get-the-data/stata.html
+
+# ---------------------------------------------------------------------------
+
+Variable Relevante GSS 2004:
+
+[SEX1-5 271-275, RACE1-5 276-280, EDUC1-5 341-345, AGE1-5 345-350,  RELIG1-5 351-355]
+[sex1 - sex2 - sex3 - sex4 - sex5, race1 - race2 - race3 - race4 - race5, educ1 - educ2 - educ3 - educ4 - educ5, age1 - age2 - age3 - age4 - age5, relig1 - relig2 - relig3 - relig4 - relig5]
+
+# ---------------------------------------------------------------------------
+
+260) NUMGIVEN
+From time to time, most people discuss important matters with other people. Looking back over the last six months--who are the people with whom you discussed matters important to you? How many names were mentioned?
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	2.011	1.814
+0) 0	397	27.0
+1) 1	281	19.1
+2) 2	263	17.9
+3) 3	232	15.8
+4) 4	128	8.7
+5) 5	96	6.5
+6) 6+	70	4.8
+9) No answer	5	0.3
+Missing	1340
+
+# ---------------------------------------------------------------------------
+
+261) CLOSE12
+From time to time, most people discuss important matters with other people. Closeness of first and second persons
+262) CLOSE13
+263) CLOSE14
+264) CLOSE15
+265) CLOSE23
+266) CLOSE24
+267) CLOSE25
+268) CLOSE34
+269) CLOSE35
+270) CLOSE45
+
+271) SEX1
+From time to time, most people discuss important matters with other people. Sex of first person
+272) SEX2
+273) SEX3
+274) SEX4
+275) SEX5
+
+276) RACE1
+From time to time, most people discuss important matters with other people. Race of first person
+277) RACE2
+278) RACE3
+279) RACE4
+280) RACE5
+
+281) SPOUSE1
+282) SPOUSE2
+283) SPOUSE3
+284) SPOUSE4
+285) SPOUSE5
+
+286) PARENT1
+From time to time, most people discuss important matters with other people. First person is parent
+287) PARENT2
+288) PARENT3
+289) PARENT4
+290) PARENT5
+
+291) SIBLING1
+From time to time, most people discuss important matters with other people. First person is sibling
+292) SIBLING2
+293) SIBLING3
+294) SIBLING4
+295) SIBLING5
+
+296) CHILD1
+From time to time, most people discuss important matters with other people. First person is child
+297) CHILD2
+298) CHILD3
+299) CHILD4
+300) CHILD5
+
+301) OTHFAM1
+From time to time, most people discuss important matters with other people. First person is other family member
+302) OTHFAM2
+303) OTHFAM3
+304) OTHFAM4
+305) OTHFAM5
+
+306) COWORK1
+From time to time, most people discuss important matters with other people. First person is co-worker
+307) COWORK2
+308) COWORK3
+309) COWORK4
+310) COWORK5
+
+311) MEMGRP1
+From time to time, most people discuss important matters with other people. First person is group member
+312) MEMGRP2
+313) MEMGRP3
+314) MEMGRP4
+315) MEMGRP5
+
+316) NEIGHBR1
+From time to time, most people discuss important matters with other people. First person is neighbor
+317) NEIGHBR2
+318) NEIGHBR3
+319) NEIGHBR4
+320) NEIGHBR5
+
+321) FRIEND1
+From time to time, most people discuss important matters with other people. First person is friend
+322) FRIEND2
+323) FRIEND3
+324) FRIEND4
+325) FRIEND5
+
+326) ADVISOR1
+From time to time, most people discuss important matters with other people. First person is advisor
+327) ADVISOR2
+328) ADVISOR3
+329) ADVISOR4
+330) ADVISOR5
+
+331) OTHER1
+From time to time, most people discuss important matters with other people. First person is other
+332) OTHER2
+333) OTHER3
+334) OTHER4
+335) OTHER5
+
+336) TALKTO1
+From time to time, most people discuss important matters with other people. Thinking about how often you usually talk to (name), on the average, do you talk to (him/her) almost every day, at least once a week, at least once a month, or less than once a month? Talks to first person
+337) TALKTO2
+338) TALKTO3
+339) TALKTO4
+340) TALKTO5
+
+341) EDUC1
+From time to time, most people discuss important matters with other people. This card lists general levels of education. As far as you know, what is (name)'s highest level of education? Education of first person
+342) EDUC2
+343) EDUC3
+344) EDUC4
+345) EDUC5
+
+346) AGE1
+From time to time, most people discuss important matters with other people. Age of first person
+347) AGE2
+348) AGE3
+349) AGE4
+350) AGE5
+
+351) RELIG1
+From time to time, most people discuss important matters with other people. What is (name)'s religious preference? Is it Protestant, Catholic, Jewish, some other religion or no religion? Religion of first person
+352) RELIG2
+353) RELIG3
+354) RELIG4
+355) RELIG5

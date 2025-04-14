@@ -1,0 +1,5902 @@
+Data File: GSS2004 (Description Only Codebook)
+
+1) YEAR
+Year of survey
+
+
+
+2) ID
+Respondent original ID Number
+
+
+
+3) WRKSTAT
+Last week were you working full time, part time, going to school, keeping house, or what?
+
+
+
+4) HRS1
+If working, full or part time: How many hours did you work last week, at all jobs?
+
+
+
+5) HRS2
+If with a job, but not at work: How many hours a week do you usually work, at all jobs?
+
+
+
+6) EVWORK
+If retired, in school, keeping house, or other: Did you ever work for as long as one year?
+
+
+
+7) WRKSLF
+(Are/Were) you self employed or (do/did) you work for someone else?
+
+
+
+8) WRKGOVT
+Respondent's employer
+
+
+
+9) OCC80
+Respondent's occupation (see Note 1: Occupation Codes on the ARDA summary page)
+
+
+
+10) PRESTG80
+Prestige of respondent's occupation (see Note 1: Prestige Scores on the ARDA summary page)
+
+
+
+11) INDUS80
+Respondent's industry (see Note 2: Industrial Classification on the ARDA summary page)
+
+
+
+12) MARITAL
+Are you currently -- married, widowed, divorced, separated, or have you never been married?
+
+
+
+13) DIVORCE
+Asked only of those who are currently married or widowed: Have you ever been divorced or legally separated?
+
+
+
+14) WIDOWED
+Have you ever been widowed?
+
+
+
+15) SPWRKSTA
+Last week was your (wife/husband) working full time, part time, going to school, keeping house, or what?
+
+
+
+16) SPHRS1
+If spouse working, full or part time: How many hours did (he/she) work last week, at all jobs?
+
+
+
+17) SPHRS2
+If spouse with job, but not at work: How many hours a week does (he/she) usually work, at all jobs?
+
+
+
+18) SPEVWORK
+If spouse retired, in school, keeping house, or other: Did (he/she) ever work for as long as one year?
+
+
+
+19) SPWRKSLF
+Spouse's employment status
+
+
+
+20) SPOCC80
+Respondent's spouse's occupation (see Note 1: Occupation Codes on the ARDA summary page)
+
+
+
+21) SPPRES80
+Prestige of respondent's spouse's occupation (see Note 1: Occupation Codes on the ARDA summary page)
+
+
+
+22) SPIND80
+Respondent's spouse's industry (see Note 2: Industrial Classification on the ARDA summary page)
+
+
+
+23) PAWRKSLF
+Father's employment status: While you were growing up was your father self-employed or did he work for someone else?
+
+
+
+24) PAOCC80
+Respondent's father's occupation (see Note 1: Occupation Codes on the ARDA summary page)
+
+
+
+25) PAPRES80
+Prestige of father's occupation (see Note 1: Prestige Scores on the ARDA summary page)
+
+
+
+26) PAIND80
+Respondent's father's industry (see Note 1: Industrial Classification on the ARDA summary page)
+
+
+
+27) MAOCC80
+Occupation of respondent's mother
+
+
+
+28) MAPRES80
+Prestige of Respondent's mother's occupation
+
+
+
+29) MAWRKSLF
+Was respondent's mother self-employed or did she work for someone else?
+
+
+
+30) MAIND80
+Industry of respondent's mother
+
+
+
+31) SIBS
+How many brothers and sisters did you have? Please count those born alive, but no longer living, as well as those alive now. Also include stepbrothers and stepsisters, and children adopted by your parents.
+
+
+
+32) CHILDS
+How many children have you ever had? Please count all that were born alive at any time (including any you had from a previous marriage).
+
+
+
+33) AGE
+Respondent's age
+
+
+
+34) AGEKDBRN
+How old were you when your first child was born?
+
+
+
+35) EDUC
+Respondent's education: What is the highest grade in elementary school or high school that you finished and got credit for?
+
+
+
+36) PAEDUC
+What is the highest grade in elementary school or high school that your father (or substitute father) finished and got credit for?
+
+
+
+37) MAEDUC
+What is the highest grade in elementary school or high school that your mother (substitute mother) finished and got credit for?
+
+
+
+38) SPEDUC
+What is the highest grade in elementary or high school that your (husband/wife) finished and got credit for?
+
+
+
+39) DEGREE
+Highest educational degree earned by respondent
+
+
+
+40) PADEG
+Highest educational degree of respondent's father
+
+
+
+41) MADEG
+Highest educational degree of respondent's mother
+
+
+
+42) SPDEG
+Highest educational degree of respondent's spouse
+
+
+
+43) SEX
+Respondent's sex
+
+
+
+44) RACE
+Respondent's race
+
+
+
+45) RES16
+Which of the categories on this card comes closest to the type of place you were living in when you were 16 years old? (Open country, farm, small city or town, medium size city, suburb near large city, large city)
+
+
+
+46) REG16
+In what state or foreign country were you living when you were 16 years old?
+
+
+
+47) MOBILE16
+When you were 16 years old, were you living in this same (city/town/county)?
+
+
+
+48) FAMILY16
+Were you living with both your own mother and father around the time you were 16? (If no: With whom were you living around that time?)
+
+
+
+49) FAMDIF16
+If not living with both own mother and father: What happened?
+
+
+
+50) MAWRKGRW
+Did (respondent's mother) work for as long as a year, while you were growing up?
+
+
+
+51) INCOM16
+Thinking about the time when you were 16 years old, compared with American families in general then, would you say your family income was -- far below average, below average, average, above average, or far above average?
+
+
+
+52) BORNUSA
+Were you born in this country?
+
+
+
+53) PARBORN
+Were both your parents born in this country?
+
+
+
+54) GRANBORN
+Were all of your four grandparents born in this country? IF NO: How many were born outside the United States?
+
+
+
+55) HOMPOP
+Number of household members
+
+
+
+56) BABIES
+Number of members under 6
+
+
+
+57) PRETEEN
+Number of members 6 to 12 years
+
+
+
+58) TEENS
+Number of members 13 to 17 years old
+
+
+
+59) ADULTS
+Number of members over 17 years old
+
+
+
+60) UNRELAT
+How many persons in the household are not related to you in any way?
+
+
+
+61) EARNRS
+Just thinking about your family now -- those people in the household who are related to you . . . How many persons in the family, including yourself earned any money last year from any job or employment?
+
+
+
+62) INCOME
+In which of these groups did your total family income, from all sources, fall last year before taxes, that is?
+
+
+
+63) RINCOME
+In which of these groups did your earnings from (stated occupation) for last year fall? That is, before taxes or other deductions.
+
+
+
+64) INCOME98
+In which of these groups did your total family income, from all sources, fall last year before taxes, that is?  Family income on the 1998 survey
+
+
+
+65) RINCOM98
+Respondent's income on the 1998, 2000 surveys.
+
+
+
+66) WEEKSWRK
+In [1993/95] how many weeks did you work either full-time or part-time not counting work around the house--include paid vacations and sick leave?
+
+
+
+67) PARTFULL
+When you worked in [1993/94], was it usually full or part time?
+
+
+
+68) REGION
+Region of interview
+
+
+
+69) PARTYID
+Generally speaking, do you usually think of yourself as a Republican, Democrat, Independent, or what?
+
+
+
+70) VOTE00
+In 2000, you remember that Gore ran for President on the Democratic ticket against Bush for the Republicans. Do you remember for sure whether or not you voted in that election?
+
+
+
+71) PRES00
+If voted in 2000 election: Did you vote for Gore or Bush?
+
+
+
+72) IF00WHO
+If did not vote or ineligible: Who would you have voted for, for President, if you had voted?
+
+
+
+73) POLVIEW
+I'm going to show you a seven-point scale on which the political views that people might hold are arranged from extremely liberal to extremely conservative. Where would you place yourself on this scale?
+
+
+
+74) NATSPAC
+Spending on the space exploration program
+
+
+
+75) NATENVIR
+Spending on improving and protecting the environment
+
+
+
+76) NATHEAL
+Spending on improving and protecting the nation's health
+
+
+
+77) NATCITY
+Spending on solving the problems of the big cities
+
+
+
+78) NATCRIME
+Spending on halting the rising crime rate
+
+
+
+79) NATDRUG
+Spending on dealing with drug addiction
+
+
+
+80) NATEDUC
+Spending on improving the nation's education system
+
+
+
+81) NATRACE
+Spending on improving the conditions of Blacks
+
+
+
+82) NATARMS
+Spending on the military, armaments and defense
+
+
+
+83) NATAID
+Spending on foreign aid
+
+
+
+84) NATFARE
+Spending on welfare
+
+
+
+85) NATROAD
+Spending on highways and bridges
+
+
+
+86) NATSOC
+Spending on Social Security
+
+
+
+87) NATMASS
+Spending on mass transportation
+
+
+
+88) NATPARK
+Spending on parks and recreation
+
+
+
+89) NATCHLD
+Spending on assistance for childcare
+
+
+
+90) NATSCI
+Spending on supporting scientific research
+
+
+
+91) NATSPACY
+Spending on space exploration
+
+
+
+92) NATENVIY
+Spending on the environment
+
+
+
+93) NATHEALY
+Spending on health
+
+
+
+94) NATACITY
+Spending on assistance to big cities
+
+
+
+95) NATCRIMY
+Spending on law enforcement
+
+
+
+96) NATDRUGY
+Spending on drug rehabilitation
+
+
+
+97) NATEDUCY
+Spending on education
+
+
+
+98) NATRACEY
+Spending on assistance to Blacks
+
+
+
+99) NATARMSY
+Spending on national defense
+
+
+
+100) NATAIDY
+Spending on assistance to other countries
+
+
+
+101) NATFAREY
+Spending on assistance to the poor
+
+
+
+102) EQWLTH
+Respondents asked to place themselves on a scale: From 1) Government should do something to reduce income differences between rich and poor; to 7) Government should not concern itself with income differences.
+
+
+
+103) TAX
+Do you consider the amount of federal income tax which you have to pay as too high, about right, or too low?
+
+
+
+104) SPKATH
+Consider a person who is against all churches and religion. If such a person wanted to make a speech in your (city/town/community) against churches and religion, should he/she be allowed to speak, or not?
+
+
+
+105) COLATH
+Should a person who is against all churches and religion be allowed to teach in a college or university, or not?
+
+
+
+106) LIBATH
+If some people in your community suggested that a book written by an atheist against churches and religion should be taken out of your public library, would you favor removing this book, or not?
+
+
+
+107) SPKRAC
+Consider a person who believes that Blacks are genetically inferior. If such a person wanted to make a speech in your community claiming that Blacks are inferior, should he/she be allowed to speak, or not?
+
+
+
+108) COLRAC
+Should a person who believes that Blacks are genetically inferior be allowed to teach in a college or university, or not?
+
+
+
+109) LIBRAC
+If some people in your community suggested that a book, written by a racist, which said Blacks are inferior should be taken out of your public library, would you favor removing this book, or not?
+
+
+
+110) SPKCOM
+Suppose an admitted Communist wanted to make a speech in your community. Should he be allowed to speak, or not?
+
+
+
+111) COLCOM
+Suppose an admitted Communist is teaching in a college. Should he be fired, or not?
+
+
+
+112) LIBCOM
+Suppose an admitted Communist wrote a book which is in your public library. Somebody in your community suggests that the book should be removed from the library. Would you favor removing it, or not?
+
+
+
+113) SPKMIL
+Consider a person who advocates doing away with elections and letting the military run the country. If such a person wanted to make a speech in your community, should he/she be allowed to speak, or not?
+
+
+
+114) COLMIL
+Should a person who advocates doing away with elections and letting the military run the country be allowed to teach in a college or university, or not?
+
+
+
+115) LIBMIL
+Suppose a person wrote a book advocating doing away with elections and letting the military run the country. Somebody in your community suggests that the book be removed from the public library. Would you favor removing it, or not?
+
+
+
+116) SPKHOMO
+Consider a man who admits that he is a homosexual. Suppose this admitted homosexual wanted to make a speech in your community. Should he be allowed to speak, or not?
+
+
+
+117) COLHOMO
+Should an admitted homosexual be allowed to teach in a college or university, or not?
+
+
+
+118) LIBHOMO
+If some people in your community suggested that a book written by a homosexual in favor of homosexuality should be taken out of your public library, would you favor removing this book, or not?
+
+
+
+119) CAPPUN
+Do you favor or oppose the death penalty for persons convicted of murder?
+
+
+
+120) GUNLAW
+Would you favor or oppose a law which would require a person to obtain a police permit before he or she could buy a gun?
+
+
+
+121) COURTS
+In general, do you think the courts in this area deal too harshly or not harshly enough with criminals?
+
+
+
+122) GRASS
+Do you think the use of marijuana should be made legal or not?
+
+
+
+123) USWARY
+Do you expect the United States to fight in another world war within the next ten years?
+
+
+
+124) RELIG
+What is your religious preference? Is it Protestant, Catholic, Jewish, some other religion, or no religion?
+
+
+
+125) DENOM
+If protestant: What specific denomination is that, if any?
+
+
+
+126) OTHER
+Other Protestant denominations (see Note 20: Religious Affiliation on the ARDA summary page)
+
+
+
+127) JEW
+If Jewish: Do you consider yourself Orthodox, Conservative, Reform or none of these?
+
+
+
+128) FUND
+Fundamentalism/liberalism of respondent's religion
+
+
+
+129) ATTEND
+How often do you attend religious services?
+
+
+
+130) RELITEN
+Would you call yourself a strong (stated religious preference) or a not very strong (stated religious preference).
+
+
+
+131) POSTLIFE
+Do you believe there is a life after death?
+
+
+
+132) PRAY
+About how often do you pray?
+
+
+
+133) POPESPKS
+Asked only OF Catholics: Under certain conditions the Pope is infallible when he speaks on matters of faith and morals.
+
+
+
+134) SPREL
+What is your (spouse's) religious preference? Is it Protestant, Catholic, Jewish, some other religion, or no religion?
+
+
+
+135) RELIG16
+In what religion were you raised?
+
+
+
+136) DENOM16
+If Protestant: What specific denomination is that, if any?
+
+
+
+137) OTH16
+Other Protestant denominations (see Note 20: Religious Affiliation on the ARDA summary page)
+
+
+
+138) JEW16
+If Jewish: Were you Orthodox, Conservative, Reform, or none of these?
+
+
+
+139) FUND16
+Fundamentalism/liberalism of religion respondent raised in
+
+
+
+140) SPDEN
+If Protestant: What specific denomination is that, if any?
+
+
+
+141) SPOTHER
+Spouse: Other Protestant denominations (see Note 20: Religious Affiliation on the ARDA summary page)
+
+
+
+142) SPJEW
+Does (s/he) consider (her/himself) Orthodox, Conservative, Reform or none of these?
+
+
+
+143) SPFUND
+Fundamentalism/liberalism of religion of spouse
+
+
+
+144) SPOTH16
+Spouse: Other Protestant denomination (see Note 20: Religious Affiliation on the ARDA summary page)
+
+
+
+145) PRAYER
+The United States Supreme Court has ruled that no state or local government may require the reading of the Lord's Prayer or Bible verses in public schools. What are your views on this--do you approve or disapprove of the court ruling?
+
+
+
+146) BIBLE
+Select from: a. Bible is actual word of God and is to be taken literally...; b. Bible is the inspired word of God but not everything in it should be taken literally ...; c. The Bible is an ancient book of fables, ... recorded by men.
+
+
+
+147) PROTTEMP
+Temperature toward Protestants 0=Cold;100=Hot I'd like to get your feelings toward groups that are in the news these days. I will use something we call the feeling thermometer, and here is how it works. I'll read the name of a groups and I'd like you to rate that group using the feeling thermometer. Ratings between 50 degrees and 100 degrees mean that you feel favorable and warm toward the group. Ratings between 0 degrees and 50 degrees mean that you don't feel favorable toward the group and that you don't care too much for that group. How would you rate Protestants? (998 = Don't know/999=No answer)
+
+
+
+148) CATHTEMP
+Temperature toward Catholics 0=Cold;100=Hot I'd like to get your feelings toward groups that are in the news these days. I will use something we call the feeling thermometer, and here is how it works. I'll read the name of a groups and I'd like you to rate that group using the feeling thermometer. Ratings between 50 degrees and 100 degrees mean that you feel favorable and warm toward the group. Ratings between 0 degrees and 50 degrees mean that you don't feel favorable toward the group and that you don't care too much for that group. How would you rate Catholics? (998 = Don't know/999=No answer)
+
+
+
+149) JEWTEMP
+Temperature toward Jews 0=Cold;100=Hot I'd like to get your feelings toward groups that are in the news these days. I will use something we call the feeling thermometer, and here is how it works. I'll read the name of a groups and I'd like you to rate that group using the feeling thermometer. Ratings between 50 degrees and 100 degrees mean that you feel favorable and warm toward the group. Ratings between 0 degrees and 50 degrees mean that you don't feel favorable toward the group and that you don't care too much for that group. How would you rate Jews? (998 = Don't know/999=No answer)
+
+
+
+150) MSLMTEMP
+Temperature toward Muslims 0=Cold;100=Hot: I'd like to get your feelings toward groups that are in the news these days. I will use something we call the feeling thermometer, and here is how it works. I'll read the name of a groups and I'd like you to rate that group using the feeling thermometer. Ratings between 50 degrees and 100 degrees mean that you feel favorable and warm toward the group. Ratings between 0 degrees and 50 degrees mean that you don't feel favorable toward the group and that you don't care too much for that group. How would you rate Muslims? (998 = Don't know/999=No answer)
+
+
+
+151) RACOPEN
+Select from: A. One law says that a homeowner can decide for himself whom to sell his house to, even if he prefers not to sell to (Negroes/ Blacks/ African-Americans); or B. The 2nd law says that a homeowner cannot refuse to sell to someone because of their race or color.
+
+
+
+152) RACLIVE
+Before 1978 asked Non-Blacks only, 1978 & later all asked about opposite race: Are there any [(Negroes/ Blacks/African-Americans)/Whites] living in this neighborhood now?
+
+
+
+153) AFFRMACT
+Do you favor or oppose preference in hiring and promotion strongly or not strongly?
+
+
+
+154) WRKWAYUP
+Do you agree strongly, agree somewhat, neither agree nor disagree, disagree somewhat, or disagree strongly with the following statement: Irish, Italians, Jewish and many other minorities overcame prejudice and worked their way up.  Blacks should do the same without special favors.
+
+
+
+155) CLOSEBLK
+In general, how close do you feel to Blacks?
+
+
+
+156) CLOSEWHT
+In general, how close do you feel to Whites?
+
+
+
+157) HAPPY
+Taken all together, how would you say things are these days -- would you say that you are very happy, pretty happy, or not too happy?
+
+
+
+158) HAPMAR
+If currently married: Taking things all together, how would you describe your marriage? Would you say that your marriage is very happy, pretty happy, or not too happy?
+
+
+
+159) HEALTH
+Would you say your own health, in general, is excellent, good, fair, or poor?
+
+
+
+160) LIFE
+In general, do you find life exciting, pretty routine, or dull?
+
+
+
+161) HELPFUL
+Would you say that most of the time people try to be helpful, or that they are mostly just looking out for themselves?
+
+
+
+162) FAIR
+Do you think most people would try to take advantage of you if they got a chance, or would they try to be fair?
+
+
+
+163) TRUST
+Generally speaking, would you say that most people can be trusted or that you can't be too careful in dealing with people?)
+
+
+
+164) CONFINAN
+Confidence? Banks and financial institutions.
+
+
+
+165) CONBUS
+Confidence? Major companies.
+
+
+
+166) CONCLERG
+Confidence? Organized religion.
+
+
+
+167) CONEDUC
+Confidence? Education.
+
+
+
+168) CONFED
+Confidence? Executive branch of the federal government.
+
+
+
+169) CONLABOR
+Confidence? Organized labor.
+
+
+
+170) CONPRESS
+Confidence? Press.
+
+
+
+171) CONMEDIC
+Confidence? Medicine.
+
+
+
+172) CONTV
+Confidence? TV
+
+
+
+173) CONJUDGE
+Confidence? U.S. Supreme Court.
+
+
+
+174) CONSCI
+Confidence? Scientific Community.
+
+
+
+175) CONLEGIS
+Confidence? Congress.
+
+
+
+176) CONARMY
+Confidence? Military.
+
+
+
+177) OBEY
+Importance of learned quality for a child: A. To obey
+
+
+
+178) POPULAR
+Importance of learned quality for a child: B. To be well-liked or popular
+
+
+
+179) THNKSELF
+Importance of learned quality for a child: C. To think for himself or herself 
+
+
+
+180) WORKHARD
+Importance of learned quality for a child: D. To work hard
+
+
+
+181) HELPOTH
+Importance of learned quality for a child: E. To help others when they need help
+
+
+
+182) SOCREL
+How often: Spend a social evening with relatives?
+
+
+
+183) SOCOMMUN
+How often: Spend a social evening with someone who lives in your neighborhood?
+
+
+
+184) SOCFREND
+How often: Spend a social evening with friends who live outside the neighborhood?
+
+
+
+185) SOCBAR
+How often: Go to a bar or tavern?
+
+
+
+186) AGED
+As you know, many older people share a home with their grown children. Do you think this is generally a good idea or a bad idea?
+
+
+
+187) JOBLOSE
+Thinking about the next 12 months, how likely do you think it is that you will lose your job or be laid off -- very likely, fairly likely, not too likely, or not at all likely?
+
+
+
+188) JOBFIND
+About how easy would it be for you to find a job with another employer with approximately the same income and fringe benefits you now have? Would you say very easy, somewhat easy, or not easy at all?
+
+
+
+189) SATJOB
+On the whole, how satisfied are you with the work you do -- would you say you are very satisfied, moderately satisfied, a little dissatisfied, or very dissatisfied?
+
+
+
+190) RICHWORK
+If you were to get enough money to live as comfortably as you would like for the rest of your life, would you continue to work or would you stop working?
+
+
+
+191) CLASS
+If you were asked to use one of four names for your social class, which would you say you belong in: the lower class, the working class, the middle class, or the upper class?
+
+
+
+192) RANK
+In our society there are groups which tend to be towards the top and those that are towards the bottom. Here we have a scale that runs from top to bottom. Where would you put yourself on this scale?
+
+
+
+193) SATFIN
+So far as you and your family are concerned, would you say that you are pretty well satisfied with your present financial situation, more or less satisfied, or not satisfied at all?
+
+
+
+194) FINALTER
+During the last few years, has your financial situation been getting better, worse or has it stayed the same?
+
+
+
+195) FINRELA
+Compared with American families in general, would you say your family income is far below average, below average, average, above average, or far above average?
+
+
+
+196) WKSUB
+Do you (does your [spouse]) have a supervisor on (your, his, her) job to whom you are (he, she, is) directly responsible?
+
+
+
+197) WKSUBS
+If yes: Does that person have a supervisor on the job to whom he is directly responsible?
+
+
+
+198) WKSUP
+In your (spouse's) job, (do you, does he, she) supervise anyone who is directly responsible to (you, him, her)?
+
+
+
+199) WKSUPS
+If yes: Do any of those persons supervise anyone else?
+
+
+
+200) UNEMP
+At any time during the last ten years, have you been unemployed and looking for work for as long as a month?
+
+
+
+201) UNION
+Do you (or your [spouse]) belong to a labor union? (Who?)
+
+
+
+202) GETAHEAD
+Some people say that people get ahead by their own hard work; others say that lucky breaks or help from other people are more important. Which do you think is most important?
+
+
+
+203) PARSOL
+Compared to your parents when they were the age you are now, do you think your own standard of living now is much better, somewhat better, about the same, somewhat worse, or much worse than theirs was?
+
+
+
+204) KIDSSOL
+When your children are at the age you are now, do you think their standard of living will be much better, somewhat better, about the same, somewhat worse, or much worse than yours is now?
+
+
+
+205) FEPOL
+Do you agree or disagree with this statement: Most men are better suited emotionally for politics than are most women.
+
+
+
+206) ABDEFECT
+Legal abortion: If there is a strong chance of serious defect in the baby?
+
+
+
+207) ABNOMORE
+Legal abortion: If she is married and does not want any more children?
+
+
+
+208) ABHLTH
+Legal abortion: If the woman's own health is seriously endangered by the pregnancy?
+
+
+
+209) ABPOOR
+Legal abortion: If the family has a very low income and cannot afford any more children?
+
+
+
+210) ABORRAPE
+Legal abortion: If she became pregnant as a result of rape?)
+
+
+
+211) ABSINGLE
+Legal abortion: If she is not married and does not want to marry the man?
+
+
+
+212) ABANY
+Legal abortion: If the women wants it for any reason?
+
+
+
+213) CHLDIDEL
+What do you think is the ideal number of children for a family to have?
+
+
+
+214) PILLOK
+Do you strongly agree, agree, disagree, or strongly disagree that methods of birth control should be available to teenagers between the ages of 14 and 16 if their parents do not approve?
+
+
+
+215) SEXEDUC
+Would you be for or against sex education in the public schools?
+
+
+
+216) DIVLAW
+Should divorce in this country be easier or more difficult to obtain than it is now?
+
+
+
+217) PREMARSX
+There's been a lot of discussion about the way morals and attitudes about sex are changing in this country. If a man and woman have sex relations before marriage, do you think it is always wrong, almost always wrong, wrong only sometimes or not wrong at all?
+
+
+
+218) TEENSEX
+What if they are in their early teens, say 14 to 16 years old? In that case, do you think sex relations before marriage are always wrong, almost always wrong, wrong only sometimes, or not wrong at all?
+
+
+
+219) XMARSEX
+What is your opinion about a married person having sexual relations with someone other than the marriage partner -- is it always wrong, almost always wrong, wrong only sometimes, or not wrong at all?
+
+
+
+220) HOMOSEX
+What about sexual relations between two adults of the same sex -- do you think it is always wrong, almost always wrong, wrong only sometimes, or not wrong at all?
+
+
+
+221) PORNLAW
+Choose: 1) There should be laws against the distribution of pornography whatever the age; 2) There should be laws against the distribution of pornography to persons under 18; or 3) There should be no laws forbidding the distribution of pornography.
+
+
+
+222) XMOVIE
+Have you seen an X-rated movie in the last year?
+
+
+
+223) SPANKING
+Do you strongly agree, agree, disagree, or strongly disagree that it is sometimes necessary to discipline a child with a good, hard spanking?
+
+
+
+224) LETDIE1
+When a person has a disease that cannot be cured, do you think doctors should be allowed by law to end the patient's life by some painless means if the patient and his family request it?
+
+
+
+225) SUICIDE1
+Person has right to end own life if this person has an incurable disease?
+
+
+
+226) SUICIDE2
+Person has right to end own life if this person has gone bankrupt?
+
+
+
+227) SUICIDE3
+Person has right to end own life if this person has dishonored his or her family?
+
+
+
+228) SUICIDE4
+Person has right to end own life if this person is tired of living and ready to die?
+
+
+
+229) POLHITOK
+Are there any situations you can imagine in which you would approve of a policeman striking an adult male citizen?
+
+
+
+230) POLABUSE
+Approve policeman striking citizen who: had said vulgar and obscene things to the policeman?
+
+
+
+231) POLMURDR
+Approve policeman striking citizen who: was being questioned as a suspect in a murder case?
+
+
+
+232) POLESCAP
+Approve of policeman striking citizen who: was attempting to escape from custody?
+
+
+
+233) POLATTAK
+Approve of policeman striking citizen who: was attacking the policeman with his fists?
+
+
+
+234) FEAR
+Is there any area right around here -- that is, within a mile -- where you would be afraid to walk alone at night?
+
+
+
+235) OWNGUN
+Do you happen to have in your home (If house: or garage) any guns or revolvers?
+
+
+
+236) PISTOL
+If yes (owngun): Is it a pistol, shotgun, rifle, or what? (Each coded as separate question)
+
+
+
+237) SHOTGUN
+Own gun?: Is it a shotgun?
+
+
+
+238) RIFLE
+Own gun?: Is it a rifle?
+
+
+
+239) ROWNGUN
+Do any of these guns personally belong to you?
+
+
+
+240) HUNT
+Do you (or does your husband/wife) go hunting?
+
+
+
+241) NEWS
+How often do you read the newspaper -- every day, a few times a week, once a week, less than once a week, or never?
+
+
+
+242) TVHOURS
+On the average day, about how many hours do you personally watch television?
+
+
+
+243) PHONE
+Do you have a telephone? May I have your name and telephone number ... Is this phone located in your own home?
+
+
+
+244) COOP
+In general, what was the respondent's attitude toward the interview?
+
+
+
+245) COMPREND
+Was respondent's understanding of the questions good, fair or poor?
+
+
+
+246) FORM
+Form number
+
+
+
+247) FECHLD
+Agree or disagree?: A working mother can establish just as warm and secure a relationship with her children as a mother who does not work.
+
+
+
+248) FEPRESCH
+Agree or disagree?: A preschool child is likely to suffer if his or her mother works.
+
+
+
+249) FEFAM
+Agree or disagree?: It is much better for everyone involved if the man is the achiever outside the home and the woman takes care of the home and family.
+
+
+
+250) RACDIF1
+On the average (Negroes/Blacks) have worse jobs, income, and housing than white people. Do you think these differences are . . . A. Mainly due to discrimination?
+
+
+
+251) RACDIF2
+On the average (Negroes/Blacks) have worse jobs, income, and housing than white people. Do you think these differences are . . . B. Because most (Negroes/Blacks) have less in-born ability to learn?
+
+
+
+252) RACDIF3
+On the average (Negroes/Blacks) have worse jobs, income, and housing than white people. Do you think these differences are . . . C. Because most (Negroes/Blacks) don't have the chance for education that it takes to rise out of poverty?
+
+
+
+253) RACDIF4
+On the average (Negroes/Blacks) have worse jobs, income, and housing than white people. Do you think these differences are . . . D. Because most (Negroes/Blacks) just don't have the motivation or will power to pull themselves up out of poverty?
+
+
+
+254) RUSHED
+In general how do you feel about your time--would you say you always feel rushed even to do things you have to do, only sometimes feel rushed, or almost never feel rushed.
+
+
+
+255) BORED
+If sometimes or almost never feel rushed: How often would you say you have time on your hands that you don't know what to do with -- quite often, just now and then, or almost never?
+
+
+
+256) HELPPOOR
+Place self on scale: 1) I strongly agree the government should improve living standards; To 5) I strongly agree that people should take care of themselves.
+
+
+
+257) HELPNOT
+Scale on how many things the government does: 1) I strongly agree that government should do more; To 2) I strongly agree that the government is doing too much.
+
+
+
+258) HELPSICK
+Scale on government covering medical costs: 1) I strongly agree it is the responsibility of government to help; To 5) I strongly agree people should take care of themselves.
+
+
+
+259) HELPBLK
+Scale on government helping blacks: 1) I strongly agree the government is obligated to help blacks; TO 5) I strongly agree that government shouldn't give special treatment.
+
+
+
+260) NUMGIVEN
+From time to time, most people discuss important matters with other people. Looking back over the last six months--who are the people with whom you discussed matters important to you? How many names were mentioned?
+
+
+
+261) CLOSE12
+From time to time, most people discuss important matters with other people. Closeness of first and second persons
+
+
+
+262) CLOSE13
+From time to time, most people discuss important matters with other people. Closeness of first and third persons
+
+
+
+263) CLOSE14
+From time to time, most people discuss important matters with other people. Closeness of first and fourth persons
+
+
+
+264) CLOSE15
+From time to time, most people discuss important matters with other people. Closeness of first and fifth persons
+
+
+
+265) CLOSE23
+From time to time, most people discuss important matters with other people. Closeness of second and third persons
+
+
+
+266) CLOSE24
+From time to time, most people discuss important matters with other people. Closeness of second and fourth persons
+
+
+
+267) CLOSE25
+From time to time, most people discuss important matters with other people. Closeness of second and fifth persons
+
+
+
+268) CLOSE34
+From time to time, most people discuss important matters with other people. Closeness of third and fourth persons
+
+
+
+269) CLOSE35
+From time to time, most people discuss important matters with other people. Closeness of third and fifth persons
+
+
+
+270) CLOSE45
+From time to time, most people discuss important matters with other people. Closeness of fourth and fifth persons
+
+
+
+271) SEX1
+From time to time, most people discuss important matters with other people. Sex of first person
+
+
+
+272) SEX2
+From time to time, most people discuss important matters with other people. Sex of second person
+
+
+
+273) SEX3
+From time to time, most people discuss important matters with other people. Sex of third person
+
+
+
+274) SEX4
+From time to time, most people discuss important matters with other people. Sex of fourth person
+
+
+
+275) SEX5
+From time to time, most people discuss important matters with other people. Sex of fifth person
+
+
+
+276) RACE1
+From time to time, most people discuss important matters with other people. Race of first person
+
+
+
+277) RACE2
+From time to time, most people discuss important matters with other people. Race of Second Person
+
+
+
+278) RACE3
+From time to time, most people discuss important matters with other people. Race of third person
+
+
+
+279) RACE4
+From time to time, most people discuss important matters with other people. Race of Fourth Person
+
+
+
+280) RACE5
+From time to time, most people discuss important matters with other people. Race of fifth person
+
+
+
+281) SPOUSE1
+From time to time, most people discuss important matters with other people. First person is spouse
+
+
+
+282) SPOUSE2
+From time to time, most people discuss important matters with other people. Second person is spouse
+
+
+
+283) SPOUSE3
+From time to time, most people discuss important matters with other people. Third person is spouse
+
+
+
+284) SPOUSE4
+From time to time, most people discuss important matters with other people. Fourth person is spouse
+
+
+
+285) SPOUSE5
+From time to time, most people discuss important matters with other people. Fifth person is spouse
+
+
+
+286) PARENT1
+From time to time, most people discuss important matters with other people. First person is parent
+
+
+
+287) PARENT2
+From time to time, most people discuss important matters with other people. Second person is parent
+
+
+
+288) PARENT3
+From time to time, most people discuss important matters with other people. Third person is parent
+
+
+
+289) PARENT4
+From time to time, most people discuss important matters with other people. Fourth person is parent
+
+
+
+290) PARENT5
+From time to time, most people discuss important matters with other people. Fifth person is parent
+
+
+
+291) SIBLING1
+From time to time, most people discuss important matters with other people. First person is sibling
+
+
+
+292) SIBLING2
+From time to time, most people discuss important matters with other people. Second person is sibling
+
+
+
+293) SIBLING3
+From time to time, most people discuss important matters with other people. Third person is sibling
+
+
+
+294) SIBLING4
+From time to time, most people discuss important matters with other people. Fourth person is sibling
+
+
+
+295) SIBLING5
+From time to time, most people discuss important matters with other people. Fifth person is sibling
+
+
+
+296) CHILD1
+From time to time, most people discuss important matters with other people. First person is child
+
+
+
+297) CHILD2
+From time to time, most people discuss important matters with other people. Second person is child
+
+
+
+298) CHILD3
+From time to time, most people discuss important matters with other people. Third person is child
+
+
+
+299) CHILD4
+From time to time, most people discuss important matters with other people. Fourth person is child
+
+
+
+300) CHILD5
+From time to time, most people discuss important matters with other people. Fifth person is child
+
+
+
+301) OTHFAM1
+From time to time, most people discuss important matters with other people. First person is other family member
+
+
+
+302) OTHFAM2
+From time to time, most people discuss important matters with other people. Second person is other family member
+
+
+
+303) OTHFAM3
+From time to time, most people discuss important matters with other people. Third person is other family member
+
+
+
+304) OTHFAM4
+From time to time, most people discuss important matters with other people. Fourth person is other family member
+
+
+
+305) OTHFAM5
+From time to time, most people discuss important matters with other people. Fifth person is other family member
+
+
+
+306) COWORK1
+From time to time, most people discuss important matters with other people. First person is co-worker
+
+
+
+307) COWORK2
+From time to time, most people discuss important matters with other people. Second person is co-worker
+
+
+
+308) COWORK3
+From time to time, most people discuss important matters with other people. Third person is co-worker
+
+
+
+309) COWORK4
+From time to time, most people discuss important matters with other people. Fourth person is co-worker
+
+
+
+310) COWORK5
+From time to time, most people discuss important matters with other people. Fifth person is co-worker
+
+
+
+311) MEMGRP1
+From time to time, most people discuss important matters with other people. First person is group member
+
+
+
+312) MEMGRP2
+From time to time, most people discuss important matters with other people. Second person is group member
+
+
+
+313) MEMGRP3
+From time to time, most people discuss important matters with other people. Third person is group member
+
+
+
+314) MEMGRP4
+From time to time, most people discuss important matters with other people. Fourth person is group member
+
+
+
+315) MEMGRP5
+From time to time, most people discuss important matters with other people. Fifth person is group member
+
+
+
+316) NEIGHBR1
+From time to time, most people discuss important matters with other people. First person is neighbor
+
+
+
+317) NEIGHBR2
+From time to time, most people discuss important matters with other people. Second person is neighbor
+
+
+
+318) NEIGHBR3
+From time to time, most people discuss important matters with other people. Third person is neighbor
+
+
+
+319) NEIGHBR4
+From time to time, most people discuss important matters with other people. Fourth person is neighbor
+
+
+
+320) NEIGHBR5
+From time to time, most people discuss important matters with other people. Fifth person is neighbor
+
+
+
+321) FRIEND1
+From time to time, most people discuss important matters with other people. First person is friend
+
+
+
+322) FRIEND2
+From time to time, most people discuss important matters with other people. Second person is friend
+
+
+
+323) FRIEND3
+From time to time, most people discuss important matters with other people. Third person is friend
+
+
+
+324) FRIEND4
+From time to time, most people discuss important matters with other people. Fourth person is friend
+
+
+
+325) FRIEND5
+From time to time, most people discuss important matters with other people. Fifth person is friend
+
+
+
+326) ADVISOR1
+From time to time, most people discuss important matters with other people. First person is advisor
+
+
+
+327) ADVISOR2
+From time to time, most people discuss important matters with other people. Second person is advisor
+
+
+
+328) ADVISOR3
+From time to time, most people discuss important matters with other people. Third person is advisor
+
+
+
+329) ADVISOR4
+From time to time, most people discuss important matters with other people. Fourth person is advisor
+
+
+
+330) ADVISOR5
+From time to time, most people discuss important matters with other people. Fifth person is advisor
+
+
+
+331) OTHER1
+From time to time, most people discuss important matters with other people. First person is other
+
+
+
+332) OTHER2
+From time to time, most people discuss important matters with other people. Second person is other
+
+
+
+333) OTHER3
+From time to time, most people discuss important matters with other people. Third person is other
+
+
+
+334) OTHER4
+From time to time, most people discuss important matters with other people. Fourth person is other
+
+
+
+335) OTHER5
+From time to time, most people discuss important matters with other people. Fifth person is other
+
+
+
+336) TALKTO1
+From time to time, most people discuss important matters with other people. Thinking about how often you usually talk to (name), on the average, do you talk to (him/her) almost every day, at least once a week, at least once a month, or less than once a month? Talks to first person
+
+
+
+337) TALKTO2
+From time to time, most people discuss important matters with other people. Thinking about how often you usually talk to (name), on the average, do you talk to (him/her) almost every day, at least once a week, at least once a month, or less than once a month? Talks to second person
+
+
+
+338) TALKTO3
+From time to time, most people discuss important matters with other people. Thinking about how often you usually talk to (NAME), on the average, do you talk to (him/her) almost every day, at least once a week, at least once a month, or less than once a month? Talks to third person
+
+
+
+339) TALKTO4
+From time to time, most people discuss important matters with other people. Thinking about how often you usually talk to (name), on the average, do you talk to (him/her) almost every day, at least once a week, at least once a month, or less than once a month? Talks to fourth person
+
+
+
+340) TALKTO5
+From time to time, most people discuss important matters with other people. Thinking about how often you usually talk to (NAME), on the average, do you talk to (him/her) almost every day, at least once a week, at least once a month, or less than once a month? Talks to fifth person
+
+
+
+341) EDUC1
+From time to time, most people discuss important matters with other people. This card lists general levels of education. As far as you know, what is (name)'s highest level of education? Education of first person
+
+
+
+342) EDUC2
+From time to time, most people discuss important matters with other people. This card lists general levels of education. As far as you know, what is (name)'s highest level of education? Education of second person
+
+
+
+343) EDUC3
+From time to time, most people discuss important matters with other people. This card lists general levels of education. As far as you know, what is (name)'s highest level of education? Education of third person
+
+
+
+344) EDUC4
+From time to time, most people discuss important matters with other people. This card lists general levels of education. As far as you know, what is (name)'s highest level of education? Education of fourth person
+
+
+
+345) EDUC5
+From time to time, most people discuss important matters with other people. This card lists general levels of education. As far as you know, what is (name)'s highest level of education? Education of fifth person
+
+
+
+346) AGE1
+From time to time, most people discuss important matters with other people. Age of first person
+
+
+
+347) AGE2
+From time to time, most people discuss important matters with other people. Age of second person
+
+
+
+348) AGE3
+From time to time, most people discuss important matters with other people. Age of third person
+
+
+
+349) AGE4
+From time to time, most people discuss important matters with other people. Age of fourth person
+
+
+
+350) AGE5
+From time to time, most people discuss important matters with other people. Age of fifth person
+
+
+
+351) RELIG1
+From time to time, most people discuss important matters with other people. What is (name)'s religious preference? Is it Protestant, Catholic, Jewish, some other religion or no religion? Religion of first person
+
+
+
+352) RELIG2
+From time to time, most people discuss important matters with other people. What is (name)'s religious preference? Is it Protestant, Catholic, Jewish, some other religion or no religion? Religion of second person
+
+
+
+353) RELIG3
+From time to time, most people discuss important matters with other people. What is (name)'s religious preference? Is it Protestant, Catholic, Jewish, some other religion or no religion? Religion of third person
+
+
+
+354) RELIG4
+From time to time, most people discuss important matters with other people. What is (name)'s religious preference? Is it Protestant, Catholic, Jewish, some other religion or no religion? Religion of fourth person
+
+
+
+355) RELIG5
+From time to time, most people discuss important matters with other people. What is (name)'s religious preference? Is it Protestant, Catholic, Jewish, some other religion or no religion? Religion of Fifth Person
+
+
+
+356) MEMFRAT
+Member? Fraternal groups
+
+
+
+357) MEMSERV
+Member? Service clubs
+
+
+
+358) MEMVET
+Member? Veterans' groups
+
+
+
+359) MEMPOLIT
+Member? Political clubs
+
+
+
+360) MEMUNION
+Member? Labor unions
+
+
+
+361) MEMSPORT
+Member? Sports groups
+
+
+
+362) MEMYOUTH
+Member? Youth groups
+
+
+
+363) MEMSCHL
+Member? School service groups
+
+
+
+364) MEMHOBBY
+Member? Hobby or garden clubs
+
+
+
+365) MEMGREEK
+Member? School fraternities or sororities
+
+
+
+366) MEMNAT
+Member? Nationality groups
+
+
+
+367) MEMFARM
+Member? Farm organizations
+
+
+
+368) MEMLIT
+Member? Literary, art, discussion or study groups
+
+
+
+369) MEMPROF
+Member? Professional or academic societies
+
+
+
+370) MEMCHURH
+Member? Church-affiliated groups
+
+
+
+371) MEMOTHER
+Member? Any other groups
+
+
+
+372) MEMNUM
+Any membership at all
+
+
+
+373) REBORN
+Would you say you have been 'born again' or have had a 'born again' experience -- that is, a turning point in your life when you committed yourself to Christ?
+
+
+
+374) WLTHWHTS
+Where would you rate the wealth of the following groups: Whites.
+
+
+
+375) WLTHBLKS
+The wealth of Blacks.
+
+
+
+376) WORKWHTS
+Do the people in the following groups tend to be hard working or do they tend to be lazy: Whites.
+
+
+
+377) WORKBLKS
+The work habits of Blacks.
+
+
+
+378) INTLWHTS
+Do the people in the following groups tend to be unintelligent or do they tend to be intelligent: Whites.
+
+
+
+379) INTLBLKS
+The intelligence of Blacks.
+
+
+
+380) LIVEBLKS
+Would you favor living in a neighborhood where half of your neighbors were Blacks?
+
+
+
+381) LIVEWHTS
+Now I'm going to ask you about different types of contact with various groups of people. In each situation would you please tell me whether you would be very much in favor of it happening, somewhat in favor, neither in favor nor opposed to it happening, somewhat opposed, or very much opposed to it happening? -- Living in a neighborhood where half of your neighbors were Whites.
+
+
+
+382) MARBLK
+How would you respond to a close relative marrying a black person?
+
+
+
+383) MARASIAN
+How would you respond to a close relative marrying an Asian American person?
+
+
+
+384) MARHISP
+How would you respond to a close relative marrying an Hispanic American person?
+
+
+
+385) MARWHT
+What about having a close relative marry a white person? Would you be very in favor of it happening, somewhat in favor, neither in favor nor opposed to it happening, somewhat opposed, or very opposed to it happening?
+
+
+
+386) RACWORK
+If employed: Are the people who work where you work all white, mostly white, about half and half, mostly black, or all black?
+
+
+
+387) DISCAFF
+What do you think the chances are these days that a white person won't get a job or promotion while an equally or less qualified black person gets one instead?
+
+
+
+388) FEJOBAFF
+Some people say that because of past discrimination, women should be given preference in hiring and promotion. Others say that such preference in hiring and promotion of women is wrong because it discriminates against men. What about your opinion - are you for or against preferential hiring and promotion of women?
+
+
+
+389) DISCAFFM
+What do you think the chances are these days that a man won't get a job or promotion while an equally or less qualified woman gets one instead? Is this very likely, somewhat likely, somewhat unlikely, or very unlikely these days?
+
+
+
+390) DISCAFFW
+What do you think the chances are these days that a woman won't get a job or promotion while an equally or less qualified man gets one instead? Is this very likely, somewhat likely, somewhat unlikely, or very unlikely these days?
+
+
+
+391) FEHIRE
+How much does respondent agree/disagree with the following statement: Because of past discrimination, employers should make special efforts to hire and promote qualified women.
+
+
+
+392) FEELGOD
+The following questions deal with possible daily spiritual experiences.  To what extent can you say you experience the following...I feel God's presence.
+
+
+
+393) HARMONY
+How often does respondent experience the following: I feel deep inner peace and harmony.
+
+
+
+394) BEAUSPRT
+How often does respondent experience the following: I am spiritually touched by the beauty of creation.
+
+
+
+395) RELEXP
+Did you ever have a religious or spiritual experience that changed your life?
+
+
+
+396) COMPUSE
+Do you personally ever use a computer at home, at work, or at some other location?
+
+
+
+397) EMAILMIN
+About how many minutes per week do you spend sending and answering electronic mail or e-mail?
+
+
+
+398) EMAILHR
+About how many hours per week do you spend sending and answering electronic mail or e-mail?
+
+
+
+399) USEWWW
+Other than for e-mail, do you ever use the Internet or World Wide Web?
+
+
+
+400) WWWHR
+Not counting e-mail, about how many hours per week do you use the Web? (Include time you spend visiting regular web sites and time spent using interactive Internet services like chat rooms, Usenet groups, discussion forums, bulletin boards, and the like.)
+
+
+
+401) WWWMIN
+Not counting e-mail, about how many minutes per week do you use the Web? (Include time you spend visiting regular web sites and time spent using interactive Internet services like chat rooms, Usenet groups, discussion forums, bulletin boards, and the like.)
+
+
+
+402) FIN30
+In the past 30 days, how often have you visited a web site for: -- Financial information?
+
+
+
+403) SCHL30
+In the past 30 days, how often have you visited a web site for: -- Sites related to a school that you or your children attend?
+
+
+
+404) EDUC30
+In the past 30 days, how often have you visited a web site for: -- Other educational site?
+
+
+
+405) WORK30
+In the past 30 days, how often have you visited a web site for: -- Sites related to your work?
+
+
+
+406) NEWS30
+In the past 30 days, how often have you visited a web site for: -- News and current events?
+
+
+
+407) GOVT30
+In the past 30 days, how often have you visited a web site for: -- Government information?
+
+
+
+408) POL30
+In the past 30 days, how often have you visited a web site for: -- Political information?
+
+
+
+409) TRAVEL30
+In the past 30 days, how often have you visited a web site for: -- Travel?
+
+
+
+410) SPORTS30
+In the past 30 days, how often have you visited a web site for: -- Sports?
+
+
+
+411) MUSIC30
+In the past 30 days, how often have you visited a web site for: -- Music/concerts?
+
+
+
+412) ART30
+In the past 30 days, how often have you visited a web site for: -- Visual art/art museums?
+
+
+
+413) TVMOV30
+In the past 30 days, how often have you visited a web site for: -- Television or movies?
+
+
+
+414) HEALTH30
+In the past 30 days, how often have you visited a web site for: -- Health and fitness?
+
+
+
+415) RELIG30
+In the past 30 days, how often have you visited a web site for: -- Religion/church related?
+
+
+
+416) GAMES30
+In the past 30 days, how often have you visited a web site for: -- Games you can play on your computer?
+
+
+
+417) HUMOR30
+In the past 30 days, how often have you visited a web site for: -- Humor?
+
+
+
+418) PORN30
+In the past 30 days, how often have you visited a web site for: -- Sexually explicit material?
+
+
+
+419) PERSON30
+In the past 30 days, how often have you visited a web site for: -- Personal home pages?
+
+
+
+420) SCI30
+In the past 30 days, how often have you visited a web site for: -- Science?
+
+
+
+421) HOBBY30
+In the past 30 days, how often have you visited a web site for: -- Hobbies and crafts?
+
+
+
+422) COOK30
+In the past 30 days, how often have you visited a web site for: -- Cooking, recipes?
+
+
+
+423) DOWNLOAD
+Do you know how to download a file from the World Wide Web to your computer?
+
+
+
+424) UPLOAD
+Now we'd like to ask you a few questions about terms that people use to talk about the Internet and World Wide Web: -- Do you know how to send a file that is on your computer's hard drive to someone using another computer?
+
+
+
+425) HLTHINFO
+In the past year have you looked for information about a health concern or medical problem?
+
+
+
+426) HLTHPAPR
+If r has looked for information about a health concern or medical problem in the past year: Please tell me if you tried to find such health information from: -- Articles in a daily newspaper?
+
+
+
+427) HLTHMAG1
+If R has looked for information about a health concern or medical problem in the past year: Please tell me if you tried to find such health information from: -- Articles in a general-interest magazine?
+
+
+
+428) HLTHMAG2
+If R has looked for information about a health concern or medical problem in the past year: Please tell me if you tried to find such health information from: -- Special health or medical magazine or newsletter?
+
+
+
+429) HLTHDOC
+If R has looked for information about a health concern or medical problem in the past year: Please tell me if you tried to find such health information from: -- A doctor, nurse, or other medical professional
+
+
+
+430) HLTHFREL
+If R has looked for information about a health concern or medical problem in the past year: Please tell me if you tried to find such health information from: -- Friends or relatives?
+
+
+
+431) HLTHTV
+If R has looked for information about a health concern or medical problem in the past year: Please tell me if you tried to find such health information from: -- Radio or television programs?
+
+
+
+432) HLTHWWW
+If R has looked for information about a health concern or medical problem in the past year: Please tell me if you tried to find such health information from: -- The Internet or World Wide Web?
+
+
+
+433) NUMCNTCT
+Not counting people at work or family at home, about how many other friends or relatives do you keep in contact with at least once a year?
+
+
+
+434) INPERSON
+Of the friends and relatives you keep in contact with at least once a year: About how many do you stay in contact with by: -- Seeing them socially, face-to-face?
+
+
+
+435) BYPHONE
+Of the friends and relatives you keep in contact with at least once a year: About how many do you stay in contact with by: -- Talking with them on the telephone?
+
+
+
+436) LETTERS
+Of the friends and relatives you keep in contact with at least once a year: About how many do you stay in contact with by: -- Exchanging cards or letters through U.S. postal mail?
+
+
+
+437) MEETINGS
+Of the friends and relatives you keep in contact with at least once a year: About how many do you stay in contact with by: -- Seeing them at meetings or events related to church, clubs, or other groups?
+
+
+
+438) BYEMAIL
+Of the friends and relatives you keep in contact with at least once a year: About how many do you stay in contact with by: -- Communicating through electronic mail?
+
+
+
+439) JOBINFO
+In the past year, have you searched for information about a new job or explored career opportunities?
+
+
+
+440) JOBPAPER
+Please tell me how many times you tried to find such [employment] information (JOBINFO) from: -- Classified ads in a daily newspaper? Would you say not at all, 1 or 2 times, or 3 o r more times?
+
+
+
+441) JOBPUB
+Please tell me how many times you tried to find such [employment] information (JOBINFO) from: -- Classified ads in an industry or professional publication?
+
+
+
+442) JOBCOWRK
+Please tell me how many times you tried to find such [employment] information (JOBINFO) from: -- A fellow worker or human resources staff member at your workplace-that is, where you were working when you were searching?
+
+
+
+443) JOBCNTCT
+Please tell me how many times you tried to find such [employment] information (JOBINFO) from: -- Business or work contacts outside your workplace-that is outside where you were then working?
+
+
+
+444) JOBFRNDS
+Please tell me how many times you tried to find such [employment] information (JOBINFO) from: -- Friends outside of work or relatives?
+
+
+
+445) JOBPLACE
+Please tell me how many times you tried to find such [employment] information (JOBINFO) from: -- Any job placement of career counseling service?
+
+
+
+446) JOBTVRAD
+Please tell me how many times you tried to find such [employment] information (JOBINFO) from: -- Radio or television programs?
+
+
+
+447) JOBONWWW
+Please tell me how many times you tried to find such [employment] information (JOBINFO) from: -- Information posted on the Internet (World Wide Web)?
+
+
+
+448) WEBYR
+When did you first begin using the World Wide Web (for purposes other than email)?
+
+
+
+449) WEBABLE
+Would you rate your ability to use the World Wide Web as excellent, good, fair, poor, or very poor?
+
+
+
+450) ADVSRCH
+How familiar respondent is with the term: -- 'Advanced Search'
+
+
+
+451) PREFSETS
+How familiar respondent is with the term: -- 'Preference Settings'
+
+
+
+452) NEWSGRPS
+How familiar respondent is with the term: -- 'Newsgroups'
+
+
+
+453) HOMEBAND
+Is your home connected to the World Wide Web by a telephone, a DSL, cable, some other way, or not at all?
+
+
+
+454) FREEMNS1
+Data to be added later: Open ended question--see NORC codebook for explanation of codes: When you think about freedom, what comes to mind? Can you tell me in a couple of sentences what freedom means to you?
+
+
+
+455) FREEEXP1
+Data to be added later: Open ended question--see NORC codebook for explanation of codes--What experiences in life make you feel most free? Are there times in your life when you feel especially free? Can you give me an example of an experience that makes you feel really free?
+
+
+
+456) MANVSEMP
+In general, how would you describe relations in your work place between management and employees?
+
+
+
+457) TRYNEWJB
+Taking everything into consideration, how likely is it you will make a genuine effort to find a new job with another employer within the next year?
+
+
+
+458) HEALTH1
+Would you say that in general your health is Excellent, Very good, Good, Fair, or Poor?
+
+
+
+459) MNTLHLTH
+Now thinking about your mental health, which includes stress, depression, and problems with emotions, for how many days during the past 30 days was your mental health not good?
+
+
+
+460) EXTRAYR
+What was the most recent year in which you received these performance-based payments? [9998 Don't know; 9999 No answer]
+
+
+
+461) LASTWKYR
+When were you last working for pay, that is what month and year were you last working? - Year
+
+
+
+462) EMPATHY1
+How well does the following statement describe your thoughts and feelings; 1 = Does not describe very well to 5 = describes very well.  I often have tender, concerned feelings for people less fortunate than me.
+
+
+
+463) EMPATHY2
+How well does the following statement describe your thoughts and feelings; 1 = Does not describe very well to 5 = Describes very well. Sometimes I don' t feel very sorry for other people when they are having problems.
+
+
+
+464) EMPATHY3
+How well does the following statement describe your thoughts and feelings; 1 = Does not describe very well to 5 = Describes very well. When I see someone being taken advantage of, I feel kind of protective towards them.
+
+
+
+465) EMPATHY4
+How well does the following statement describe your thoughts and feelings; 1 = Does not describe very well to 5 = Describes very well. Other people's misfortunes do not usually disturb me a great deal.
+
+
+
+466) EMPATHY5
+How well does the following statement describe your thoughts and feelings; 1 = Does not describe very well to 5 = Describes very well. When I see someone being treated unfairly, I sometimes don't feel very much pity for them.
+
+
+
+467) EMPATHY6
+How well does the following statement describe your thoughts and feelings; 1 = Does not describe very well to 5 = Describes very well. I am often quite touched by things that I see happen.
+
+
+
+468) EMPATHY7
+How well does the following statement describe your thoughts and feelings; 1 = Does not describe very well to 5 = Describes very well. I would describe myself as a pretty soft-hearted person.
+
+
+
+469) GIVBLOOD
+During the past 12 months, how often have you done each of the following things: -- Donated blood
+
+
+
+470) GIVHMLSS
+During the past 12 months, how often have you done each of the following things: -- Given food or money to a homeless person
+
+
+
+471) RETCHNGE
+During the past 12 months, how often have you done each of the following things: -- Returned money to a cashier after getting too much change
+
+
+
+472) CUTAHEAD
+During the past 12 months, how often have you done each of the following things: -- Allowed a stranger to go ahead of you in line
+
+
+
+473) VOLCHRTY
+During the past 12 months, how often have you done each of the following things: -- Done volunteer work for a charity
+
+
+
+474) GIVCHRTY
+During the past 12 months, how often have you done each of the following things: -- Given money to a charity
+
+
+
+475) GIVSEAT
+During the past 12 months, how often have you done each of the following things: -- Offered your seat on a bus or in a public place to a stranger who was standing
+
+
+
+476) HELPAWAY
+During the past 12 months, how often have you done each of the following things: -- Looked after a person's plants, mail, or pets while they were away
+
+
+
+477) CARRIED
+During the past 12 months, how often have you done each of the following things: -- Carried a stranger's belongings, like groceries, a suitcase, or shopping bag
+
+
+
+478) DIRECTNS
+During the past 12 months, how often have you done each of the following things: -- Given directions to a stranger
+
+
+
+479) LOANITEM
+During the past 12 months, how often have you done each of the following things: -- Let someone you didn't know well borrow an item of some value like dishes or tools.
+
+
+
+480) SELFLESS
+I feel a selfless caring for others.
+
+
+
+481) ACCPTOTH
+I accept others even when they do things I think are wrong.
+
+
+
+482) OTHSHELP
+People should be willing to help others who are less fortunate
+
+
+
+483) CARESELF
+Those in need have to learn to take care of themselves and not depend on others
+
+
+
+484) PEOPTRBL
+Personally assisting people in trouble is very important to me
+
+
+
+485) SELFFRST
+These days people need to look after themselves and not overly worry about others
+
+
+
+486) DIFSTAND
+Some people are held to standards in my workplace that others are not.
+
+
+
+487) RPTPROBS
+People feel free to report problems in my workplace without fear of negative consequences
+
+
+
+488) OTHCREDT
+Other people take credit for my work or ideas.
+
+
+
+489) PUTDOWN
+People at work treat me in a manner that puts me down or address me in unprofessional terms, either publicly or privately.
+
+
+
+490) LACKINFO
+People at work fail to give me information that is necessary for me to do my job.
+
+
+
+491) PERSPACE
+People at work get in my personal space in an attempt to intimidate me.
+
+
+
+492) PHYSHARM
+At work, I have been threatened with physical harm.
+
+
+
+493) ACTUPSET
+People at work throw things, slam doors, or hit objects when they are upset with me.
+
+
+
+494) SHOUT
+People at work shout or yell at me in a hostile manner.
+
+
+
+495) HOTARGUS
+Heated arguments occur in my workplace.
+
+
+
+496) RELIEDON
+People at work with can be relied on when someone needs help.
+
+
+
+497) GDJOBSEC
+At work, job security is good.
+
+
+
+498) TREATRES
+At work, people are treated with respect.
+
+
+
+499) LOOKAWAY
+In my workplace, people look the other way when others are threatened, intimidated, or put down.
+
+
+
+500) WKSTRESS
+How often do you find your work stressful?
+
+
+
+501) SKIPWORK
+During the past 3 months, how often did you stay at home or leave work early because you were unhappy about your work situation?
+
+
+
+502) NUMEMPS
+If you (are/were) self-employed and (have/had) employees, how many employees (do/did) you have?
+
+
+
+503) NATBORN
+What country were you born in?
+
+
+
+504) BORNHOME
+Thinking back to the time when you were born, tell me which box shows the kind of house your family lived in at that time: A (Farm), B (Apartment building, Hut, Shack or other nonstandard dwelling, Single-family house), or C (Other type of dwelling)
+
+
+
+505) TRAVELUS
+Thinking about the most recent time you traveled to the United States from another country---please tell me which box shows the kind of transportation you took: A (farm), B (apartment bldg, hut, shack single family house), or C (other type of dwelling).
+
+
+
+506) IMMSTATS
+Thinking of your current immigration status right now, is that in Box A, B, or C? Box A (farm), B (apartment bldg, hut, shack single family house), or C (other type of dwelling). If it's in Box B, we do not want to know which specific category applies to you, and there will be no more questions about Box B (if respondent asks why, say: Because right now we are focusing on Box A.)
+
+
+
+507) RUNDRSTD
+Interviewer: By the time you handed hand card C4 to the respondent, did he or she appear to understand the 3-box answer format?
+
+
+
+508) ROBJECT
+Interviewer: Did the respondent object to or delay answering card C4?
+
+
+
+509) GENEVIG1
+Vignette set number given to respondent.(For complete wording of all 32 'nature versus nurture' vignettes please consult the GSS Cumulative Codebook for 2004) 
+
+
+
+510) GENEVIG2
+Vignette order given to respondent.
+
+
+
+511) GENENVO1
+Carol is a substantially overweight White woman. She has lost weight in the past but always gains it back again. Setup to personality, character and behavior questions--What percent of the person's behavior is influenced by the genes they inherit, and what percent is influenced by their learning experience?  The higher the number, the more you think the behavior is influenced by learning and experience; the lower the number, the more you think it is influenced by genes.
+
+
+
+512) GENENVO2
+David is an Asian man who drinks enough alcohol to become drunk several times a week. Often he can't remember what happened during these drinking episodes. Setup to personality, character and behavior questions--What percent of the person's behavior is influenced by the genes they inherit, and what percent is influenced by their learning experience?  The higher the number, the more you think the behavior is influenced by learning and experience; the lower the number, the more you think it is influenced by genes.
+
+
+
+513) GENENVO3
+Felicia is a very kind Hispanic woman. She never has anything bad to say about anybody, and can be counted on to help others. Setup to personality, character and BEHAVIOR questions--What percent of the person's behavior is influenced by the genes they inherit, and what percent is influenced by their learning experience?  The higher the number, the more you think the behavior is influenced by learning and experience; the lower the number, the more you think it is influenced by genes.
+
+
+
+514) GENENVO4
+George is a Black man who's a good all-around athlete. He was on the high school varsity swim team and still works out five times a week. Setup to personality, character and behavior questions--What percent of the person's behavior is influenced by the genes they inherit, and what percent is influenced by their learning experience?  The higher the number, the more you think the behavior is influenced by learning and experience; the lower the number, the more you think it is influenced by genes.
+
+
+
+515) SATSELF
+On the whole, I am satisfied with myself.
+
+
+
+516) AFAILURE
+All in all, I'm inclined to feel I'm a failure.
+
+
+
+517) SLFRSPCT
+I wish I could have more respect for myself.
+
+
+
+518) OFWORTH
+I feel that I'm a person of worth, at least equal to others.
+
+
+
+519) NOGOOD
+At times I think I am no good at all.
+
+
+
+520) OPTIMIST
+I'm always optimistic about my future.
+
+
+
+521) PESSIMST
+I hardly ever expect things to go my way.
+
+
+
+522) NOTCOUNT
+I rarely count on good things happening to me
+
+
+
+523) MOREGOOD
+Overall, I expect more good things to happen to me than bad.
+
+
+
+524) OWNDOING
+Please indicate which of the following statements comes closer to describing you by circling the appropriate letter: 1) I feel I have little influence over the things that happen to me. 2) What happens to me is largely my own doing.
+
+
+
+525) GENEEXPS
+For the following pair of questions, please circle the letter of the one that comes closer to your opinion: 1) Genes play the major role in determining people's personality. 2) It's people's experiences in life that determine their personality.
+
+
+
+526) DEPNDABL
+Please indicate how well the description applies to you--A dependable person. Is this a very good description, a good description, a fair description or not a very good description at all
+
+
+
+527) SADBLUE
+Please indicate how well the description applies to you--A person who often feels sad and blue. Is this a very good description, a good description, a fair description or not a very good description at all
+
+
+
+528) ATHLETIC
+Please indicate how well the description applies to you--An athletic person. Is this a very good description, a good description, a fair description or not a very good description at all
+
+
+
+529) KINDPERS
+Please indicate how well the description applies to you--A kind person. Is this a very good description, a good description, a fair description or not a very good description at all
+
+
+
+530) SELFISH
+Please indicate how well the description applies to you--selfish person. Is this a very good description, a good description, a fair description or not a very good description at all
+
+
+
+531) INTRWGHT
+Interviewer: Rate respondents weight without asking: If R is pregnant consider her weight aside from being pregnant.
+
+
+
+532) AGAPE1
+I would rather suffer myself than let the one I love suffer.
+
+
+
+533) AGAPE2
+I cannot be happy unless I place the one I love's happiness before my own.
+
+
+
+534) AGAPE3
+I am usually willing to sacrifice my own wishes to let the one I love achieve his/hers.
+
+
+
+535) AGAPE4
+I would endure all things for the sake of the one I love.
+
+
+
+536) HGUNLAW
+Please tell me whether you agree or disagree with the following statement: There should be more legal handguns in our society.
+
+
+
+537) HGUNCRIM
+Some people argue that more restrictions on handguns would decrease violent crime by making it harder for criminals to get handguns. Other people argue that more restrictions on handguns would increase violent crime by making it harder for law-abiding citizens to defend themselves with handguns. Which of the following statements is closer to your own opinion?
+
+
+
+538) CRIMUP
+Suppose research proves that more legal restrictions on handguns would increase violent crime. Which of these two reactions would be closer to your position? : 1) I would change my mind and oppose more restrictions on handguns. 2) I would still support more restrictions because I don't like the idea of private citizens arming themselves.
+
+
+
+539) CRIMDOWN
+Suppose research proves that more restrictions on handguns would reduce violent crime. Which of these two reactions would be closer to your position?: 1) I would change my mind and support more restrictions on handguns. 2) I would still oppose more restrictions because law-abiding citizens have a right to own handguns.
+
+
+
+540) NUMRELEX
+Thinking of the turning point in your life when you made a new and personal commitment to religion (and/or) the religious or spiritual experience that changed your life, how many such experiences have you had?
+
+
+
+541) AGERELEX
+How old were you when this occurred? Referring to turning point/change in spiritual life in above item NUMRELEX
+
+
+
+542) CHNGREL
+Did you change religions because of this experience? Referring to turning point/change in spiritual life in above item NUMRELEX
+
+
+
+543) NUMRBORN
+How many born-again experiences have you had? Referring to turning point/change in spiritual life in above item NUMRELEX
+
+
+
+544) AGERBORN
+How old were you when this occurred? Referring to turning point/change in spiritual life in above item NUMRELEX
+
+
+
+545) CHNGRBRN
+Did you change religions because of this experience?
+
+
+
+546) ENTITY
+Specific religious figures mentioned in religious change. Open ended question for how people who had undergone spiritual or religious change described their experiences. Codes: 1 = God; 2 = Christ, Jesus; 3 = God and Christ, Jesus both mentioned; 4 = Lord and mentions like 'Lord God' ; 5 = Other major religious figures like Buddha, Mohammed, Mary, specific saints, does not include ministers or other contemporary religious leaders; 6 = No mention of religious entity
+
+
+
+547) EXPCHNG1
+Occurrence or aspects of religious or spiritual change. First mention open ended question (see Note 23: Religious or Spiritual Change on the ARDA summary page)
+
+
+
+548) EXPCHNG2
+Occurrence or aspects of religious or spiritual change. Second Mention open ended question (see Note 23: Religious or Spiritual Change on the ARDA summary page)
+
+
+
+549) EXPCHNG3
+Occurrence or aspects of religious or spiritual change. Third Mention open ended question (see Note 23: Religious or Spiritual Change on the ARDA summary page)
+
+
+
+550) WHYCHNG1
+What led to, caused, or triggered the religious or spiritual change? First mention (see Note 24: Religious or Spiritual Change on the ARDA summary page)
+
+
+
+551) WHYCHNG2
+What led to, caused, or triggered the religious or spiritual change? Second mention (see Note 24: Religious or Spiritual Change on the ARDA summary page)
+
+
+
+552) WHYCHNG3
+What led to, caused, or triggered the religious or spiritual change? Third mention (See Note 24: Religious or Spiritual Change on the ARDA summary page)
+
+
+
+553) CHANGED1
+The consequences of the spiritual or religious change. First mention (see Note 25: Religious or Spiritual Change on the ARDA summary page)
+
+
+
+554) CHANGED2
+The consequences of the spiritual or religious change. Second mention (see Note 25: Religious or Spiritual Change on the ARDA summary page)
+
+
+
+555) CHANGED3
+The consequences of the spiritual or religious change. Third mention (see note 25 for specific codes)
+
+
+
+556) RELALT1
+To what extent did the religious/spiritual change you just told me about do the following? Altered your outlook on life?
+
+
+
+557) RELALT2
+Gave you a greater sense that your life was meaningful and significant)
+
+
+
+558) RELALT3
+Changed your goals in life
+
+
+
+559) RELALT4
+Positively affected your relations with other people
+
+
+
+560) RELALT5
+Changed your day-to-day activities
+
+
+
+561) RELALT6
+Changed your life overall
+
+
+
+562) ALLOFLFE
+You may experience the following in your daily life, if so how often. Experience a connection to all of life.
+
+
+
+563) JOYLIFTS
+During worship, or at other times when connecting to God, I feel joy which lifts me out of my daily concerns.
+
+
+
+564) RELSPRT1
+I find strength in my religion or spirituality.
+
+
+
+565) RELSPRT2
+I find comfort in my religion or spirituality
+
+
+
+566) GODHELP
+I ask for God's help in the midst of daily activities.
+
+
+
+567) GODGUIDE
+I feel guided by God in the midst of daily activities.
+
+
+
+568) GODLVDIR
+I feel Gods love for me, directly.
+
+
+
+569) GODLVOTH
+I feel Gods love for me, through others.
+
+
+
+570) BLESSNGS
+I feel thankful for my blessings.
+
+
+
+571) CLOSRGOD
+I desire to be closer to God or in union with Him.
+
+
+
+572) GODCLOSE
+In general, how close do you feel to God?
+
+
+
+573) IDOLS
+The statues and images in Catholic churches are idols.
+
+
+
+574) ROSARIES
+Catholic rosaries and holy medals are superstitious.
+
+
+
+575) NOTTHINK
+Catholics really are not permitted to think for themselves.
+
+
+
+576) EVDRINK
+Was there ever a time when you drank any alcoholic beverages?
+
+
+
+577) DRINKYR
+Thinking back over the last 12 months, about how regularly did you drink alcoholic beverages? Would you say that is was
+
+
+
+578) DRINKDAY
+Again, as you think back over the last 12 months, about how many drinks would you have on a typical day when you drank?
+
+
+
+579) DRINK6UP
+Now I would like to ask you some questions about your use of alcoholic beverages during the last 12 months. How often did you have 6 or more drinks of wine, beer, or liquor in a single day?
+
+
+
+580) DRINKMAX
+Think of all kinds of alcoholic beverages combined, that is, any combination of cans, bottles or glasses of beer; glasses of wine; or drinks containing liquor of any kind. During the last 12 months, what is the largest number of drinks you had on any single day? Was it:
+
+
+
+581) DRINK12
+During the last 12 months, how often did you have at least 12, but less than 20 drinks of any kind of alcoholic beverage in a single day, that is any combination of cans, bottles or glasses of beer, glasses of wine, or drinks containing liquor of any kind. Was it:
+
+
+
+582) DRINK8
+During the last 12 months, how often did you have at least 8, but less than 12 drinks of any kind of alcoholic beverage in a single day, that is any combination of cans, bottles or glasses of beer, glasses of wine, or drinks containing liquor of any kind. Was it:
+
+
+
+583) DRINK5
+During the last 12 months, how often did you have at least 5, but less than 8 drinks of any kind of alcoholic beverage in a single day, that is any combination of cans, bottles or glasses of beer, glasses of wine, or drinks containing liquor of any kind. Was it:
+
+
+
+584) DRINK3
+During the last 12 months, how often did you have at least 3, but less than 5 drinks of any kind of alcoholic beverage in a single day, that is any combination of cans, bottles or glasses of beer, glasses of wine, or drinks containing liquor of any kind. Was it:
+
+
+
+585) DRINK1
+During the last 12 months, how often did you have at least 1, but less than 3 drinks of any kind of alcoholic beverage in a single day, that is any combination of cans, bottles or glasses of beer, glasses of wine, or drinks containing liquor of any kind. Was it:
+
+
+
+586) DRINKMIN
+During the last 12 months, how often did you have at least a sip, but less than one full drink of any kind of alcoholic beverage in a single day, that is, beer, wine, or a drink containing liquor of any kind. Was it:
+
+
+
+587) CHURCHTX
+Besides belonging to a congregation or religion, do you belong to any church-related groups such as a fellowship or study group, a choir, board, or committee?
+
+
+
+588) INFRMGRP
+Are there any activities that you do with the same group of people on a regular basis even if the group doesn't have a name such as a bridge group, exercise group, or a group that meets to discuss individual or community problems?
+
+
+
+589) TYPFRAT
+Do you belong to more than one fraternal group?
+
+
+
+590) TYPSERV
+Do you belong to more than one service club?
+
+
+
+591) TYPVET
+Do you belong to more than one veterans club?
+
+
+
+592) TYPPOLIT
+Do you belong to more than one political club?
+
+
+
+593) TYPUNION
+Do you belong to more than one labor union?
+
+
+
+594) TYPSPORT
+Do you belong to more than one sport club?
+
+
+
+595) TYPYOUTH
+Do you belong to more than one youth group?
+
+
+
+596) TYPSCHL
+Do you belong to more than one school service club?
+
+
+
+597) TYPHOBBY
+Do you belong to more than one hobby or garden club?
+
+
+
+598) TYPGREEK
+Do you belong to more than one school fraternity or sorority?
+
+
+
+599) TYPNAT
+Do you belong to more than one nationality club?
+
+
+
+600) TYPFARM
+Do you belong to more than one farm organization?
+
+
+
+601) TYPLIT
+Do you belong to more than one literary, art, discussion, or study group?
+
+
+
+602) TYPPROF
+Do you belong to more than one professional or academic society?
+
+
+
+603) TYPCHURH
+Do you belong to more than one church-affiliated group?
+
+
+
+604) TYPOTHER
+Do you belong to more than one of any other club?
+
+
+
+605) TYPINFRM
+Do you belong to more than one informal group?
+
+
+
+606) NUMFRAT
+How many fraternal groups do you belong to?
+
+
+
+607) NUMSERV
+How many service clubs do you belong to?
+
+
+
+608) NUMVET
+How many veterans groups do you belong to?
+
+
+
+609) NUMPOLIT
+How many political clubs do you belong to?
+
+
+
+610) NUMUNION
+How many labor unions do you belong to?
+
+
+
+611) NUMSPORT
+How many sports groups do you belong to?
+
+
+
+612) NUMYOUTH
+How many youth groups do you belong to?
+
+
+
+613) NUMSCHL
+How many school service groups do you belong to?
+
+
+
+614) NUMHOBBY
+How many hobby or garden clubs do you belong to?
+
+
+
+615) NUMGREEK
+How many school fraternities or sororities do you belong to?
+
+
+
+616) NUMNAT
+How many nationality groups do you belong to?
+
+
+
+617) NUMFARM
+How many farm organizations do you belong to?
+
+
+
+618) NUMLIT
+How many literary, art, discussion, or study groups do you belong to?
+
+
+
+619) NUMPROF
+How many professional or academic societies do you belong to?
+
+
+
+620) NUMCHURH
+How many church-affiliated groups do you belong to?
+
+
+
+621) NUMOTHER
+How many of any other groups do you belong to?
+
+
+
+622) NUMINFRM
+How many INFRM groups do you belong to?
+
+
+
+623) YRFRAT1
+How many years have you been a member of: First fraternal group
+
+
+
+624) YRFRAT2
+How many years have you been a member of: Second fraternal group
+
+
+
+625) YRFRAT3
+How many years have you been a member of: Third fraternal group
+
+
+
+626) YRFRAT4
+How many years have you been a member of: Fourth fraternal group
+
+
+
+627) YRSERV1
+How many years have you been a member of: First service club
+
+
+
+628) YRSERV2
+How many years have you been a member of: Second service club
+
+
+
+629) YRSERV3
+How many years have you been a member of: Third service club
+
+
+
+630) YRSERV4
+How many years have you been a member of: Fourth service club
+
+
+
+631) YRSERV5
+How many years have you been a member of: Fifth service club
+
+
+
+632) YRSERV6
+How many years have you been a member of: Sixth service club
+
+
+
+633) YRSERV7
+How many years have you been a member of: Seventh service club
+
+
+
+634) YRSERV8
+How many years have you been a member of: Eighth service club
+
+
+
+635) YRVET1
+How many years have you been a member of: First veterans group
+
+
+
+636) YRVET2
+How many years have you been a member of: Second veterans group
+
+
+
+637) YRVET3
+How many years have you been a member of: Third veterans group
+
+
+
+638) YRVET4
+How many years have you been a member of: Fourth veterans group
+
+
+
+639) YRVET5
+How many years have you been a member of: Fifth veterans group
+
+
+
+640) YRPOLIT1
+How many years have you been a member of: First political club
+
+
+
+641) YRPOLIT2
+How many years have you been a member of: Second political club
+
+
+
+642) YRPOLIT3
+How many years have you been a member of: Third political club
+
+
+
+643) YRUNION1
+How many years have you been a member of: First labor union
+
+
+
+644) YRUNION2
+How many years have you been a member of: Second labor union
+
+
+
+645) YRUNION3
+How many years have you been a member of: Third labor union
+
+
+
+646) YRUNION4
+How many years have you been a member of: Fourth labor union
+
+
+
+647) YRSPORT1
+How many years have you been a member of: First sports group
+
+
+
+648) YRSPORT2
+How many years have you been a member of: Second sports group
+
+
+
+649) YRSPORT3
+How many years have you been a member of: Third sports group
+
+
+
+650) YRSPORT4
+How many years have you been a member of: Fourth sports group
+
+
+
+651) YRSPORT5
+How many years have you been a member of: Fifth sports group
+
+
+
+652) YRSPORT6
+How many years have you been a member of: Sixth sports group
+
+
+
+653) YRYOUTH1
+How many years have you been a member of: First youth group
+
+
+
+654) YRYOUTH2
+How many years have you been a member of: Second youth group
+
+
+
+655) YRYOUTH3
+How many years have you been a member of: Third youth group
+
+
+
+656) YRYOUTH4
+How many years have you been a member of: Fourth youth group
+
+
+
+657) YRYOUTH5
+How many years have you been a member of: Fifth youth group
+
+
+
+658) YRSCHL1
+How many years have you been a member of: First school service group
+
+
+
+659) YRSCHL2
+How many years have you been a member of: Second school service group
+
+
+
+660) YRSCHL3
+How many years have you been a member of: Third school service group
+
+
+
+661) YRSCHL4
+How many years have you been a member of: Fourth school service group
+
+
+
+662) YRHOBBY1
+How many years have you been a member of: First hobby or garden club
+
+
+
+663) YRHOBBY2
+How many years have you been a member of: Second hobby or garden club
+
+
+
+664) YRHOBBY3
+How many years have you been a member of: Third hobby or garden club
+
+
+
+665) YRGREEK1
+How many years have you been a member of: First school fraternity or sorority
+
+
+
+666) YRGREEK2
+How many years have you been a member of: Second school fraternity or sorority
+
+
+
+667) YRGREEK3
+How many years have you been a member of: Third school fraternity or sorority
+
+
+
+668) YRNAT1
+How many years have you been a member of: First nationality group
+
+
+
+669) YRNAT2
+How many years have you been a member of: Second nationality group
+
+
+
+670) YRNAT3
+How many years have you been a member of: Third nationality group
+
+
+
+671) YRFARM1
+How many years have you been a member of: First farm organization
+
+
+
+672) YRFARM2
+How many years have you been a member of: Second farm organization
+
+
+
+673) YRFARM3
+How many years have you been a member of: Third farm organization
+
+
+
+674) YRLIT1
+How many years have you been a member of: First literary, art, discussion, or study groups
+
+
+
+675) YRLIT2
+How many years have you been a member of: Second literary, art, discussion, or study groups
+
+
+
+676) YRLIT3
+How many years have you been a member of: Third literary, art, discussion, or study groups
+
+
+
+677) YRLIT4
+How many years have you been a member of: Fourth literary, art, discussion, or study groups
+
+
+
+678) YRPROF1
+How many years have you been a member of: First professional or academic society
+
+
+
+679) YRPROF2
+How many years have you been a member of: Second professional or academic society
+
+
+
+680) YRPROF3
+How many years have you been a member of: Third professional or academic society
+
+
+
+681) YRPROF4
+How many years have you been a member of: Fourth professional or academic society
+
+
+
+682) YRPROF5
+How many years have you been a member of: Fifth professional or academic society
+
+
+
+683) YRPROF6
+How many years have you been a member of: Sixth professional or academic society
+
+
+
+684) YRCHURH1
+How many years have you been a member of: First church affiliated group
+
+
+
+685) YRCHURH2
+How many years have you been a member of: Second church affiliated group
+
+
+
+686) YRCHURH3
+How many years have you been a member of: Third church affiliated group
+
+
+
+687) YRCHURH4
+How many years have you been a member of: Fourth church affiliated group
+
+
+
+688) YRCHURH5
+How many years have you been a member of: Fifth church affiliated group
+
+
+
+689) YRCHURH6
+How many years have you been a member of: Sixth church affiliated group
+
+
+
+690) YROTHER1
+How many years have you been a member of: First other group
+
+
+
+691) YROTHER2
+How many years have you been a member of: Second other group
+
+
+
+692) YROTHER3
+How many years have you been a member of: Third other group
+
+
+
+693) YROTHER4
+How many years have you been a member of: Fourth other group
+
+
+
+694) YROTHER5
+How many years have you been a member of: Fifth other group
+
+
+
+695) YRINFRM1
+How many years have you been a member of: First farm organization
+
+
+
+696) YRINFRM2
+How many years have you been a member of: Second farm organization
+
+
+
+697) YRINFRM3
+How many years have you been a member of: Third farm organization
+
+
+
+698) YRINFRM4
+How many years have you been a member of: Fourth farm organization
+
+
+
+699) YRINFRM5
+How many years have you been a member of: Fifth farm organization
+
+
+
+700) MTFRAT1
+Does the fraternal club meet in this area? First fraternal club
+
+
+
+701) MTFRAT2
+Does the fraternal club meet in this area? Second fraternal club
+
+
+
+702) MTFRAT3
+Does the fraternal club meet in this area? Third fraternal club
+
+
+
+703) MTFRAT4
+Does the fraternal club meet in this area? Fourth fraternal club
+
+
+
+704) MTSERV1
+Does the service club meet in this area? First service club
+
+
+
+705) MTSERV2
+Does the service club meet in this area? Second service club
+
+
+
+706) MTSERV3
+Does the service club meet in this area? Third service club
+
+
+
+707) MTSERV4
+Does the service club meet in this area? Fourth service club
+
+
+
+708) MTSERV5
+Does the service club meet in this area? Fifth service club
+
+
+
+709) MTSERV6
+Does the service club meet in this area? Sixth service club
+
+
+
+710) MTSERV7
+Does the service club meet in this area? Seventh service club
+
+
+
+711) MTSERV8
+Does the service club meet in this area? Eighth service club
+
+
+
+712) MTVET1
+Does the veterans group meet in this area? First veterans group
+
+
+
+713) MTVET2
+Does the veterans group meet in this area? Second veterans group
+
+
+
+714) MTVET3
+Does the veterans group meet in this area? Third veterans group
+
+
+
+715) MTVET4
+Does the veterans group meet in this area? Fourth veterans group
+
+
+
+716) MTVET5
+Does the veterans group meet in this area? Fifth veterans group
+
+
+
+717) MTPOLIT1
+Does the political club meet in this area? First political club
+
+
+
+718) MTPOLIT2
+Does the political club meet in this area? Second political club
+
+
+
+719) MTPOLIT3
+Does the political club meet in this area? Third political club
+
+
+
+720) MTUNION1
+Does the labor union meet in this area? First labor union
+
+
+
+721) MTUNION2
+Does the labor union meet in this area? Second labor union
+
+
+
+722) MTUNION3
+Does the labor union meet in this area? Third labor union
+
+
+
+723) MTUNION4
+Does the labor union meet in this area? Fourth labor union
+
+
+
+724) MTSPORT1
+Does the sports group meet in this area? First sports group
+
+
+
+725) MTSPORT2
+Does the sports group meet in this area? Second sports group
+
+
+
+726) MTSPORT3
+Does the sports group meet in this area? Third sports group
+
+
+
+727) MTSPORT4
+Does the sports group meet in this area? Fourth sports group
+
+
+
+728) MTSPORT5
+Does the sports group meet in this area? Fifth sports group
+
+
+
+729) MTSPORT6
+Does the sports group meet in this area? Sixth sports group
+
+
+
+730) MTYOUTH1
+Does the youth group meet in this area? First youth group
+
+
+
+731) MTYOUTH2
+Does the youth group meet in this area? Second youth group
+
+
+
+732) MTYOUTH3
+Does the youth group meet in this area? Third youth group
+
+
+
+733) MTYOUTH4
+Does the youth group meet in this area? Fourth youth group
+
+
+
+734) MTYOUTH5
+Does the youth group meet in this area? Fifth youth group
+
+
+
+735) MTSCHL1
+Does the school service group meet in this area? First school service group
+
+
+
+736) MTSCHL2
+Does the school service group meet in this area? Second school service group
+
+
+
+737) MTSCHL3
+Does the school service group meet in this area? Third school service group
+
+
+
+738) MTSCHL4
+Does the school service group meet in this area? Fourth school service group
+
+
+
+739) MTHOBBY1
+Does the hobby or garden club meet in this area? First hobby or garden club
+
+
+
+740) MTHOBBY2
+Does the hobby or garden club meet in this area? Second hobby or garden club
+
+
+
+741) MTHOBBY3
+Does the hobby or garden club meet in this area? Third hobby or garden club
+
+
+
+742) MTGREEK1
+Does the school fraternity or sorority meet in this area? First school fraternity or sorority
+
+
+
+743) MTGREEK2
+Does the school fraternity or sorority meet in this area? Second school fraternity or sorority
+
+
+
+744) MTGREEK3
+Does the school fraternity or sorority meet in this area? Third school fraternity or sorority
+
+
+
+745) MTNAT1
+Does the nationality group meet in this area? First nationality group
+
+
+
+746) MTNAT2
+Does the nationality group meet in this area? Second nationality group 
+
+
+
+747) MTNAT3
+Does the nationality group meet in this area? Third nationality group
+
+
+
+748) MTFARM1
+Does the farm organization meet in this area? First farm organization
+
+
+
+749) MTFARM2
+Does the farm organization meet in this area? Second farm organization
+
+
+
+750) MTFARM3
+Does the farm organization meet in this area? Third farm organization
+
+
+
+751) MTLIT1
+Does the literary, art, discussion, or study group meet in this area? First literary, art, discussion, or study group
+
+
+
+752) MTLIT2
+Does the literary, art, discussion, or study group meet in this area? Second literary, art, discussion, or study group
+
+
+
+753) MTLIT3
+Does the literary, art, discussion, or study group meet in this area? Third literary, art, discussion, or study group
+
+
+
+754) MTLIT4
+Does the literary, art, discussion, or study group meet in this area? Fourth literary, art, discussion, or study group
+
+
+
+755) MTPROF1
+Does the professional or academic society meet in this area? First professional or academic society
+
+
+
+756) MTPROF2
+Does the professional or academic society meet in this area? Second professional or academic society
+
+
+
+757) MTPROF3
+Does the professional or academic society meet in this area? Third professional or academic society
+
+
+
+758) MTPROF4
+Does the professional or academic society meet in this area? Fourth professional or academic society
+
+
+
+759) MTPROF5
+Does the professional or academic society meet in this area? Fifth professional or academic society
+
+
+
+760) MTPROF6
+Does the professional or academic society meet in this area? Sixth professional or academic society
+
+
+
+761) MTCHURH1
+Does the church-affiliated group meet in this area? First church-affiliated group
+
+
+
+762) MTCHURH2
+Does the church-affiliated group meet in this area? Second church-affiliated group
+
+
+
+763) MTCHURH3
+Does the church-affiliated group meet in this area? Third church-affiliated group
+
+
+
+764) MTCHURH4
+Does the church-affiliated group meet in this area? Fourth church-affiliated group
+
+
+
+765) MTCHURH5
+Does the church-affiliated group meet in this area? Fifth church-affiliated group
+
+
+
+766) MTCHURH6
+Does the church-affiliated group meet in this area? Sixth church-affiliated group
+
+
+
+767) MTOTHER1
+Do any other groups meet in this area? First other group
+
+
+
+768) MTOTHER2
+Do any other groups meet in this area? Second other group
+
+
+
+769) MTOTHER3
+Do any other groups meet in this area? Third other group (MTOTHER3)
+
+
+
+770) MTOTHER4
+Do any other groups meet in this area? Fourth other group
+
+
+
+771) MTOTHER5
+Do any other groups meet in this area? Fifth other group
+
+
+
+772) MTINFRM1
+Do any other informal groups meet in this area? First other group
+
+
+
+773) MTINFRM2
+Do any other informal groups meet in this area? Second other group
+
+
+
+774) MTINFRM3
+Do any other informal groups meet in this area? Third other group
+
+
+
+775) MTINFRM4
+Do any other informal groups meet in this area? Fourth other group
+
+
+
+776) MTINFRM5
+Do any other informal groups meet in this area? Fifth other group
+
+
+
+777) GRPBOTH1
+Do you and first name both belong to one or more of the same groups on the list?
+
+
+
+778) GRPBOTH2
+Do you and second name both belong to one or more of the same groups on the list?
+
+
+
+779) GRPBOTH3
+Do you and third name both belong to one or more of the same groups on the list?
+
+
+
+780) GRPBOTH4
+Do you and fourth name both belong to one or more of the same groups on the list?
+
+
+
+781) GRPBOTH5
+Do you and fifth name both belong to one or more of the same groups on the list?
+
+
+
+782) FRSTMET1
+Did you meet the first name in one of these groups or did you meet somewhere else?
+
+
+
+783) FRSTMET2
+Did you meet the second name in one of these groups or did you meet somewhere else?
+
+
+
+784) FRSTMET3
+Did you meet the third name in one of these groups or did you meet somewhere else?
+
+
+
+785) FRSTMET4
+Did you meet the fourth name in one of these groups or did you meet somewhere else?
+
+
+
+786) FRSTMET5
+Did you meet the fifth name in one of these groups or did you meet somewhere else?
+
+
+
+787) YRSKWN1
+How many years have you known the first name?
+
+
+
+788) YRSKWN2
+How many years have you known the second name?
+
+
+
+789) YRSKWN3
+How many years have you known the third name?
+
+
+
+790) YRSKWN4
+How many years have you known the fourth name?
+
+
+
+791) YRSKWN5
+How many years have you known the fifth name?
+
+
+
+792) POLEFF11
+Do you agree or disagree with this statement: People like me don't have any say about what the government does
+
+
+
+793) POSSLQ
+Which of these statements applies to you?: married and living with your husband/wife; not married but living with a partner; married or partnered, but not living in the same household; not married/no partner.
+
+
+
+794) HELPHWRK
+During the past 12 months, how often have you done any of the following things for people you know personally, such as relatives, friends, neighbors or other acquaintances? -- Helped someone outside of your household with housework or shopping
+
+
+
+795) LENTTO
+During the past 12 months, how often have you done any of the following things for people you know personally, such as relatives, friends, neighbors or other acquaintances? -- Lent quite a bit of money to another person
+
+
+
+796) TALKEDTO
+During the past 12 months, how often have you done any of the following things for people you know personally, such as relatives, friends, neighbors or other acquaintances? -- Spent time talking with someone who was a bit down or depressed
+
+
+
+797) HELPJOB
+During the past 12 months, how often have you done any of the following things for people you know personally, such as relatives, friends, neighbors or other acquaintances? -- Helped somebody to find a job
+
+
+
+798) GOODLIFE
+The way things are in America, people like me and my family have a good chance of improving our standard of living--do you agree or disagree?
+
+
+
+799) MARHOMO
+Homosexual couples should have the right to marry one another--do you agree or disagree?
+
+
+
+800) MEOVRWRK
+Do you agree or disagree with this statement: Family life often suffers because men concentrate too much on their work.
+
+
+
+801) LOCALNUM
+Asked of those whose employers have more than one physical location: About how many people work at the location where you work? (Count part-time as well as full-time employees in all areas, departments and buildings.)
+
+
+
+802) GODCHNGE
+Which best describes your beliefs about God: 1) I don't believe..., and I never have; 2) I don't believe..., but I used to; 3) I believe..., but I didn't used to; 4) I believe..., and I always have.
+
+
+
+803) RELEXPER
+Has there ever been a turning point in your life when you made a new and personal commitment to religion?
+
+
+
+804) BEFAIR
+How often do you think that people would try to take advantage of you if they got the chance and how often would they try to be fair?  Would they...1. Try to take advantage almost all of the time, 2. Try to take advantage most of the time, 3. Try to be fair most of the time, or 4. Try to be fair almost all of the time
+
+
+
+805) CANTRUST
+Generally speaking, would you say that people can be trusted or that you can't be too careful in dealing with people?  1.  People can almost always be trusted, 2. People can usually be trusted, 3. You usually can't be too careful in dealing with people, 4. You almost always can't be too careful in dealing with people
+
+
+
+806) CLSETOWN
+How close do you feel to... Your town or city
+
+
+
+807) CLSESTAT
+How close do you feel to... Your state
+
+
+
+808) CLSEUSA
+How close do you feel to... America
+
+
+
+809) CLSENOAM
+How close do you feel to... North America
+
+
+
+810) AMBORNIN
+How important for being truly American does respondent consider the following...To have been born in America
+
+
+
+811) AMCIT
+How important for being truly American does respondent consider the following...To have American citizenship
+
+
+
+812) AMLIVED
+How important for being truly American does respondent consider the following...To have lived in America for most of one's life
+
+
+
+813) AMENGLSH
+How important for being truly American does respondent consider the following...To be able to speak English
+
+
+
+814) AMCHRSTN
+How important for being truly American does respondent consider the following...To be a Christian
+
+
+
+815) AMGOVT
+How important for being truly American does respondent consider the following...To respect America's political institutions and laws
+
+
+
+816) AMFEEL
+How important for being truly American does respondent consider the following...To feel American
+
+
+
+817) AMCITIZN
+Do you agree or disagree with this statement: I would rather be a citizen of America than of any other country in the world
+
+
+
+818) AMSHAMED
+Do you agree or disagree with this statement: There are some things about America today that make me feel ashamed of America
+
+
+
+819) BELIKEUS
+Do you agree or disagree with this statement: The world would be a better place if people from other countries were more like the Americans
+
+
+
+820) AMBETTER
+Do you agree or disagree with this statement: Generally speaking, America is a better country than most other countries
+
+
+
+821) IFWRONG
+Do you agree or disagree with this statement: People should support their country even if the country is in the wrong
+
+
+
+822) AMSPORTS
+Do you agree or disagree with this statement: When my country does well in international sports, it makes me proud to be an American
+
+
+
+823) PROUDDEM
+How proud is respondent of...The way democracy works
+
+
+
+824) PROUDPOL
+How proud is respondent of... U.S. political influence in the world
+
+
+
+825) PROUDECO
+How proud is respondent of...America's economic achievements
+
+
+
+826) PROUDSSS
+How proud is respondent of... U.S. social security system
+
+
+
+827) PROUDSCI
+How proud is respondent of...U.S. scientific and technological achievements
+
+
+
+828) PROUDSPT
+How proud is respondent of...U.S. achievements in sports
+
+
+
+829) PROUDART
+How proud is respondent of...: U.S. achievements in the arts and literature
+
+
+
+830) PROUDMIL
+How proud is respondent of...: America's armed forces
+
+
+
+831) PROUDHIS
+How proud is respondent of...: U.S. history
+
+
+
+832) PROUDGRP
+How proud is respondent of...: U.S. fair and equal treatment of all groups in society
+
+
+
+833) IMPORTS
+Do you agree or disagree with this statement: America should limit the import of foreign products in order to protect its national economy
+
+
+
+834) WRLDGOVT
+Do you agree or disagree with this statement: For certain problems, like environmental pollution, international bodies should have the right to enforce solutions
+
+
+
+835) AMOWNWAY
+Do you agree or disagree with this statement: America should follow its own interests, even if this leads to conflicts with other nations
+
+
+
+836) FORLAND
+Do you agree or disagree with this statement: Foreigners should not be allowed to buy land in America
+
+
+
+837) AMTV
+Do you agree or disagree with this statement: American television should give preference to American films and programs
+
+
+
+838) AMCULT
+Do you agree or disagree with this statement: It is impossible for people who do not share American customs and traditions to become fully American
+
+
+
+839) MINCULT
+Do you agree or disagree with this statement: Ethnic minorities should be given government assistance to preserve their customs and traditions
+
+
+
+840) MELTPOT1
+Some people say that it is better for a country if different racial and ethnic groups maintain their distinct customs and traditions. Others say that it is better if these groups adapt and blend into the larger society. Which of these views comes closer to your own?
+
+
+
+841) IMMCRIME
+Do you agree or disagree with this statement: Immigrants increase crime rates
+
+
+
+842) IMMAMECO
+Do you agree or disagree with this statement: Immigrants are generally good for America's economy
+
+
+
+843) IMMJOBS
+Do you agree or disagree with this statement: Immigrants take jobs away from people who were born in America
+
+
+
+844) LETIN1
+Do you think the number of immigrants to America nowadays should be...
+
+
+
+845) SPKHOME1
+First language respondent says he or she speaks at home
+
+
+
+846) SPKHOME2
+Second language respondent says he or she speaks at home
+
+
+
+847) CITIZEN
+Are you a citizen of America?
+
+
+
+848) PARCIT
+At the time of your birth, were both, one or neither of your parents citizens of America?
+
+
+
+849) ETHCLOSE
+How close do you feel to your ethnic or racial group?
+
+
+
+850) NAFTA1
+How much have you heard or read about the North American Free Trade Agreement or NAFTA?
+
+
+
+851) SOCID1
+We are all part of different groups. Some are more important to us than others when we think of ourselves. In general, which in the following list is most important to you in describing who you are? (SOCID1) (1=Current occupation, 2=Race or ethnic background, 3=Gender, 4= Age group, 5=Religion, 6=Political party, 7=Nationality, 8=Family or marital status, 9=Social class, 10=Region)
+
+
+
+852) SOCID2
+And the second most important? (From previous question:  We are all part of different groups. Some are more important to us than others when we think of ourselves. In general, which in the following list is most important to you in describing who you are?)
+
+
+
+853) SOCID3
+And the third most important? (From previous question:  We are all part of different groups. Some are more important to us than others when we think of ourselves. In general, which in the following list is most important to you in describing who you are?)
+
+
+
+854) AMANCSTR
+Some people say that the following things are important for being truly American. Others say they are not important. How important do you think each of the following is: to have American ancestry
+
+
+
+855) LESSPRD
+I am often less proud of America than I would like to be.
+
+
+
+856) INTLINCS
+Large international companies are doing more and more damage to local businesses in America.
+
+
+
+857) FREETRDE
+Free trade leads to better products becoming available in America.
+
+
+
+858) DECSORGS
+In general, America should follow decisions of international organizations to which it belongs, even if the government does not agree with them.
+
+
+
+859) POWRORGS
+International organizations are taking away too much power from the American government.
+
+
+
+860) FORCULT
+Increased exposure to foreign films, music, and books is damaging our national and local cultures.
+
+
+
+861) INTERNET
+A benefit of the Internet is that it makes information available to more and more people worldwide.
+
+
+
+862) IMMIMP
+Immigrants improve American society by bringing in new ideas and cultures.
+
+
+
+863) IMMCOSTS
+Government spends too much money assisting immigrants.
+
+
+
+864) KIDSHERE
+Children born in America of parents who are not citizens should have the right to become American citizens.
+
+
+
+865) KIDSAWAY
+Children born abroad should have the right to become American citizens if at least one of their parents is an American citizen.
+
+
+
+866) IMMRGHTS
+Legal immigrants to America who are not citizens should have the same rights as American citizens.
+
+
+
+867) AMPROUD1
+How proud are you of being American?
+
+
+
+868) NAFTA2A
+Generally speaking, would you say that America benefits or does not benefit from being a member of NAFTA?
+
+
+
+869) NAFTA3
+America should follow NAFTA decisions, even if it does not agree with them.
+
+
+
+870) VOTEELEC
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--Always to vote in elections.
+
+
+
+871) PAYTAXES
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--Never to try to evade taxes.
+
+
+
+872) OBEYLAWS
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--Always to obey laws and regulations.
+
+
+
+873) WATCHGOV
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--To keep watch on the actions of government.
+
+
+
+874) ACTASSOC
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--To be active in social or political associations.
+
+
+
+875) OTHREASN
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--To try to understand the reasoning of people with other opinions.
+
+
+
+876) BUYPOL
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--To choose products for political, ethical or environmental reasons, even if they cost a bit more.
+
+
+
+877) HELPUSA
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--To help people in America who are worse off than yourself.
+
+
+
+878) HELPWRLD
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--To help people in the rest of the world who are worse off than yourself.
+
+
+
+879) MILSERVE
+There are different opinions as to what it takes to be a good citizen. As far as you are concerned personally on a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--To be willing to serve in the military at a time of need.
+
+
+
+880) RELMEET
+Should religious extremists be allowed to hold public meetings?
+
+
+
+881) REVMEET
+Should people who want to overthrow the government by force be allowed to hold public meetings?
+
+
+
+882) RACMEET
+Should people prejudiced against any racial or ethnic group be allowed to hold public meetings?
+
+
+
+883) SIGNDPET
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Signed a petition.
+
+
+
+884) AVOIDBUY
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Boycotted, or deliberately bought, certain products for political, ethical or environmental reasons.
+
+
+
+885) JOINDEM
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Took part in a demonstration.
+
+
+
+886) ATTRALLY
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Attended a political meeting or rally.
+
+
+
+887) CNTCTGOV
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Contacted, or attempted to contact, a politician or a civil servant to express your views.
+
+
+
+888) POLFUNDS
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Donated money or raised funds for a social or political activity.
+
+
+
+889) USEMEDIA
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Contacted or appeared in the media to express your views.
+
+
+
+890) INTERPOL
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Joined an Internet political forum or discussion group.
+
+
+
+891) GRPPARTY
+People sometimes belong to different kinds of groups or associations. For each type of group, please indicate whether you (1) Belong and actively participate, (2) belong but don't actively participate, (3) used to belong but do not any more, (4) have never belonged to it--A political party.
+
+
+
+892) GRPWORK
+People sometimes belong to different kinds of groups or associations. For each type of group, please indicate whether you (1) Belong and actively participate, (2) belong but don't actively participate, (3) used to belong but do not any more, (4) have never belonged to it--A trade union, business, or professional association.
+
+
+
+893) GRPRELIG
+People sometimes belong to different kinds of groups or associations. For each type of group, please indicate whether you (1) Belong and actively participate, (2) belong but don't actively participate, (3) used to belong but do not any more, (4) have never belonged to it--A church or other religious organization.
+
+
+
+894) GRPSPRTS
+People sometimes belong to different kinds of groups or associations. For each type of group, please indicate whether you (1) Belong and actively participate, (2) belong but don't actively participate, (3) used to belong but do not any more, (4) have never belonged to it--A sports, leisure or cultural group.
+
+
+
+895) GRPOTHER
+People sometimes belong to different kinds of groups or associations. For each type of group, please indicate whether you (1) Belong and actively participate, (2) belong but don't actively participate, (3) used to belong but do not any more, (4) have never belonged to it--Another voluntary association.
+
+
+
+896) SOLOK
+There are different opinions about people's rights in a democracy. On a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--That all citizens have an adequate standard of living.
+
+
+
+897) RGHTSMIN
+There are different opinions about people's rights in a democracy. On a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--That government authorities respect and protect the rights of minorities.
+
+
+
+898) EQTREAT
+There are different opinions about people's rights in a democracy. On a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--That government authorities treat everybody equally regardless of their position in society.
+
+
+
+899) CITVIEWS
+There are different opinions about people's rights in a democracy. On a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--That politicians take into account the views of citizens before making decisions.
+
+
+
+900) POLOPTS
+There are different opinions about people's rights in a democracy. On a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--That people be given more opportunities to participate in public decision-making.
+
+
+
+901) OPPSEGOV
+There are different opinions about people's rights in a democracy. On a scale of 1 to 7, where 1 is not at all important and 7 is very important, how important is it--That citizens may engage in acts of civil disobedience when they oppose government actions.
+
+
+
+902) POLEFF18
+I don't think government cares much what people like me think.
+
+
+
+903) POLEFF19
+I feel I have a pretty good understanding of the important political issues facing America.
+
+
+
+904) POLEFF20
+I think most people in America are better informed about politics and government than I am.
+
+
+
+905) ACTLAW
+Suppose a law were being considered by the Congress that you considered to be unjust or harmful. If such a case arose, how likely is it that you, acting along or together with others, would be able to try to do something about it?
+
+
+
+906) AFFCTLAW
+If you made such an effort, how likely is it that the Congress would give serious attention to your demands?
+
+
+
+907) POLINT1
+How interested would you say you personally are in politics?
+
+
+
+908) GOVDOOK
+Most of the time we can trust people in government to do what is right.
+
+
+
+909) POLGREED
+Most politicians are in politics only for what they can get out of it personally.
+
+
+
+910) DISCPOL
+When you get together with your friends, relatives or fellow workers, how often do you discuss politics?
+
+
+
+911) CHNGEOTH
+When you hold a strong opinion about politics, how often do you try to persuade your friends, relatives or fellow workers to share your views?
+
+
+
+912) POWERUN
+Thinking about the United Nations, which comes closest to your view? 1) The United Nations has too much power. 2) The United Nations has about the right amount of power. 3) The United Nations has too little power.
+
+
+
+913) GOVNGOS
+Which of these two statements comes closer to your view: 1) In international organizations, decisions should be left to national government representatives. 2) In international organizations, citizens organizations should be involved directly in the decision-making process.
+
+
+
+914) UNRGHTS
+Which of these two statements comes closer to your view? 1) If a country seriously violates human rights, the United Nations should intervene.  2) Even if human rights are seriously violated, the country's sovereignty must be respected, and the United Nations should not intervene.
+
+
+
+915) POLACTVE
+Political parties encourage people to become active in politics.
+
+
+
+916) CHOICES
+Political parties do not give voters real policy choices.
+
+
+
+917) REFRNDMS
+Referendums are a good way to decide important political questions.
+
+
+
+918) ELECVOTE
+Thinking of the last national election in America, how honest was it regarding the counting and reporting of the votes?
+
+
+
+919) ELECFAIR
+Thinking of the last national election in America, how fair was it regarding the opportunities of the candidates and parties to campaign?
+
+
+
+920) SERVEPEO
+Thinking of government administrators in America, how committed are they to serve the people?
+
+
+
+921) FIXMISTK
+When the government administrators make serious mistakes in America how likely is it that they will be corrected?
+
+
+
+922) CORRUPTN
+How widespread do you think corruption is in the public service in America?
+
+
+
+923) DEMTODAY
+How well does democracy work in America today?
+
+
+
+924) DEM10PST
+And what about 10 years ago? How well did democracy work in America then?
+
+
+
+925) DEM10FUT
+And how about 10 years from now? How well do you think democracy will work in America then?
+
+
+
+926) DEMRGHTS
+Here are some views regarding Americas political system. Which of these statements is closer to your view? (1) Under no circumstance should democratic rights be restricted by the government, or (2) When the government thinks it is necessary it should restrict democratic rights
+
+
+
+927) CREATION
+After I read off three statements, please tell me which one comes closest to your views about the origin and development of man. 1) God created man pretty much in his present form at one time within the last 10,000 years. 2) Man has developed over millions of years from less advanced forms of life. God had no part in this process. 3) Man has developed over millions of years from less advanced forms of life, but God guided this process, including mans creation.
+
+
+
+928) SCITESTY
+Human beings developed from earlier species of animals.
+
+
+
+929) EXCLDIMM
+Do you agree or disagree with this statement: America should take stronger measures to exclude illegal immigrants.
+
+
+
+930) PARTNERS
+How many sex partners have you had in the last 12 months?
+
+
+
+931) MATESEX
+Was one of the partners your husband or wife or regular sexual partner?
+
+
+
+932) FRNDSEX
+If you had other partners, please indicate all categories that apply to them. Close personal friend
+
+
+
+933) ACQNTSEX
+Had sex with: Neighbor, Co-Worker, or long-term acquaintance
+
+
+
+934) PIKUPSEX
+Had sex with: Casual date or pick-up
+
+
+
+935) PAIDSEX
+Had Sex With: Person you paid for sex
+
+
+
+936) OTHERSEX
+Had sex with: Other
+
+
+
+937) SEXSEX
+Have your sex partners in the last 12 months been exclusively male, both male and female, exclusively female.
+
+
+
+938) SEXFREQ
+About how often did you have sex during the last 12 months?
+
+
+
+939) NUWOMEN
+Now thinking about the time since your 18th birthday (including the past 12 months) how many female partners have you had sex with?  [994=Several; 995=Many/lots; 996=NA; 997=Refused; 998=Don't Know; 999=No Answer]
+
+
+
+940) NUMMEN
+Now thinking about the time since your 18th birthday (including the past 12 months) how many male partners have you had sex with? [994=Several; 995=Many/lots; 996=NA; 997=Refused; 998=Don't Know; 999=No Answer]
+
+
+
+941) PARTNRS5
+Now think about the past five years-- the time since February/March 1986, and including the past 12 months, how many sex partners have you had in that five year period?
+
+
+
+942) SEXSEX5
+Have your sex partners in the last five years been...
+
+
+
+943) EVPDSEX
+Thinking about the time since your 18th birthday, have you ever had sex with a person you paid or who paid you for sex?
+
+
+
+944) EVSTRAY
+Have you ever had sex with someone other than your husband or wife while you were married?
+
+
+
+945) CONDOM
+The last time you had sex, was a condom used?  By 'sex' we mean vaginal, oral, or anal sex.
+
+
+
+946) RELATSEX
+The last time you had sex, was it with someone you were in an on-going relationship with, or was it with someone else?
+
+
+
+947) EVIDU
+Have you ever, even once, taken any drugs by injection with a needle (like heroin, cocaine, amphetamines, or steroids)...Do not include anything you took under a doctor's orders.
+
+
+
+948) IDU30
+How long has it been since you last used a needle to inject drugs?
+
+
+
+949) EVCRACK
+Have you ever, even once, used 'crack' cocaine in chunk or rock form?
+
+
+
+950) CRACK30
+How long has it been since you last used 'crack' cocaine in chunk or rock form?
+
+
+
+951) GENETST1
+How much would you say you have heard or read about genetic testing?
+
+
+
+952) GENEGOO2
+Some people say that genetic testing may cause trouble.  Others think it is a wonderful medical advance.  Based on what you know, do you think genetic testing will do more harm than good or more good than harm?
+
+
+
+953) GENESELF
+Today, tests are being developed that make it possible to detect serious genetic defects before a baby is born. But so far, it is impossible either to treat or to correct most of them. If (you/your partner) were pregnant, would you want (her) to have a test to find out if the baby has any serious genetic defects?
+
+
+
+954) GENEABRT
+Suppose a test shows the baby has a serious genetic defect. Would you (yourself want to/want your partner to) have an abortion if a test shows the baby has a serious genetic defect?
+
+
+
+955) PROB1
+What are the most important problems that you and members of your household have had during the last 12 months? First problem mentioned. (See Note 15: Important problems on the ARDA summary page)
+
+
+
+956) PROBLEM2
+Second problem mentioned. (See Note 15: Important problems on the ARDA summary page)
+
+
+
+957) PROBLEM3
+Third problem mentioned. (See Note 15: Important problems on the ARDA summary page)
+
+
+
+958) PROBLEM4
+Fourth problem mentioned. (See Note 15: Important Problems on the ARDA summary page)
+
+
+
+959) HLTH1
+Now, I'm going to ask you about various events and conditions that happen to people. I'm interested in those that happened to you during the last 12 months, that is since February/March, 1990. As I ask you about the specific events , please think carefully, so I can record things accurately. A. First, thinking about health related matters, did any of the following happen to you since February/March, 1990? Ill enough to go to a doctor.
+
+
+
+960) HLTH2
+Underwent counseling for mental or emotional problems.
+
+
+
+961) HLTH3
+Infertility or unable to have a baby.
+
+
+
+962) HLTH4
+Had a drinking problem (e.g., frequently drunk, suffered from alcoholism).
+
+
+
+963) HLTH5
+Used illegal drugs (e.g., marijuana, cocaine, pills).
+
+
+
+964) HLTH6
+Your (Husband/wife)/partner was a patient in a hospital, sanatorium, convalescent or nursing home (apart from have a baby).
+
+
+
+965) HLTH7
+A child of yours was a patient in a hospital, sanatorium, convalescent or nursing home (apart from having a baby).
+
+
+
+966) HLTH8
+Child on drugs or had drinking problem.
+
+
+
+967) HLTH9
+A death of a close friend.
+
+
+
+968) HLTH10
+During the past twelve months, that is since (current month) 2003, have you, yourself, been a patient in a hospital, sanatorium, convalescent or nursing home (apart from having a baby)?
+
+
+
+969) HLTH11
+During the past twelve months, were you unable to work at your job or carry on your regular activities for one month or more because of illness or injury?
+
+
+
+970) HLTH12
+Did any deaths occur during the past year, that is since (Current month) 2003? Who was that? Husband or wife
+
+
+
+971) HLTH13
+Did any deaths occur during the past year, that is since (Current month) 2003? Who was that? Child
+
+
+
+972) HLTH14
+Did any deaths occur during the past year, that is since (Current month) 2003? Who was that? Father or mother
+
+
+
+973) WORK1
+Second, what about work-related matters? Did any of the following happen to you since February/March, 1990? Fired or permanently laid-off.
+
+
+
+974) WORK2
+Demoted or switched to a less favorable position.
+
+
+
+975) WORK3
+A cut in pay (including reduced hours).
+
+
+
+976) WORK4
+Passed over for promotion.
+
+
+
+977) WORK5
+Serious trouble with your boss.
+
+
+
+978) WORK6
+Your own business (farm or professional office) lost money or failed.
+
+
+
+979) WORK7
+Your (husband/wife)/partner was fired or permanently laid-off.
+
+
+
+980) WORK8
+Your (husband/wife)/partner had a cut in pay (including reduced hours).
+
+
+
+981) WORK9
+Your (husband/wife)/partner was unemployed and looking for work for a month or more.
+
+
+
+982) WORK10
+During the past twelve months, that is since (current month) 2003, were you unemployed and looking for work for as long as a month?
+
+
+
+983) FINAN1
+Did any of the following financial matters happen to you during the last year: Went bankrupt (declared personal bankruptcy).
+
+
+
+984) FINAN2
+Car, household appliances, or furniture repossessed.
+
+
+
+985) FINAN3
+Pawned or sold-off valuables to make ends meet.
+
+
+
+986) FINAN4
+Pressured to pay bills by stores, creditors, or bill collectors.
+
+
+
+987) FINAN5
+Major worsening of your financial condition.
+
+
+
+988) HRDSHP1
+Now I am going to ask about specific hardships. Did any of the following occur to you since February/March, 1990? Fell behind in paying your rent or mortgage.
+
+
+
+989) HRDSHP2
+Evicted from your apartment/house.
+
+
+
+990) HRDSHP3
+Had your utilities (water, heat, electricity) shut off.
+
+
+
+991) HRDSHP4
+Unable to purchase needed food.
+
+
+
+992) HRDSHP5
+Unable to afford needed medical care.
+
+
+
+993) HRDSHP6
+Lacked health insurance coverage (e.g. Medicare, Medicaid, Blue Cross, and HMO, etc.).
+
+
+
+994) HRDSHP7
+Had to temporarily live with others or in a shelter or 'on the street.'
+
+
+
+995) FAMPER1
+What about family and personal relationships? During the last year, did you...Have serious trouble with your (husband/wife)/partner.
+
+
+
+996) FAMPER2
+Separate from your (husband/wife)/partner.
+
+
+
+997) FAMPER3
+Break up with a steady boyfriend/girlfriend or fiancé(e).
+
+
+
+998) FAMPER4
+Have serious trouble with a child.
+
+
+
+999) FAMPER5
+Have serious trouble with a close friend.
+
+
+
+1000) FAMPER6
+Did you obtain a divorce or separation during the last 12 months, that is since (current month) 2003?
+
+
+
+1001) LAW1
+Next, did any of the following criminal or legal events occur to you since February/March, 1990. A robbery (e.g. a mugging or stick-up).
+
+
+
+1002) LAW2
+A personal assault (e.g. being beaten up, hit, or attacked with a weapon).
+
+
+
+1003) LAW3
+Your home burglarized or broken into.
+
+
+
+1004) LAW4
+Accused of something for which a person might be sent to jail.
+
+
+
+1005) LAW5
+Arrested.
+
+
+
+1006) LAW6
+Sued in a civil (non-criminal) case.
+
+
+
+1007) LAW7
+Your child was arrested or got in trouble with the law.
+
+
+
+1008) LIVE1
+What about things concerning where you live? During the last year, did any of the following happen? Your home destroyed or heavily damaged due to fire, flood, or other disaster.
+
+
+
+1009) LIVE2
+Your home in poor condition (e.g. leaks, broken windows, insects, heating breakdowns, exposed wires, etc.).
+
+
+
+1010) LIVE3
+Major home repairs (e.g. replaced furnace, new roof).
+
+
+
+1011) LIVE4
+Serious trouble with a landlord or building manager.
+
+
+
+1012) OTH1
+And finally, since February/March, 1990, did any of the following occur to you? Discriminated against because of your race or nationality, sex, or for a similar reason.
+
+
+
+1013) OTH2
+Unable to get into school or training program.
+
+
+
+1014) OTH3
+Child had serious trouble in school (e.g., failing, dropping out, expelled, held back)
+
+
+
+1015) OTH4
+Needed, but unable to use, public transportation to get to work, shop, etc.
+
+
+
+1016) OTH5
+Did not have a car (one month or more).
+
+
+
+1017) EXTRA1
+Aside from the things we've already covered, what other important problems did you or members of your household have during the last 12 months? First mention. (See Note 16: Other Important Problems on the ARDA summary page)
+
+
+
+1018) EXTRA2
+Aside from the things we've already covered, what other important problems did you or members of your household have during the last 12 months? Second mention. (See Note 16: Other Important Problems on the ARDA summary page)
+
+
+
+1019) REALINC
+Family income on 1972-1991 surveys in constant dollars (base=1986)
+
+
+
+1020) REALRINC
+Respondent's income on 1972-1991 surveys in constant dollars (base=1986)
+
+
+
+1021) ETHNIC
+From what countries or part of the world did your ancestors come?
+
+
+
+1022) ETH1
+First ethnicity mentioned
+
+
+
+1023) ETH2
+Second ethnicity mentioned
+
+
+
+1024) ETH3
+Third ethnicity mentioned
+
+
+
+1025) ETHNUM
+Number of ethnicities named and picked
+
+
+
+1026) HISPANIC
+Are you Spanish, Hispanic, or Latino/Latina? Which group are you from?
+
+
+
+1027) RACECEN1
+What is your race? Indicate one or more races that you consider yourself to be -- First mention
+
+
+
+1028) RACECEN2
+What is your race? Indicate one or more races that you consider yourself to be -- Second mention
+
+
+
+1029) RACECEN3
+What is your race? Indicate one or more races that you consider yourself to be -- Third mention
+
+
+
+1030) DWELLING
+Dwelling type
+
+
+
+1031) DWELOWN
+(Do you/Does your family) own your (home/apartment), pay rent, or what?
+
+
+
+1032) WORDA
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word A
+
+
+
+1033) WORDB
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word B
+
+
+
+1034) WORDC
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word C
+
+
+
+1035) WORDD
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word D
+
+
+
+1036) WORDE
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word E
+
+
+
+1037) WORDF
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word F
+
+
+
+1038) WORDG
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word G
+
+
+
+1039) WORDH
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word H
+
+
+
+1040) WORDI
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word I
+
+
+
+1041) WORDJ
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word J
+
+
+
+1042) WORDSUM
+Total number of correct words.
+
+
+
+1043) RELATE1
+Relationship of first person to head of household.
+
+
+
+1044) GENDER1
+Gender of first person.
+
+
+
+1045) OLD1
+Age of first person.
+
+
+
+1046) MAR1
+Marital status of first person.
+
+
+
+1047) AWAY1
+Is the first person staying somewhere else right now?
+
+
+
+1048) WHERE1
+Where is the first person staying?
+
+
+
+1049) RELATE2
+Relationship of second person to head of household.
+
+
+
+1050) GENDER2
+Gender of second person.
+
+
+
+1051) OLD2
+Age of second person.
+
+
+
+1052) MAR2
+Marital status of second person.
+
+
+
+1053) AWAY2
+Is the second person staying somewhere else right now?
+
+
+
+1054) WHERE2
+Where is the second person staying?
+
+
+
+1055) RELATE3
+Relationship of third person to head of household.
+
+
+
+1056) GENDER3
+Gender of third person.
+
+
+
+1057) OLD3
+Age of third person.
+
+
+
+1058) MAR3
+Marital status of third person.
+
+
+
+1059) AWAY3
+Is the third person staying somewhere else right now?
+
+
+
+1060) WHERE3
+Where is the third person staying?
+
+
+
+1061) RELATE4
+Relationship of fourth person to head of household
+
+
+
+1062) GENDER4
+Gender of fourth person.
+
+
+
+1063) OLD4
+Age of fourth person.
+
+
+
+1064) MAR4
+Marital status of fourth person.
+
+
+
+1065) AWAY4
+Is the fourth person staying somewhere else right now?
+
+
+
+1066) WHERE4
+Where is the fourth person staying?
+
+
+
+1067) RELATE5
+Relationship of fifth person to head of household.
+
+
+
+1068) GENDER5
+Gender of fifth person.
+
+
+
+1069) OLD5
+Age of fifth person.
+
+
+
+1070) MAR5
+Marital status of fifth person.
+
+
+
+1071) AWAY5
+Is the fifth person staying somewhere else right now?
+
+
+
+1072) WHERE5
+Where is the fifth person staying?
+
+
+
+1073) RELATE6
+Relationship of sixth person to head of household.
+
+
+
+1074) GENDER6
+Gender of sixth person.
+
+
+
+1075) OLD6
+Age of sixth person.
+
+
+
+1076) MAR6
+Marital status of sixth person.
+
+
+
+1077) AWAY6
+Is the sixth person staying somewhere else right now?
+
+
+
+1078) WHERE6
+Where is the sixth person staying?
+
+
+
+1079) RELATE7
+Relationship of seventh person to head of household.
+
+
+
+1080) GENDER7
+Gender of seventh person.
+
+
+
+1081) OLD7
+Age of seventh person.
+
+
+
+1082) MAR7
+Marital status of seventh person.
+
+
+
+1083) AWAY7
+Is the seventh person staying somewhere else right now?
+
+
+
+1084) WHERE7
+Where is the seventh person staying?
+
+
+
+1085) RELATE8
+Relationship of eighth person to head of household.
+
+
+
+1086) GENDER8
+Gender of eighth person.
+
+
+
+1087) OLD8
+Age of eighth person.
+
+
+
+1088) MAR8
+Marital status of eighth person.
+
+
+
+1089) RELATE9
+Relationship of ninth person to head of household.
+
+
+
+1090) GENDER9
+Gender of ninth person.
+
+
+
+1091) OLD9
+Age of ninth person.
+
+
+
+1092) MAR9
+Marital status of ninth person.
+
+
+
+1093) RELATE10
+Relationship of tenth person to head of household.
+
+
+
+1094) GENDER10
+Gender of tenth person.
+
+
+
+1095) OLD10
+Age of tenth person.
+
+
+
+1096) MAR10
+Marital status of tenth person.
+
+
+
+1097) RELATE11
+Relationship of eleventh person to head of household.
+
+
+
+1098) GENDER11
+Gender of eleventh person.
+
+
+
+1099) OLD11
+Age of eleventh person.
+
+
+
+1100) MAR11
+Marital status of eleventh person.
+
+
+
+1101) AWAY11
+Is the eleventh person staying somewhere else right now?
+
+
+
+1102) WHERE11
+Where is the eleventh person staying?
+
+
+
+1103) RELHHD1
+Relationship of first person to head of household, revised
+
+
+
+1104) RELHHD2
+Relationship of second person to head of household, revised
+
+
+
+1105) RELHHD3
+Relationship of third person to head of household, revised
+
+
+
+1106) RELHHD4
+Relationship of fourth person to head of household, revised
+
+
+
+1107) RELHHD5
+Relationship of fifth person to head of household, revised
+
+
+
+1108) RELHHD6
+Relationship of sixth person to head of household, revised
+
+
+
+1109) RELHHD7
+Relationship of seventh person to head of household, revised
+
+
+
+1110) RELHHD8
+Relationship of eighth person to head of household, revised
+
+
+
+1111) RELHHD9
+Relationship of ninth person to head of household, revised
+
+
+
+1112) RELHHD10
+Relationship of tenth person to head of household, revised
+
+
+
+1113) RELHHD11
+Relationship of eleventh person to head of household, revised
+
+
+
+1114) HEFINFO
+Number in family of person who was household informant. (i.e. who provided information on household members).
+
+
+
+1115) HHRACE
+Race of household.
+
+
+
+1116) RESPNUM
+Number in family of respondent.
+
+
+
+1117) HHTYPE
+Household type
+
+
+
+1118) HHTYPE1
+Household type condensed
+
+
+
+1119) FAMGEN
+Number of family generations in household.
+
+
+
+1120) RPLACE
+Respondent's relationship to head.
+
+
+
+1121) RVISITOR
+Is respondent a visitor?
+
+
+
+1122) VISITORS
+Number of visitors in household.
+
+
+
+1123) RELHH1
+Relationship of person 1 to head of household
+
+
+
+1124) RELHH2
+Relationship of person 2 to head of household
+
+
+
+1125) RELHH3
+Relationship of person 3 to head of household
+
+
+
+1126) RELHH4
+Relationship of person 4 to head of household
+
+
+
+1127) RELHH5
+Relationship of person 5 to head of household
+
+
+
+1128) RELHH6
+Relationship of person 6 to head of household
+
+
+
+1129) RELHH7
+Relationship of person 7 to head of household
+
+
+
+1130) RELHH8
+Relationship of person 8 to head of household
+
+
+
+1131) RELHH9
+Relationship of person 9 to head of household
+
+
+
+1132) RELHH10
+Relationship of person 10 to head of household
+
+
+
+1133) RELHH11
+Relationship of person 11 to head of household
+
+
+
+1134) RELSP1
+Relationship of person 1 to spouse of household head
+
+
+
+1135) RELSP2
+Relationship of person 2 to spouse of household head
+
+
+
+1136) RELSP3
+Relationship of person 3 to spouse of household head
+
+
+
+1137) RELSP4
+Relationship of person 4 to spouse of household head
+
+
+
+1138) RELSP5
+Relationship of person 5 to spouse of household head
+
+
+
+1139) RELSP6
+Relationship of person 6 to spouse of household head
+
+
+
+1140) RELSP7
+Relationship of person 7 to spouse of household head
+
+
+
+1141) RELSP8
+Relationship of person 8 to spouse of household head
+
+
+
+1142) RELSP9
+Relationship of person 9 to spouse of household head
+
+
+
+1143) RELSP10
+Relationship of person 10 to spouse of household head
+
+
+
+1144) RELSP11
+Relationship of person 11 to spouse of household head
+
+
+
+1145) DATEINTV
+Date of interview (first digit is month, last two digits are date)
+
+
+
+1146) SPISCO68
+Occupation of respondent's spouse (International Standard Classification Codes-1968) (See Note 3: on the ARDA summary page)
+
+
+
+1147) ISCO681
+Respondent's occupation (International Standard Classification Codes 1968) (See Note 3: on the ARDA summary page)
+
+
+
+1148) PAISC681
+Occupation of respondent's father (International Standard Classification Codes 1968) (See Note 3: on the ARDA summary page
+
+
+
+1149) MAISC681
+Occupation of respondent's mother (International Standard Classification Codes 1968) (See Note 3: on the ARDA summary page)
+
+
+
+1150) SPISC681
+Occupation of respondent's spouse (International Standard Classification Code 1968) (See Note 3: on the ARDA summary page)
+
+
+
+1151) ISCO88
+Respondent's occupation, 1988 Census
+
+
+
+1152) PAISCO88
+Respondent's father's occupation, 1988 Census
+
+
+
+1153) MAISCO88
+Respondent's mother's occupation, 1988 Census
+
+
+
+1154) SPISCO88
+Respondent's spouse's occupation, 1988 Census
+
+
+
+1155) SEI
+Respondent socioeconomic index.
+
+
+
+1156) PASEI
+Socioeconomic index of respondent's father.
+
+
+
+1157) MASEI
+Socioeconomic index of respondent's mother.
+
+
+
+1158) SPSEI
+Socioeconomic index of respondent's spouse.
+
+
+
+1159) COHORT
+Birth cohort of respondent -- actual year of birth.
+
+
+
+1160) ZODIAC
+Astrological sign of respondent
+
+
+
+1161) INTHISP
+Interviewer, are you Spanish, Hispanic, or Latino/Latina?
+
+
+
+1162) INTRACE1
+What is your race?
+
+
+
+1163) INTRACE2
+What is your race?
+
+
+
+1164) INTRACE3
+What is your race?
+
+
+
+1165) BALLOT
+Ballot Administered.
+
+
+
+1166) VERSION
+Version Administered
+
+
+
+1167) ISSP
+Status on International Social Survey Program Supplement.
+
+
+
+1168) FORMWT
+Weight for form variables. Post-stratification weight
+
+
+
+1169) SAMPCODE
+Sampling error code.
+
+
+
+1170) SAMPLE
+The GSS has employed various sampling procedures and frames. Appendix A gives full details.
+
+
+
+1171) OVERSAMP
+Weight for Black oversamples.
+
+
+
+1172) PHASE
+Subsampling: two-phase design [1 = PHASE 1 - Initial cases; 2 = Phase 2 - Subsampled cases]
+
+
+
+1173) WT2004
+Weight of variables--Weights for 2004
+
+
+
+1174) WT2004NR
+Weight of variables--Weights for 2004 area nonresponse adjustment
+
+
+
+1175) I-AGE
+Respondent's age (Recoded for use with online analysis)
+
+
+
+1176) I-SEX
+Respondent's sex (for use with online analysis)
+
+
+
+1177) I-EDUC
+Highest educational degree earned by respondent (Recoded for use with online analysis)
+
+
+
+1178) I-POLITICS
+I'm going to show you a seven-point scale on which the political views that people might hold are arranged from extremely liberal to extremely conservative. Where would you place yourself on this scale? (Recoded for use with online analysis)
+
+
+
+1179) I-MARITAL
+Are you currently -- married, widowed, divorced, separated, or have you never been married? (for use with online analysis)
+
+
+
+1180) I-RELIGION
+What is your religious preference? Is it Protestant, Catholic, Jewish, some other religion, or no religion? (Recoded for use with online analysis)
+
+
+
