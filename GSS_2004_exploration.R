@@ -122,7 +122,7 @@ GSS_2004_EGO <- read.csv('trabajo_1_files/GSS_2004_EGO.csv')
 refused_count <- sum(sapply(GSS_2004_EGO[col_alters_net], function(x) sum(x == 7, na.rm = TRUE)))
 cat("Cantidad de casos '7 = refused':", refused_count, "\n")
 
-# 10) Recodificar lazos alter-alter
+# 10) Recodificar lazos alter-alter y guardar
 set.seed(123) # Para reproducibilidad
 
 recode_close <- function(x) {
@@ -137,6 +137,9 @@ recode_close <- function(x) {
 
 GSS_2004_EGO_bin <- GSS_2004_EGO
 GSS_2004_EGO_bin[col_alters_net] <- lapply(GSS_2004_EGO[col_alters_net], recode_close)
+
+write.csv(GSS_2004_EGO_bin, 'trabajo_1_files/GSS_2004_EGO_bin.csv', row.names = FALSE)
+GSS_2004_EGO <- read.csv('trabajo_1_files/GSS_2004_EGO_bin.csv')
 
 # 11) Contar el número de egos para cada valor de alters declarados
 table_numgiven <- table(GSS_2004_EGO_bin$numgiven)
