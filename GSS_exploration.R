@@ -1,7 +1,8 @@
 # ----------------- DESCRIPTORES ----------------- 
 # 2812 obs , 1264 var --> El 50.7% de ellos tienen entrada no nula en 'numgiven'.
-# 1426 obs con 'numgiven'
+# 1426 obs con 'numgiven' != NA
 # 1070 obs con 'numgiven' != 0
+# 789 obs con 'numgiven' >= 2
 
 # ----------------- IMPORTAR ------------
 
@@ -30,10 +31,10 @@ library(haven)
 library(dplyr)
 library(labelled)
 
-# 1. Importar datos
+# 1) Importar datos
 GSS_2004 <- read_dta("B - Surveys Data/GSS 2004/GSS 2004 NORC.dta")
 
-# 2. Definir columnas de atributos y de red
+# 2) Definir columnas de atributos y de red
 col_alters_attr <- c(
   "numgiven", 
   paste0("sex", 1:5), paste0("race", 1:5), paste0("educ", 1:5), 
@@ -57,23 +58,23 @@ col_alters_status <- c(
   paste0("talkto", 1:5)
 )
 
-# 3. Filtrar solo casos con numgiven no nulo
+# 3) Filtrar solo casos con numgiven no nulo
 GSS_2004_EGO <- GSS_2004 %>% filter(!is.na(numgiven))
 
-# 4. Seleccionar columnas relevantes (atributos + red)
+# 4) Seleccionar columnas relevantes (atributos + red)
 selected_columns <- c(col_alters_attr, col_alters_net, col_alters_status)
 GSS_2004_EGO <- GSS_2004_EGO %>% select(all_of(selected_columns))
 
-# 5. Guardar etiquetas originales
+# 5) Guardar etiquetas originales
 labels_list_attr <- lapply(GSS_2004_EGO[col_alters_attr], val_labels)
 labels_list_net  <- lapply(GSS_2004_EGO[col_alters_net],  val_labels)
 labels_list_status <- lapply(GSS_2004_EGO[col_alters_status], val_labels)
 
-# 6. Convertir a data frame base R 
+# 6) Convertir a data frame base R 
 GSS_2004_EGO <- GSS_2004_EGO %>% mutate(across(everything(), ~ as.integer(.)))
 GSS_2004_EGO <- as.data.frame(GSS_2004_EGO)
 
-# 7. Análisis exploratorio
+# 7) Análisis exploratorio
 
 library(ggplot2)
 
@@ -108,17 +109,17 @@ plot_histograms <- function(df) {
 }
 plot_histograms(GSS_2004_EGO)
 
-# 8. Exportamos datos limpios
+# 8) Exportamos datos limpios
 write.csv(GSS_2004_EGO, 'B - Surveys Data/GSS 2004/GSS_2004_EGO.csv', row.names = FALSE)
 GSS_2004_EGO <- read.csv('B - Surveys Data/GSS 2004/GSS_2004_EGO.csv')
 
 # ----------------- NETWORK ------------
 
-# 9. Cuantificar casos '7 = refused'
+# 9) Cuantificar casos '7 = refused'
 refused_count <- sum(sapply(GSS_2004_EGO[col_alters_net], function(x) sum(x == 7, na.rm = TRUE)))
 cat("Cantidad de casos '7 = refused':", refused_count, "\n")
 
-# 10. Recodificar lazos alter-alter
+# 10) Recodificar lazos alter-alter
 set.seed(123) # Para reproducibilidad
 
 recode_close <- function(x) {
@@ -134,7 +135,29 @@ recode_close <- function(x) {
 GSS_2004_EGO_bin <- GSS_2004_EGO
 GSS_2004_EGO_bin[col_alters_net] <- lapply(GSS_2004_EGO[col_alters_net], recode_close)
 
-# 11. Graficar la red alter-alter para un ego
+# 11) Contar el número de egos para cada valor de alters declarados
+table_numgiven <- table(GSS_2004_EGO_bin$numgiven)
+
+percent_numgiven <- table_numgiven / sum(table_numgiven)
+
+n_alters_plot <- barplot(percent_numgiven,
+              col = "skyblue",
+              border = "black",
+              main = "Egos que declararon n Alters - GSS_2004_EGO_bin",
+              xlab = "Número de Alters (n)",
+              ylab = "Porcentaje de Egos",
+              names.arg = 0:6,
+              ylim = c(0, max(percent_numgiven) * 1.1))
+text(x = n_alters_plot, 
+     y = percent_numgiven, 
+     labels = as.numeric(table_numgiven), 
+     pos = 3, cex = 1, col = "black")
+text(x = max(n_alters_plot), 
+     y = max(percent_numgiven) * 0.85, 
+     labels = paste("Total de casos:", sum(table_numgiven)), 
+     adj = 1, cex = 1.1, font = 2)
+
+# 12) Graficar la red alter-alter para un ego
 
 library(igraph)
 
@@ -163,7 +186,7 @@ plot_ego_network <- function(row, close_cols) {
 # Graficamos redes únicas
 plot_ego_network(GSS_2004_EGO_bin[3, ], col_alters_net)
 
-# 12. Histograma de densidad de redes Alter-Alter (lazos máximos 5x4/2 = 10)
+# 13) Histograma de densidad de redes Alter-Alter (lazos máximos 5x4/2 = 10)
 densidades <- rowSums(GSS_2004_EGO_bin[, col_alters_net], na.rm = TRUE) / 10
 
 hist(densidades,
@@ -178,16 +201,20 @@ hist(densidades,
 # redes con densidad mayor a 0
 sum(densidades > 0)
 
-# 13. Histograma con densidad corregida por Alter reportados. Eje-y considera número de redes con al menos 2 Alters.
+# 14) Histograma con densidad corregida por Alter reportados. Eje-y considera número de redes con al menos 2 Alters.
 
 calc_density <- function(row, close_cols) {
   n <- row[["numgiven"]]
-  if (is.na(n) || n < 2) return(NA) # No se puede calcular densidad con menos de 2 alters
+  if (n < 2) {#print('NA')
+    return(NA)} # No se puede calcular densidad con menos de 2 alters 
+                # Ojo que choose(0, 2)=choose(1, 2)=0, así que se indetermina la frac.
+  
   # Calculamos número máximo de links n(n-1)/2 .
   possible_links <- choose(n, 2)
   # Extrae los valores de los lazos relevantes. Ej: close12, close13, close23
   links <- as.numeric(row[close_cols][1:possible_links])
   observed_links <- sum(links, na.rm = TRUE)
+  
   return(observed_links / possible_links)
 }
 
@@ -195,10 +222,9 @@ calc_density <- function(row, close_cols) {
 densidades_corregidas <- apply(GSS_2004_EGO_bin, 1, calc_density, close_cols = col_alters_net)
 
 # Filtra densidades válidas (no NA)
-densidades_validas <- densidades_corregidas[!is.na(densidades_corregidas)]
+densidades_validas <- densidades_corregidas[!is.na(densidades_corregidas)] # HAY VARIOS NA. SE PRODUCEN DESPUÉS DEL if EN LA FUNC.
 length(densidades_validas)/length(densidades_corregidas)
-length(densidades_validas) # 789 obs tienen red Alter-Alter válida (pero habíamos filtrado ya las no-validas 
-                                # ??????????????????????? )
+length(densidades_validas) # 789 obs con 'numgiven' >= 2
 
 # Histograma con eje-y ajustado
 hist(densidades_validas,
