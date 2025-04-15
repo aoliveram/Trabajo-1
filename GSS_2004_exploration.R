@@ -4,6 +4,9 @@
 # 1070 obs con 'numgiven' != 0
 # 789 obs con 'numgiven' >= 2
 
+# Tomé una decisión con close_recode: 
+# En vez de quitar los datos, puse NA --> 0 (no lazo)
+
 # ----------------- IMPORTAR ------------
 
 library(haven)
@@ -110,8 +113,8 @@ plot_histograms <- function(df) {
 plot_histograms(GSS_2004_EGO)
 
 # 8) Exportamos datos limpios
-write.csv(GSS_2004_EGO, 'B - Surveys Data/GSS 2004/GSS_2004_EGO.csv', row.names = FALSE)
-GSS_2004_EGO <- read.csv('B - Surveys Data/GSS 2004/GSS_2004_EGO.csv')
+write.csv(GSS_2004_EGO, 'trabajo_1_files/GSS_2004_EGO.csv', row.names = FALSE)
+GSS_2004_EGO <- read.csv('trabajo_1_files/GSS_2004_EGO.csv')
 
 # ----------------- NETWORK ------------
 
@@ -140,6 +143,7 @@ table_numgiven <- table(GSS_2004_EGO_bin$numgiven)
 
 percent_numgiven <- table_numgiven / sum(table_numgiven)
 
+png("trabajo_1_plots/n_alters_plot.png", width = 800, height = 600)
 n_alters_plot <- barplot(percent_numgiven,
               col = "skyblue",
               border = "black",
@@ -156,6 +160,7 @@ text(x = max(n_alters_plot),
      y = max(percent_numgiven) * 0.85, 
      labels = paste("Total de casos:", sum(table_numgiven)), 
      adj = 1, cex = 1.1, font = 2)
+dev.off()
 
 # 12) Graficar la red alter-alter para un ego
 
@@ -189,14 +194,16 @@ plot_ego_network(GSS_2004_EGO_bin[3, ], col_alters_net)
 # 13) Histograma de densidad de redes Alter-Alter (lazos máximos 5x4/2 = 10)
 densidades <- rowSums(GSS_2004_EGO_bin[, col_alters_net], na.rm = TRUE) / 10
 
+png("trabajo_1_plots/densidades.png", width = 800, height = 600)
 hist(densidades,
      breaks = seq(0, 1, by = 0.1),
      col = "cyan",
      border = "black",
-     main = "Histograma de densidades de red (5 alters)",
+     main = "Densidades de red (basado 5 alters)",
      xlab = "Densidad",
      ylab = "Frecuencia",
      xlim = c(0, 1))
+dev.off()
 
 # redes con densidad mayor a 0
 sum(densidades > 0)
@@ -207,7 +214,7 @@ calc_density <- function(row, close_cols) {
   n <- row[["numgiven"]]
   if (n < 2) {#print('NA')
     return(NA)} # No se puede calcular densidad con menos de 2 alters 
-                # Ojo que choose(0, 2)=choose(1, 2)=0, así que se indetermina la frac.
+                # Ojo que choose(0, 2)=choose(1, 2)=0, se indetermina la frac --> NA
   
   # Calculamos número máximo de links n(n-1)/2 .
   possible_links <- choose(n, 2)
@@ -222,17 +229,19 @@ calc_density <- function(row, close_cols) {
 densidades_corregidas <- apply(GSS_2004_EGO_bin, 1, calc_density, close_cols = col_alters_net)
 
 # Filtra densidades válidas (no NA)
-densidades_validas <- densidades_corregidas[!is.na(densidades_corregidas)] # HAY VARIOS NA. SE PRODUCEN DESPUÉS DEL if EN LA FUNC.
+densidades_validas <- densidades_corregidas[!is.na(densidades_corregidas)] 
 length(densidades_validas)/length(densidades_corregidas)
 length(densidades_validas) # 789 obs con 'numgiven' >= 2
 
 # Histograma con eje-y ajustado
+png("trabajo_1_plots/densidades_corregidas.png", width = 800, height = 600)
 hist(densidades_validas,
      breaks = seq(0, 1, by = 0.1),
      col = "cyan",
      border = "black",
-     main = "Histograma de densidades de red (corrigido por alters reportados)",
+     main = "Densidades de red (corregido por redes con $n>=2$ )",
      xlab = "Densidad corregida",
      ylab = "Frecuencia",
      xlim = c(0, 1),
      ylim = c(0, length(densidades_validas)))
+dev.off
