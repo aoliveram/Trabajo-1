@@ -314,6 +314,11 @@ head(gss_egor$ego)
 head(gss_egor$alter)
 head(gss_egor$aatie)
 
+# 5.9 Saving gss_egor
+saveRDS(gss_egor, "trabajo_1_files/gss_egor.rds")
+
+gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
+
 # --- 6. Define and Estimate ERGM.EGO Model ---
 
 # - Tendencia general a formar lazos alter-alter (edges)
@@ -334,8 +339,6 @@ ergm.ego(gss_egor ~ edges + nodematch("race") + nodematch("sex") )
          # control = control.ergm.ego(MPLE.samplesize = 10000), # Example control if needed
 
 ergm.ego(gss_egor ~ edges + nodematch("race") + nodecov("age"))
-
-
 
 
 #
