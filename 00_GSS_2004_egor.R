@@ -337,11 +337,11 @@ gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
 
 ergm.ego(gss_egor ~ edges + nodematch("race") + nodematch("sex"),
          popsize = 1,
-         control = control.ergm.ego(ppopsize = 'samp',
+         control = control.ergm.ego(ppopsize = 'samp', # this will generate ppop size equal to sampling size
                                     )
+         # continue by running ?control.ergm.ego !!!!
          )
-         # control = control.ergm.ego(MPLE.samplesize = 10000), # Example control if needed
-
+         
 ergm.ego(gss_egor ~ edges + nodematch("race") + nodecov("age") + absdiff("educ_num"))
 
 
