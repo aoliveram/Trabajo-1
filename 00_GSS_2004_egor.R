@@ -1,4 +1,4 @@
-# --- 0. Load Necessary Libraries ---
+# --- 0. Load Necessary Libraries ----------------------------------------------
 # install.packages(c("readr", "dplyr", "tidyr", "egor", "ergm.ego", "network"))
 library(readr)
 library(dplyr)
@@ -7,7 +7,7 @@ library(egor)
 library(ergm.ego)
 library(network)
 
-# --- 1. Load the Raw Data ---
+# --- 1. Load the Raw Data (egos_df) -------------------------------------------
 gss_data_raw <- read_csv("trabajo_1_files/GSS_2004_EGO_bin.csv", na = "NA", show_col_types = FALSE)
 
 # Add a unique Ego ID
@@ -75,7 +75,7 @@ egos_df <- gss_data_raw %>%
   ) %>% 
   select(-educ) # Remove original numeric code
 
-# --- 3. Prepare Alter Data ----------------------------------------------------
+# --- 3. Prepare Alter Data (alters_df) ----------------------------------------
 
 alter_attr_vars <- c("sex", "race", "educ", "age", "relig")
 alter_status_vars <- c("spouse", "parent", "sibling", "child", "othfam",
@@ -113,7 +113,7 @@ alters_wide <- alters_long_filtered %>%
   ) %>%
   select(-numgiven) # numgiven no longer needed in alters table
 
-# --- Recode Alter variables ---
+   # --- Recode Alter variables ---
 alters_df <- alters_wide %>%
   mutate(
     # Ensure NAs are handled *before* factoring for Alters
@@ -196,7 +196,7 @@ alters_df <- alters_wide %>%
 # Remove numgiven from egos_df now that alter processing is done
 egos_df <- egos_df %>% select(-numgiven)
 
-# --- Display structure and summary ---
+   # --- Display structure and summary ---
 
 cols_common <- c('.egoID', 'sex', 'race', 'age', 'relig', 'educ_num')
 
@@ -216,7 +216,7 @@ lapply(cols_common, function(col) {
   cat("  Clase en alters_df:", class_alter, "\n\n")
 })
 
-# --- 3.3. DataFrame Lazos Alter-Alter (aaties) --------------------------------
+# --- 4. Prepare Alter-Alter ties (aaties) -------------------------------------
 # Columnas de la red alter-alter
 alter_net_cols <- paste0("close", c("12", "13", "14", "15", "23", "24", "25", "34", "35", "45"))
 
@@ -245,7 +245,7 @@ aaties_long <- gss_data_raw %>%
   select(.egoID, .srcID, .tgtID)
 
 
-# --- 4. Create the EGOR Object ------------------------------------------------
+# --- 5. Create the EGOR Object ------------------------------------------------
 
 head(egos_df)
 head(alters_df)
@@ -257,42 +257,31 @@ sum(is.na(egos_df$age))
 sum(is.na(egos_df$relig))
 sum(is.na(egos_df$educ_num))
 
-# alters_df <- alters_df[!is.na(egos_df$age), ] # quitamos primero en alters
-# egos_df <- egos_df[!is.na(egos_df$age), ]
-# alters_df <- alters_df[!is.na(egos_df$relig), ]
-# egos_df <- egos_df[!is.na(egos_df$relig), ]
-# alters_df <- alters_df[!is.na(egos_df$educ_num), ]
-# egos_df <- egos_df[!is.na(egos_df$educ_num), ]
-
 sum(is.na(alters_df$sex))
 sum(is.na(alters_df$race))
 sum(is.na(alters_df$age))
 sum(is.na(alters_df$relig))
 sum(is.na(alters_df$educ_num))
 
-# alters_df <- alters_df[!is.na(alters_df$age), ]
-# alters_df <- alters_df[!is.na(alters_df$relig), ]
-# alters_df <- alters_df[!is.na(alters_df$educ_num), ]
-
-# 1. Filtra egos
+# 5.1 Filtering egos
 egos_df <- egos_df[complete.cases(egos_df[, c("sex", "race", "age", "relig", "educ_num")]), ]
 
-# 2. Filtra alters por egos válidos
+# 5.2 Filtering alters with valid egos
 alters_df <- alters_df[alters_df$.egoID %in% egos_df$.egoID, ]
 
-# 3. (Opcional) Filtra alters por NA en variables de interés
+# 5.3 Filtering alters with NA in vars
 alters_df <- alters_df[complete.cases(alters_df[, c("sex", "race", "age", "relig", "educ_num")]), ]
 
-# 4. Filtra aaties por egos y alters válidos
+# 5.4 Filtering aaties by valid egos and alters 
 aaties_long <- aaties_long[
   aaties_long$.egoID %in% egos_df$.egoID &
     aaties_long$.srcID %in% alters_df$alt_ID &
     aaties_long$.tgtID %in% alters_df$alt_ID, ]
 
-# 1. Crea un vector con los alters válidos para cada ego
+# 5.5 Create a vector with valid alters for each ego
 valid_alters <- alters_df[, c(".egoID", "alt_ID")]
 
-# 2. Une (merge) para verificar que tanto .srcID como .tgtID existen para el ego correspondiente
+# 5.6 Merge to verify that both .srcID .tgtID exists for each ego
 aaties_long <- merge(
   aaties_long, valid_alters, 
   by.x = c(".egoID", ".srcID"), by.y = c(".egoID", "alt_ID")
@@ -302,12 +291,10 @@ aaties_long <- merge(
   by.x = c(".egoID", ".tgtID"), by.y = c(".egoID", "alt_ID")
 )
 
-# 3. (Opcional) Si quieres dejar solo las columnas originales:
+# 5.7 Return to the original columns
 aaties_long <- aaties_long[, c(".egoID", ".srcID", ".tgtID")]
 
-
-
-# Access data within the object using $ego and $alter
+# 5.8 Creating EGOR object
 gss_egor <- egor(
   egos = egos_df,
   alters = alters_df,
@@ -327,7 +314,7 @@ head(gss_egor$ego)
 head(gss_egor$alter)
 head(gss_egor$aatie)
 
-# --- 5. Define and Estimate ERGM.EGO Model ---
+# --- 6. Define and Estimate ERGM.EGO Model ---
 
 # - Tendencia general a formar lazos alter-alter (edges)
 # - Homofilia por sexo entre alters (nodematch('sex_cat'))
@@ -340,7 +327,6 @@ head(gss_egor$aatie)
 # que los modelos con términos de red alter-alter (como edges, nodematch) sean
 # difíciles o imposibles de estimar (degeneración). Si aaties_long está vacío o casi vacío,
 # estos términos no deben incluirse.
-
 
 # `nodefactor` requiere que no hayan NA.
 
@@ -364,7 +350,7 @@ ergm.ego(gss_egor ~ edges + nodematch("race") + nodecov("age"))
 
 
 
-# --- 6. Check Fit and Simulate Networks ---
+# --- 7. Check Fit and Simulate Networks ---
 if (!is.null(fit_gss_ego)) {
   cat("\n--- Model Estimation Summary ---\n")
   print(summary(fit_gss_ego))
