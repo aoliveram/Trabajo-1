@@ -329,12 +329,17 @@ head(gss_egor$aatie)
 
 # --- 5. Define and Estimate ERGM.EGO Model ---
 
-# Define the model formula we will attempt to estimate.
-# Let's use the one that caused the error initially, now that race is harmonized.
-# It includes homophily for race/sex and main effects for race.
-# Note: We removed nodefactor("sex") previously, let's try adding it back
-#       after fixing the race issue. If it fails, remove it again.
-#ego_model_formula_to_fit <- ~ edges + nodematch("race") + nodematch("sex") + nodefactor("race") + nodefactor("sex")
+# - Tendencia general a formar lazos alter-alter (edges)
+# - Homofilia por sexo entre alters (nodematch('sex_cat'))
+# - Homofilia por raza entre alters (nodematch('race_cat'))
+# - Efecto del sexo del ego en el número de lazos alter-alter (ego.nodefactor('sex_cat'))
+# - Efecto de la edad del alter en la probabilidad de tener lazos (nodefactor('age')) - ¡Necesitaría discretizar o usar nodecov!
+# - Tendencia de cónyuges a estar conectados con otros alters (nodefactor('spouse_bin'))
+
+# NOTA IMPORTANTE: La presencia de muy pocos lazos alter-alter (aaties) puede hacer
+# que los modelos con términos de red alter-alter (como edges, nodematch) sean
+# difíciles o imposibles de estimar (degeneración). Si aaties_long está vacío o casi vacío,
+# estos términos no deben incluirse.
 
 
 # `nodefactor` requiere que no hayan NA.
