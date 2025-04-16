@@ -4,8 +4,8 @@
 # 1070 obs con 'numgiven' != 0
 # 789 obs con 'numgiven' >= 2
 
-# Tomé una decisión con close_recode: 
-# En vez de quitar los datos, puse NA --> 0 (no lazo)
+# NO tomé una decisión con close_recode: 
+# Está NA --> 0 (no lazo), pero NO hay NA en GSS_2004_EGO
 
 # ----------------- IMPORTAR ------------
 
@@ -38,6 +38,9 @@ library(labelled)
 GSS_2004 <- read_dta("B - Surveys Data/GSS 2004/GSS 2004 NORC.dta")
 
 # 2) Definir columnas de atributos y de red
+
+col_ego_attr <- c("sex", "race", "educ", "age", "relig",  "degree")
+
 col_alters_attr <- c(
   "numgiven", 
   paste0("sex", 1:5), paste0("race", 1:5), paste0("educ", 1:5), 
@@ -65,13 +68,14 @@ col_alters_status <- c(
 GSS_2004_EGO <- GSS_2004 %>% filter(!is.na(numgiven))
 
 # 4) Seleccionar columnas relevantes (atributos + red)
-selected_columns <- c(col_alters_attr, col_alters_net, col_alters_status)
+selected_columns <- c(col_ego_attr, col_alters_attr, col_alters_net, col_alters_status)
 GSS_2004_EGO <- GSS_2004_EGO %>% select(all_of(selected_columns))
 
 # 5) Guardar etiquetas originales
-labels_list_attr <- lapply(GSS_2004_EGO[col_alters_attr], val_labels)
-labels_list_net  <- lapply(GSS_2004_EGO[col_alters_net],  val_labels)
-labels_list_status <- lapply(GSS_2004_EGO[col_alters_status], val_labels)
+labels_ego_attr <- lapply(GSS_2004_EGO[col_alters_attr], val_labels)
+labels_alters_attr <- lapply(GSS_2004_EGO[col_alters_attr], val_labels)
+labels_alters_net  <- lapply(GSS_2004_EGO[col_alters_net],  val_labels)
+labels_alters_status <- lapply(GSS_2004_EGO[col_alters_status], val_labels)
 
 # 6) Convertir a data frame base R 
 GSS_2004_EGO <- GSS_2004_EGO %>% mutate(across(everything(), ~ as.integer(.)))
@@ -127,7 +131,7 @@ set.seed(123) # Para reproducibilidad
 
 recode_close <- function(x) {
   sapply(x, function(val) {
-    if (is.na(val)) return(0)           # NA --> 0 (no lazo)
+    if (is.na(val)) return(0)           # NA --> 0 (no hay NA en GSS_2004_EGO)
     if (val == 3) return(0)             # 'total strangers' --> 0
     if (val %in% c(1, 2)) return(1)     # 'especially close' 'know each other' --> 1
     if (val == 7) return(sample(c(0, 1), 1)) # 'refused' --> random (0,1)
