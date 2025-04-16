@@ -345,6 +345,20 @@ ergm.ego(gss_egor ~ edges + nodematch("race") + nodematch("sex") )
 ergm.ego(gss_egor ~ edges + nodematch("race") + nodecov("age"))
 
 
+
+
+#
+# --- Analizar el modelo y perfeccionarlo ---------------
+# ~
+# ~
+# ~
+# ~
+# -------------------------------------------------------
+
+
+
+
+
 # --- 6. Check Fit and Simulate Networks ---
 if (!is.null(fit_gss_ego)) {
   cat("\n--- Model Estimation Summary ---\n")
