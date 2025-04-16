@@ -335,10 +335,14 @@ gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
 
 # `nodefactor` requiere que no hayan NA.
 
-ergm.ego(gss_egor ~ edges + nodematch("race") + nodematch("sex") )
+ergm.ego(gss_egor ~ edges + nodematch("race") + nodematch("sex"),
+         popsize = 1,
+         control = control.ergm.ego(ppopsize = 'samp',
+                                    )
+         )
          # control = control.ergm.ego(MPLE.samplesize = 10000), # Example control if needed
 
-ergm.ego(gss_egor ~ edges + nodematch("race") + nodecov("age"))
+ergm.ego(gss_egor ~ edges + nodematch("race") + nodecov("age") + absdiff("educ_num"))
 
 
 #
@@ -351,39 +355,39 @@ ergm.ego(gss_egor ~ edges + nodematch("race") + nodecov("age"))
 
 
 
-
-
-# --- 7. Check Fit and Simulate Networks ---
-if (!is.null(fit_gss_ego)) {
-  cat("\n--- Model Estimation Summary ---\n")
-  print(summary(fit_gss_ego))
-  
-  # Check MCMC diagnostics if needed (requires coda package)
-  # mcmc.diagnostics(fit_gss_ego)
-  
-  cat("\nSimulating 1000 networks based on the fitted model...\n")
-  simulated_networks <- simulate(fit_gss_ego, nsim = 1000, verbose = TRUE)
-  
-  cat(sprintf("\nSimulation complete. %d sets of ego networks were generated.\n", length(simulated_networks)))
-  
-  # Example: Get summary statistics from simulated networks
-  # This calculates the average degree for each ego across all simulations
-  # avg_sim_degrees <- sapply(seq_len(nrow(gss_egor$ego)), function(i) {
-  #    mean(sapply(simulated_networks, function(net_list) network.edgecount(net_list[[i]])))
-  # })
-  # print("Average simulated degrees for first 10 egos:")
-  # print(head(avg_sim_degrees, 10))
-  
-  # Save results
-  # saveRDS(fit_gss_ego, file = "gss_ego_model_fit.rds")
-  # saveRDS(simulated_networks, file = "gss_simulated_networks.rds")
-  
-} else {
-  cat("\nERGM.EGO model estimation failed. Cannot proceed with simulation.\n")
-  cat("Potential issues:\n")
-  cat("- Model misspecification (terms might be collinear or poorly identified).\n")
-  cat("- Insufficient MCMC convergence (try adjusting control.ergm.ego parameters).\n")
-  cat("- Remaining data inconsistencies (double-check factor levels and NAs).\n")
-}
-
-cat("\nScript finished.\n")
+# 
+# 
+# # --- 7. Check Fit and Simulate Networks ---
+# if (!is.null(fit_gss_ego)) {
+#   cat("\n--- Model Estimation Summary ---\n")
+#   print(summary(fit_gss_ego))
+#   
+#   # Check MCMC diagnostics if needed (requires coda package)
+#   # mcmc.diagnostics(fit_gss_ego)
+#   
+#   cat("\nSimulating 1000 networks based on the fitted model...\n")
+#   simulated_networks <- simulate(fit_gss_ego, nsim = 1000, verbose = TRUE)
+#   
+#   cat(sprintf("\nSimulation complete. %d sets of ego networks were generated.\n", length(simulated_networks)))
+#   
+#   # Example: Get summary statistics from simulated networks
+#   # This calculates the average degree for each ego across all simulations
+#   # avg_sim_degrees <- sapply(seq_len(nrow(gss_egor$ego)), function(i) {
+#   #    mean(sapply(simulated_networks, function(net_list) network.edgecount(net_list[[i]])))
+#   # })
+#   # print("Average simulated degrees for first 10 egos:")
+#   # print(head(avg_sim_degrees, 10))
+#   
+#   # Save results
+#   # saveRDS(fit_gss_ego, file = "gss_ego_model_fit.rds")
+#   # saveRDS(simulated_networks, file = "gss_simulated_networks.rds")
+#   
+# } else {
+#   cat("\nERGM.EGO model estimation failed. Cannot proceed with simulation.\n")
+#   cat("Potential issues:\n")
+#   cat("- Model misspecification (terms might be collinear or poorly identified).\n")
+#   cat("- Insufficient MCMC convergence (try adjusting control.ergm.ego parameters).\n")
+#   cat("- Remaining data inconsistencies (double-check factor levels and NAs).\n")
+# }
+# 
+# cat("\nScript finished.\n")
