@@ -197,11 +197,13 @@ legend("topleft", c("Egos", "Alters (Synthetic)"),
 
 
 par(mfrow=c(1,1))
-hist(synthetic_years_best_binned, breaks=0:21, col=rgb(0.4,0.8,0.4,0.5))
+hist(synthetic_years_best_binned, breaks=0:21, col=rgb(0.4,0.8,0.4,0.5),
+     main = paste("Education Distribution (binned) Comparison\n(w1:", 
+                  sprintf("%.2f", best_params[1]), ", mu1:", sprintf("%.2f", best_params[2]),
+                  ", sigma1:", sprintf("%.2f", best_params[3]), ", mu2:", sprintf("%.2f", best_params[4]),
+                  ", sigma2:", sprintf("%.2f", best_params[5]), ")"))
 hist(gss_alters$educ_num, breaks=0:21, col=rgb(0.2,0.4,0.6,0.5), add=TRUE)
-# abline(v=mean(synthetic_years), col=rgb(1,0.4,0.4,0.8), lty=2)
-# abline(v=mean(gss_egos$educ_num), col=rgb(0.2,0.4,0.6,0.8), lty=2)
- legend("topleft", c("synthetic_years_best_binned", "gss_alters$educ_num"), 
+legend("topleft", c("synthetic_years_best_binned", "gss_alters$educ_num"), 
         fill=c(rgb(0.4,0.8,0.4,0.5), rgb(0.2,0.4,0.6,0.5)))
 
 
