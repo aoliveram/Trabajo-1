@@ -247,7 +247,7 @@ aaties_long <- gss_data_raw %>%
   select(.egoID, .srcID, .tgtID)
 
 
-# --- 5. Create the EGOR Object ------------------------------------------------
+# --- 5. Cleaning NA's ------------------------------------
 
 head(egos_df)
 head(alters_df)
@@ -323,7 +323,68 @@ saveRDS(gss_egor, "trabajo_1_files/gss_egor.rds")
 
 gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
 
-# --- 6. Define and Estimate ERGM.EGO Model ---
+# --- 6. Exploratory Analysis (EGOR Object) ------------------------------------
+
+# egos <- mesa.egos$ego
+# alters <- mesa.egos$alter
+
+gss_egos <- gss_egor$ego
+gss_alters <- gss_egor$alter
+
+# table(egos$Sex) # Distribution of `Sex`
+# table(egos$Race) # Distribution of `Race`
+# barplot(table(egos$Grade), 
+#         main = "Ego grade distribution",
+#         ylab="frequency")
+
+table(gss_egos$sex) # Distribution of `Sex`
+table(gss_egos$race) # Distribution of `Race`
+
+ego_educ <- table(factor(gss_egos$educ_num, levels=0:20))
+alter_educ <- table(factor(gss_alters$educ_num, levels=0:20))
+tot <- sum(ego_educ) + sum(alter_educ)
+mp <- barplot(ego_educ/tot, col=rgb(0.2,0.4,0.6,0.5), ylim=c(0, max((ego_educ+alter_educ)/tot)), main="Educ_num (proportion of total)", ylab="Proportion")
+barplot(alter_educ/tot, col=rgb(1,0.4,0.4,0.5), add=TRUE)
+abline(v=approx(0:20, mp, xout=mean(gss_egos$educ_num))$y, col=rgb(0.2,0.4,0.6,0.8), lty=2)
+abline(v=approx(0:20, mp, xout=mean(gss_alters$educ_num))$y, col=rgb(1,0.4,0.4,0.8), lty=2)
+legend("topright", c("Egos", "Alters"), fill=c(rgb(0.2,0.4,0.6,0.5), rgb(1,0.4,0.4,0.5)))
+
+layout(matrix(1:2, 1, 2))
+barplot(table(gss_egos$race)/nrow(gss_egos),
+        main="Ego Race Distn", ylab="percent",
+        ylim = c(0,0.85), las = 3)
+abline(h=0.124, lty=2) # Mean 'black' population, by CIA World Factbook.
+barplot(table(gss_alters$race)/nrow(gss_alters),
+        main="Alter Race Distn", ylab="percent",
+        ylim = c(0,0.85), las = 3)
+abline(h=0.124, lty=2)
+layout(1)
+
+# to get the crosstabulated counts of ties:
+mixingmatrix(mesa, "Grade")
+
+# to get the row conditional probabilities:
+
+round(mixingmatrix(mesa.ego, "Grade", rowprob=T), 2)
+round(mixingmatrix(mesa.ego, "Race", rowprob=T), 2)
+
+# edgecount
+# note that the ties are double counted, so we need to divide by 2.
+nrow(mesa.ego$alter)/2
+
+# mean degree -- here we want to count each "stub", so we don't divide by 2
+nrow(mesa.ego$alter)/nrow(mesa.ego$ego)
+
+# degree distribution
+degreedist(mesa.ego, by="Sex", plot=TRUE, prob=TRUE)
+
+# expected degree distribution for a Bernoulli random graph with the same expected density
+degreedist(mesa.ego, by="Sex", prob=TRUE, brg=TRUE)
+
+
+
+
+# --- 7. Model Fitting Ergm.Ego ------------------------------------------------
 
 # - Tendencia general a formar lazos alter-alter (edges)
 # - Homofilia por sexo entre alters (nodematch('sex_cat'))
@@ -342,26 +403,16 @@ gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
 ergm.ego(gss_egor ~ edges + nodematch("race") + nodematch("sex"),
          popsize = 1,
          control = control.ergm.ego(ppopsize = 'samp', # this will generate ppop size equal to sampling size
-                                    )
-         # continue by running ?control.ergm.ego !!!!
          )
-         
+         # continue by running ?control.ergm.ego !!!!
+)
+
 ergm.ego(gss_egor ~ edges + nodematch("race") + nodecov("age") + absdiff("educ_num"))
 
 
-#
-# --- Analizar el modelo y perfeccionarlo ---------------
-# ~
-# ~
-# ~
-# ~
-# -------------------------------------------------------
-
-
-
 # 
 # 
-# # --- 7. Check Fit and Simulate Networks ---
+# # --- 8. Check Fit and Simulate Networks ---
 # if (!is.null(fit_gss_ego)) {
 #   cat("\n--- Model Estimation Summary ---\n")
 #   print(summary(fit_gss_ego))
