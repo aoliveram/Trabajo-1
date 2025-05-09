@@ -207,3 +207,206 @@ legend("topleft", c("synthetic_years_best_binned", "gss_alters$educ_num"),
         fill=c(rgb(0.4,0.8,0.4,0.5), rgb(0.2,0.4,0.6,0.5)))
 
 
+#-------------------------------------------------------------------------------
+# PRUEBA CON 3 NORMALES 
+#-------------------------------------------------------------------------------
+
+
+# Función para generar educación desde una mezcla de TRES normales
+generate_educ_distribution_3norm <- function(n, w1, w2, mu1, sd1, mu2, sd2, mu3, sd3) {
+  # w3 se calcula para que la suma de los pesos sea 1
+  w3 <- 1 - w1 - w2
+  
+  # Comprobaciones básicas de los pesos y sigmas
+  if (w1 < 0 || w2 < 0 || w3 < 0 || w1 > 1 || w2 > 1 || w3 > 1 || (w1 + w2 > 1)) {
+    # Si los pesos no son válidos, devuelve NAs o maneja el error
+    # Esto es crucial para que `optim` no se rompa con parámetros inválidos
+    # Devolver Inf en la función objetivo es mejor que NAs aquí.
+    # Para la generación directa, podrías devolver NAs o parar con error.
+    # Aquí, asumimos que los parámetros de entrada ya son válidos post-optimización.
+  }
+  if (sd1 <= 0 || sd2 <= 0 || sd3 <= 0) {
+    # Sigmas deben ser positivas
+  }
+  
+  component <- sample(1:3, size = n, replace = TRUE, prob = c(w1, w2, w3))
+  
+  samples <- numeric(n)
+  samples[component == 1] <- rnorm(sum(component == 1), mu1, sd1)
+  samples[component == 2] <- rnorm(sum(component == 2), mu2, sd2)
+  samples[component == 3] <- rnorm(sum(component == 3), mu3, sd3)
+  
+  # Redondear y asegurar dentro del rango 0-20
+  samples <- round(pmax(0, pmin(20, samples)))
+  return(samples)
+}
+
+# Función objetivo para la optimización con 3 componentes normales
+objective_3norm <- function(params) {
+  w1 <- params[1]
+  w2 <- params[2]
+  mu1 <- params[3]
+  sd1 <- params[4]
+  mu2 <- params[5]
+  sd2 <- params[6]
+  mu3 <- params[7]
+  sd3 <- params[8]
+  
+  # Penalizar parámetros inválidos para guiar al optimizador
+  # Pesos deben estar entre 0 y 1, y w1+w2 <= 1
+  if (w1 < 0 || w1 > 1 || w2 < 0 || w2 > 1 || (w1 + w2) > 1) return(Inf)
+  # Sigmas deben ser positivas
+  if (sd1 <= 0 || sd2 <= 0 || sd3 <= 0) return(Inf)
+  # Medias dentro de un rango razonable (ej. 0-20)
+  # if (mu1 < 0 || mu1 > 20 || mu2 < 0 || mu2 > 20 || mu3 < 0 || mu3 > 20) return(Inf)
+  
+  
+  synthetic_years_3n <- generate_educ_distribution_3norm(total_n, w1, w2, mu1, sd1, mu2, sd2, mu3, sd3)
+  
+  # Si por alguna razón la generación falló (aunque las comprobaciones anteriores deberían evitarlo)
+  if (any(is.na(synthetic_years_3n))) return(Inf) 
+  
+  # Usar tu función de binning consistente (¡asegúrate que es la correcta!)
+  binned_values_3n <- bin_education_years(synthetic_years_3n) 
+  
+  synthetic_freq_3n <- table(factor(binned_values_3n, levels = names(target_freq)))
+  
+  # Asegurar que no haya NAs o longitudes incorrectas
+  # (factor con levels ya debería manejar la mayoría de esto)
+  current_target_freq <- target_freq
+  # Si synthetic_freq_3n no tiene todos los niveles, table(factor(...)) lo arregla
+  
+  # Evitar división por cero en Chi-cuadrado
+  # Considerar solo bins donde target_freq > 0
+  valid_idx <- current_target_freq > 0
+  
+  chi_sq <- sum(((synthetic_freq_3n[valid_idx] - current_target_freq[valid_idx])^2) / current_target_freq[valid_idx])
+  
+  return(chi_sq)
+}
+
+# --- Configuración y Ejecución de la Optimización para 3 Normales ---
+set.seed(124) # Para reproducibilidad en esta nueva optimización
+
+# Parámetros iniciales para 3 componentes (w1, w2, mu1, sd1, mu2, sd2, mu3, sd3)
+# Estos son solo ejemplos, ajústalos según tu intuición de los 3 picos:
+# ej. HS, Some College/Assoc, Bach/Grad
+init_params_3norm <- c(0.35, 0.30,  12.0, 1.5,  14.0, 1.0,  16.5, 1.8) 
+
+# Límites para los parámetros
+# (w1, w2 van de 0 a 1, pero su suma también debe ser <=1. L-BFGS-B maneja esto bien)
+# (medias entre ~6 y ~19, sigmas > 0 y razonables)
+# lower_bounds_3norm <- c(0.05, 0.05,  10.0, 0.5,  13.0, 0.5,  15.0, 0.5)
+# upper_bounds_3norm <- c(0.70, 0.70,  13.0, 3.0,  15.0, 2.5,  19.0, 3.5)
+lower_bounds_3norm <- c(0.05, 0.05,  10.5, 0.5,  13.0, 0.5,  15.5, 0.8)
+upper_bounds_3norm <- c(0.60, 0.60,  12.8, 2.5,  15.2, 2.5,  19.5, 4.0)
+
+cat("Iniciando optimización para 3 componentes normales...\n")
+opt_result_3norm <- optim(
+  par = init_params_3norm,
+  fn = objective_3norm,
+  method = "L-BFGS-B",
+  lower = lower_bounds_3norm,
+  upper = upper_bounds_3norm,
+  control = list(maxit = 500, trace = 1) # maxit más alto, trace para ver progreso
+)
+
+cat("Optimización para 3 componentes completada.\n")
+best_params_3norm <- opt_result_3norm$par
+print("Mejores parámetros (3 normales):")
+print(best_params_3norm)
+print(paste("Valor del Chi-cuadrado (3 normales):", round(opt_result_3norm$value, 2)))
+
+# Generar distribución final con los mejores parámetros de 3 normales
+synthetic_years_best_3norm <- generate_educ_distribution_3norm(
+  n = total_n,
+  w1 = best_params_3norm[1], w2 = best_params_3norm[2],
+  mu1 = best_params_3norm[3], sd1 = best_params_3norm[4],
+  mu2 = best_params_3norm[5], sd2 = best_params_3norm[6],
+  mu3 = best_params_3norm[7], sd3 = best_params_3norm[8]
+)
+
+synthetic_years_best_binned_3norm <- bin_education_years(synthetic_years_best_3norm)
+
+# --- Comparación y Visualización para 3 Normales ---
+
+# Comparación de frecuencias
+comparison_3norm <- rbind(
+  target_freq,
+  as.integer(table(factor(synthetic_years_best_binned_3norm, levels = names(target_freq))))
+)
+rownames(comparison_3norm) <- c("Target (gss_alters$educ_num)", "Synthetic (3-norm binned)")
+print("Comparación de frecuencias (3 normales):")
+print(comparison_3norm)
+
+# Histograma de comparación (similar al que ya tienes para el modelo de 2 normales)
+# Primero, la distribución de los años sintéticos (0-20) contra los egos
+par(mfrow=c(1,1)) # Asegurar una sola gráfica
+hist(gss_egos$educ_num, breaks=seq(-0.5, 20.5, by=1), col=rgb(1,0.4,0.4,0.5), # Rojo para Egos
+     main="Education Distribution Comparison (Egos vs. Synthetic 3-Norm)",
+     xlab="Years of Education",
+     ylab="Frequency",
+     ylim=c(0, max(table(gss_egos$educ_num), table(synthetic_years_best_3norm))),
+     xaxt="n") # Suprimir ejes x por defecto
+axis(1, at=0:20, labels=0:20) # Eje x más limpio
+hist(synthetic_years_best_3norm, breaks=seq(-0.5, 20.5, by=1), col=rgb(0.2,0.4,0.8,0.5), add=TRUE) # Azul para Alters sintéticos
+abline(v=mean(gss_egos$educ_num, na.rm=TRUE), col=rgb(1,0.4,0.4,0.9), lty=2, lwd=2)
+abline(v=mean(synthetic_years_best_3norm, na.rm=TRUE), col=rgb(0.2,0.4,0.8,0.9), lty=2, lwd=2)
+legend("topleft", c("Egos (GSS)", "Alters (Synthetic 3-Norm)"),
+       fill=c(rgb(1,0.4,0.4,0.5), rgb(0.2,0.4,0.8,0.5)))
+
+
+# Segundo, la distribución binned sintética contra los alters originales binned
+title_str_3norm <- sprintf(
+  "Education Dist (Binned) Comparison (3-Norm)\n(w1=%.2f,w2=%.2f,w3=%.2f\nmu1=%.2f,s1=%.2f, mu2=%.2f,s2=%.2f, mu3=%.2f,s3=%.2f)",
+  best_params_3norm[1], best_params_3norm[2], 1-best_params_3norm[1]-best_params_3norm[2],
+  best_params_3norm[3], best_params_3norm[4], best_params_3norm[5], best_params_3norm[6],
+  best_params_3norm[7], best_params_3norm[8]
+)
+
+# Calcular el ylim dinámicamente para el histograma binned
+max_freq_binned_3norm <- max(c(target_freq, table(synthetic_years_best_binned_3norm)))
+
+# Histograma de comparación para los datos binned
+h1_data <- gss_alters$educ_num[!is.na(gss_alters$educ_num)]
+h2_data <- synthetic_years_best_binned_3norm[!is.na(synthetic_years_best_binned_3norm)]
+
+# Definir los breaks para que los bins sean los números exactos
+unique_bins <- sort(unique(c(h1_data, h2_data)))
+breaks_binned <- c(unique_bins - 0.5, max(unique_bins) + 0.5)
+
+hist_gss_alters <- hist(h1_data, breaks = breaks_binned, plot = FALSE)
+hist_synthetic_binned <- hist(h2_data, breaks = breaks_binned, plot = FALSE)
+
+# Usar barplot para mejor control de superposición y etiquetas
+barplot_data <- rbind(hist_synthetic_binned$counts, hist_gss_alters$counts)
+# Puede que necesites ajustar el orden si quieres que gss_alters esté "debajo"
+# barplot_data <- rbind(hist_gss_alters$counts, hist_synthetic_binned$counts)
+
+
+# Crear el gráfico de barras superpuesto
+bp <- barplot(barplot_data, beside = TRUE, # 'beside = FALSE' para apilado, 'TRUE' para lado a lado
+              col = c(rgb(0.4,0.8,0.4,0.7), rgb(0.2,0.4,0.6,0.7)), # Verde para sintético, Azul para GSS
+              main = title_str_3norm,
+              xlab = "Binned Education Years (Alters)",
+              ylab = "Frequency",
+              ylim = c(0, max_freq_binned_3norm * 1.1),
+              names.arg = hist_gss_alters$mids, # O usa los nombres de tus bins
+              cex.names = 0.8)
+legend("topright", c("Synthetic (3-Norm Binned)", "GSS Alters (Original Binned)"),
+       fill=c(rgb(0.4,0.8,0.4,0.7), rgb(0.2,0.4,0.6,0.7)), cex=0.8)
+
+# Si prefieres el estilo de histogramas superpuestos como antes:
+# plot(hist_gss_alters, col=rgb(0.2,0.4,0.6,0.5), # Azul para GSS Alters
+#      main=title_str_3norm,
+#      xlab="Binned Education Years (Alters)",
+#      ylab="Frequency",
+#      ylim=c(0, max_freq_binned_3norm * 1.1),
+#      xaxt = "n")
+# axis(1, at = hist_gss_alters$mids, labels = names(target_freq)) # Usar los nombres de los bins como etiquetas
+# plot(hist_synthetic_binned, col=rgb(0.4,0.8,0.4,0.5), add=TRUE) # Verde para sintético
+# legend("topright", c("Synthetic (3-Norm Binned)", "GSS Alters (Original Binned)"),
+#        fill=c(rgb(0.4,0.8,0.4,0.5), rgb(0.2,0.4,0.6,0.5)), cex=0.8)
+
+
+cat("Script de 3 normales completado.\n")
