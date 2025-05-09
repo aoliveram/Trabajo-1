@@ -1,5 +1,4 @@
 # --- 0. Load Necessary Libraries ----------------------------------------------
-# install.packages(c("readr", "dplyr", "tidyr", "egor", "ergm.ego", "network"))
 library(readr)
 library(dplyr)
 library(tidyr)
@@ -99,21 +98,22 @@ alters_long <- gss_data_raw %>%
   ) %>%
   mutate(alt_ID = as.integer(alt_ID))
 
-# Filter *only* based on whether the alter position was nominated
+# FILTER based on whether the alter position was nominated
 # Keep egos with numgiven=0 (they will have no rows here after the filter)
 # Keep egos with numgiven=NA (they will also have no rows)
-alters_long_filtered <- alters_long %>%
+
+alters_long <- alters_long %>%
   filter(!is.na(numgiven) & alt_ID <= numgiven) # Keep only valid alter slots
 
 # Pivot wider
-alters_wide <- alters_long_filtered %>%
+alters_wide <- alters_long %>%
   pivot_wider(
     names_from = .variable,
     values_from = .value
   ) %>%
   select(-numgiven) # numgiven no longer needed in alters table
 
-   # --- Recode Alter variables ---
+# --- Recode Alter variables ---
 alters_df <- alters_wide %>%
   mutate(
     # Ensure NAs are handled *before* factoring for Alters
@@ -187,16 +187,18 @@ alters_df <- alters_wide %>%
         TRUE ~ NA      # Includes NAs assigned above and any others
       )
     )
-  ) %>%
-  # Filter on NAs in sex and race
-  filter(!is.na(sex), !is.na(race)) %>%
+  ) %>% 
+  filter(!is.na(sex), !is.na(race)) #%>% # Filter on NAs in sex and race
   # Keep categorical educ, rename numeric for clarity if using both
-  select(-educ) # Remove original numeric code
+  #select(-educ) # Remove original numeric code
+
+rm(alter_attr_vars, alter_status_vars, alter_attr_cols, alter_status_cols)
+rm(alters_long, alters_wide)
 
 # Remove numgiven from egos_df now that alter processing is done
-egos_df <- egos_df %>% select(-numgiven)
+#egos_df <- egos_df %>% select(-numgiven)
 
-   # --- Display structure and summary ---
+# --- Display structure and summary ---
 
 cols_common <- c('.egoID', 'sex', 'race', 'age', 'relig', 'educ_num')
 
@@ -307,6 +309,8 @@ gss_egor <- egor(
   ),
   alter_design = list(max = 5)
 )
+
+rm(aaties_long, valid_alters)
 
 summary(gss_egor)
 
