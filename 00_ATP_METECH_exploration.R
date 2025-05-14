@@ -3,8 +3,28 @@ library(haven)
 # Leer el archivo .sav y convertirlo en un data frame
 #ruta_archivo <- "C:/Users/Usuario/Desktop/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav"#"ruta/del/archivo.sav"  # Cambia esto por la ruta real de tu archivo
 
-ATP_W3 <- read_sav("B - Surveys Data and Papers Inn/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav") # Leer el archivo como tibble
+ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav") # Leer el archivo como tibble
 ATP_W3_df <- as.data.frame(ATP_W3)        # Convertir a data frame (opcional si prefieres este formato)
+
+library(openxlsx)  # For writing Excel files
+
+# Extract labels
+labels <- sapply(ATP_W3_df, function(x) attr(x, "label"))
+labels[is.na(labels)] <- ""
+
+# Convert the entire dataframe to character type
+ATP_W3_df <- data.frame(lapply(ATP_W3_df, as.character), stringsAsFactors = FALSE)
+
+# Add the labels as the first row
+ATP_W3_df_2 <- rbind(labels, ATP_W3_df)
+
+# Optionally, reset row names to avoid confusion
+rownames(ATP_W3_df_2) <- NULL
+
+# Write to Excel
+write.xlsx(ATP_W3_df_2, file = "B - Surveys Data/Datos A. Trends Panel/ATP_W3.xlsx", rowNames = FALSE)
+write.csv(ATP_W3_df_2, file = "B - Surveys Data/Datos A. Trends Panel/ATP_W3.csv", row.names = FALSE)
+
 
 # Ver las primeras filas del data frame
 head(ATP_W3)
