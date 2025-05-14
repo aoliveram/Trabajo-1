@@ -165,6 +165,8 @@ GSS_2004_EGO_bin[col_alters_net] <- lapply(GSS_2004_EGO[col_alters_net], recode_
 write.csv(GSS_2004_EGO_bin, 'trabajo_1_files/GSS_2004_EGO_bin.csv', row.names = FALSE)
 GSS_2004_EGO <- read.csv('trabajo_1_files/GSS_2004_EGO_bin.csv')
 
+saveRDS(GSS_2004_EGO_bin, 'trabajo_1_files/GSS_2004_EGO_bin.rds')
+
 # 11) Contar el número de egos para cada valor de alters declarados
 table_numgiven <- table(GSS_2004_EGO_bin$numgiven)
 
