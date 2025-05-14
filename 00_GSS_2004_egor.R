@@ -7,7 +7,9 @@ library(ergm.ego)
 library(network)
 
 # --- 1. Load the Raw Data (egos_df) -------------------------------------------
-gss_data_raw <- read_csv("trabajo_1_files/GSS_2004_EGO_bin.csv", na = "NA", show_col_types = FALSE)
+#gss_data_raw <- read_csv("trabajo_1_files/GSS_2004_EGO_bin.csv", na = "NA", show_col_types = FALSE)
+
+gss_data_raw <- readRDS("trabajo_1_files/GSS_2004_EGO_bin.rds")
 
 # Add a unique Ego ID
 gss_data_raw <- gss_data_raw %>%
@@ -19,7 +21,8 @@ gss_data_raw <- gss_data_raw %>%
 egos_df <- gss_data_raw %>%
   select(
     .egoID,
-    sex, race, educ, age, relig, degree, numgiven # Keep numgiven temporarily for alter processing
+    sex, race, educ, age, relig, degree, numgiven, # Keep numgiven temporarily for alter processing
+    wtssnr # Weights
   ) %>%
   # --- Recode Ego variables ---
   mutate(
@@ -70,9 +73,11 @@ egos_df <- gss_data_raw %>%
       degree == 4 ~ "Grad",
       TRUE ~ NA_character_ # Catches NAs assigned above
     ),
-    degree = factor(degree, levels = c("LTHS", "HS", "Assoc", "Bach", "Grad"))
-  ) %>% 
-  select(-educ) # Remove original numeric code
+    degree = factor(degree, levels = c("LTHS", "HS", "Assoc", "Bach", "Grad")),
+    
+    # Ensure is numeric
+    wtssnr = as.numeric(wtssnr)
+  )
 
 # --- 3. Prepare Alter Data (alters_df) ----------------------------------------
 
@@ -258,6 +263,7 @@ sum(is.na(egos_df$race))
 sum(is.na(egos_df$age))
 sum(is.na(egos_df$relig))
 sum(is.na(egos_df$educ_num))
+sum(is.na(egos_df$wtssnr))
 
 sum(is.na(alters_df$sex))
 sum(is.na(alters_df$race))
