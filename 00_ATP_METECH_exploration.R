@@ -1,12 +1,11 @@
-library(haven)
+# -----------------------------------------------------------------------------
+# ATP W3
+# -----------------------------------------------------------------------------
 
-# Leer el archivo .sav y convertirlo en un data frame
-#ruta_archivo <- "C:/Users/Usuario/Desktop/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav"#"ruta/del/archivo.sav"  # Cambia esto por la ruta real de tu archivo
+library(haven)
 
 ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav") # Leer el archivo como tibble
 ATP_W3_df <- as.data.frame(ATP_W3)        # Convertir a data frame (opcional si prefieres este formato)
-
-library(openxlsx)  # For writing Excel files
 
 # Extract labels
 labels <- sapply(ATP_W3_df, function(x) attr(x, "label"))
@@ -21,8 +20,7 @@ ATP_W3_df_2 <- rbind(labels, ATP_W3_df)
 # Optionally, reset row names to avoid confusion
 rownames(ATP_W3_df_2) <- NULL
 
-# Write to Excel
-write.xlsx(ATP_W3_df_2, file = "B - Surveys Data/Datos A. Trends Panel/ATP_W3.xlsx", rowNames = FALSE)
+# Write
 write.csv(ATP_W3_df_2, file = "B - Surveys Data/Datos A. Trends Panel/ATP_W3.csv", row.names = FALSE)
 
 # Exploración Variables -------------------------------------------------------
@@ -135,3 +133,59 @@ suma_respuestas_1 <- sum(ATP_W3_df[columnas] == 1, na.rm = TRUE)
 
 # Mostrar el resultado
 print(suma_respuestas_1)
+
+
+# -----------------------------------------------------------------------------
+# ATP W4
+# -----------------------------------------------------------------------------
+
+library(haven)
+
+ATP_W4 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-4-May-30-Jun-30/W4_Jun14/ATP W4.sav") # Leer el archivo como tibble
+ATP_W4_df <- as.data.frame(ATP_W4)
+
+# Extract labels
+labels <- sapply(ATP_W4_df, function(x) attr(x, "label"))
+labels[is.na(labels)] <- ""
+
+# Convert the entire dataframe to character type
+ATP_W4_df <- data.frame(lapply(ATP_W4_df, as.character), stringsAsFactors = FALSE)
+
+# Add the labels as the first row
+ATP_W4_df_2 <- rbind(labels, ATP_W4_df)
+
+# Optionally, reset row names to avoid confusion
+rownames(ATP_W4_df_2) <- NULL
+
+# Write
+write.csv(ATP_W4_df_2, file = "B - Surveys Data/Datos A. Trends Panel/ATP_W4.csv", row.names = FALSE)
+
+# Exploración Variables -------------------------------------------------------
+
+ATP_W4_df <- as.data.frame(ATP_W3)
+labels <- sapply(ATP_W4_df , function(x) attr(x, "label"))
+
+# Edad
+labels[["F_AGECAT_TYPOLOGY"]]
+ATP_W4_df$F_AGECAT_TYPOLOGY
+
+# Educación
+labels[["F_EDUCCAT_TYPOLOGY"]]
+ATP_W4_df$F_EDUCCAT_TYPOLOGY
+
+# Race
+labels[["F_RACETHN_TYPOLOGY"]]
+ATP_W4_df$F_RACETHN_TYPOLOGY
+
+# Sex
+labels[["F_SEX_FINAL"]]
+ATP_W4_df$F_SEX_FINAL
+
+# Religion
+labels[["F_RELIG_TYPOLOGY"]]
+ATP_W4_df$F_RELIG_TYPOLOGY
+
+# Ver las primeras filas del data frame
+head(ATP_W4)
+head(ATP_W4_df)
+
