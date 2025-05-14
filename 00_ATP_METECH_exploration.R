@@ -25,6 +25,30 @@ rownames(ATP_W3_df_2) <- NULL
 write.xlsx(ATP_W3_df_2, file = "B - Surveys Data/Datos A. Trends Panel/ATP_W3.xlsx", rowNames = FALSE)
 write.csv(ATP_W3_df_2, file = "B - Surveys Data/Datos A. Trends Panel/ATP_W3.csv", row.names = FALSE)
 
+# Exploración Variables -------------------------------------------------------
+
+ATP_W3_df <- as.data.frame(ATP_W3)
+labels <- sapply(ATP_W3_df , function(x) attr(x, "label"))
+
+# Edad
+labels[["F_AGECAT_TYPOLOGY"]]
+ATP_W3_df$F_AGECAT_TYPOLOGY
+
+# Educación
+labels[["F_EDUCCAT_TYPOLOGY"]]
+ATP_W3_df$F_EDUCCAT_TYPOLOGY
+
+# Race
+labels[["F_RACETHN_TYPOLOGY"]]
+ATP_W3_df$F_RACETHN_TYPOLOGY
+
+# Sex
+labels[["F_SEX_FINAL"]]
+ATP_W3_df$F_SEX_FINAL
+
+# Religion
+labels[["F_RELIG_TYPOLOGY"]]
+ATP_W3_df$F_RELIG_TYPOLOGY
 
 # Ver las primeras filas del data frame
 head(ATP_W3)
