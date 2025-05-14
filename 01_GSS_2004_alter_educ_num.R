@@ -7,6 +7,7 @@ table(gss_egos$degree)
 table(gss_egos$educ_num)
 
 table(gss_alters$educ_cat)
+table(gss_alters$educ_num)
 
 # Set seed for reproducibility
 set.seed(1)
