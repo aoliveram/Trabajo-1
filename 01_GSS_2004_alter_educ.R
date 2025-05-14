@@ -58,3 +58,4 @@ print(table(gss_alters$educ_level_unified, useNA = "ifany"))
 # Es importante que los dataframes dentro de gss_egor sean los actualizados.
 gss_egor$ego <- gss_egos
 gss_egor$alter <- gss_alters
+ 
