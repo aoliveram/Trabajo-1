@@ -37,9 +37,22 @@ library(labelled)
 # 1) Importar datos
 GSS_2004 <- read_dta("B - Surveys Data/GSS 2004/GSS 2004 NORC.dta")
 
+# 1.1) Variable de Pesos
+
+GSS_2004$wtss
+GSS_2004$wtssall
+GSS_2004$wtssnr
+
+max(unique(GSS_2004$wtssnr))
+min(unique(GSS_2004$wtssnr))
+
+weights_2004 <- GSS_2004$wtssnr
+
+1413 * min(unique(weights_2004)) / 3
+
 # 2) Definir columnas de atributos y de red
 
-col_ego_attr <- c("sex", "race", "educ", "age", "relig",  "degree")
+col_ego_attr <- c("sex", "race", "educ", "age", "relig",  "degree", "wtssnr")
 
 col_alters_attr <- c(
   "numgiven", 
@@ -78,7 +91,12 @@ labels_alters_net  <- lapply(GSS_2004_EGO[col_alters_net],  val_labels)
 labels_alters_status <- lapply(GSS_2004_EGO[col_alters_status], val_labels)
 
 # 6) Convertir a data frame base R 
-GSS_2004_EGO <- GSS_2004_EGO %>% mutate(across(everything(), ~ as.integer(.)))
+#GSS_2004_EGO <- GSS_2004_EGO %>% mutate(across(everything(), ~ as.integer(.)))
+GSS_2004_EGO <- GSS_2004_EGO %>%
+  mutate(
+    across(-c(wtssnr), ~ as.integer(.)),
+    wtssnr = as.numeric(wtssnr)
+  )
 GSS_2004_EGO <- as.data.frame(GSS_2004_EGO)
 
 # 7) Análisis exploratorio
@@ -119,6 +137,8 @@ plot_histograms(GSS_2004_EGO)
 # 8) Exportamos datos limpios
 write.csv(GSS_2004_EGO, 'trabajo_1_files/GSS_2004_EGO.csv', row.names = FALSE)
 GSS_2004_EGO <- read.csv('trabajo_1_files/GSS_2004_EGO.csv')
+
+saveRDS(GSS_2004_EGO, 'trabajo_1_files/GSS_2004_EGO.rds')
 
 # ----------------- NETWORK ------------
 
