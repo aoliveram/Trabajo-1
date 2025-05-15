@@ -169,6 +169,26 @@ labels <- sapply(ATP_W4_df , function(x) attr(x, "label"))
 labels[["F_AGECAT_TYPOLOGY"]]
 ATP_W4_df$F_AGECAT_TYPOLOGY
 
+hist(as.numeric(ATP_W4_df$F_AGECAT_TYPOLOGY),
+     breaks = 0:4,
+     xaxt = "n",
+     main = "Distribución por Categoría de Edad",
+     xlab = "Rango de Edad")
+axis(1, at = 1:4, labels = c("18-29", "30-49", "50-64", "65+"))
+
+
+# Gráfico de barras
+barplot(table(factor(
+                ATP_W4_df$F_AGECAT_TYPOLOGY,
+                levels = 1:4,
+                labels = c("18-29", "30-49", "50-64", "65+")
+              )),
+        col = "skyblue",
+        xlab = "Rango de Edad",
+        ylab = "Frecuencia",
+        main = "Distribución por Categoría de Edad")
+
+
 # Educación
 labels[["F_EDUCCAT_TYPOLOGY"]]
 ATP_W4_df$F_EDUCCAT_TYPOLOGY
@@ -185,7 +205,62 @@ ATP_W4_df$F_SEX_FINAL
 labels[["F_RELIG_TYPOLOGY"]]
 ATP_W4_df$F_RELIG_TYPOLOGY
 
+# Openness to innovation
+columnas <- c("METECH_A_W3", "METECH_B_W3", "METECH_C_W3", 
+              "METECH_D_W3", "METECH_E_W3", "METECH_F_W3")
+
 # Ver las primeras filas del data frame
 head(ATP_W4)
 head(ATP_W4_df)
 
+# ----------------------------- Cramos .rds -----------------------------------
+
+library(haven) 
+library(dplyr)
+
+ATP_W3 <- read_sav("ruta/a/tu/ATP W3.sav")
+ATP_W3_df <- as.data.frame(ATP_W3)
+
+# --- Columnas Demográficas ATP ---
+columnas_demograficas_atp <- c(
+  "QKEY",                  # Identificador único del encuestado
+  "F_AGECAT_TYPOLOGY",     # Edad
+  "F_EDUCCAT_TYPOLOGY",    # Educación
+  "F_RACETHN_TYPOLOGY",    # Raza
+  "F_SEX_FINAL",           # Sexo
+  "F_RELIG_TYPOLOGY",      # Religión
+  "WEIGHT_W3"              # La variable de peso
+)
+
+# --- Columnas de Innovación ATP ---
+columnas_innovacion_atp <- c(
+  "METECH_A_W3", "METECH_B_W3", "METECH_C_W3",
+  "METECH_D_W3", "METECH_E_W3", "METECH_F_W3"
+)
+
+# --- Combinamos ---
+columnas_seleccionadas_total <- c(columnas_demograficas_atp, columnas_innovacion_atp)
+
+# --- Creamos DataFrame ---
+ATP_W3_sub <- ATP_W3_df %>%
+  select(all_of(columnas_existentes))
+
+# --- Guardar el DataFrame de subconjunto ---
+
+saveRDS(ATP_W3_sub, file = "trabajo_1_files/ATP_W3_sub.rds")
+
+# Convertir columnas que son factores (o etiquetadas por haven) a character para CSV
+ATP_W3_sub_csv <- ATP_subset_df
+for (col_name in names(ATP_W3_sub_csv)) {
+  if (is.factor(ATP_W3_sub_csv[[col_name]]) || inherits(ATP_W3_sub_csv[[col_name]], "haven_labelled")) {
+    ATP_W3_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W3[[col_name]])) # Usar as_factor para obtener etiquetas
+  }
+}
+# También convierte las variables METECH a character si aún son etiquetadas
+for (col_name in columnas_innovacion_atp) {
+  if (col_name %in% names(ATP_W3_sub_csv) && inherits(ATP_W3[[col_name]], "haven_labelled")){
+    ATP_W3_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W3[[col_name]]))
+  }
+}
+
+write.csv(ATP_W3_sub_csv, file = "trabajo_1_files/ATP_W3_sub.csv", row.names = FALSE)
