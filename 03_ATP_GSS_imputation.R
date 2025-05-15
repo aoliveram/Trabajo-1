@@ -82,3 +82,39 @@ nrow(gss_egos)
 
 print(lapply(gss_ages_by_category, head, 5))
 
+
+
+
+
+
+
+
+
+# Crear la nueva columna en ATP_W3_sub
+ATP_W3_sub$age <- NA_integer_ # Inicializar con NA
+
+# Establecer una semilla para reproducibilidad de la imputación
+set.seed(123)
+
+# Iterar para cada individuo de ATP
+for (i in 1:nrow(ATP_W3_sub)) {
+  # Obtenmos su categoría de edad
+  atp_category <- as.character(ATP_W3_sub$F_AGECAT_TYPOLOGY_factor[i])
+  
+  # Verificar si la categoría existe
+  if (atp_category %in% names(gss_ages_by_category)) {
+    # vector de edades GSS para esa categoría ---> Aquí ya está la distribución de GSS !
+    possible_gss_ages <- gss_ages_by_category[[atp_category]]
+    
+    imputed_age <- sample(possible_gss_ages, 1)
+    ATP_W3_sub$age[i] <- imputed_age
+    
+  } else {
+    warning(paste("Categoría de edad ATP no mapeada:", atp_category, "en la fila", i))
+    ATP_W3_sub$age[i] <- NA # O alguna otra estrategia
+  }
+}
+
+summary(ATP_W3_sub$age)
+hist(ATP_W3_sub$age, main = "Edades Imputadas en ATP \n(basado en distribución GSS)", xlab = "Edad Imputada")
+
