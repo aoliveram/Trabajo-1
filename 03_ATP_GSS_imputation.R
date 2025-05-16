@@ -6,6 +6,7 @@ gss_egos <- gss_egor$ego
 gss_alters <- gss_egor$alter
 
 hist(gss_egos$age)
+hist(gss_egos$educ_num)
 
 # Cargamos datos ATP W3
 
@@ -13,8 +14,39 @@ ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_sub.rds")
 
 hist(ATP_W3_sub$F_AGECAT_TYPOLOGY) # Edad
 
+# Qué datos tenemos ---------------------------------
+
+# Edad
+labels[["F_AGECAT_TYPOLOGY"]]
+ATP_W3_sub$F_AGECAT_TYPOLOGY
+
+# Educación
+labels[["F_EDUCCAT_TYPOLOGY"]]
+ATP_W3_sub$F_EDUCCAT_TYPOLOGY
+
+# Race
+labels[["F_RACETHN_TYPOLOGY"]]
+ATP_W3_sub$F_RACETHN_TYPOLOGY
+
+# Sex
+labels[["F_SEX_FINAL"]]
+ATP_W3_sub$F_SEX_FINAL
+
+# Religion
+labels[["F_RELIG_TYPOLOGY"]]
+ATP_W3_sub$F_RELIG_TYPOLOGY
+
+# Ver las primeras filas del data frame
+head(ATP_W3)
+head(ATP_W3_sub)
+
+# ------------------------------------------------------------------------------
+# EDAD
+# ------------------------------------------------------------------------------
+
 # --- Veamos cómo se comparan las EDADES en GSS y en ATP -----------------------
 
+# ]17,29], ]29,49], ]49,64], ]65, inf]
 age_breaks_gss <- c(17, 29, 49, 64, Inf) 
 age_labels_gss <- c("18-29", "30-49", "50-64", "65+")
 
@@ -82,14 +114,6 @@ nrow(gss_egos)
 
 print(lapply(gss_ages_by_category, head, 5))
 
-
-
-
-
-
-
-
-
 # Crear la nueva columna en ATP_W3_sub
 ATP_W3_sub$age <- NA_integer_ # Inicializar con NA
 
@@ -118,3 +142,67 @@ for (i in 1:nrow(ATP_W3_sub)) {
 summary(ATP_W3_sub$age)
 hist(ATP_W3_sub$age, main = "Edades Imputadas en ATP \n(basado en distribución GSS)", xlab = "Edad Imputada")
 
+
+# ------------------------------------------------------------------------------
+# EDUCACIÓN
+# ------------------------------------------------------------------------------
+
+# --- Veamos cómo se comparan los niveles de EDUCACIÖN en GSS y en ATP ---------
+
+# Crear categoría colapsada en GSS
+gss_egos$degree_atp3cat <- case_when(
+  gss_egos$degree %in% c("Bach", "Grad") ~ "College graduate+",
+  gss_egos$degree == "Assoc" ~ "Some college",
+  gss_egos$degree %in% c("HS", "LTHS") ~ "HS graduate or less",
+  TRUE ~ NA_character_
+)
+gss_egos$degree_atp3cat <- factor(gss_egos$degree_atp3cat,
+                                  levels = c("College graduate+", "Some college", "HS graduate or less"))
+
+# ATP ya tiene la variable F_EDUCCAT_TYPOLOGY: 1=College graduate+, 2=Some college, 3=HS graduate or less
+ATP_W3_sub$F_EDUCCAT_TYPOLOGY_factor <- factor(
+  ATP_W3_sub$F_EDUCCAT_TYPOLOGY,
+  levels = c(1, 2, 3),
+  labels = c("College graduate+", "Some college", "HS graduate or less")
+)
+
+# Tabla de contingencia
+gss_counts <- table(gss_egos$degree_atp3cat)
+atp_counts <- table(ATP_W3_sub$F_EDUCCAT_TYPOLOGY_factor)
+contingency_table_educ <- rbind(GSS = as.numeric(gss_counts), ATP = as.numeric(atp_counts))
+colnames(contingency_table_educ) <- levels(gss_egos$degree_atp3cat)
+print(contingency_table_educ)
+
+# Test Chi-cuadrado
+chi_sq_test_educ <- chisq.test(contingency_table_educ)
+print(chi_sq_test_educ)
+
+if (chi_sq_test_educ$p.value < 0.05) {
+  cat("Conclusión: Las distribuciones de categorías de educación entre GSS y ATP son significativamente DIFERENTES (p < 0.05).\n")
+  cat("Sin embargo, el muestreo *dentro* de los estratos definidos por las categorías ATP sigue siendo una estrategia razonable.\n")
+} else {
+  cat("Conclusión: No hay evidencia de una diferencia significativa en las distribuciones de categorías de educación (p >= 0.05).\n")
+  cat("Esto apoya la idea de que la distribución de educación categórica de GSS es comparable a la de ATP.\n")
+}
+
+# ---------- Imputación de educ_num en ATP -------------------------------------
+
+# Creando una lista por cada categoría colapsada
+gss_educ_by_cat <- split(gss_egos$educ_num, gss_egos$degree_atp3cat)
+
+# Inicializamos columna 
+ATP_W3_sub$educ_num <- NA_real_
+
+set.seed(123)
+for (i in 1:nrow(ATP_W3_sub)) {
+  atp_cat <- as.character(ATP_W3_sub$F_EDUCCAT_TYPOLOGY_factor[i])
+  if (atp_cat %in% names(gss_educ_by_cat)) {
+    possible_vals <- gss_educ_by_cat[[atp_cat]]
+    ATP_W3_sub$educ_num[i] <- sample(possible_vals, 1)
+  } else {
+    ATP_W3_sub$educ_num[i] <- NA
+  }
+}
+
+summary(ATP_W3_sub$educ_num)
+hist(ATP_W3_sub$educ_num, main = "Años de educación imputados en ATP", xlab = "Años de educación")
