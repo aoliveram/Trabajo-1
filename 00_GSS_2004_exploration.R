@@ -50,9 +50,11 @@ weights_2004 <- GSS_2004$wtssnr
 
 1413 * min(unique(weights_2004)) / 3
 
+unique(GSS_2004$racecen1)
+
 # 2) Definir columnas de atributos y de red
 
-col_ego_attr <- c("sex", "race", "educ", "age", "relig",  "degree", "wtssnr")
+col_ego_attr <- c("sex", "race", "racecen1", "educ", "age", "relig",  "degree", "wtssnr")
 
 col_alters_attr <- c(
   "numgiven", 
