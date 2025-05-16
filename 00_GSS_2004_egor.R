@@ -21,14 +21,15 @@ gss_data_raw <- gss_data_raw %>%
 egos_df <- gss_data_raw %>%
   select(
     .egoID,
-    sex, race, educ, age, relig, degree, numgiven, # Keep numgiven temporarily for alter processing
+    sex, hispanic, racecen1, educ, age, relig, degree, numgiven, # Keep numgiven temporarily for alter processing
     wtssnr # Weights
   ) %>%
   # --- Recode Ego variables ---
   mutate(
     # Ensure NAs are handled *before* factoring
     sex = na_if(sex, 9), # Assuming 9 might be an NA code not mentioned
-    race = na_if(race, 9), # Assuming 9 might be an NA code
+    race = na_if(racecen1, 98), # Codebook NA/DK
+    race = na_if(racecen1, 99),
     relig = na_if(relig, 98), # Codebook NA/DK
     relig = na_if(relig, 99),
     degree = na_if(degree, 8), # Codebook DK/NA
@@ -38,14 +39,19 @@ egos_df <- gss_data_raw %>%
     # Sex: 1=Male, 2=Female
     sex = factor(sex, levels = c(1, 2), labels = c("Male", "Female")),
     
-    # Race: Harmonize to White, Black, OtherRace
+    # Race: 
     race = case_when(
-      race == 1 ~ "White",
-      race == 2 ~ "Black",
-      race == 3 ~ "OtherRace", # Ego code 3 is 'Other'
+      # Prioridad 1
+      hispanic %in% c(2, 3, 4, 5, 6, 10, 15, 20, 21, 22, 23, 24, 30, 40, 41) ~ "Hispanic",
+      # Prioridad 2
+      racecen1 == 1 ~ "White",
+      racecen1 == 2 ~ "Black",
+      racecen1 %in% c(3,11,15) ~ "Other", # 3) American Indian or Alaska Native, 11) Native Hawaiian, 15) Some other race
+      racecen1 %in% c(4,5,6,7,8,9,10) ~ "Asian", # 4) Asian Indian, 5) Chinese, 6) Filipino, 7) Japanese, 8) Korean, 9) Vietnamese, 10) Other Asian
+      racecen1 == 16 ~ "Hispanic",
       TRUE ~ NA_character_
     ),
-    race = factor(race, levels = c("White", "Black", "OtherRace")),
+    race = factor(race, levels = c("Asian", "Black", "Hispanic", "White", "Other")),
     
     # Educ: Numeric years. Code 99 = NA.
     educ_num = ifelse(educ == 99, NA_real_, as.numeric(educ)),
@@ -138,11 +144,13 @@ alters_df <- alters_wide %>%
     race = case_when(
       race == 4 ~ "White",     # Alter code 4 = White
       race == 2 ~ "Black",     # Alter code 2 = Black
-      race %in% c(1, 3, 5) ~ "OtherRace", # Alter codes 1=Asian, 3=Hispanic, 5=Other -> OtherRace
+      race == 5 ~ "Other", # Alter codes 5=Other -> OtherRace
+      race == 1 ~ "Asian",     # Alter codes 1=Asian
+      race == 3 ~ "Hispanic",  # Alter codes 3=Hispanic,
       TRUE ~ NA_character_ # Catches NAs assigned above and any others
     ),
     # IMPORTANT: Ensure levels match ego$race levels exactly
-    race = factor(race, levels = c("White", "Black", "OtherRace")),
+    race = factor(race, levels = c("Asian", "Black", "Hispanic", "White", "Other")),
     
     # Educ: Map to simpler categories & create numeric version
     # Alter codes: 0=1-6, 1=7-9, 2=10-12, 3=HSG, 4=SomeColl, 5=Assoc, 6=Bach, 7=Grad
