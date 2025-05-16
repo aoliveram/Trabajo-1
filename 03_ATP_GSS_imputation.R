@@ -268,137 +268,86 @@ if (chi_sq_test_race_4cat$p.value < 0.05) {
 plot(gss_egos$race_4cat, main = "Raza armonizada en GSS", xlab = "Raza")
 plot(ATP_W3_sub$race_harmonized, main = "Raza armonizada en ATP", xlab = "Raza")
 
-# --- Armonización de la variable RELIGIÓN en ATP con comentarios detallados ---
+
+# ---------- Imputación de RAZA en ATP -----------------------------------------
+
+gss_asian_other_subset <- gss_egos %>%
+  filter(race %in% c("Asian", "Other")) # Usamos la variable original de 5 categorías
+
+# proporciones de "Asian" y "Other" en este subconjunto
+prob_asian <- prop.table(table(gss_asian_other_subset$race))["Asian"]
+prob_other <- prop.table(table(gss_asian_other_subset$race))["Other"]
+
+if (prob_asian + prob_other != 1) {cat("Cuidado, las probabilidades suman", prob_asian + prob_other, " ,y no 1")}
+
+# nuevas columnas de raza imputada en ATP
+ATP_W3_sub <- ATP_W3_sub %>%
+  mutate(
+    race_imputed_5cat = as.character(race_harmonized) # Empezar con las 4 categorías como character
+  )
+atp_other_indices <- which(ATP_W3_sub$race_harmonized == "Other") # índices de ATP que son "Other"
+
+set.seed(456)
+
+# Imputamos "Asian" u "Other" a los que tienen solo "Other" en ATP
+for (i in atp_other_indices) {
+  ATP_W3_sub$race_imputed_5cat[i] <- sample(
+    x = c("Asian", "Other"),       
+    size = 1,                      # Asignar una sola categoría
+    replace = TRUE,
+    prob = c(prob_asian, prob_other) # Con las probabilidades de GSS
+  )
+}
+# Convertimos la nueva columna a factor con los 5 niveles
+ATP_W3_sub$race_imputed_5cat <- factor(ATP_W3_sub$race_imputed_5cat,
+                                       levels = c("Asian", "Black", "Hispanic", "White", "Other"))
+
+
+# ------------------------------------------------------------------------------
+# Raza
+# ------------------------------------------------------------------------------
+
+# --- Veamos cómo se comparan los niveles de RELIGIÓN en GSS y en ATP ----------
+
 # Los niveles objetivo de GSS para religión son: "Catholic", "Jewish", "None", "OtherRelig", "Protestant"
-# (basado en tu output de `unique(gss_egos$relig)`).
 
 ATP_W3_sub <- ATP_W3_sub %>%
   mutate(
     relig_harmonized = case_when(
-      # Mapeo directo a "Protestant"
       F_RELIG_TYPOLOGY == 1 ~ "Protestant", # ATP: 1 = Protestant (Baptist, Methodist, etc.)
-      
-      # Mapeo directo a "Catholic"
       F_RELIG_TYPOLOGY == 2 ~ "Catholic",   # ATP: 2 = Roman Catholic (Catholic)
-      
-      # Mapeo directo a "Jewish"
       F_RELIG_TYPOLOGY == 5 ~ "Jewish",     # ATP: 5 = Jewish (Judaism)
-      
-      # Mapeo a "None": Agrupa a aquellos sin afiliación religiosa específica o que no creen.
-      # Esto sigue la práctica común en estudios como Smith et al. 2014 [5]
-      # y es consistente con cómo se suele tratar "None" en GSS.
       F_RELIG_TYPOLOGY %in% c(9, 10, 12) ~ "None", # ATP: 9 = Atheist, 10 = Agnostic, 12 = Nothing in particular
-      
-      # Mapeo a "OtherRelig": Agrupa todas las demás afiliaciones religiosas específicas
-      # que no son Protestante, Católica o Judía, y que no son "None".
       F_RELIG_TYPOLOGY %in% c(3, 4, 6, 7, 8, 11, 13, 14) ~ "OtherRelig",
-      # ATP: 3 = Mormon
-      # ATP: 4 = Orthodox (Greek, Russian, etc.)
-      # ATP: 6 = Muslim (Islam)
-      # ATP: 7 = Buddhist
-      # ATP: 8 = Hindu
-      # ATP: 11 = Something else (SPECIFY)
-      # ATP: 13 = (VOL) Christian (no especificado como Protestante o Católico)
-      # ATP: 14 = (VOL) Unitarian (Universalist)
-      
-      # Mapeo de valores de no respuesta a NA
+                                            # ATP: 3 = Mormon
+                                            # ATP: 4 = Orthodox (Greek, Russian, etc.)
+                                            # ATP: 6 = Muslim (Islam)
+                                            # ATP: 7 = Buddhist
+                                            # ATP: 8 = Hindu
+                                            # ATP: 11 = Something else (SPECIFY)
+                                            # ATP: 13 = (VOL) Christian (no especificado como Protestante o Católico)
+                                            # ATP: 14 = (VOL) Unitarian (Universalist)
       F_RELIG_TYPOLOGY == 99 ~ NA_character_, # ATP: 99 = (VOL) Don't know/Refused
-      
-      # Para cualquier otro valor no contemplado o NA preexistente
       TRUE ~ NA_character_
     ),
     # Asegurar que los niveles del factor coincidan con los de gss_egos$relig
     relig_harmonized = factor(relig_harmonized, levels = c("Catholic", "Jewish", "None", "OtherRelig", "Protestant"))
   )
 
-# --- Comparación de Distribuciones de RELIGIÓN (GSS vs ATP) ---
+# Tabla de contingencia
 gss_relig_counts <- table(gss_egos$relig)
-print("Cuentas de Religión en GSS (egos):")
-print(gss_relig_counts)
-
 atp_relig_counts <- table(ATP_W3_sub$relig_harmonized)
-print("Cuentas de Religión en ATP (harmonized):")
-print(atp_relig_counts)
-
-if (!identical(levels(gss_egos$relig), levels(ATP_W3_sub$relig_harmonized))) {
-  warning("Los niveles de los factores de religión no son idénticos entre GSS y ATP. Ajustar antes de la prueba de Chi-cuadrado.")
-}
-
 contingency_table_relig <- rbind(
   GSS = gss_relig_counts[levels(gss_egos$relig)],
   ATP = atp_relig_counts[levels(ATP_W3_sub$relig_harmonized)]
 )
-
-print("Tabla de Contingencia para Religión (GSS vs ATP):")
 print(contingency_table_relig)
 
+# Test Chi-cuadrado
 chi_sq_test_relig <- chisq.test(contingency_table_relig)
-print("Prueba de Chi-cuadrado para Religión:")
-print(chi_sq_test_relig)
 
 if (chi_sq_test_relig$p.value < 0.05) {
   cat("Conclusión RELIGIÓN: Las distribuciones de religión entre GSS y ATP son significativamente DIFERENTES (p < 0.05).\n")
 } else {
   cat("Conclusión RELIGIÓN: No hay evidencia de una diferencia significativa en las distribuciones de religión (p >= 0.05).\n")
 }
-
-
-# --- Armonización de la variable RELIGIÓN en ATP ---
-
-# Los niveles objetivo de GSS son: "Catholic", "Jewish", "None", "OtherRelig", "Protestant"
-ATP_W3_sub <- ATP_W3_sub %>%
-  mutate(
-    relig_harmonized = case_when(
-      F_RELIG_TYPOLOGY == 1 ~ "Protestant",
-      F_RELIG_TYPOLOGY == 2 ~ "Catholic",
-      F_RELIG_TYPOLOGY == 5 ~ "Jewish",
-      F_RELIG_TYPOLOGY %in% c(9, 10, 12) ~ "None",
-      F_RELIG_TYPOLOGY %in% c(3, 4, 6, 7, 8, 11, 13, 14) ~ "OtherRelig",
-      F_RELIG_TYPOLOGY == 99 ~ NA_character_,
-      TRUE ~ NA_character_
-    ),
-    relig_harmonized = factor(relig_harmonized, levels = c("Catholic", "Jewish", "None", "OtherRelig", "Protestant"))
-  )
-
-# --- Comparación de Distribuciones de RELIGIÓN (GSS vs ATP) ---
-
-# Asegúrate de que gss_egos$relig está definido y tiene los mismos niveles
-# Ejemplo: gss_egos$relig <- factor(gss_egos$relig, levels = c("Catholic", "Jewish", "None", "OtherRelig", "Protestant"))
-
-gss_relig_counts <- table(gss_egos$relig)
-print("Cuentas de Religión en GSS (egos):")
-print(gss_relig_counts)
-
-atp_relig_counts <- table(ATP_W3_sub$relig_harmonized)
-print("Cuentas de Religión en ATP (harmonized):")
-print(atp_relig_counts)
-
-# Verificar que los niveles son idénticos
-if (!identical(levels(gss_egos$relig), levels(ATP_W3_sub$relig_harmonized))) {
-  warning("Los niveles de los factores de religión no son idénticos entre GSS y ATP. Ajustar antes de la prueba de Chi-cuadrado.")
-}
-
-contingency_table_relig <- rbind(
-  GSS = gss_relig_counts[levels(gss_egos$relig)],
-  ATP = atp_relig_counts[levels(ATP_W3_sub$relig_harmonized)]
-)
-
-print("Tabla de Contingencia para Religión (GSS vs ATP):")
-print(contingency_table_relig)
-
-chi_sq_test_relig <- chisq.test(contingency_table_relig)
-print("Prueba de Chi-cuadrado para Religión:")
-print(chi_sq_test_relig)
-
-if (chi_sq_test_relig$p.value < 0.05) {
-  cat("Conclusión RELIGIÓN: Las distribuciones de religión entre GSS y ATP son significativamente DIFERENTES (p < 0.05).\n")
-} else {
-  cat("Conclusión RELIGIÓN: No hay evidencia de una diferencia significativa en las distribuciones de religión (p >= 0.05).\n")
-}
-
-# Inspeccionar las variables finales
-# print("Resumen de ATP_W3_sub$race_harmonized:")
-# summary(ATP_W3_sub$race_harmonized)
-# print("Resumen de ATP_W3_sub$relig_harmonized:")
-# summary(ATP_W3_sub$relig_harmonized)
-
