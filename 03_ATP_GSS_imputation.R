@@ -84,7 +84,7 @@ print(ggplot(ages_gss_atp, aes(x = category, y = proportion, fill = source)) +
              x = "Categoría de Edad", y = "Proporción") +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 45, hjust = 1)))
-ggsave("trabajo_1_plots/age_GSS_ATP.pdf", width = 7, height = 6)
+ggsave("trabajo_1_plots/age_GSS_vs_ATP.pdf", width = 8, height = 5)
 
 # Comparación Chi-Cuadrado
 # Necesitamos las cuentas, no las proporciones
@@ -178,9 +178,48 @@ ATP_W3_sub$F_EDUCCAT_TYPOLOGY_factor <- factor(
   labels = c("College graduate+", "Some college", "HS graduate or less")
 )
 
-# Tabla de contingencia
+# plot -----------
 gss_counts <- table(gss_egos$degree_atp3cat)
 atp_counts <- table(ATP_W3_sub$F_EDUCCAT_TYPOLOGY_factor)
+
+gss_educ_proportions <- gss_counts / sum(gss_counts)
+atp_educ_proportions <- atp_counts / sum(atp_counts)
+
+df_gss_educ <- data.frame(
+  source = "GSS",
+  category = names(gss_educ_proportions), # O usa colnames(contingency_table_educ)
+  proportion = as.numeric(gss_educ_proportions)
+)
+
+df_atp_educ <- data.frame(
+  source = "ATP",
+  category = names(atp_educ_proportions), # O usa colnames(contingency_table_educ)
+  proportion = as.numeric(atp_educ_proportions)
+)
+
+educ_gss_atp <- rbind(df_gss_educ, df_atp_educ)
+
+rm(df_gss_educ, df_atp_educ)
+
+# Para ordenar los factores
+educ_levels <- c("HS graduate or less", "Some college", "College graduate+")
+educ_gss_atp$category <- factor(educ_gss_atp$category, levels = educ_levels)
+
+print(educ_gss_atp)
+
+plot_educ <- ggplot(educ_gss_atp, aes(x = category, y = proportion, fill = source)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Comparación de Distribuciones de Nivel Educativo (GSS vs ATP)",
+       x = "Nivel Educativo",
+       y = "Proporción",
+       fill = "Fuente de Datos") + # Etiqueta para la leyenda
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5), # Puedes ajustar angle y hjust
+        plot.title = element_text(hjust = 0.5)) # Centrar el título
+print(plot_educ)
+ggsave("trabajo_1_plots/educ_GSS_vs_ATP.pdf", plot = plot_educ, width = 8, height = 5)
+
+# Tabla de contingencia
 contingency_table_educ <- rbind(GSS = as.numeric(gss_counts), ATP = as.numeric(atp_counts))
 colnames(contingency_table_educ) <- levels(gss_egos$degree_atp3cat)
 print(contingency_table_educ)
@@ -221,6 +260,13 @@ summary(ATP_W3_sub$educ_num)
 hist(gss_egos$educ_num, main = "Años de educación en GSS", xlab = "Años de educación")
 hist(ATP_W3_sub$educ_num, main = "Años de educación imputados en ATP", xlab = "Años de educación")
 
+pdf(file = "trabajo_1_plots/educ_distribution_GSS.pdf", width = 6, height = 5)
+hist(gss_egos$educ_num, main = "Años de educación en GSS (EGO)", xlab = "Edad", ylab = "Frecuencia")
+dev.off()
+
+pdf(file = "trabajo_1_plots/educ_distribution_ATP.pdf", width = 6, height = 5)
+hist(ATP_W3_sub$educ_num, main = "Años de educación imputados en ATP", xlab = "Edad", ylab = "Frecuencia")
+dev.off()
 
 # ------------------------------------------------------------------------------
 # Raza
@@ -255,9 +301,48 @@ ATP_W3_sub <- ATP_W3_sub %>%
     race_harmonized = factor(race_harmonized, levels = c("Black", "Hispanic", "White", "Other"))
   )
 
-# Tabla de contingencia
+# plot -----------
 gss_race_counts_4cat <- table(gss_egos$race_4cat)
 atp_race_counts_4cat <- table(ATP_W3_sub$race_harmonized)
+
+gss_race_counts_4cat_proportions <- gss_race_counts_4cat / sum(gss_race_counts_4cat)
+atp_race_counts_4cat_proportions <- atp_race_counts_4cat / sum(atp_race_counts_4cat)
+
+df_gss_race <- data.frame(
+  source = "GSS",
+  category = names(gss_race_counts_4cat_proportions), # O usa colnames(contingency_table_educ)
+  proportion = as.numeric(gss_race_counts_4cat_proportions)
+)
+
+df_atp_race <- data.frame(
+  source = "ATP",
+  category = names(atp_race_counts_4cat_proportions), # O usa colnames(contingency_table_educ)
+  proportion = as.numeric(atp_race_counts_4cat_proportions)
+)
+
+race_gss_atp <- rbind(df_gss_race, df_atp_race)
+
+rm(df_gss_race, df_atp_race)
+
+# Para ordenar los factores
+race_levels <- c("Black", "Hispanic", "White", "Other")
+race_gss_atp$category <- factor(race_gss_atp$category, levels = race_levels)
+
+print(race_gss_atp)
+
+plot_educ <- ggplot(race_gss_atp, aes(x = category, y = proportion, fill = source)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Comparación de Distribuciones de Raza (GSS vs ATP)",
+       x = "Raza",
+       y = "Proporción",
+       fill = "Fuente de Datos") + # Etiqueta para la leyenda
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5), # Puedes ajustar angle y hjust
+        plot.title = element_text(hjust = 0.5)) # Centrar el título
+print(plot_educ)
+ggsave("trabajo_1_plots/race_GSS_vs_ATP.pdf", plot = plot_educ, width = 8, height = 5)
+
+# Tabla de contingencia
 contingency_table_race_4cat <- rbind(
   GSS = gss_race_counts_4cat[levels(gss_egos$race_4cat)],
   ATP = atp_race_counts_4cat[levels(ATP_W3_sub$race_harmonized)]
