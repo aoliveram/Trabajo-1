@@ -16,6 +16,7 @@ unique(gss_egos$relig)
 ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_sub.rds")
 labels <- sapply(ATP_W3_sub, function(x) attr(x, "label"))
 
+# ATP raw
 library(haven)
 ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav")
 
@@ -198,7 +199,6 @@ df_atp_educ <- data.frame(
 )
 
 educ_gss_atp <- rbind(df_gss_educ, df_atp_educ)
-
 rm(df_gss_educ, df_atp_educ)
 
 # Para ordenar los factores
@@ -318,7 +318,6 @@ df_atp_race <- data.frame(
 )
 
 race_gss_atp <- rbind(df_gss_race, df_atp_race)
-
 rm(df_gss_race, df_atp_race)
 
 # Para ordenar los factores
@@ -369,7 +368,7 @@ if (prob_asian + prob_other != 1) {cat("Cuidado, las probabilidades suman", prob
 # nuevas columnas de raza imputada en ATP
 ATP_W3_sub <- ATP_W3_sub %>%
   mutate(
-    race_imputed_5cat = as.character(race_harmonized) # Empezar con las 4 categorías como character
+    race = as.character(race_harmonized) # Empezar con las 4 categorías como character
   )
 atp_other_indices <- which(ATP_W3_sub$race_harmonized == "Other") # índices de ATP que son "Other"
 
@@ -377,7 +376,7 @@ set.seed(456)
 
 # Imputamos "Asian" u "Other" a los que tienen solo "Other" en ATP
 for (i in atp_other_indices) {
-  ATP_W3_sub$race_imputed_5cat[i] <- sample(
+  ATP_W3_sub$race[i] <- sample(
     x = c("Asian", "Other"),       
     size = 1,                      # Asignar una sola categoría
     replace = TRUE,
@@ -385,7 +384,7 @@ for (i in atp_other_indices) {
   )
 }
 # Convertimos la nueva columna a factor con los 5 niveles
-ATP_W3_sub$race_imputed_5cat <- factor(ATP_W3_sub$race_imputed_5cat,
+ATP_W3_sub$race <- factor(ATP_W3_sub$race,
                                        levels = c("Asian", "Black", "Hispanic", "White", "Other"))
 
 pdf(file = "trabajo_1_plots/race_distribution_GSS.pdf", width = 6, height = 5)
@@ -393,7 +392,7 @@ plot(gss_egos$race, main = "Raza en GSS (EGO)", xlab = "Raza", ylab = "Frecuenci
 dev.off()
 
 pdf(file = "trabajo_1_plots/race_distribution_ATP.pdf", width = 6, height = 5)
-plot(ATP_W3_sub$race_imputed_5cat, main = "Raza imputada en ATP", xlab = "Raza", ylab = "Frecuencia")
+plot(ATP_W3_sub$race, main = "Raza imputada en ATP", xlab = "Raza", ylab = "Frecuencia")
 dev.off()
 
 
@@ -407,7 +406,7 @@ dev.off()
 
 ATP_W3_sub <- ATP_W3_sub %>%
   mutate(
-    relig_harmonized = case_when(
+    relig = case_when(
       F_RELIG_TYPOLOGY == 1 ~ "Protestant", # ATP: 1 = Protestant (Baptist, Methodist, etc.)
       F_RELIG_TYPOLOGY == 2 ~ "Catholic",   # ATP: 2 = Roman Catholic (Catholic)
       F_RELIG_TYPOLOGY == 5 ~ "Jewish",     # ATP: 5 = Jewish (Judaism)
@@ -425,12 +424,12 @@ ATP_W3_sub <- ATP_W3_sub %>%
       TRUE ~ NA_character_
     ),
     # Asegurar que los niveles del factor coincidan con los de gss_egos$relig
-    relig_harmonized = factor(relig_harmonized, levels = c("Catholic", "Jewish", "None", "OtherRelig", "Protestant"))
+    relig = factor(relig, levels = c("Catholic", "Jewish", "None", "OtherRelig", "Protestant"))
   )
 
 # plot -----------
 gss_relig_counts <- table(gss_egos$relig)
-atp_relig_counts <- table(ATP_W3_sub$relig_harmonized)
+atp_relig_counts <- table(ATP_W3_sub$relig)
 
 gss_relig_proportions <- gss_relig_counts / sum(gss_relig_counts)
 atp_relig_proportions <- atp_relig_counts / sum(atp_relig_counts)
@@ -448,7 +447,6 @@ df_atp_relig <- data.frame(
 )
 
 relig_gss_atp <- rbind(df_gss_relig, df_atp_relig)
-
 rm(df_gss_relig, df_atp_relig)
 
 # Para ordenar los factores
@@ -472,7 +470,7 @@ ggsave("trabajo_1_plots/relig_GSS_vs_ATP.pdf", plot = plot_relig, width = 8, hei
 # Tabla de contingencia
 contingency_table_relig <- rbind(
   GSS = gss_relig_counts[levels(gss_egos$relig)],
-  ATP = atp_relig_counts[levels(ATP_W3_sub$relig_harmonized)]
+  ATP = atp_relig_counts[levels(ATP_W3_sub$relig)]
 )
 print(contingency_table_relig)
 
@@ -497,13 +495,29 @@ levels(gss_egos$relig)
 unique(ATP_W3_sub$F_RELIG_TYPOLOGY)
 
 # Como tengo más granuliadad de relig en ATP, entonces no tengo que imputar datos
-# de religión a ATP, sino que solo debo agrupar relig --->> ATP_W3_sub$relig_harmonized
+# de religión a ATP, sino que solo debo agrupar relig --->> ATP_W3_sub$relig
 # 
 # En resumen, las variables 'armonizadas' son:
 #   
 #   1. gss_egos$age , ATP_W3_sub$age --->>> sort(unique(gss_egos$age))==sort(unique(ATP_W3_sub$age))
 #   2. gss_egos$educ_num , ATP_W3_sub$educ_num --->>> sort(unique(gss_egos$educ_num))[5:21]==sort(unique(ATP_W3_sub$educ_num))[(5-2):(21-2)]
-#   3. gss_egos$race , ATP_W3_sub$race_imputed_5cat -->> levels(gss_egos$race)==levels(ATP_W3_sub$race_imputed_5cat)
-#   4. gss_egos$relig , ATP_W3_sub$relig_harmonized -->> levels(gss_egos$relig)==levels(ATP_W3_sub$relig_harmonized)
+#   3. gss_egos$race , ATP_W3_sub$race -->> levels(gss_egos$race)==levels(ATP_W3_sub$race)
+#   4. gss_egos$relig , ATP_W3_sub$relig -->> levels(gss_egos$relig)==levels(ATP_W3_sub$relig)
 #   
 # La variable 'sexo' no fue modificada.
+
+ATP_W3_sub <- ATP_W3_sub %>%
+  rename(
+    weight_ATP = WEIGHT_W3,
+    sex = F_SEX_FINAL
+  ) %>%
+  select(
+    -race_harmonized # Elimina race_harmonized
+  ) %>%
+  relocate(
+    weight_ATP, age, sex, educ_num, race, relig, # Columnas a mover
+    .after = last_col() # Moverlas después de la última columna existente
+  )
+
+write.csv(ATP_W3_sub, "trabajo_1_files/ATP_W3_sub_imput.csv", row.names = FALSE)
+saveRDS(ATP_W3_sub, "trabajo_1_files/ATP_W3_sub_imput.rds")
