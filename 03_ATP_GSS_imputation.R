@@ -257,9 +257,6 @@ for (i in 1:nrow(ATP_W3_sub)) {
 
 summary(ATP_W3_sub$educ_num)
 
-hist(gss_egos$educ_num, main = "Años de educación en GSS", xlab = "Años de educación")
-hist(ATP_W3_sub$educ_num, main = "Años de educación imputados en ATP", xlab = "Años de educación")
-
 pdf(file = "trabajo_1_plots/educ_distribution_GSS.pdf", width = 6, height = 5)
 hist(gss_egos$educ_num, main = "Años de educación en GSS (EGO)", xlab = "Edad", ylab = "Frecuencia")
 dev.off()
@@ -469,8 +466,8 @@ plot_relig <- ggplot(relig_gss_atp, aes(x = category, y = proportion, fill = sou
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 0, hjust = 0.5), # Puedes ajustar angle y hjust
         plot.title = element_text(hjust = 0.5)) # Centrar el título
-print(plot_educ)
-ggsave("trabajo_1_plots/relig_GSS_vs_ATP.pdf", plot = plot_educ, width = 8, height = 5)
+print(plot_relig)
+ggsave("trabajo_1_plots/relig_GSS_vs_ATP.pdf", plot = plot_relig, width = 8, height = 5)
 
 # Tabla de contingencia
 contingency_table_relig <- rbind(
@@ -487,3 +484,26 @@ if (chi_sq_test_relig$p.value < 0.05) {
 } else {
   cat("Conclusión RELIGIÓN: No hay evidencia de una diferencia significativa en las distribuciones de religión (p >= 0.05).\n")
 }
+
+# ---------- Imputación de RELIG en ATP -----------------------------------------
+
+# En GSS tengo MÁs razas
+unique(gss_egos$racecen1)
+unique(ATP_W3_sub$F_RACETHN_TYPOLOGY)
+levels(ATP_W3_sub$race_harmonized)
+
+# En GSS tengo MENOS relig
+levels(gss_egos$relig)
+unique(ATP_W3_sub$F_RELIG_TYPOLOGY)
+
+# Como tengo más granuliadad de relig en ATP, entonces no tengo que imputar datos
+# de religión a ATP, sino que solo debo agrupar relig --->> ATP_W3_sub$relig_harmonized
+# 
+# En resumen, las variables 'armonizadas' son:
+#   
+#   1. gss_egos$age , ATP_W3_sub$age --->>> sort(unique(gss_egos$age))==sort(unique(ATP_W3_sub$age))
+#   2. gss_egos$educ_num , ATP_W3_sub$educ_num --->>> sort(unique(gss_egos$educ_num))[5:21]==sort(unique(ATP_W3_sub$educ_num))[(5-2):(21-2)]
+#   3. gss_egos$race , ATP_W3_sub$race_imputed_5cat -->> levels(gss_egos$race)==levels(ATP_W3_sub$race_imputed_5cat)
+#   4. gss_egos$relig , ATP_W3_sub$relig_harmonized -->> levels(gss_egos$relig)==levels(ATP_W3_sub$relig_harmonized)
+#   
+# La variable 'sexo' no fue modificada.
