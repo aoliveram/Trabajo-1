@@ -358,10 +358,6 @@ if (chi_sq_test_race_4cat$p.value < 0.05) {
   cat("Conclusión RAZA (4 cat): No hay evidencia de una diferencia significativa en las distribuciones de raza (p >= 0.05).\n")
 }
 
-plot(gss_egos$race_4cat, main = "Raza armonizada en GSS", xlab = "Raza")
-plot(ATP_W3_sub$race_harmonized, main = "Raza armonizada en ATP", xlab = "Raza")
-
-
 # ---------- Imputación de RAZA en ATP -----------------------------------------
 
 gss_asian_other_subset <- gss_egos %>%
