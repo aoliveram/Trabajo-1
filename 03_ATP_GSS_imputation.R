@@ -1,4 +1,5 @@
 library(dplyr)
+library(ggplot2)
 
 # Cargamos datos GSS 2004
 gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
@@ -13,30 +14,32 @@ unique(gss_egos$relig)
 # Cargamos datos ATP W3
 
 ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_sub.rds")
+labels <- sapply(ATP_W3_sub, function(x) attr(x, "label"))
 
-hist(ATP_W3_sub$F_AGECAT_TYPOLOGY) # Edad
+library(haven)
+ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav")
 
 # Qué datos tenemos ---------------------------------
 
 # Edad
 labels[["F_AGECAT_TYPOLOGY"]]
-ATP_W3_sub$F_AGECAT_TYPOLOGY
+ATP_W3$F_AGECAT_TYPOLOGY
 
 # Educación
 labels[["F_EDUCCAT_TYPOLOGY"]]
-ATP_W3_sub$F_EDUCCAT_TYPOLOGY
+ATP_W3$F_EDUCCAT_TYPOLOGY
 
 # Race
 labels[["F_RACETHN_TYPOLOGY"]]
-ATP_W3_sub$F_RACETHN_TYPOLOGY
+ATP_W3$F_RACETHN_TYPOLOGY
 
 # Sex
 labels[["F_SEX_FINAL"]]
-ATP_W3_sub$F_SEX_FINAL
+ATP_W3$F_SEX_FINAL
 
 # Religion
 labels[["F_RELIG_TYPOLOGY"]]
-ATP_W3_sub$F_RELIG_TYPOLOGY
+ATP_W3$F_RELIG_TYPOLOGY
 
 # Ver las primeras filas del data frame
 head(ATP_W3)
@@ -81,6 +84,7 @@ print(ggplot(ages_gss_atp, aes(x = category, y = proportion, fill = source)) +
              x = "Categoría de Edad", y = "Proporción") +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 45, hjust = 1)))
+ggsave("trabajo_1_plots/age_GSS_ATP.pdf", width = 7, height = 6)
 
 # Comparación Chi-Cuadrado
 # Necesitamos las cuentas, no las proporciones
@@ -88,8 +92,8 @@ gss_counts <- table(gss_egos$age_category_gss)
 atp_counts_raw <- table(ATP_W3_sub$F_AGECAT_TYPOLOGY_factor)
 
 # tabla de contingencia para el test
-contingency_table_age <- rbind(GSS = as.numeric(gss_counts_aligned), ATP = as.numeric(atp_counts_aligned))
-colnames(contingency_table_age) <- all_age_cats
+contingency_table_age <- rbind(GSS = as.numeric(gss_counts), ATP = as.numeric(atp_counts_raw))
+colnames(contingency_table_age) <- age_labels_gss
 
 print(contingency_table_age)
 
@@ -120,7 +124,7 @@ print(lapply(gss_ages_by_category, head, 5))
 ATP_W3_sub$age <- NA_integer_ # Inicializar con NA
 
 # Establecer una semilla para reproducibilidad de la imputación
-set.seed(123)
+set.seed(999)
 
 # Iterar para cada individuo de ATP
 for (i in 1:nrow(ATP_W3_sub)) {
@@ -143,9 +147,13 @@ for (i in 1:nrow(ATP_W3_sub)) {
 
 summary(ATP_W3_sub$age)
 
-hist(gss_egos$age, main = "Edades en GSS", xlab = "Edad")
-hist(ATP_W3_sub$age, main = "Edades Imputadas en ATP", xlab = "Edad")
+pdf(file = "trabajo_1_plots/age_distribution_GSS.pdf", width = 6, height = 5)
+hist(gss_egos$age, main = "Edades en GSS (EGO)", xlab = "Edad", ylab = "Frecuencia")
+dev.off()
 
+pdf(file = "trabajo_1_plots/age_distribution_ATP.pdf", width = 6, height = 5)
+hist(ATP_W3_sub$age, main = "Edades Imputadas en ATP", xlab = "Edad", ylab = "Frecuencia")
+dev.off()
 
 # ------------------------------------------------------------------------------
 # EDUCACIÓN
