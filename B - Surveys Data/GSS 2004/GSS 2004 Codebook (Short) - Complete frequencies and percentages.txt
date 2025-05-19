@@ -1,0 +1,3705 @@
+Data File: GSS2004 (Full Data Codebook)
+
+1) YEAR
+Year of survey
+RANGE: 2004 to 2004
+	N	Mean	Std. Deviation
+Total	2812	2004	0
+2004) 2004	2812	100.0
+
+
+2) ID
+Respondent original ID Number
+RANGE: 1 to 2812
+	N	Mean	Std. Deviation
+Total	2812	1406.5	811.899
+
+
+3) WRKSTAT
+Last week were you working full time, part time, going to school, keeping house, or what?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2812	2.779	2.282
+1) Working full time	1466	52.1
+2) Working part time	320	11.4
+3) With a job, but not at work because of temporary illness, vacation, strike	80	2.8
+4) Unemployed, laid off, looking for work	99	3.5
+5) Retired	403	14.3
+6) In school	115	4.1
+7) Keeping house	266	9.5
+8) Other	62	2.2
+9) No answer	1	0.0
+
+
+4) HRS1
+If working, full or part time: How many hours did you work last week, at all jobs?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	1787	43.022	16.28
+Missing	1025
+
+
+5) HRS2
+If with a job, but not at work: How many hours a week do you usually work, at all jobs?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	81	50.765	28.397
+Missing	2731
+
+
+6) EVWORK
+If retired, in school, keeping house, or other: Did you ever work for as long as one year?
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	847	1.133	0.34
+1) Yes	734	86.7
+2) No	113	13.3
+Missing	1965
+
+
+7) WRKSLF
+(Are/Were) you self employed or (do/did) you work for someone else?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2699	1.879	0.398
+1) Self-employed	345	12.8
+2) Someone else	2351	87.1
+8) Don't know	2	0.1
+9) No answer	1	0.0
+Missing	113
+
+
+8) WRKGOVT
+Respondent's employer
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2699	1.871	0.74
+1) Government	507	18.8
+2) Private	2167	80.3
+8) Don't know	16	0.6
+9) No answer	9	0.3
+Missing	113
+
+
+9) OCC80
+Respondent's occupation (see Note 1: Occupation Codes on the ARDA summary page)
+RANGE: 0 to 999
+	N	Mean	Std. Deviation
+Total	2812	329.669	262.052
+
+
+10) PRESTG80
+Prestige of respondent's occupation (see Note 1: Prestige Scores on the ARDA summary page)
+RANGE: 0 to 86
+	N	Mean	Std. Deviation
+Total	2812	42.635	17.156
+
+
+11) INDUS80
+Respondent's industry (see Note 2: Industrial Classification on the ARDA summary page)
+RANGE: 0 to 990
+	N	Mean	Std. Deviation
+Total	2812	597.01	297.165
+
+
+12) MARITAL
+Are you currently -- married, widowed, divorced, separated, or have you never been married?
+RANGE: 1 to 5
+	N	Mean	Std. Deviation
+Total	2812	2.35	1.634
+1) Married	1479	52.6
+2) Widowed	204	7.3
+3) Divorced	415	14.8
+4) Separated	95	3.4
+5) Never married	619	22.0
+
+
+13) DIVORCE
+Asked only of those who are currently married or widowed: Have you ever been divorced or legally separated?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1683	1.774	0.525
+1) Yes	402	23.9
+2) No	1278	75.9
+9) No answer	3	0.2
+Missing	1129
+
+
+14) WIDOWED
+Have you ever been widowed?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1989	1.99	0.349
+1) Yes	47	2.4
+2) No	1938	97.4
+9) No answer	4	0.2
+Missing	823
+
+
+15) SPWRKSTA
+Last week was your (wife/husband) working full time, part time, going to school, keeping house, or what?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1479	2.742	2.397
+1) Working full time	840	56.8
+2) Working part time	133	9.0
+3) With a job, but not at work because of temporary illness, vacation strike	35	2.4
+4) Unemployed, laid off, looking for work	34	2.3
+5) Retired	194	13.1
+6) In school	19	1.3
+7) Keeping house	178	12.0
+8) Other	35	2.4
+9) No answer	11	0.7
+Missing	1333
+
+
+16) SPHRS1
+If spouse working, full or part time: How many hours did (he/she) work last week, at all jobs?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	984	45.327	16.688
+1) 1	2	0.2
+4) 4	2	0.2
+5) 5	2	0.2
+7) 7	1	0.1
+8) 8	7	0.7
+10) 10	4	0.4
+11) 11	1	0.1
+14) 14	1	0.1
+15) 15	5	0.5
+16) 16	4	0.4
+17) 17	2	0.2
+18) 18	2	0.2
+19) 19	1	0.1
+20) 20	23	2.3
+22) 22	2	0.2
+23) 23	1	0.1
+24) 24	11	1.1
+25) 25	14	1.4
+26) 26	2	0.2
+27) 27	5	0.5
+28) 28	4	0.4
+30) 30	25	2.5
+31) 31	1	0.1
+32) 32	14	1.4
+34) 34	1	0.1
+35) 35	17	1.7
+36) 36	11	1.1
+37) 37	3	0.3
+38) 38	7	0.7
+40) 40	405	41.2
+41) 41	2	0.2
+42) 42	11	1.1
+43) 43	3	0.3
+44) 44	4	0.4
+45) 45	51	5.2
+46) 46	7	0.7
+47) 47	1	0.1
+48) 48	12	1.2
+49) 49	1	0.1
+50) 50	98	10.0
+51) 51	1	0.1
+52) 52	6	0.6
+53) 53	2	0.2
+54) 54	2	0.2
+55) 55	21	2.1
+56) 56	4	0.4
+60) 60	73	7.4
+61) 61	1	0.1
+62) 62	3	0.3
+65) 65	14	1.4
+70) 70	16	1.6
+72) 72	5	0.5
+75) 75	3	0.3
+76) 76	2	0.2
+78) 78	1	0.1
+80) 80	19	1.9
+84) 84	1	0.1
+89) 89	6	0.6
+98) Don't know	15	1.5
+99) No answer	19	1.9
+Missing	1828
+
+
+17) SPHRS2
+If spouse with job, but not at work: How many hours a week does (he/she) usually work, at all jobs?
+RANGE: 12 to 99
+	N	Mean	Std. Deviation
+Total	46	60.239	30.747
+12) 	1	2.2
+20) 	3	6.5
+21) 	1	2.2
+32) 	1	2.2
+33) 	1	2.2
+35) 	2	4.3
+36) 	1	2.2
+37) 	1	2.2
+40) 	13	28.3
+50) 	1	2.2
+56) 	1	2.2
+60) 	3	6.5
+80) 	1	2.2
+99) No answer	16	34.8
+Missing	2766
+
+
+18) SPEVWORK
+If spouse retired, in school, keeping house, or other: Did (he/she) ever work for as long as one year?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	437	1.382	1.321
+1) Yes	353	80.8
+2) No	72	16.5
+8) Don't know	1	0.2
+9) No answer	11	2.5
+Missing	2375
+
+
+19) SPWRKSLF
+Spouse's employment status
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1406	1.914	0.766
+1) Self-employed	211	15.0
+2) Someone else	1182	84.1
+8) Don't know	1	0.1
+9) No answer	12	0.9
+Missing	1406
+
+
+20) SPOCC80
+Respondent's spouse's occupation (see Note 1: Occupation Codes on the ARDA summary page)
+RANGE: 5 to 999
+	N	Mean	Std. Deviation
+Total	1406	338.196	278.445
+
+
+21) SPPRES80
+Prestige of respondent's spouse's occupation (see Note 1: Occupation Codes on the ARDA summary page)
+RANGE: 17 to 86
+	N	Mean	Std. Deviation
+Total	1359	46.659	13.738
+
+
+22) SPIND80
+Respondent's spouse's industry (see Note 2: Industrial Classification on the ARDA summary page)
+RANGE: 10 to 999
+	N	Mean	Std. Deviation
+Total	1406	618.998	285.035
+
+
+23) PAWRKSLF
+Father's employment status: While you were growing up was your father self-employed or did he work for someone else?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2298	1.868	0.987
+1) Self-employed	561	24.4
+2) Someone else	1698	73.9
+8) Don't know	15	0.7
+9) No answer	24	1.0
+Missing	514
+
+
+24) PAOCC80
+Respondent's father's occupation (see Note 1: Occupation Codes on the ARDA summary page)
+RANGE: 4 to 999
+	N	Mean	Std. Deviation
+Total	2298	463.812	287.828
+
+
+25) PAPRES80
+Prestige of father's occupation (see Note 1: Prestige Scores on the ARDA summary page)
+RANGE: 17 to 86
+	N	Mean	Std. Deviation
+Total	2201	43.724	13.253
+
+
+26) PAIND80
+Respondent's father's industry (see Note 1: Industrial Classification on the ARDA summary page)
+RANGE: 10 to 999
+	N	Mean	Std. Deviation
+Total	2298	442.544	333.964
+
+
+27) MAOCC80
+Occupation of respondent's mother
+RANGE: 5 to 999
+	N	Mean	Std. Deviation
+Total	1762	381.182	249.505
+
+
+28) MAPRES80
+Prestige of Respondent's mother's occupation
+RANGE: 17 to 86
+	N	Mean	Std. Deviation
+Total	1696	41.976	14.477
+
+
+29) MAWRKSLF
+Was respondent's mother self-employed or did she work for someone else?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1736	1.908	0.518
+1) Self-employed	203	11.7
+2) Someone else	1526	87.9
+8) Don't know	5	0.3
+9) No answer	2	0.1
+Missing	1076
+
+
+30) MAIND80
+Industry of respondent's mother
+RANGE: 10 to 990
+	N	Mean	Std. Deviation
+Total	1762	665.862	255.783
+
+
+31) SIBS
+How many brothers and sisters did you have? Please count those born alive, but no longer living, as well as those alive now. Also include stepbrothers and stepsisters, and children adopted by your parents.
+RANGE: 0 to 99
+	N	Mean	Std. Deviation
+Total	2812	3.685	4.616
+0) 0	144	5.1
+1) 1	553	19.7
+2) 2	556	19.8
+3) 3	472	16.8
+4) 4	344	12.2
+5) 5	198	7.0
+6) 6	157	5.6
+7) 7	108	3.8
+8) 8	80	2.8
+9) 9	63	2.2
+10) 10	47	1.7
+11) 11	22	0.8
+12) 12	18	0.6
+13) 13	15	0.5
+14) 14	11	0.4
+15) 15	7	0.2
+16) 16	6	0.2
+17) 17	1	0.0
+18) 18	3	0.1
+19) 19	1	0.0
+20) 20	1	0.0
+29) 29	1	0.0
+98) Don't know	2	0.1
+99) No answer	2	0.1
+
+
+32) CHILDS
+How many children have you ever had? Please count all that were born alive at any time (including any you had from a previous marriage).
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.833	1.638
+0) None	767	27.3
+1) One	474	16.9
+2) Two	730	26.0
+3) Three	459	16.3
+4) Four	221	7.9
+5) Five	79	2.8
+6) Six	39	1.4
+7) Seven	18	0.6
+8) Over seven	21	0.7
+9) No answer	4	0.1
+
+
+33) AGE
+Respondent's age
+RANGE: 18 to 99
+	N	Mean	Std. Deviation
+Total	2812	46.134	17.042
+
+
+34) AGEKDBRN
+How old were you when your first child was born?
+RANGE: 12 to 99
+	N	Mean	Std. Deviation
+Total	2045	24.726	8.984
+12) 	1	0.0
+13) 	2	0.1
+14) 	6	0.3
+15) 	12	0.6
+16) 	48	2.3
+17) 	72	3.5
+18) 	132	6.5
+19) 	168	8.2
+20) 	177	8.7
+21) 	181	8.9
+22) 	157	7.7
+23) 	115	5.6
+24) 	131	6.4
+25) 	114	5.6
+26) 	104	5.1
+27) 	119	5.8
+28) 	86	4.2
+29) 	56	2.7
+30) 	87	4.3
+31) 	52	2.5
+32) 	55	2.7
+33) 	33	1.6
+34) 	27	1.3
+35) 	26	1.3
+36) 	12	0.6
+37) 	12	0.6
+38) 	10	0.5
+39) 	11	0.5
+40) 	6	0.3
+41) 	3	0.1
+42) 	2	0.1
+43) 	2	0.1
+44) 	1	0.0
+45) 	1	0.0
+46) 	1	0.0
+47) 	1	0.0
+49) 	1	0.0
+50) 	1	0.0
+51) 	1	0.0
+98) Don't know	10	0.5
+99) No answer	9	0.4
+Missing	767
+
+
+35) EDUC
+Respondent's education: What is the highest grade in elementary school or high school that you finished and got credit for?
+RANGE: 0 to 99
+	N	Mean	Std. Deviation
+Total	2812	13.759	3.676
+0) No formal schooling	4	0.1
+1) 1st grade	1	0.0
+2) 2nd grade	7	0.2
+3) 3rd grade	3	0.1
+4) 4th grade	2	0.1
+5) 5th grade	4	0.1
+6) 6th grade	17	0.6
+7) 7th grade	17	0.6
+8) 8th grade	54	1.9
+9) 9th grade	59	2.1
+10) 10th grade	72	2.6
+11) 11th grade	156	5.5
+12) 12th grade	734	26.1
+13) 1 year of college	265	9.4
+14) 2 years of college	403	14.3
+15) 3 years of college	174	6.2
+16) 4 years of college	450	16.0
+17) 5 years of college	106	3.8
+18) 6 years of college	138	4.9
+19) 7 years of college	51	1.8
+20) 8 years of college	93	3.3
+99) No answer	2	0.1
+
+
+36) PAEDUC
+What is the highest grade in elementary school or high school that your father (or substitute father) finished and got credit for?
+RANGE: 0 to 99
+	N	Mean	Std. Deviation
+Total	2812	33.726	37.547
+0) No formal schooling	33	1.2
+1) 1st grade	3	0.1
+2) 2nd grade	5	0.2
+3) 3rd grade	36	1.3
+4) 4th grade	27	1.0
+5) 5th grade	29	1.0
+6) 6th grade	84	3.0
+7) 7th grade	48	1.7
+8) 8th grade	204	7.3
+9) 9th grade	79	2.8
+10) 10th grade	81	2.9
+11) 11th grade	65	2.3
+12) 12th grade	692	24.6
+13) 1 year of college	72	2.6
+14) 2 years of college	165	5.9
+15) 3 years of college	25	0.9
+16) 4 years of college	256	9.1
+17) 5 years of college	29	1.0
+18) 6 years of college	69	2.5
+19) 7 years of college	28	1.0
+20) 8 years of college	60	2.1
+97) Not applicable	514	18.3
+98) Don't know	182	6.5
+99) No answer	26	0.9
+
+
+37) MAEDUC
+What is the highest grade in elementary school or high school that your mother (substitute mother) finished and got credit for?
+RANGE: 0 to 99
+	N	Mean	Std. Deviation
+Total	2812	23.494	29.635
+0) No formal schooling	39	1.4
+1) 1st grade	1	0.0
+2) 2nd grade	13	0.5
+3) 3rd grade	25	0.9
+4) 4th grade	14	0.5
+5) 5th grade	23	0.8
+6) 6th grade	70	2.5
+7) 7th grade	40	1.4
+8) 8th grade	179	6.4
+9) 9th grade	86	3.1
+10) 10th grade	116	4.1
+11) 11th grade	115	4.1
+12) 12th grade	945	33.6
+13) 1 year of college	82	2.9
+14) 2 years of college	236	8.4
+15) 3 years of college	55	2.0
+16) 4 years of college	282	10.0
+17) 5 years of college	14	0.5
+18) 6 years of college	48	1.7
+19) 7 years of college	12	0.4
+20) 8 years of college	34	1.2
+97) Not applicable	166	5.9
+98) Don't know	181	6.4
+99) No answer	36	1.3
+
+
+38) SPEDUC
+What is the highest grade in elementary or high school that your (husband/wife) finished and got credit for?
+RANGE: 0 to 99
+	N	Mean	Std. Deviation
+Total	2812	53.863	41.647
+0) No formal schooling	3	0.1
+2) 2nd grade	2	0.1
+4) 4th grade	2	0.1
+5) 5th grade	4	0.1
+6) 6th grade	5	0.2
+7) 7th grade	5	0.2
+8) 8th grade	24	0.9
+9) 9th grade	20	0.7
+10) 10th grade	36	1.3
+11) 11th grade	59	2.1
+12) 12th grade	481	17.1
+13) 1 year of college	112	4.0
+14) 2 years of college	171	6.1
+15) 3 years of college	51	1.8
+16) 4 years of college	278	9.9
+17) 5 years of college	40	1.4
+18) 6 years of college	85	3.0
+19) 7 years of college	24	0.9
+20) 8 years of college	56	2.0
+97) Not applicable	1333	47.4
+98) Don't know	15	0.5
+99) No answer	6	0.2
+
+
+39) DEGREE
+Highest educational degree earned by respondent
+RANGE: 0 to 8
+	N	Mean	Std. Deviation
+Total	2812	1.613	1.213
+0) Less than high school	364	12.9
+1) High school	1435	51.0
+2) Associate/Junior college	224	8.0
+3) Bachelor's	507	18.0
+4) Graduate	281	10.0
+8) Don't know	1	0.0
+
+
+40) PADEG
+Highest educational degree of respondent's father
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	2.541	2.768
+0) Less than high school	765	27.2
+1) High school	898	31.9
+2) Associate/Junior college	70	2.5
+3) Bachelor's	259	9.2
+4) Graduate	179	6.4
+7) Not applicable	514	18.3
+8) Don't know	126	4.5
+9) No answer	1	0.0
+
+
+41) MADEG
+Highest educational degree of respondent's mother
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.735	2.185
+0) Less than high school	791	28.1
+1) High school	1214	43.2
+2) Associate/Junior college	138	4.9
+3) Bachelor's	270	9.6
+4) Graduate	112	4.0
+7) Not applicable	166	5.9
+8) Don't know	120	4.3
+9) No answer	1	0.0
+
+
+42) SPDEG
+Highest educational degree of respondent's spouse
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	4.249	2.789
+0) Less than high school	156	5.5
+1) High school	733	26.1
+2) Associate/Junior college	115	4.1
+3) Bachelor's	292	10.4
+4) Graduate	173	6.2
+7) Not applicable	1333	47.4
+8) Don't know	5	0.2
+9) No answer	5	0.2
+
+
+43) SEX
+Respondent's sex
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	2812	1.545	0.498
+1) Male	1280	45.5
+2) Female	1532	54.5
+
+
+44) RACE
+Respondent's race
+RANGE: 1 to 3
+	N	Mean	Std. Deviation
+Total	2812	1.277	0.586
+1) White	2234	79.4
+2) Black	377	13.4
+3) Other	201	7.1
+
+
+45) RES16
+Which of the categories on this card comes closest to the type of place you were living in when you were 16 years old? (Open country, farm, small city or town, medium size city, suburb near large city, large city)
+RANGE: 1 to 8
+	N	Mean	Std. Deviation
+Total	2812	3.547	1.518
+1) In open country but not on a farm	318	11.3
+2) On a farm	274	9.7
+3) In a small city or town (under 50,000)	999	35.5
+4) In a medium-size city (50,000 - 250,000)	427	15.2
+5) In a suburb near a large city	364	12.9
+6) In a large city (over 250,000)	429	15.3
+8) Don't know	1	0.0
+
+
+46) REG16
+In what state or foreign country were you living when you were 16 years old?
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	4.502	2.638
+0) Foreign	194	6.9
+1) New England	105	3.7
+2) Middle Atlantic	398	14.2
+3) East North Central	548	19.5
+4) West North Central	190	6.8
+5) South Atlantic	459	16.3
+6) East South Central	151	5.4
+7) West South Central	295	10.5
+8) Mountain	160	5.7
+9) Pacific	312	11.1
+
+
+47) MOBILE16
+When you were 16 years old, were you living in this same (city/town/county)?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.946	0.867
+1) Same state, same city	1116	39.7
+2) Same state, different city	739	26.3
+3) Different state	956	34.0
+9) No answer	1	0.0
+
+
+48) FAMILY16
+Were you living with both your own mother and father around the time you were 16? (If no: With whom were you living around that time?)
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.948	1.828
+0) Other	93	3.3
+1) Both own mother and father	1967	70.0
+2) Father and stepmother	48	1.7
+3) Mother and stepfather	148	5.3
+4) Father only	68	2.4
+5) Mother only	388	13.8
+6) Some other male relative (no female head)	5	0.2
+7) Some other female relative (no male head)	33	1.2
+8) Other arrangement with relatives (e.g., aunt and uncle, grandparents)	61	2.2
+9) No answer	1	0.0
+
+
+49) FAMDIF16
+If not living with both own mother and father: What happened?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	845	2.45	1.544
+1) One or both parents died	192	22.7
+2) Parents divorced or separated	473	56.0
+3) Father absent in armed forces	3	0.4
+4) One or both parents in institution	4	0.5
+5) Other	162	19.2
+8) Don't know	2	0.2
+9) No answer	9	1.1
+Missing	1967
+
+
+50) MAWRKGRW
+Did (respondent's mother) work for as long as a year, while you were growing up?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2646	1.436	0.98
+1) Yes	1735	65.6
+2) No	875	33.1
+8) Don't know	9	0.3
+9) No answer	27	1.0
+Missing	166
+
+
+51) INCOM16
+Thinking about the time when you were 16 years old, compared with American families in general then, would you say your family income was -- far below average, below average, average, above average, or far above average?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2500	2.835	1.128
+1) Far below average	237	9.5
+2) Below average	637	25.5
+3) Average	1151	46.0
+4) Above average	377	15.1
+5) Far above average	58	2.3
+8) Don't know	35	1.4
+9) No answer	5	0.2
+Missing	312
+
+
+52) BORNUSA
+Were you born in this country?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.1	0.331
+1) Yes	2539	90.3
+2) No	272	9.7
+9) No answer	1	0.0
+
+
+53) PARBORN
+Were both your parents born in this country?
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.136	2.709
+0) Both born in US	2295	81.6
+1) Mother yes, father no	80	2.8
+2) Mother no, father yes	61	2.2
+3) Mother no, father don't know	2	0.1
+4) Mother no, father don't know	3	0.1
+6) Mother don't know, father no	1	0.0
+7) Mother don't know, father don't know	1	0.0
+8) Neither born in US	359	12.8
+9) No answer	10	0.4
+
+
+54) GRANBORN
+Were all of your four grandparents born in this country? IF NO: How many were born outside the United States?
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2696	1.169	1.707
+0) None	1652	61.3
+1) One	169	6.3
+2) Two	274	10.2
+3) Three	55	2.0
+4) Four	525	19.5
+8) Don't know	19	0.7
+9) No answer	2	0.1
+Missing	116
+
+
+55) HOMPOP
+Number of household members
+RANGE: 1 to 11
+	N	Mean	Std. Deviation
+Total	2812	2.453	1.352
+1) 	706	25.1
+2) 	1080	38.4
+3) 	441	15.7
+4) 	342	12.2
+5) 	157	5.6
+6) 	62	2.2
+7) 	15	0.5
+8) 	5	0.2
+9) 	2	0.1
+10) 	1	0.0
+11) 	1	0.0
+
+
+56) BABIES
+Number of members under 6
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	0.235	0.893
+0) None	2439	86.7
+1) One	241	8.6
+2) Two	96	3.4
+3) Three	15	0.5
+4) Four	1	0.0
+9) No answer	20	0.7
+
+
+57) PRETEEN
+Number of members 6 to 12 years
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	0.282	0.921
+0) None	2358	83.9
+1) One	282	10.0
+2) Two	126	4.5
+3) Three	21	0.7
+4) Four	6	0.2
+9) No answer	19	0.7
+
+
+58) TEENS
+Number of members 13 to 17 years old
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	0.229	0.836
+0) None	2427	86.3
+1) One	256	9.1
+2) Two	102	3.6
+3) Three	8	0.3
+4) Four	2	0.1
+7) Seven	1	0.0
+9) No answer	16	0.6
+
+
+59) ADULTS
+Number of members over 17 years old
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.888	0.845
+1) One	875	31.1
+2) Two	1548	55.0
+3) Three	278	9.9
+4) Four	86	3.1
+5) Five	13	0.5
+6) Six	3	0.1
+7) Seven	2	0.1
+8) Eight or more	1	0.0
+9) No answer	6	0.2
+
+
+60) UNRELAT
+How many persons in the household are not related to you in any way?
+RANGE: 0 to 8
+	N	Mean	Std. Deviation
+Total	1951	0.149	0.55
+0) None	1744	89.4
+1) One	166	8.5
+2) Two	22	1.1
+3) Three	9	0.5
+4) Four	3	0.2
+5) Five	4	0.2
+6) Six	1	0.1
+7) Seven	1	0.1
+8) Eight or more	1	0.1
+Missing	861
+
+
+61) EARNRS
+Just thinking about your family now -- those people in the household who are related to you . . . How many persons in the family, including yourself earned any money last year from any job or employment?
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.494	1.088
+0) None	394	14.0
+1) One	1131	40.2
+2) Two	996	35.4
+3) Three	179	6.4
+4) Four	78	2.8
+5) Five	13	0.5
+6) Six	4	0.1
+7) Seven	3	0.1
+8) Eight or more	7	0.2
+9) No answer	7	0.2
+
+
+62) INCOME
+In which of these groups did your total family income, from all sources, fall last year before taxes, that is?
+RANGE: 1 to 98
+	N	Mean	Std. Deviation
+Total	2812	14.761	17.731
+1) Under $1,000	46	1.6
+2) $1,000 to 2,999	30	1.1
+3) $3,000 to 3,999	21	0.7
+4) $4,000 to 4,999	19	0.7
+5) $5,000 to 5,999	25	0.9
+6) $6,000 to 6,999	38	1.4
+7) $7,000 to 7,999	24	0.9
+8) $8,000 to 9,999	36	1.3
+9) $10,000 to 14,999	160	5.7
+10) $15,000 to 19,999	153	5.4
+11) $20,000 to 24,999	166	5.9
+12) $25,000 or over	1764	62.7
+13) Refused	210	7.5
+98) Don't know	120	4.3
+
+
+63) RINCOME
+In which of these groups did your earnings from (stated occupation) for last year fall? That is, before taxes or other deductions.
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	1889	14.553	18.763
+1) Under $1,000	38	2.0
+2) $1,000 to 2,999	48	2.5
+3) $3,000 to 3,999	27	1.4
+4) $4,000 to 4,999	36	1.9
+5) $5,000 to 5,999	22	1.2
+6) $6,000 to 6,999	28	1.5
+7) $7,000 to 7,999	22	1.2
+8) $8,000 to 9,999	35	1.9
+9) $10,000 to 14,999	143	7.6
+10) $15,000 to 19,999	145	7.7
+11) $20,000 to 24,999	179	9.5
+12) $25,000 or over	965	51.1
+13) Refused	113	6.0
+98) Don't know	48	2.5
+99) No answer	40	2.1
+Missing	923
+
+
+64) INCOME98
+In which of these groups did your total family income, from all sources, fall last year before taxes, that is?  Family income on the 1998 survey
+RANGE: 1 to 98
+	N	Mean	Std. Deviation
+Total	2812	20.486	17.277
+1) Under $1,000	42	1.5
+2) $1,000 to 2,999	27	1.0
+3) $3,000 to 3,999	23	0.8
+4) $4,000 to 4,999	22	0.8
+5) $5,000 to 5,999	24	0.9
+6) $6,000 to 6,999	38	1.4
+7) $7,000 to 7,999	25	0.9
+8) $8,000 to 9,999	35	1.2
+9) $10,000 to 12,499	70	2.5
+10) $12,500 to 14,999	91	3.2
+11) $15,000 to 17,499	93	3.3
+12) $17,500 to 19,999	61	2.2
+13) $20,000 to 22,499	85	3.0
+14) $22,500 to 24,999	81	2.9
+15) $25,000 to 29,999	137	4.9
+16) $30,000 to 34,999	167	5.9
+17) $35,000 to 39,999	143	5.1
+18) $40,000 to 49,999	220	7.8
+19) $50,000 to 59,999	229	8.1
+20) $60,000 to 74,999	244	8.7
+21) $75,000 to 89,999	178	6.3
+22) $90,000 to 109,999	152	5.4
+23) $110,000 or over	295	10.5
+24) Refused	210	7.5
+98) Don't know	120	4.3
+
+
+65) RINCOM98
+Respondent's income on the 1998, 2000 surveys.
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	1889	18.9	18.533
+1) Under $1,000	38	2.0
+2) $1,000 to 2,999	48	2.5
+3) $3,000 to 3,999	27	1.4
+4) $4,000 to 4,999	36	1.9
+5) $5,000 to 5,999	22	1.2
+6) $6,000 to 6,999	28	1.5
+7) $7,000 to 7,999	22	1.2
+8) $8,000 to 9,999	35	1.9
+9) $10,000 to 12,499	69	3.7
+10) $12,500 to 14,999	74	3.9
+11) $15,000 to 17,499	70	3.7
+12) $17,500 to 19,999	75	4.0
+13) $20,000 to 22,499	99	5.2
+14) $22,500 to 24,999	80	4.2
+15) $25,000 to 29,999	110	5.8
+16) $30,000 to 34,999	144	7.6
+17) $35,000 to 39,999	101	5.3
+18) $40,000 to 49,999	183	9.7
+19) $50,000 to 59,999	105	5.6
+20) $60,000 to 74,999	123	6.5
+21) $75,000 to 89,999	68	3.6
+22) $90,000 to 109,999	43	2.3
+23) $110,000 or over	88	4.7
+24) Refused	113	6.0
+98) Don't know	48	2.5
+99) No answer	40	2.1
+Missing	923
+
+1001) LAW1
+Next, did any of the following criminal or legal events occur to you since February/March, 1990. A robbery (e.g. a mugging or stick-up).
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	1.997	0.544
+1) Yes	53	4.0
+2) No	1280	95.5
+9) No answer	7	0.5
+Missing	1472
+
+
+1002) LAW2
+A personal assault (e.g. being beaten up, hit, or attacked with a weapon).
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.009	0.533
+1) Yes	37	2.8
+2) No	1296	96.7
+9) No answer	7	0.5
+Missing	1472
+
+
+1003) LAW3
+Your home burglarized or broken into.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	1.994	0.547
+1) Yes	57	4.3
+2) No	1276	95.2
+9) No answer	7	0.5
+Missing	1472
+
+
+1004) LAW4
+Accused of something for which a person might be sent to jail.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.021	0.521
+1) Yes	21	1.6
+2) No	1312	97.9
+9) No answer	7	0.5
+Missing	1472
+
+
+1005) LAW5
+Arrested.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.019	0.523
+1) Yes	24	1.8
+2) No	1309	97.7
+9) No answer	7	0.5
+Missing	1472
+
+
+1006) LAW6
+Sued in a civil (non-criminal) case.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.028	0.514
+1) Yes	12	0.9
+2) No	1321	98.6
+9) No answer	7	0.5
+Missing	1472
+
+
+1007) LAW7
+Your child was arrested or got in trouble with the law.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.03	0.701
+1) Yes	49	3.7
+2) No	1278	95.4
+8) Don't know	2	0.1
+9) No answer	11	0.8
+Missing	1472
+
+
+1008) LIVE1
+What about things concerning where you live? During the last year, did any of the following happen? Your home destroyed or heavily damaged due to fire, flood, or other disaster.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.015	0.527
+1) Yes	29	2.2
+2) No	1304	97.3
+9) No answer	7	0.5
+Missing	1472
+
+
+1009) LIVE2
+Your home in poor condition (e.g. leaks, broken windows, insects, heating breakdowns, exposed wires, etc.).
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	1.984	0.627
+1) Yes	85	6.3
+2) No	1246	93.0
+9) No answer	9	0.7
+Missing	1472
+
+
+1010) LIVE3
+Major home repairs (e.g. replaced furnace, new roof).
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	1.877	0.633
+1) Yes	214	16.0
+2) No	1119	83.5
+9) No answer	7	0.5
+Missing	1472
+
+
+1011) LIVE4
+Serious trouble with a landlord or building manager.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.013	0.528
+1) Yes	31	2.3
+2) No	1302	97.2
+9) No answer	7	0.5
+Missing	1472
+
+
+1012) OTH1
+And finally, since February/March, 1990, did any of the following occur to you? Discriminated against because of your race or nationality, sex, or for a similar reason.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	1.999	0.623
+1) Yes	69	5.1
+2) No	1261	94.1
+8) Don't know	3	0.2
+9) No answer	7	0.5
+Missing	1472
+
+
+1013) OTH2
+Unable to get into school or training program.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.011	0.53
+1) Yes	34	2.5
+2) No	1299	96.9
+9) No answer	7	0.5
+Missing	1472
+
+
+1014) OTH3
+Child had serious trouble in school (e.g., failing, dropping out, expelled, held back)
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.016	0.666
+1) Yes	55	4.1
+2) No	1274	95.1
+9) No answer	11	0.8
+Missing	1472
+
+
+1015) OTH4
+Needed, but unable to use, public transportation to get to work, shop, etc.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	2.019	0.606
+1) Yes	42	3.1
+2) No	1288	96.1
+8) Don't know	3	0.2
+9) No answer	7	0.5
+Missing	1472
+
+
+1016) OTH5
+Did not have a car (one month or more).
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1340	1.943	0.588
+1) Yes	125	9.3
+2) No	1208	90.1
+9) No answer	7	0.5
+Missing	1472
+
+
+1017) EXTRA1
+Aside from the things we've already covered, what other important problems did you or members of your household have during the last 12 months? First mention. (See Note 16: Other Important Problems on the ARDA summary page)
+RANGE: 1 to 999
+	N	Mean	Std. Deviation
+Total	1340	727.096	422.772
+1) 	56	4.2
+2) 	51	3.8
+3) 	2	0.1
+6) 	1	0.1
+7) 	1	0.1
+10) 	11	0.8
+15) 	1	0.1
+20) 	7	0.5
+21) 	2	0.1
+24) 	1	0.1
+25) 	1	0.1
+26) 	18	1.3
+27) 	1	0.1
+28) 	2	0.1
+29) 	1	0.1
+30) 	68	5.1
+31) 	3	0.2
+43) 	1	0.1
+44) 	3	0.2
+46) 	1	0.1
+47) 	2	0.1
+50) 	1	0.1
+55) 	2	0.1
+65) 	1	0.1
+70) 	7	0.5
+72) 	2	0.1
+73) 	17	1.3
+74) 	1	0.1
+76) 	1	0.1
+80) 	2	0.1
+81) 	2	0.1
+84) 	1	0.1
+86) 	1	0.1
+90) 	2	0.1
+91) 	3	0.2
+92) 	1	0.1
+93) 	4	0.3
+94) 	3	0.2
+96) 	1	0.1
+100) 	1	0.1
+101) 	1	0.1
+103) 	3	0.2
+110) 	2	0.1
+120) 	2	0.1
+130) 	2	0.1
+131) 	1	0.1
+132) 	1	0.1
+133) 	1	0.1
+134) 	1	0.1
+140) 	7	0.5
+161) 	1	0.1
+166) 	2	0.1
+170) 	5	0.4
+172) 	5	0.4
+175) 	6	0.4
+176) 	1	0.1
+180) 	2	0.1
+190) 	11	0.8
+191) 	4	0.3
+200) 	2	0.1
+201) 	3	0.2
+210) 	5	0.4
+211) 	2	0.1
+235) 	7	0.5
+237) 	3	0.2
+240) 	22	1.6
+996) 	944	70.4
+999) 	7	0.5
+Missing	1472
+
+
+1018) EXTRA2
+Aside from the things we've already covered, what other important problems did you or members of your household have during the last 12 months? Second mention. (See Note 16: Other Important Problems on the ARDA summary page)
+RANGE: 1 to 999
+	N	Mean	Std. Deviation
+Total	1340	840.649	349.06
+1) 	39	2.9
+2) 	17	1.3
+3) 	1	0.1
+6) 	1	0.1
+10) 	7	0.5
+11) 	1	0.1
+20) 	2	0.1
+21) 	2	0.1
+23) 	4	0.3
+24) 	1	0.1
+26) 	11	0.8
+28) 	2	0.1
+30) 	30	2.2
+31) 	1	0.1
+40) 	5	0.4
+41) 	1	0.1
+42) 	1	0.1
+43) 	3	0.2
+44) 	2	0.1
+46) 	2	0.1
+47) 	1	0.1
+50) 	8	0.6
+62) 	1	0.1
+70) 	6	0.4
+72) 	1	0.1
+73) 	14	1.0
+75) 	2	0.1
+76) 	1	0.1
+80) 	3	0.2
+81) 	1	0.1
+84) 	1	0.1
+85) 	1	0.1
+90) 	3	0.2
+92) 	2	0.1
+100) 	2	0.1
+101) 	1	0.1
+110) 	3	0.2
+120) 	1	0.1
+132) 	3	0.2
+170) 	4	0.3
+175) 	1	0.1
+190) 	5	0.4
+200) 	4	0.3
+201) 	1	0.1
+210) 	8	0.6
+235) 	2	0.1
+240) 	10	0.7
+996) 	1112	83.0
+999) 	5	0.4
+Missing	1472
+
+
+1019) REALINC
+Family income on 1972-1991 surveys in constant dollars (base=1986)
+RANGE: 0 to 125205
+	N	Mean	Std. Deviation
+Total	2812	32595.004	35717.955
+0) 	330	11.7
+294) 	42	1.5
+1177) 	27	1.0
+2060) 	23	0.8
+2648) 	22	0.8
+3237) 	24	0.9
+3826) 	38	1.4
+4414) 	25	0.9
+5297) 	35	1.2
+6622) 	70	2.5
+8093) 	91	3.2
+9565) 	93	3.3
+11036) 	61	2.2
+12508) 	85	3.0
+13979) 	81	2.9
+16187) 	137	4.9
+19130) 	167	5.9
+22073) 	143	5.1
+26488) 	220	7.8
+32374) 	229	8.1
+39731) 	244	8.7
+48561) 	178	6.3
+58861) 	152	5.4
+125205) 	295	10.5
+
+
+1020) REALRINC
+Respondent's income on 1972-1991 surveys in constant dollars (base=1986)
+RANGE: 0 to 130639
+	N	Mean	Std. Deviation
+Total	2812	15226.414	25161.172
+0) 	1124	40.0
+294) 	38	1.4
+1177) 	48	1.7
+2060) 	27	1.0
+2648) 	36	1.3
+3237) 	22	0.8
+3826) 	28	1.0
+4414) 	22	0.8
+5297) 	35	1.2
+6622) 	69	2.5
+8093) 	74	2.6
+9565) 	70	2.5
+11036) 	75	2.7
+12508) 	99	3.5
+13979) 	80	2.8
+16187) 	110	3.9
+19130) 	144	5.1
+22073) 	101	3.6
+26488) 	183	6.5
+32374) 	105	3.7
+39731) 	123	4.4
+48561) 	68	2.4
+58861) 	43	1.5
+130639) 	88	3.1
+
+
+1021) ETHNIC
+From what countries or part of the world did your ancestors come?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2213	17.401	17.025
+1) Africa	221	10.0
+2) Austria	8	0.4
+3) Canada (French)	10	0.5
+4) Canada (Other)	10	0.5
+5) China	27	1.2
+6) Czechoslovakia	20	0.9
+7) Denmark	15	0.7
+8) England and Wales	286	12.9
+9) Finland	11	0.5
+10) France	41	1.9
+11) Germany	341	15.4
+12) Greece	11	0.5
+13) Hungary	10	0.5
+14) Ireland	283	12.8
+15) Italy	119	5.4
+16) Japan	10	0.5
+17) Mexico	130	5.9
+18) Netherlands (Dutch/Holland)	28	1.3
+19) Norway	34	1.5
+20) Philippines	22	1.0
+21) Poland	42	1.9
+22) Puerto Rico	27	1.2
+23) Russia (USSR)	31	1.4
+24) Scotland	71	3.2
+25) Spain	24	1.1
+26) Sweden	29	1.3
+27) Switzerland	9	0.4
+28) West Indies	1	0.0
+29) Other	10	0.5
+30) American Indian	120	5.4
+31) India	21	0.9
+32) Portugal	11	0.5
+33) Lithuania	5	0.2
+34) Yugoslavia	4	0.2
+35) Romania	5	0.2
+36) Belgium	3	0.1
+37) Arabic	13	0.6
+38) Other Spanish	28	1.3
+39) West Indies (Non-Spanish)	13	0.6
+40) Other Asian	24	1.1
+41) Other European	17	0.8
+97) America	56	2.5
+99) No answer	12	0.5
+Missing	599
+
+
+1022) ETH1
+First ethnicity mentioned
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2812	23.291	26.672
+1) Africa	233	8.3
+2) Austria	10	0.4
+3) Canada(French)	12	0.4
+4) Canada(Other)	13	0.5
+5) China	27	1.0
+6) Czechoslovakia	28	1.0
+7) Denmark	19	0.7
+8) England and Wales	348	12.4
+9) Finland	12	0.4
+10) France	58	2.1
+11) Germany	440	15.6
+12) Greece	11	0.4
+13) Hungary	12	0.4
+14) Ireland	338	12.0
+15) Italy	130	4.6
+16) Japan	11	0.4
+17) Mexico	132	4.7
+18) Netherlands (Dutch/Holland)	30	1.1
+19) Norway	39	1.4
+20) Philippines	24	0.9
+21) Poland	54	1.9
+22) Puerto Rico	27	1.0
+23) Russia (USSR)	47	1.7
+24) Scotland	88	3.1
+25) Spain	28	1.0
+26) Sweden	35	1.2
+27) Switzerland	13	0.5
+28) West Indies	1	0.0
+29) Other	10	0.4
+30) American Indian	134	4.8
+31) India	23	0.8
+32) Portugal	12	0.4
+33) Lithuania	6	0.2
+34) Yugoslavia	8	0.3
+35) Romania	6	0.2
+36) Belgium	7	0.2
+37) Arabic	13	0.5
+38) Other Spanish	29	1.0
+39) West Indies (Non-Spanish)	14	0.5
+40) Other Asian	24	0.9
+41) Other Euro	18	0.6
+97) America	57	2.0
+98) No ethnicity mentioned	219	7.8
+99) No answer	12	0.4
+
+
+1023) ETH2
+Second ethnicity mentioned
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	1241	17.338	14.599
+1) Africa	11	0.9
+2) Austria	13	1.0
+3) Canada(French)	13	1.0
+4) Canada(Other)	7	0.6
+5) China	3	0.2
+6) Czechoslovakia	16	1.3
+7) Denmark	22	1.8
+8) England and Wales	178	14.3
+9) Finland	1	0.1
+10) France	57	4.6
+11) Germany	224	18.0
+12) Greece	7	0.6
+13) Hungary	13	1.0
+14) Ireland	224	18.0
+15) Italy	33	2.7
+16) Japan	1	0.1
+17) Mexico	16	1.3
+18) Netherlands (Dutch/Holland)	25	2.0
+19) Norway	13	1.0
+20) Philippines	3	0.2
+21) Poland	35	2.8
+22) Puerto Rico	6	0.5
+23) Russia (USSR)	19	1.5
+24) Scotland	86	6.9
+25) Spain	30	2.4
+26) Sweden	26	2.1
+27) Switzerland	7	0.6
+28) West Indies	2	0.2
+29) Other	4	0.3
+30) American Indian	64	5.2
+31) India	2	0.2
+32) Portugal	4	0.3
+33) Lithuania	4	0.3
+34) Yugoslavia	5	0.4
+35) Romania	6	0.5
+36) Belgium	4	0.3
+37) Arabic	3	0.2
+38) Other Spanish	7	0.6
+39) West Indies (Non-Spanish)	7	0.6
+40) Other Asian	7	0.6
+41) Other European	6	0.5
+97) America	3	0.2
+98) No ethnicity mentioned	13	1.0
+99) No answer	11	0.9
+Missing	1571
+
+
+1024) ETH3
+Third ethnicity mentioned
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	546	20.386	18.188
+1) Africa	1	0.2
+2) Austria	5	0.9
+3) Canada(French)	9	1.6
+4) Canada(Other)	4	0.7
+5) China	1	0.2
+6) Czechoslovakia	8	1.5
+7) Denmark	5	0.9
+8) England and Wales	62	11.4
+9) Finland	2	0.4
+10) France	38	7.0
+11) Germany	72	13.2
+12) Greece	2	0.4
+14) Ireland	84	15.4
+15) Italy	13	2.4
+17) Mexico	2	0.4
+18) Netherland	18	3.3
+19) Norway	5	0.9
+20) Philippine	2	0.4
+21) Poland	9	1.6
+22) Puerto Rico	3	0.5
+23) Russia	9	1.6
+24) Scotland	61	11.2
+25) Spain	5	0.9
+26) Sweden	11	2.0
+27) Switzerland	4	0.7
+29) Other	5	0.9
+30) American Indian	61	11.2
+31) India	1	0.2
+32) Portugal	3	0.5
+33) Lithuania	2	0.4
+34) Yugoslavia	2	0.4
+35) Romania	3	0.5
+36) Belgium	4	0.7
+38) Other Spanish	2	0.4
+40) Other Asian	2	0.4
+41) Other European	4	0.7
+97) America	2	0.4
+98) No ethnicity mentioned	9	1.6
+99) No answer	11	2.0
+Missing	2266
+
+
+1025) ETHNUM
+Number of ethnicities named and picked
+RANGE: 1 to 5
+	N	Mean	Std. Deviation
+Total	2812	1.824	0.969
+1) Names one country	1351	48.0
+2) Names two or more countries, chooses one	850	30.2
+3) Names two or more countries, can't choose	380	13.5
+4) Can't name any country	217	7.7
+5) No information	14	0.5
+
+
+1026) HISPANIC
+Are you Spanish, Hispanic, or Latino/Latina? Which group are you from?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2812	1.672	5.555
+1) Not Hispanic	2563	91.1
+2) Mexican	156	5.5
+3) Puerto Rico	33	1.2
+4) Cuban	7	0.2
+5) Salvadorian	4	0.1
+6) Guatemalan	5	0.2
+10) Central American	3	0.1
+15) Dominican	1	0.0
+20) Peruvian	3	0.1
+21) Equadorian	2	0.1
+22) Columbian	2	0.1
+23) Venezuelan	3	0.1
+24) Argentinian	1	0.0
+30) Spanish	15	0.5
+35) Filipino/a	2	0.1
+40) Latin American	1	0.0
+41) South American	4	0.1
+50) Other, not specified	1	0.0
+98) Don't know	3	0.1
+99) No answer	3	0.1
+
+
+1027) RACECEN1
+What is your race? Indicate one or more races that you consider yourself to be -- First mention
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2812	1.953	4.89
+1) White	2222	79.0
+2) Black	374	13.3
+3) American Indian or Alaska Native	26	0.9
+4) Asian Indian	21	0.7
+5) Chinese	29	1.0
+6) Filipino	24	0.9
+7) Japanese	6	0.2
+8) Korean	7	0.2
+9) Vietnamese	1	0.0
+10) Other Asian	8	0.3
+11) Native Hawaiian	5	0.2
+15) Some other race	9	0.3
+16) Hispanic	75	2.7
+98) Don't know	2	0.1
+99) No answer	3	0.1
+
+
+1028) RACECEN2
+What is your race? Indicate one or more races that you consider yourself to be -- Second mention
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	162	4.883	8.526
+1) White	28	17.3
+2) Black	7	4.3
+3) American Indian	95	58.6
+5) Chinese	2	1.2
+6) Filipino	2	1.2
+7) Japanese	4	2.5
+8) Korean	3	1.9
+9) Vietnamese	1	0.6
+10) Other Asian	2	1.2
+11) Native Hawaiian	1	0.6
+15) Some other race	5	3.1
+16) Hispanic	11	6.8
+99) No answer	1	0.6
+Missing	2650
+
+
+1029) RACECEN3
+What is your race? Indicate one or more races that you consider yourself to be -- Third mention
+RANGE: 2 to 99
+	N	Mean	Std. Deviation
+Total	10	22.4	40.12
+2) Black	1	10.0
+3) American Indian	5	50.0
+5) Chinese	2	20.0
+98) Don't know	1	10.0
+99) No answer	1	10.0
+Missing	2802
+
+
+1030) DWELLING
+Dwelling type
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2812	4.973	13.448
+1) Trailer	158	5.6
+2) Detached single family house	1841	65.5
+3) 2-family house, 2 units side-by-side	106	3.8
+4) 2-family house, 2 units one above the other	52	1.8
+5) Detached 3-4 family house	54	1.9
+6) Row house (3 or more units in an attached row)	117	4.2
+7) Apartment house (5 or more units, 3 stories or less)	334	11.9
+8) Apartment house (5 or more units, 4 stories or more)	59	2.1
+9) Apartment in a partly commercial structure	12	0.4
+10) Other	23	0.8
+98) Don't know	47	1.7
+99) No answer	9	0.3
+
+
+1031) DWELOWN
+(Do you/Does your family) own your (home/apartment), pay rent, or what?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	906	1.366	0.597
+1) Own or is buying	609	67.2
+2) Pays rent	268	29.6
+3) Other	28	3.1
+9) No answer	1	0.1
+Missing	1906
+
+
+1032) WORDA
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word A
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.063	1.445
+0) Incorrect answer	260	17.7
+1) Correct answer	1168	79.3
+9) No answer	44	3.0
+Missing	1340
+
+
+1033) WORDB
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word B
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.316	1.721
+0) Incorrect answer	87	5.9
+1) Correct answer	1316	89.4
+9) No answer	69	4.7
+Missing	1340
+
+
+1034) WORDC
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word C
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.52	3.104
+0) Incorrect answer	938	63.7
+1) Correct answer	321	21.8
+9) No answer	213	14.5
+Missing	1340
+
+
+1035) WORDD
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word D
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.251	1.558
+0) Incorrect answer	79	5.4
+1) Correct answer	1337	90.8
+9) No answer	56	3.8
+Missing	1340
+
+
+1036) WORDE
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word E
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.303	1.915
+0) Incorrect answer	218	14.8
+1) Correct answer	1171	79.6
+9) No answer	83	5.6
+Missing	1340
+
+
+1037) WORDF
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word F
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.292	1.907
+0) Incorrect answer	226	15.4
+1) Correct answer	1164	79.1
+9) No answer	82	5.6
+Missing	1340
+
+
+1038) WORDG
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word G
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.163	2.533
+0) Incorrect answer	840	57.1
+1) Correct answer	497	33.8
+9) No answer	135	9.2
+Missing	1340
+
+
+1039) WORDH
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word H
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.617	3.062
+0) Incorrect answer	788	53.5
+1) Correct answer	472	32.1
+9) No answer	212	14.4
+Missing	1340
+
+
+1040) WORDI
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word I
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	1.055	1.561
+0) Incorrect answer	327	22.2
+1) Correct answer	1094	74.3
+9) No answer	51	3.5
+Missing	1340
+
+
+1041) WORDJ
+We would like to know something about how people go about guessing words they do not know. On this card are listed some words--you may know some of them, and you may not know quite a few of them: Word J
+RANGE: 0 to 9
+	N	Mean	Std. Deviation
+Total	1472	0.771	2.047
+0) Incorrect answer	993	67.5
+1) Correct answer	397	27.0
+9) No answer	82	5.6
+Missing	1340
+
+
+1042) WORDSUM
+Total number of correct words.
+RANGE: 0 to 99
+	N	Mean	Std. Deviation
+Total	1472	8.291	13.891
+0) 0 correct	20	1.4
+1) 1	19	1.3
+2) 2	27	1.8
+3) 3	54	3.7
+4) 4	137	9.3
+5) 5	219	14.9
+6) 6	324	22.0
+7) 7	270	18.3
+8) 8	170	11.5
+9) 9	125	8.5
+10) 10 correct	74	5.0
+99) No answer	33	2.2
+Missing	1340
+
+
+1043) RELATE1
+Relationship of first person to head of household.
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	2812	1	0
+1) Head of household	2812	100.0
+
+
+1044) GENDER1
+Gender of first person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.422	0.514
+1) Male	1632	58.0
+2) Female	1179	41.9
+9) No answer	1	0.0
+
+
+1045) OLD1
+Age of first person.
+RANGE: 18 to 99
+	N	Mean	Std. Deviation
+Total	2812	48.732	17.682
+
+
+1046) MAR1
+Marital status of first person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2812	2.219	1.598
+1) Married	1567	55.7
+2) Widowed	209	7.4
+3) Divorced	419	14.9
+4) Separated	139	4.9
+5) Never married	462	16.4
+8) Don't know	13	0.5
+9) No answer	3	0.1
+
+
+1047) AWAY1
+Is the first person staying somewhere else right now?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	11	1	0
+1) Yes	11	100.0
+Missing	2801
+
+
+1048) WHERE1
+Where is the first person staying?
+RANGE: 1 to 4
+	N	Mean	Std. Deviation
+Total	11	2.273	1.104
+1) Another household	3	27.3
+2) Traveling	4	36.4
+3) Institution	2	18.2
+4) Other, don't know	2	18.2
+Missing	2801
+
+
+1049) RELATE2
+Relationship of second person to head of household.
+RANGE: 2 to 9
+	N	Mean	Std. Deviation
+Total	2105	2.919	1.941
+2) Spouse	1527	72.5
+3) Child (natural, adopted, step)	279	13.3
+4) Son-/daughter-in-law	5	0.2
+5) Grand/great-grandchild	13	0.6
+6) Parent/parent-in-law	22	1.0
+7) Other relative	39	1.9
+8) Non-relative	217	10.3
+9) No answer	3	0.1
+Missing	707
+
+
+1050) GENDER2
+Gender of second person.
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	2105	1.66	0.474
+1) Male	715	34.0
+2) Female	1390	66.0
+Missing	707
+
+
+1051) OLD2
+Age of second person.
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2105	42.731	19.316
+Missing	707
+
+
+1052) MAR2
+Marital status of second person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2002	1.79	1.545
+1) Married	1548	77.3
+2) Widowed	21	1.0
+3) Divorced	83	4.1
+4) Separated	32	1.6
+5) Never married	310	15.5
+8) Don't know	6	0.3
+9) No answer	2	0.1
+Missing	810
+
+
+1053) AWAY2
+Is the second person staying somewhere else right now?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	31	1	0
+1) Yes	31	100.0
+Missing	2781
+
+
+1054) WHERE2
+Where is the second person staying?
+RANGE: 1 to 4
+	N	Mean	Std. Deviation
+Total	31	2	1.095
+1) Another household	14	45.2
+2) Traveling	7	22.6
+3) Institution	6	19.4
+4) Other, don't know	4	12.9
+Missing	2781
+
+
+1055) RELATE3
+Relationship of third person to head of household.
+RANGE: 3 to 9
+	N	Mean	Std. Deviation
+Total	1032	3.432	1.227
+3) Child (natural, adopted, step)	899	87.1
+4) Son-/daughter-in-law	11	1.1
+5) Grand/great-grandchild	34	3.3
+6) Parent/parent-in-law	24	2.3
+7) Other relative	29	2.8
+8) Non-relative	31	3.0
+9) No answer	4	0.4
+Missing	1780
+
+
+1056) GENDER3
+Gender of third person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1032	1.512	0.794
+1) Male	553	53.6
+2) Female	472	45.7
+9) No answer	7	0.7
+Missing	1780
+
+
+1057) OLD3
+Age of third person.
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	1032	18.119	17.654
+Missing	1780
+
+
+1058) MAR3
+Marital status of third person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	624	4.651	1.239
+1) Married	39	6.3
+2) Widowed	14	2.2
+3) Divorced	23	3.7
+4) Separated	22	3.5
+5) Never married	512	82.1
+8) Don't know	8	1.3
+9) No answer	6	1.0
+Missing	2188
+
+
+1059) AWAY3
+Is the third person staying somewhere else right now?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	30	1.267	1.461
+1) Yes	29	96.7
+9) No answer	1	3.3
+Missing	2782
+
+
+1060) WHERE3
+Where is the third person staying?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	30	3.033	1.377
+1) Another household	3	10.0
+2) Traveling	3	10.0
+3) Institution	19	63.3
+4) Other, don't know	4	13.3
+9) No answer	1	3.3
+Missing	2782
+
+
+1061) RELATE4
+Relationship of fourth person to head of household
+RANGE: 3 to 9
+	N	Mean	Std. Deviation
+Total	598	3.406	1.178
+3) Child (natural, adopted, step)	522	87.3
+4) Son-/daughter-in-law	5	0.8
+5) Grand/great-grandchild	31	5.2
+6) Parent/parent-in-law	5	0.8
+7) Other relative	16	2.7
+8) Non-relative	17	2.8
+9) No answer	2	0.3
+Missing	2214
+
+
+1062) GENDER4
+Gender of fourth person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	598	1.559	0.999
+1) Male	320	53.5
+2) Female	270	45.2
+9) No answer	8	1.3
+Missing	2214
+
+
+1063) OLD4
+Age of fourth person.
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	598	14.482	17.536
+1) 	35	5.9
+2) 	47	7.9
+3) 	19	3.2
+4) 	23	3.8
+5) 	25	4.2
+6) 	24	4.0
+7) 	25	4.2
+8) 	26	4.3
+9) 	26	4.3
+10) 	28	4.7
+11) 	27	4.5
+12) 	32	5.4
+13) 	35	5.9
+14) 	30	5.0
+15) 	25	4.2
+16) 	15	2.5
+17) 	20	3.3
+18) 	27	4.5
+19) 	17	2.8
+20) 	8	1.3
+21) 	17	2.8
+22) 	7	1.2
+23) 	7	1.2
+24) 	5	0.8
+25) 	2	0.3
+26) 	5	0.8
+28) 	4	0.7
+29) 	1	0.2
+31) 	2	0.3
+34) 	3	0.5
+35) 	1	0.2
+38) 	1	0.2
+39) 	2	0.3
+43) 	1	0.2
+45) 	1	0.2
+49) 	1	0.2
+51) 	1	0.2
+56) 	1	0.2
+57) 	1	0.2
+66) 	1	0.2
+71) 	1	0.2
+91) 	1	0.2
+98) Don't know	3	0.5
+99) No answer	15	2.5
+Missing	2214
+
+
+1064) MAR4
+Marital status of fourth person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	261	4.716	1.248
+1) Married	19	7.3
+2) Widowed	2	0.8
+3) Divorced	2	0.8
+4) Separated	12	4.6
+5) Never married	219	83.9
+8) Don't know	4	1.5
+9) No answer	3	1.1
+Missing	2551
+
+
+1065) AWAY4
+Is the fourth person staying somewhere else right now?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	22	1.364	1.706
+1) Yes	21	95.5
+9) No answer	1	4.5
+Missing	2790
+
+
+1066) WHERE4
+Where is the fourth person staying?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	22	2.545	1.819
+1) Another household	9	40.9
+3) Institution	10	45.5
+4) Other, don't know	2	9.1
+9) No answer	1	4.5
+Missing	2790
+
+
+1067) RELATE5
+Relationship of fifth person to head of household.
+RANGE: 3 to 8
+	N	Mean	Std. Deviation
+Total	245	3.563	1.281
+3) Child (natural, adopted, step)	198	80.8
+4) Son-/daughter-in-law	2	0.8
+5) Grand/great-grandchild	24	9.8
+6) Parent/parent-in-law	4	1.6
+7) Other relative	9	3.7
+8) Non-relative	8	3.3
+Missing	2567
+
+
+1068) GENDER5
+Gender of fifth person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	245	1.596	0.837
+1) Male	113	46.1
+2) Female	130	53.1
+9) No answer	2	0.8
+Missing	2567
+
+
+1069) OLD5
+Age of fifth person.
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	245	14.384	20.099
+1) 	18	7.3
+2) 	12	4.9
+3) 	13	5.3
+4) 	15	6.1
+5) 	11	4.5
+6) 	12	4.9
+7) 	16	6.5
+8) 	9	3.7
+9) 	18	7.3
+10) 	17	6.9
+11) 	12	4.9
+12) 	11	4.5
+13) 	11	4.5
+14) 	10	4.1
+15) 	11	4.5
+16) 	8	3.3
+17) 	1	0.4
+18) 	2	0.8
+19) 	5	2.0
+20) 	3	1.2
+21) 	4	1.6
+22) 	3	1.2
+23) 	1	0.4
+24) 	2	0.8
+25) 	1	0.4
+26) 	1	0.4
+35) 	1	0.4
+36) 	1	0.4
+37) 	1	0.4
+60) 	2	0.8
+63) 	1	0.4
+73) 	1	0.4
+84) 	1	0.4
+85) 	1	0.4
+98) Don't know	4	1.6
+99) No answer	5	2.0
+Missing	2567
+
+
+1070) MAR5
+Marital status of fifth person.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	81	4.506	1.433
+1) Married	7	8.6
+2) Widowed	4	4.9
+3) Divorced	2	2.5
+4) Separated	3	3.7
+5) Never married	63	77.8
+8) Don't know	1	1.2
+9) No answer	1	1.2
+Missing	2731
+
+
+1071) AWAY5
+Is the fifth person staying somewhere else right now?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	7	1	0
+1) Yes	7	100.0
+Missing	2805
+
+
+1072) WHERE5
+Where is the fifth person staying?
+RANGE: 1 to 4
+	N	Mean	Std. Deviation
+Total	7	2	1.291
+1) Another household	4	57.1
+3) Institution	2	28.6
+4) Other, don't know	1	14.3
+Missing	2805
+
+
+1073) RELATE6
+Relationship of sixth person to head of household.
+RANGE: 3 to 8
+	N	Mean	Std. Deviation
+Total	88	3.841	1.575
+3) Child (natural, adopted, step)	65	73.9
+4) Son-/daughter-in-law	1	1.1
+5) Grand/great-grandchild	10	11.4
+7) Other relative	7	8.0
+8) Non-relative	5	5.7
+Missing	2724
+
+
+1074) GENDER6
+Gender of sixth person.
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	88	1.477	0.502
+1) Male	46	52.3
+2) Female	42	47.7
+Missing	2724
+
+
+1075) OLD6
+Age of sixth person.
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	88	11.864	16.108
+1) 	5	5.7
+2) 	11	12.5
+3) 	4	4.5
+4) 	4	4.5
+5) 	7	8.0
+6) 	6	6.8
+7) 	4	4.5
+8) 	7	8.0
+9) 	2	2.3
+10) 	6	6.8
+11) 	3	3.4
+12) 	7	8.0
+13) 	3	3.4
+14) 	2	2.3
+15) 	3	3.4
+16) 	1	1.1
+17) 	1	1.1
+18) 	1	1.1
+19) 	1	1.1
+20) 	1	1.1
+21) 	1	1.1
+25) 	1	1.1
+26) 	1	1.1
+33) 	1	1.1
+37) 	1	1.1
+45) 	1	1.1
+53) 	1	1.1
+98) Don't know	1	1.1
+99) No answer	1	1.1
+Missing	2724
+
+
+1076) MAR6
+Marital status of sixth person.
+RANGE: 1 to 5
+	N	Mean	Std. Deviation
+Total	22	4.136	1.583
+1) Married	4	18.2
+3) Divorced	1	4.5
+4) Separated	1	4.5
+5) Never married	16	72.7
+Missing	2790
+
+
+1077) AWAY6
+Is the sixth person staying somewhere else right now?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	3	1	0
+1) Yes	3	100.0
+Missing	2809
+
+
+1078) WHERE6
+Where is the sixth person staying?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	3	1	0
+1) Another household	3	100.0
+Missing	2809
+
+
+1079) RELATE7
+Relationship of seventh person to head of household.
+RANGE: 3 to 8
+	N	Mean	Std. Deviation
+Total	26	4.346	1.896
+3) Child (natural, adopted, step)	16	61.5
+5) Grand/great-grandchild	3	11.5
+6) Parent/parent-in-law	2	7.7
+7) Other relative	2	7.7
+8) Non-relative	3	11.5
+Missing	2786
+
+
+1080) GENDER7
+Gender of seventh person.
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	26	1.615	0.496
+1) Male	10	38.5
+2) Female	16	61.5
+Missing	2786
+
+
+1081) OLD7
+Age of seventh person.
+RANGE: 1 to 98
+	N	Mean	Std. Deviation
+Total	26	18.885	24.924
+1) 	6	23.1
+4) 	1	3.8
+5) 	1	3.8
+7) 	3	11.5
+8) 	2	7.7
+10) 	1	3.8
+12) 	1	3.8
+14) 	2	7.7
+16) 	1	3.8
+20) 	1	3.8
+21) 	1	3.8
+22) 	1	3.8
+27) 	1	3.8
+43) 	1	3.8
+71) 	2	7.7
+98) Don't know	1	3.8
+Missing	2786
+
+
+1082) MAR7
+Marital status of seventh person.
+RANGE: 1 to 5
+	N	Mean	Std. Deviation
+Total	11	4.182	1.328
+1) Married	1	9.1
+3) Divorced	2	18.2
+4) Separated	1	9.1
+5) Never married	7	63.6
+Missing	2801
+
+
+1083) AWAY7
+Is the seventh person staying somewhere else right now?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	1	1	0
+1) Yes	1	100.0
+Missing	2811
+
+
+1084) WHERE7
+Where is the seventh person staying?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	1	1	0
+1) Another household	1	100.0
+Missing	2811
+
+
+1085) RELATE8
+Relationship of eighth person to head of household.
+RANGE: 3 to 8
+	N	Mean	Std. Deviation
+Total	9	4.222	1.986
+3) Child (natural, adopted, step)	6	66.7
+5) Grand/great-grandchild	1	11.1
+7) Other relative	1	11.1
+8) Non-relative	1	11.1
+Missing	2803
+
+
+1086) GENDER8
+Gender of eighth person.
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	9	1.556	0.527
+1) Male	4	44.4
+2) Female	5	55.6
+Missing	2803
+
+
+1087) OLD8
+Age of eighth person.
+RANGE: 3 to 98
+	N	Mean	Std. Deviation
+Total	9	19.667	31.875
+3) 	3	33.3
+4) 	1	11.1
+7) 	2	22.2
+10) 	1	11.1
+42) 	1	11.1
+98) Don't know	1	11.1
+Missing	2803
+
+
+1088) MAR8
+Marital status of eighth person.
+RANGE: 1 to 5
+	N	Mean	Std. Deviation
+Total	2	3	2.828
+1) Married	1	50.0
+5) Never married	1	50.0
+Missing	2810
+
+
+1089) RELATE9
+Relationship of ninth person to head of household.
+RANGE: 3 to 5
+	N	Mean	Std. Deviation
+Total	4	3.5	1
+3) Child (natural, adopted, step)	3	75.0
+5) Grand/great-grandchild	1	25.0
+Missing	2808
+
+
+1090) GENDER9
+Gender of ninth person.
+RANGE: 2 to 2
+	N	Mean	Std. Deviation
+Total	4	2	0
+2) Female	4	100.0
+Missing	2808
+
+
+1091) OLD9
+Age of ninth person.
+RANGE: 1 to 98
+	N	Mean	Std. Deviation
+Total	4	27	47.364
+1) 	1	25.0
+4) 	1	25.0
+5) 	1	25.0
+98) Don't know	1	25.0
+Missing	2808
+
+
+1092) MAR9
+Marital status of ninth person.
+RANGE: 5 to 5
+	N	Mean	Std. Deviation
+Total	1	5	0
+5) Never married	1	100.0
+Missing	2811
+
+
+1093) RELATE10
+Relationship of tenth person to head of household.
+RANGE: 3 to 5
+	N	Mean	Std. Deviation
+Total	3	3.667	1.155
+3) Child (natural, adopted, step)	2	66.7
+5) Grand/great-grandchild	1	33.3
+Missing	2809
+
+
+1094) GENDER10
+Gender of tenth person.
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	3	1.667	0.577
+1) Male	1	33.3
+2) Female	2	66.7
+Missing	2809
+
+
+1095) OLD10
+Age of tenth person.
+RANGE: 3 to 98
+	N	Mean	Std. Deviation
+Total	3	35	54.562
+3) 	1	33.3
+4) 	1	33.3
+98) Don't know	1	33.3
+Missing	2809
+
+
+1096) MAR10
+Marital status of tenth person.
+RANGE: 5 to 5
+	N	Mean	Std. Deviation
+Total	1	5	0
+5) Never married	1	100.0
+Missing	2811
+
+
+1097) RELATE11
+Relationship of eleventh person to head of household.
+RANGE: 3 to 8
+	N	Mean	Std. Deviation
+Total	15	6.067	2.12
+3) Child (natural, adopted, step)	4	26.7
+5) Grand/great-grandchild	1	6.7
+6) Parent/parent-in-law	2	13.3
+7) Other relative	2	13.3
+8) Non-relative	6	40.0
+Missing	2797
+
+
+1098) GENDER11
+Gender of eleventh person.
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	15	1.667	0.488
+1) Male	5	33.3
+2) Female	10	66.7
+Missing	2797
+
+
+1099) OLD11
+Age of eleventh person.
+RANGE: 3 to 99
+	N	Mean	Std. Deviation
+Total	15	46.933	27.999
+3) 	1	6.7
+23) 	2	13.3
+27) 	1	6.7
+29) 	1	6.7
+32) 	1	6.7
+36) 	1	6.7
+38) 	1	6.7
+43) 	1	6.7
+51) 	1	6.7
+63) 	2	13.3
+75) 	1	6.7
+99) No answer	2	13.3
+Missing	2797
+
+
+1100) MAR11
+Marital status of eleventh person.
+RANGE: 1 to 8
+	N	Mean	Std. Deviation
+Total	14	4.286	1.729
+1) Married	1	7.1
+2) Widowed	1	7.1
+3) Divorced	3	21.4
+5) Never married	8	57.1
+8) Don't know	1	7.1
+Missing	2798
+
+
+1101) AWAY11
+Is the eleventh person staying somewhere else right now?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	1	1	0
+1) Yes	1	100.0
+Missing	2811
+
+
+1102) WHERE11
+Where is the eleventh person staying?
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	1	1	0
+1) Another household	1	100.0
+Missing	2811
+
+
+1103) RELHHD1
+Relationship of first person to head of household, revised
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	2812	1	0
+1) Head of household	2812	100.0
+
+
+1104) RELHHD2
+Relationship of second person to head of household, revised
+RANGE: 2 to 99
+	N	Mean	Std. Deviation
+Total	2105	3.172	4.962
+2) Spouse	1527	72.5
+3) Partner, fiancé(e), boyfriend, girlfriend, etc.	163	7.7
+4) Child, natural or adopted, stepchild	277	13.2
+5) Grandchild, great-grandchild	13	0.6
+6) Son-in-law, daughter-in-law	5	0.2
+7) Parent	22	1.0
+9) Grandparent, great-grandparent	1	0.0
+10) Uncle or aunt	1	0.0
+11) Niece or nephew	5	0.2
+12) Cousin	3	0.1
+13) Brother, sister (full, half, or step sibling)	27	1.3
+14) Sibling-in-law	2	0.1
+16) Roommate, housemate	44	2.1
+17) Friend	8	0.4
+18) Child of non-relative	1	0.0
+19) Other non-relative (employee, boarder)	2	0.1
+98) Don't know	3	0.1
+99) No answer	1	0.0
+Missing	707
+
+
+1105) RELHHD3
+Relationship of third person to head of household, revised
+RANGE: 3 to 99
+	N	Mean	Std. Deviation
+Total	1032	5.096	6.36
+3) Partner, fiancé(e)	2	0.2
+4) Child, natural or adopted, stepchild	899	87.1
+5) Grandchild, great-grandchild	34	3.3
+6) Son-in-law, daughter-in-law	11	1.1
+7) Parent	18	1.7
+8) Parent-in-law	6	0.6
+9) Grandparent, great-grandparent	1	0.1
+10) Uncle or aunt	1	0.1
+11) Niece or nephew	7	0.7
+12) Cousin	3	0.3
+13) Brother, sister (full, half, or step sibling)	13	1.3
+15) Other relative (great-aunt, grandniece, etc.)	4	0.4
+16) Roommate, housemate	15	1.5
+17) Friend	4	0.4
+18) Child of non-relative	5	0.5
+19) Other non-relative (employee, boarder)	5	0.5
+98) Don't know	3	0.3
+99) No answer	1	0.1
+Missing	1780
+
+
+1106) RELHHD4
+Relationship of fourth person to head of household, revised
+RANGE: 4 to 98
+	N	Mean	Std. Deviation
+Total	598	5.018	5.988
+4) Child, natural or adopted, stepchild	522	87.3
+5) Grandchild, great-grandchild	31	5.2
+6) Son-in-law, daughter-in-law	5	0.8
+7) Parent	3	0.5
+8) Parent-in-law	2	0.3
+9) Grandparent, great-grandparent	1	0.2
+11) Niece or nephew	4	0.7
+12) Cousin	1	0.2
+13) Brother, sister (full, half, or step sibling)	6	1.0
+14) Sibling-in-law	1	0.2
+15) Other relative (great-aunt, grandniece, etc.)	3	0.5
+16) Roommate, housemate	8	1.3
+17) Friend	2	0.3
+18) Child of non-relative	2	0.3
+19) Other non-relative (employee, boarder)	5	0.8
+98) Don't know	2	0.3
+Missing	2214
+
+
+1107) RELHHD5
+Relationship of fifth person to head of household, revised
+RANGE: 4 to 19
+	N	Mean	Std. Deviation
+Total	245	4.89	2.765
+4) Child, natural or adopted, stepchild	198	80.8
+5) Grandchild, great-grandchild	24	9.8
+6) Son-in-law, daughter-in-law	2	0.8
+7) Parent	3	1.2
+8) Parent-in-law	1	0.4
+10) Uncle or aunt	1	0.4
+11) Niece or nephew	5	2.0
+14) Sibling-in-law	1	0.4
+15) Other relative (great-aunt, grandniece, etc.)	2	0.8
+16) Roommate, housemate	4	1.6
+17) Friend	1	0.4
+18) Child or non-relative	2	0.8
+19) Other non-relative (employee, boarder)	1	0.4
+Missing	2567
+
+
+1108) RELHHD6
+Relationship of sixth person to head of household, revised
+RANGE: 4 to 18
+	N	Mean	Std. Deviation
+Total	88	5.58	3.701
+4) Child, natural or adopted, stepchild	65	73.9
+5) Grandchild, great-grandchild	10	11.4
+6) Son-in-law, daughter-in-law	1	1.1
+11) Niece or nephew	2	2.3
+12) Cousin	1	1.1
+14) Sibling-in-law	1	1.1
+15) Other relative (great-aunt, grandniece, etc.)	3	3.4
+16) Roommate, housemate	4	4.5
+18) Child of non-relative	1	1.1
+Missing	2724
+
+
+1109) RELHHD7
+Relationship of seventh person to head of household, revised
+RANGE: 4 to 16
+	N	Mean	Std. Deviation
+Total	26	6.5	4.357
+4) Child, natural or adopted, stepchild	16	61.5
+5) Grandchild, great-grandchild	3	11.5
+8) Parent-in-law	2	7.7
+11) Niece or nephew	1	3.8
+15) Other relative	1	3.8
+16) Roommate, housemate	3	11.5
+Missing	2786
+
+
+1110) RELHHD8
+Relationship of eighth person to head of household, revised
+RANGE: 4 to 16
+	N	Mean	Std. Deviation
+Total	9	6.222	4.324
+4) Child, natural or adopted, stepchild	6	66.7
+5) Grandchild, great-grandchild	1	11.1
+11) Niece or nephew	1	11.1
+16) Roommate, housemate	1	11.1
+Missing	2803
+
+
+1111) RELHHD9
+Relationship of ninth person to head of household, revised
+RANGE: 4 to 5
+	N	Mean	Std. Deviation
+Total	4	4.25	0.5
+4) Child, natural or adopted, stepchild	3	75.0
+5) Grandchild, great-grandchild	1	25.0
+Missing	2808
+
+
+1112) RELHHD10
+Relationship of tenth person to head of household, revised
+RANGE: 4 to 5
+	N	Mean	Std. Deviation
+Total	3	4.333	0.577
+4) Child, natural or adopted, stepchild	2	66.7
+5) Grandchild, great-grandchild	1	33.3
+Missing	2809
+
+
+1113) RELHHD11
+Relationship of eleventh person to head of household, revised
+RANGE: 3 to 19
+	N	Mean	Std. Deviation
+Total	15	9.067	6.112
+3) Partner, fiancé(e), boyfriend, girlfriend, etc.	2	13.3
+4) Child, natural or adopted, stepchild	4	26.7
+5) Grandchild, great-grandchild	1	6.7
+7) Parent	1	6.7
+8) Parent-in-law	1	6.7
+10) Uncle or aunt	1	6.7
+13) Brother, sister (full, half, or step sibling)	1	6.7
+16) Roommate, housemate	1	6.7
+17) Friend	1	6.7
+19) Other non-relative (employee, boarder)	2	13.3
+Missing	2797
+
+
+1114) HEFINFO
+Number in family of person who was household informant. (i.e. who provided information on household members).
+RANGE: 1 to 98
+	N	Mean	Std. Deviation
+Total	2812	1.642	4.262
+1) First person	2132	75.8
+2) Second person	553	19.7
+3) Third person	73	2.6
+4) Fourth person	13	0.5
+5) Fifth person	3	0.1
+7) Seventh person	1	0.0
+11) Eleventh person	3	0.1
+22) Non-household person	30	1.1
+98) Don't know	4	0.1
+
+
+1115) HHRACE
+Race of household.
+RANGE: 1 to 8
+	N	Mean	Std. Deviation
+Total	2812	1.45	1.111
+1) White	2217	78.8
+2) Black	361	12.8
+3) American Indian	4	0.1
+4) Asiatic, Oriental	64	2.3
+5) Other, mixed, not able to observe	153	5.4
+8) Don't know	13	0.5
+
+
+1116) RESPNUM
+Number in family of respondent.
+RANGE: 1 to 11
+	N	Mean	Std. Deviation
+Total	2812	1.412	0.73
+1) First person	1863	66.3
+2) Second person	814	28.9
+3) Third person	99	3.5
+4) Fourth person	25	0.9
+5) Fifth person	5	0.2
+6) Sixth person	1	0.0
+7) Seventh person	1	0.0
+11) Eleventh person	4	0.1
+
+
+1117) HHTYPE
+Household type
+RANGE: 1 to 999
+	N	Mean	Std. Deviation
+Total	2812	18.62	66.485
+1) 	706	25.1
+2) 	169	6.0
+3) 	747	26.6
+4) 	473	16.8
+5) 	13	0.5
+6) 	11	0.4
+7) 	89	3.2
+8) 	46	1.6
+9) 	38	1.4
+10) 	3	0.1
+11) 	94	3.3
+12) 	30	1.1
+13) 	1	0.0
+23) 	17	0.6
+26) 	4	0.1
+27) 	6	0.2
+28) 	11	0.4
+31) 	1	0.0
+33) 	2	0.1
+41) 	116	4.1
+43) 	8	0.3
+44) 	1	0.0
+47) 	1	0.0
+100) 	15	0.5
+102) 	58	2.1
+104) 	8	0.3
+123) 	4	0.1
+127) 	3	0.1
+128) 	1	0.0
+133) 	3	0.1
+137) 	1	0.0
+141) 	79	2.8
+143) 	7	0.2
+144) 	1	0.0
+151) 	6	0.2
+200) 	6	0.2
+202) 	16	0.6
+203) 	1	0.0
+204) 	7	0.2
+999) 	9	0.3
+
+
+1118) HHTYPE1
+Household type condensed
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2812	5.138	6.792
+1) Married couple, no children	939	33.4
+2) Single parent	169	6.0
+3) Other family, no children	121	4.3
+4) Single adult	706	25.1
+5) Cohabiting couple, no children	89	3.2
+6) Non-family, no children	49	1.7
+8) Unsure, no children	32	1.1
+11) Married couple with children	590	21.0
+13) Other family with children	38	1.4
+15) Cohabiting couple with children	46	1.6
+16) Non-family with children	4	0.1
+18) Unsure with children	20	0.7
+99) No answer	9	0.3
+
+
+1119) FAMGEN
+Number of family generations in household.
+RANGE: 1 to 6
+	N	Mean	Std. Deviation
+Total	2812	1.512	0.802
+1) One generation	1661	59.1
+2) Two generations, children	1029	36.6
+3) Two generations, parents	35	1.2
+4) Two generations, grandchild(ren)	23	0.8
+5) Three generations, child(ren), grandchildren	48	1.7
+6) Three generations, child(ren), parent	16	0.6
+
+
+1120) RPLACE
+Respondent's relationship to head.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	2812	1.703	1.541
+1) Head of household	1863	66.3
+2) Spouse	631	22.4
+3) Child (natural, adopted, step)	156	5.5
+4) Son-/daughter-in-law	7	0.2
+5) Grand/great-grandchild	7	0.2
+6) Parent/parent-in-law	14	0.5
+7) Other relative	25	0.9
+8) Non-relative	106	3.8
+9) No answer	3	0.1
+
+
+1121) RVISITOR
+Is respondent a visitor?
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	2812	1.001	0.038
+1) R. is member of household	2808	99.9
+2) R. is visitor	4	0.1
+
+
+1122) VISITORS
+Number of visitors in household.
+RANGE: 0 to 1
+	N	Mean	Std. Deviation
+Total	2812	0.005	0.07
+0) No visitor	2798	99.5
+1) 1 visitor	14	0.5
+
+
+1123) RELHH1
+Relationship of person 1 to head of household
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	2812	1	0
+1) Head of household	2812	100.0
+
+
+1124) RELHH2
+Relationship of person 2 to head of household
+RANGE: 2 to 99
+	N	Mean	Std. Deviation
+Total	2105	6.514	11.948
+2) Spouse	1527	72.5
+3) Partner, fiancé(e)	163	7.7
+4) Child, not specified	87	4.1
+5) Grandchild, great-grandchild	13	0.6
+6) Son-in-law, daughter-in-law	5	0.2
+7) Parent	22	1.0
+9) Grandparent, great-grandparent	1	0.0
+10) Uncle or aunt	1	0.0
+11) Niece or nephew	5	0.2
+12) Cousin	3	0.1
+13) Brother, sister (full, half, or step sibling)	27	1.3
+14) Sibling-in-law	2	0.1
+16) Roommate, housemate	44	2.1
+17) Friend	8	0.4
+18) Child of non-relative	1	0.0
+19) Other non-relative (employee, boarder)	2	0.1
+41) Natural/biological child	186	8.8
+42) Adopted child	4	0.2
+98) Don't know	3	0.1
+99) No answer	1	0.0
+Missing	707
+
+
+1125) RELHH3
+Relationship of person 3 to head of household
+RANGE: 4 to 99
+	N	Mean	Std. Deviation
+Total	1030	26.407	18.201
+4) Child, not specified	308	29.9
+5) Grandchild, great-child	34	3.3
+6) Son-in-law, daughter-in-law	11	1.1
+7) Parent	18	1.7
+8) Parent-in-law	6	0.6
+9) Grandparent, great-grandparent	1	0.1
+10) Uncle or Aunt	1	0.1
+11) Niece or Nephew	7	0.7
+12) Cousin	3	0.3
+13) Brother, sister (full, half, or step sibling)	13	1.3
+15) Other relative (great-aunt, grandniece, etc.)	4	0.4
+16) Roommate, housemate	15	1.5
+17) Friend	4	0.4
+18) Child of non-relative	5	0.5
+19) Other non-relative (employee, boarder)	5	0.5
+41) Natural/biological child	546	53.0
+42) Adopted child	11	1.1
+43) Stepchild	34	3.3
+98) Don't know	3	0.3
+99) No answer	1	0.1
+Missing	1782
+
+
+1126) RELHH4
+Relationship of person 4 to head of household
+RANGE: 4 to 98
+	N	Mean	Std. Deviation
+Total	598	26.662	18.071
+4) Child, not specified	173	28.9
+5) Grandchild, great-grandchild	31	5.2
+6) Son-in-law, daughter-in-law	5	0.8
+7) Parent	3	0.5
+8) Parent-in-law	2	0.3
+9) Grandparent, great-grandparent	1	0.2
+11) Niece or nephew	4	0.7
+12) Cousin	1	0.2
+13) Brother, sister (full, half, or step sibling)	6	1.0
+14) Sibling-in-law	1	0.2
+15) Other relative (great-aunt, grandniece, etc.)	3	0.5
+16) Roommate, housemate	8	1.3
+17) Friend	2	0.3
+18) Child of non-relative	2	0.3
+19) Other non-relative (employee, boarder)	5	0.8
+41) Natural/biological child	333	55.7
+42) Adopted child	2	0.3
+43) Stepchild	14	2.3
+98) Don't know	2	0.3
+Missing	2214
+
+
+1127) RELHH5
+Relationship of person 5 to head of household
+RANGE: 4 to 43
+	N	Mean	Std. Deviation
+Total	245	25.661	17.669
+4) Child, not specified	61	24.9
+5) Grandchild, great-grandchild	24	9.8
+6) Son-in-law, daughter-in-law	2	0.8
+7) Parent	3	1.2
+8) Parent-in-law	1	0.4
+10) Uncle or aunt	1	0.4
+11) Niece or nephew	5	2.0
+14) Sibling-in-law	1	0.4
+15) Other relative (great-aunt, grandniece, etc.)	2	0.8
+16) Roommate, housemate	4	1.6
+17) Friend	1	0.4
+18) Child of non-relative	2	0.8
+19) Other non-relative (employee, boarder)	1	0.4
+41) Natural/biological child	127	51.8
+43) Stepchild	10	4.1
+Missing	2567
+
+
+1128) RELHH6
+Relationship of person 6 to head of household
+RANGE: 4 to 43
+	N	Mean	Std. Deviation
+Total	88	23.784	17.508
+4) Child not specified	22	25.0
+5) Grandchild, great-grandchild	10	11.4
+6) Son-in-law, daughter-in-law	1	1.1
+11) Niece or nephew	2	2.3
+12) Cousin	1	1.1
+14) Sibling-in-law	1	1.1
+15) Other relative (great-aunt, grandniece, etc.)	3	3.4
+16) Roommate, housemate	4	4.5
+18) Child of non-relative	1	1.1
+41) Natural/biological child	37	42.0
+42) Adopted child	1	1.1
+43) Stepchild	5	5.7
+Missing	2724
+
+
+1129) RELHH7
+Relationship of person 7 to head of household
+RANGE: 4 to 43
+	N	Mean	Std. Deviation
+Total	26	19.385	16.681
+4) Child not specified	7	26.9
+5) Grandchild, great-grandchild	3	11.5
+8) Parent-in-law	2	7.7
+11) Niece or nephew	1	3.8
+15) Other relative (great-aunt, grandniece, etc.)	1	3.8
+16) Roommate, housemate	3	11.5
+41) Natural/biological child	8	30.8
+43) Stepchild	1	3.8
+Missing	2786
+
+
+1130) RELHH8
+Relationship of person 8 to head of household
+RANGE: 4 to 41
+	N	Mean	Std. Deviation
+Total	9	22.667	17.797
+4) Child not specified	2	22.2
+5) Grandchild, great-grandchild	1	11.1
+11) Niece or nephew	1	11.1
+16) Roommate, housemate	1	11.1
+41) Natural/biological child	4	44.4
+Missing	2803
+
+
+1131) RELHH9
+Relationship of person 9 to head of household
+RANGE: 5 to 41
+	N	Mean	Std. Deviation
+Total	4	32	18
+5) Grandchild, great-grandchild	1	25.0
+41) Natural/biological child	3	75.0
+Missing	2808
+
+
+1132) RELHH10
+Relationship of person 10 to head of household
+RANGE: 5 to 41
+	N	Mean	Std. Deviation
+Total	3	29	20.785
+5) Grandchild, great-grandchild	1	33.3
+41) Natural/biological	2	66.7
+Missing	2809
+
+
+1133) RELHH11
+Relationship of person 11 to head of household
+RANGE: 5 to 41
+	N	Mean	Std. Deviation
+Total	12	19.75	13.606
+5) Grandchild, great-grandchild	1	8.3
+7) Parent	1	8.3
+8) Parent-in-law	1	8.3
+10) Uncle or aunt	1	8.3
+13) Brother, sister (full, half, or step sibling)	1	8.3
+16) Roommate, housemate	1	8.3
+17) Friend	1	8.3
+19) Other non-relative (employee, boarder)	2	16.7
+41) Natural/biological child	3	25.0
+Missing	2800
+
+
+1134) RELSP1
+Relationship of person 1 to spouse of household head
+RANGE: 2 to 98
+	N	Mean	Std. Deviation
+Total	1688	2.266	4.051
+2) Spouse	1524	90.3
+3) Partner, fiancé(e), boyfriend, girlfriend, etc.	161	9.5
+98) Don't know	3	0.2
+Missing	1124
+
+
+1135) RELSP2
+Relationship of person 2 to spouse of household head
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	1686	1	0
+1) Spouse/partner of head of household	1686	100.0
+Missing	1126
+
+
+1136) RELSP3
+Relationship of person 3 to spouse of household head
+RANGE: 4 to 98
+	N	Mean	Std. Deviation
+Total	836	26.791	18.008
+4) Child, not specific	270	32.3
+5) Grandchild, great-grandchild	13	1.6
+6) Son-in-law, daughter-in-law	6	0.7
+7) Parent	8	1.0
+8) Parent-in-law	7	0.8
+9) Grandparent, great-grandparent	1	0.1
+10) Uncle or aunt	2	0.2
+11) Niece or nephew	2	0.2
+13) Brother, sister (full, half, or step sibling)	2	0.2
+14) Sibling-in-law	4	0.5
+15) Other relative (great-aunt, grandniece, etc.)	1	0.1
+16) Roommate, housemate	4	0.5
+17) Friend	4	0.5
+18) Child of non-relative	7	0.8
+19) Other non-relative (employee, boarder)	8	1.0
+41) Natural/biological child	463	55.4
+42) Adopted child	9	1.1
+43) Stepchild	23	2.8
+98) Don't know	2	0.2
+Missing	1976
+
+
+1137) RELSP4
+Relationship of person 4 to spouse of household head
+RANGE: 4 to 98
+	N	Mean	Std. Deviation
+Total	507	27.611	17.972
+4) Child, not specific	150	29.6
+5) Grandchild, great-grandchild	13	2.6
+6) Son-in-law, daughter-in-law	4	0.8
+7) Parent	2	0.4
+8) Parent-in-law	1	0.2
+9) Grandparent, great-grandparent	1	0.2
+11) Niece or nephew	3	0.6
+13) Brother, sister (full, half, or step sibling)	2	0.4
+14) Sibling-in-law	3	0.6
+16) Roommate, housemate	4	0.8
+17) Friend	2	0.4
+18) Child of non-relative	7	1.4
+19) Other non-relative (employee, boarder)	5	1.0
+41) Natural/biological child	290	57.2
+42) Adopted child	1	0.2
+43) Stepchild	17	3.4
+98) Don't know	2	0.4
+Missing	2305
+
+
+1138) RELSP5
+Relationship of person 5 to spouse of household head
+RANGE: 4 to 43
+	N	Mean	Std. Deviation
+Total	206	27.573	17.313
+4) Child, not specific	49	23.8
+5) Grandchild, great-grandchild	12	5.8
+6) Son-in-law, daughter-in-law	1	0.5
+7) Parent	2	1.0
+8) Parent-in-law	3	1.5
+10) Uncle or aunt	1	0.5
+11) Niece or nephew	4	1.9
+13) Brother, sister (full, half, or step sibling)	1	0.5
+15) Other relative (great-aunt, grandniece, etc.)	1	0.5
+17) Friend	1	0.5
+18) Child of non-relative	2	1.0
+19) Other non-relative (employee, boarder)	3	1.5
+41) Natural/biological child	115	55.8
+43) Stepchild	11	5.3
+Missing	2606
+
+
+1139) RELSP6
+Relationship of person 6 to spouse of household head
+RANGE: 4 to 43
+	N	Mean	Std. Deviation
+Total	72	25	17.616
+4) Child, not specific	20	27.8
+5) Grandchild, great-grandchild	5	6.9
+6) Son-in-law, daughter-in-law	1	1.4
+11) Niece or nephew	1	1.4
+13) Brother, sister (full, half, or step sibling)	2	2.8
+15) Other relative (great-aunt, grandniece, etc.)	2	2.8
+18) Child of non-relative	2	2.8
+19) Other non-relative (employee, boarder)	1	1.4
+41) Natural/biological child	33	45.8
+42) Adopted child	1	1.4
+43) Stepchild	4	5.6
+Missing	2740
+
+
+1140) RELSP7
+Relationship of person 7 to spouse of household head
+RANGE: 4 to 43
+	N	Mean	Std. Deviation
+Total	17	16.941	16.798
+4) Child, not specified	7	41.2
+5) Grandchild, great-grandchild	1	5.9
+7) Parent	2	11.8
+15) Other relative (great-aunt, grandniece, etc.)	1	5.9
+19) Other non-relative (employee, boarder)	1	5.9
+41) Natural/biological child	4	23.5
+43) Stepchild	1	5.9
+Missing	2795
+
+
+1141) RELSP8
+Relationship of person 8 to spouse of household head
+RANGE: 4 to 43
+	N	Mean	Std. Deviation
+Total	5	22.2	19.097
+4) Child, no specified	2	40.0
+19) Other non-relative (employee, boarder)	1	20.0
+41) Natural/biological child	1	20.0
+43) Stepchild	1	20.0
+Missing	2807
+
+
+1142) RELSP9
+Relationship of person 9 to spouse of household head
+RANGE: 41 to 41
+	N	Mean	Std. Deviation
+Total	2	41	0
+41) Natural/biological child	2	100.0
+Missing	2810
+
+
+1143) RELSP10
+Relationship of person 10 to spouse of household head
+RANGE: 41 to 41
+	N	Mean	Std. Deviation
+Total	1	41	0
+41) Natural/biological child	1	100.0
+Missing	2811
+
+
+1144) RELSP11
+Relationship of person 11 to spouse of household head
+RANGE: 4 to 43
+	N	Mean	Std. Deviation
+Total	6	27	16.793
+4) Child, not specified	1	16.7
+14) Sibling-in-law	1	16.7
+19) Other non-relative (employee, boarder)	1	16.7
+41) Natural/biological child	2	33.3
+43) Stepchild	1	16.7
+Missing	2806
+
+
+1145) DATEINTV
+Date of interview (first digit is month, last two digits are date)
+RANGE: 102 to 1231
+	N	Mean	Std. Deviation
+Total	2807	977.862	128.439
+
+
+1146) SPISCO68
+Occupation of respondent's spouse (International Standard Classification Codes-1968) (See Note 3: on the ARDA summary page)
+RANGE: 0 to 0
+	N	Mean	Std. Deviation
+Total	2812	0	0
+0) 	2812	100.0
+
+
+1147) ISCO681
+Respondent's occupation (International Standard Classification Codes 1968) (See Note 3: on the ARDA summary page)
+RANGE: 110 to 9996
+	N	Mean	Std. Deviation
+Total	2659	4301.124	2903.051
+
+
+1148) PAISC681
+Occupation of respondent's father (International Standard Classification Codes 1968) (See Note 3: on the ARDA summary page
+RANGE: 110 to 9996
+	N	Mean	Std. Deviation
+Total	2201	5811.525	3102.529
+
+
+1149) MAISC681
+Occupation of respondent's mother (International Standard Classification Codes 1968) (See Note 3: on the ARDA summary page)
+RANGE: 110 to 9990
+	N	Mean	Std. Deviation
+Total	1696	4228.985	2520.716
+
+
+1150) SPISC681
+Occupation of respondent's spouse (International Standard Classification Code 1968) (See Note 3: on the ARDA summary page)
+RANGE: 110 to 9990
+	N	Mean	Std. Deviation
+Total	1359	4244.472	2958.152
+
+
+1151) ISCO88
+Respondent's occupation, 1988 Census
+RANGE: 110 to 9999
+	N	Mean	Std. Deviation
+Total	2660	4409.984	2562.843
+
+
+1152) PAISCO88
+Respondent's father's occupation, 1988 Census
+RANGE: 110 to 9333
+	N	Mean	Std. Deviation
+Total	2201	5489.185	2840.687
+
+
+1153) MAISCO88
+Respondent's mother's occupation, 1988 Census
+RANGE: 110 to 9333
+	N	Mean	Std. Deviation
+Total	1696	4796.314	2478.578
+
+
+1154) SPISCO88
+Respondent's spouse's occupation, 1988 Census
+RANGE: 110 to 9999
+	N	Mean	Std. Deviation
+Total	1363	4284.381	2621.73
+
+
+1155) SEI
+Respondent socioeconomic index.
+RANGE: 17.1 to 97.2
+	N	Mean	Std. Deviation
+Total	2649	50.804	19.724
+
+
+1156) PASEI
+Socioeconomic index of respondent's father.
+RANGE: 17.1 to 97.2
+	N	Mean	Std. Deviation
+Total	2159	47.633	19.18
+
+
+1157) MASEI
+Socioeconomic index of respondent's mother.
+RANGE: 17.1 to 97.2
+	N	Mean	Std. Deviation
+Total	1695	44.82	19.676
+
+
+1158) SPSEI
+Socioeconomic index of respondent's spouse.
+RANGE: 17.1 to 97.2
+	N	Mean	Std. Deviation
+Total	1353	53.116	19.629
+
+
+1159) COHORT
+Birth cohort of respondent -- actual year of birth.
+RANGE: 1915 to 9999
+	N	Mean	Std. Deviation
+Total	2812	1983.771	454.568
+
+
+1160) ZODIAC
+Astrological sign of respondent
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2812	9.678	17.81
+1) Aries	232	8.3
+2) Taurus	232	8.3
+3) Gemini	259	9.2
+4) Cancer	240	8.5
+5) Leo	247	8.8
+6) Virgo	233	8.3
+7) Libra	255	9.1
+8) Scorpio	205	7.3
+9) Sagittarius	212	7.5
+10) Capricorn	193	6.9
+11) Aquarius	205	7.3
+12) Pisces	195	6.9
+98) Don't know	6	0.2
+99) No answer	98	3.5
+
+
+1161) INTHISP
+Interviewer, are you Spanish, Hispanic, or Latino/Latina?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2812	1.631	6.931
+1) Not Hispanic	2702	96.1
+2) Mexican	65	2.3
+3) Puerto Rico	4	0.1
+4) Cuban	3	0.1
+5) Salvadorian	3	0.1
+6) Guatemalan	1	0.0
+9) Costa Rican	9	0.3
+11) Honduran	1	0.0
+15) Dominican	1	0.0
+20) Peruvian	1	0.0
+21) Equadorian	2	0.1
+23) Venezuelan	1	0.0
+30) Spanish	2	0.1
+41) South American	3	0.1
+47) Hispanic	1	0.0
+99) No answer	13	0.5
+
+
+1162) INTRACE1
+What is your race?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	2812	1.943	8.133
+1) White	2382	84.7
+2) Black	377	13.4
+3) American Indian	1	0.0
+4) Asian Indian	3	0.1
+5) Chinese	2	0.1
+6) Filipino	1	0.0
+9) Vietnam	1	0.0
+10) Asian other	1	0.0
+15) Some other race	2	0.1
+16) Hispanic	23	0.8
+98) Don't know	1	0.0
+99) No answer	18	0.6
+
+
+1163) INTRACE2
+What is your race?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	63	31.841	43.013
+1) White	3	4.8
+2) Black	6	9.5
+3) American Indian	27	42.9
+8) Korean	1	1.6
+10) Asian Other	1	1.6
+15) Some other race	2	3.2
+16) Hispanic	5	7.9
+99) No answer	18	28.6
+Missing	2749
+
+
+1164) INTRACE3
+What is your race?
+RANGE: 1 to 99
+	N	Mean	Std. Deviation
+Total	23	78.522	39.819
+1) White	1	4.3
+2) Black	2	8.7
+3) American Indian	1	4.3
+16) Hispanic	1	4.3
+99) No answer	18	78.3
+Missing	2789
+
+
+1165) BALLOT
+Ballot Administered.
+RANGE: 1 to 3
+	N	Mean	Std. Deviation
+Total	2812	1.988	0.816
+1) Ballot A	952	33.9
+2) Ballot B	941	33.5
+3) Ballot C	919	32.7
+
+
+1166) VERSION
+Version Administered
+RANGE: 1 to 6
+	N	Mean	Std. Deviation
+Total	2812	3.559	1.715
+1) 	464	16.5
+2) 	442	15.7
+3) 	434	15.4
+4) 	488	17.4
+5) 	499	17.7
+6) 	485	17.2
+
+
+1167) ISSP
+Status on International Social Survey Program Supplement.
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	1464	1.169	0.375
+1) R did ISSP	1216	83.1
+2) R did not do ISSP	248	16.9
+Missing	1348
+
+
+1168) FORMWT
+Weight for form variables. Post-stratification weight
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	2812	1	0
+1) 	2812	100.0
+
+
+1169) SAMPCODE
+Sampling error code.
+RANGE: 501 to 579
+	N	Mean	Std. Deviation
+Total	2812	534.81	24.414
+
+
+1170) SAMPLE
+The GSS has employed various sampling procedures and frames. Appendix A gives full details.
+RANGE: 9 to 9
+	N	Mean	Std. Deviation
+Total	2812	9	0
+9) 2004 FP	2812	100.0
+
+
+1171) OVERSAMP
+Weight for Black oversamples.
+RANGE: 1 to 1
+	N	Mean	Std. Deviation
+Total	2812	1	0
+1) 	2812	100.0
+
+
+1172) PHASE
+Subsampling: two-phase design [1 = PHASE 1 - Initial cases; 2 = Phase 2 - Subsampled cases]
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	2812	1.159	0.366
+1) 	2364	84.1
+2) 	448	15.9
+
+
+1173) WT2004
+Weight of variables--Weights for 2004
+RANGE: 0.46 to 6.43
+	N	Mean	Std. Deviation
+Total	2812	1.001	0.537
+
+
+1174) WT2004NR
+Weight of variables--Weights for 2004 area nonresponse adjustment
+RANGE: 0.35 to 5.92
+	N	Mean	Std. Deviation
+Total	2812	1	0.563
+
+
+1175) I-AGE
+Respondent's age (Recoded for use with online analysis)
+RANGE: 1 to 4
+	N	Mean	Std. Deviation
+Total	2803	2.439	0.989
+1) 18-30	596	21.3
+2) 31-44	810	28.9
+3) 45-64	967	34.5
+4) 65+	430	15.3
+Missing	9
+
+
+1176) I-SEX
+Respondent's sex (for use with online analysis)
+RANGE: 1 to 2
+	N	Mean	Std. Deviation
+Total	2812	1.545	0.498
+1) Male	1280	45.5
+2) Female	1532	54.5
+
+
+1177) I-EDUC
+Highest educational degree earned by respondent (Recoded for use with online analysis)
+RANGE: 1 to 5
+	N	Mean	Std. Deviation
+Total	2811	2.611	1.207
+1) Less than high school	364	12.9
+2) High school	1435	51.0
+3) Associate/Junior college	224	8.0
+4) Bachelor's	507	18.0
+5) Graduate	281	10.0
+Missing	1
+
+
+1178) I-POLITICS
+I'm going to show you a seven-point scale on which the political views that people might hold are arranged from extremely liberal to extremely conservative. Where would you place yourself on this scale? (Recoded for use with online analysis)
+RANGE: 1 to 3
+	N	Mean	Std. Deviation
+Total	1309	2.133	0.777
+1) Liberal	319	24.4
+2) Moderate, middle of the road	497	38.0
+3) Conservative	493	37.7
+Missing	1503
+
+
+1179) I-MARITAL
+Are you currently -- married, widowed, divorced, separated, or have you never been married? (for use with online analysis)
+RANGE: 1 to 5
+	N	Mean	Std. Deviation
+Total	2812	2.35	1.634
+1) Married	1479	52.6
+2) Widowed	204	7.3
+3) Divorced	415	14.8
+4) Separated	95	3.4
+5) Never married	619	22.0
+
+
+1180) I-RELIGION
+What is your religious preference? Is it Protestant, Catholic, Jewish, some other religion, or no religion? (Recoded for use with online analysis)
+RANGE: 1 to 5
+	N	Mean	Std. Deviation
+Total	2800	1.995	1.333
+1) Protestant	1483	53.0
+2) Catholic	656	23.4
+3) Jewish	55	2.0
+4) None	403	14.4
+5) Other	203	7.3
+Missing	12
+
+
