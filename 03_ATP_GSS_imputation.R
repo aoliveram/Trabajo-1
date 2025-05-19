@@ -431,9 +431,48 @@ ATP_W3_sub <- ATP_W3_sub %>%
     relig_harmonized = factor(relig_harmonized, levels = c("Catholic", "Jewish", "None", "OtherRelig", "Protestant"))
   )
 
-# Tabla de contingencia
+# plot -----------
 gss_relig_counts <- table(gss_egos$relig)
 atp_relig_counts <- table(ATP_W3_sub$relig_harmonized)
+
+gss_relig_proportions <- gss_relig_counts / sum(gss_relig_counts)
+atp_relig_proportions <- atp_relig_counts / sum(atp_relig_counts)
+
+df_gss_relig <- data.frame(
+  source = "GSS",
+  category = names(gss_relig_proportions), # O usa colnames(contingency_table_educ)
+  proportion = as.numeric(gss_relig_proportions)
+)
+
+df_atp_relig <- data.frame(
+  source = "ATP",
+  category = names(atp_relig_proportions), # O usa colnames(contingency_table_educ)
+  proportion = as.numeric(atp_relig_proportions)
+)
+
+relig_gss_atp <- rbind(df_gss_relig, df_atp_relig)
+
+rm(df_gss_relig, df_atp_relig)
+
+# Para ordenar los factores
+relig_levels <- c("Catholic", "Jewish", "None", "OtherRelig", "Protestant")
+relig_gss_atp$category <- factor(relig_gss_atp$category, levels = relig_levels)
+
+print(relig_gss_atp)
+
+plot_relig <- ggplot(relig_gss_atp, aes(x = category, y = proportion, fill = source)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Comparación de Distribuciones de Religión (GSS vs ATP)",
+       x = "Religión",
+       y = "Proporción",
+       fill = "Fuente de Datos") + # Etiqueta para la leyenda
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5), # Puedes ajustar angle y hjust
+        plot.title = element_text(hjust = 0.5)) # Centrar el título
+print(plot_educ)
+ggsave("trabajo_1_plots/relig_GSS_vs_ATP.pdf", plot = plot_educ, width = 8, height = 5)
+
+# Tabla de contingencia
 contingency_table_relig <- rbind(
   GSS = gss_relig_counts[levels(gss_egos$relig)],
   ATP = atp_relig_counts[levels(ATP_W3_sub$relig_harmonized)]
