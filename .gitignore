@@ -5,3 +5,10 @@
 .DS_Store
 */.DS_Store
 **/.DS_Store
+
+# Carpetas específicas para ignorar
+A - Papers -1/
+trabajo_1_playground/
+
+# Ignorar todas las carpetas con un nombre específico en cualquier lugar del proyecto
+#**/nombre_carpeta/
