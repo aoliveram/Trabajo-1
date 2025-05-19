@@ -391,9 +391,17 @@ for (i in atp_other_indices) {
 ATP_W3_sub$race_imputed_5cat <- factor(ATP_W3_sub$race_imputed_5cat,
                                        levels = c("Asian", "Black", "Hispanic", "White", "Other"))
 
+pdf(file = "trabajo_1_plots/race_distribution_GSS.pdf", width = 6, height = 5)
+plot(gss_egos$race, main = "Raza en GSS (EGO)", xlab = "Raza", ylab = "Frecuencia")
+dev.off()
+
+pdf(file = "trabajo_1_plots/race_distribution_ATP.pdf", width = 6, height = 5)
+plot(ATP_W3_sub$race_imputed_5cat, main = "Raza imputada en ATP", xlab = "Raza", ylab = "Frecuencia")
+dev.off()
+
 
 # ------------------------------------------------------------------------------
-# Raza
+# Relig
 # ------------------------------------------------------------------------------
 
 # --- Veamos cómo se comparan los niveles de RELIGIÓN en GSS y en ATP ----------
