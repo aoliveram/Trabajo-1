@@ -519,5 +519,5 @@ ATP_W3_sub <- ATP_W3_sub %>%
     .after = last_col() # Moverlas después de la última columna existente
   )
 
-write.csv(ATP_W3_sub, "trabajo_1_files/ATP_W3_sub_imput.csv", row.names = FALSE)
-saveRDS(ATP_W3_sub, "trabajo_1_files/ATP_W3_sub_imput.rds")
+write.csv(ATP_W3_sub, "trabajo_1_files/ATP_W3_imput.csv", row.names = FALSE)
+saveRDS(ATP_W3_sub, "trabajo_1_files/ATP_W3_imput.rds")
