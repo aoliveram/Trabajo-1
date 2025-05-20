@@ -119,3 +119,47 @@ diag(P_matrix) <- 0 # No hay lazos de un nodo consigo mismo
 
 # Guardamos matriz
 # saveRDS(P_matrix, 'trabajo_1_files/P_Matrix.rds')
+
+# ------------------ Creación de Red (Bernoulli iterativo) ---------------------
+
+# Esta función crea UNA matriz de adyacencia A
+generate_bernoulli_network <- function(P_matrix_input, seed = NULL) {
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
+  N <- nrow(P_matrix_input)
+  A_matrix <- matrix(0, nrow = N, ncol = N) # Inicializar con ceros
+  
+  # Iterar solo sobre la mitad superior de la matriz (simátrica)
+  for (i in 1:(N - 1)) {
+    for (j in (i + 1):N) {
+      # Realizamos un sorteo Bernoulli
+      if (runif(1) < P_matrix_input[i, j]) {
+        A_matrix[i, j] <- 1
+        A_matrix[j, i] <- 1 # Imputamos simetría
+      }
+    }
+  }
+  
+  # nombres de filas/columnas
+  rownames(A_matrix) <- rownames(P_matrix_input)
+  colnames(A_matrix) <- colnames(P_matrix_input)
+  
+  return(A_matrix)
+}
+
+# Ejemplo de uso para generar una red:
+set.seed(123) # Para reproducibilidad
+Adjacency_matrix_ATP <- generate_bernoulli_network(P_matrix)
+
+# densidad de la red generada
+num_nodes_atp <- nrow(Adjacency_matrix_ATP)
+num_edges_atp <- sum(Adjacency_matrix_ATP[upper.tri(Adjacency_matrix_ATP)]) # Contar lazos únicos
+possible_edges_atp <- num_nodes_atp * (num_nodes_atp - 1) / 2
+density_atp_bernoulli <- num_edges_atp / possible_edges_atp
+
+# La densidad es 0.
+
+# La matriz P tiene como valor más alto 4.697804e-07. 
+# Es decir, incluso cuando no hay distancia social, eta_ij = -14.571, 
+# por lo que entonces p_ij = 1 / (1 + exp(-eta_ij)) = 4.697804e-07.
