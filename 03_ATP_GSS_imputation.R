@@ -508,15 +508,24 @@ unique(ATP_W3_sub$F_RELIG_TYPOLOGY)
 
 ATP_W3_sub <- ATP_W3_sub %>%
   rename(
-    weight_ATP = WEIGHT_W3,
-    sex = F_SEX_FINAL
+    weight_ATP = WEIGHT_W3
+  ) %>%
+  mutate(
+    sex = factor(F_SEX_FINAL,
+                 levels = c(1, 2),
+                 labels = c("Male", "Female"))
   ) %>%
   select(
-    -race_harmonized # Elimina race_harmonized
+    -race_harmonized,
+    -F_SEX_FINAL     
   ) %>%
   relocate(
-    weight_ATP, age, sex, educ_num, race, relig, # Columnas a mover
-    .after = last_col() # Moverlas después de la última columna existente
+    QKEY,
+    .before = 1 
+  ) %>%
+  relocate(
+    age, sex, educ_num, race, relig, weight_ATP,
+    .after = last_col()
   )
 
 write.csv(ATP_W3_sub, "trabajo_1_files/ATP_W3_imput.csv", row.names = FALSE)
