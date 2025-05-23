@@ -287,7 +287,7 @@ save(ATP_network_simulated_1000, file = "trabajo_1_files/ATP_network_simulated_1
 load("trabajo_1_files/ATP_network_simulated_1000.RData")
 
 # Estadísticos Básicos -- de Red
-print(summary(ATP_network_simulated_1000))
+summary(ATP_network_simulated_1000) # Attrs: age - educ_num - race - relig - sex - (and vertex.names)
 
 network.size(ATP_network_simulated_1000)
 network.edgecount(ATP_network_simulated_1000)
@@ -354,14 +354,11 @@ for (attr_name in attribute_vars) {
   cat("--------------------------------\n")
 }
 
+# Histograma (gmode="graph" para no dirigida)
+hist(degree(ATP_network_simulated_1000, gmode="graph"), main="Distribución de Grado (ATP Simulada)",
+     xlab="Grado", ylab="Frecuencia", breaks=50)
 
-
-
-
-
-
-
-# Goodness of Fit
+# Goodness of Fit  - GOF -
 gof_simulado <- gof(
   full_formula_ergm,
   coef = final_ergm_coefs,
@@ -370,10 +367,4 @@ gof_simulado <- gof(
   verbose = TRUE
 )
 plot(gof_simulado)
-print(gof_simulado)
-
-# Histograma (gmode="graph" para no dirigida)
-hist(degree(ATP_network_simulated_1000, gmode="graph"), main="Distribución de Grado (ATP Simulada)",
-     xlab="Grado", ylab="Frecuencia", breaks=50)
-
-# Estadísticos Básicos -- Demográficos
+print(gof_simulado) # Los p-value < 0.05 indican problema: diferencia significativa entre realizaciones.
