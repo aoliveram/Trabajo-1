@@ -15,6 +15,22 @@ if (!is.factor(ATP_W3_sub$sex)) ATP_W3_sub$sex <- factor(ATP_W3_sub$sex, labels 
 if (!is.factor(ATP_W3_sub$race)) ATP_W3_sub$race <- factor(ATP_W3_sub$race)
 if (!is.factor(ATP_W3_sub$relig)) ATP_W3_sub$relig <- factor(ATP_W3_sub$relig)
 
+# Variables de atributos para ergm
+attribute_vars <- c("race", "sex", "age", "educ_num", "relig")
+
+sapply(ATP_W3_sub[, attribute_vars], function(col) sum(is.na(col))) # verificar NA's
+sapply(ATP_W3_sub[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
+#ATP_W3_sub_2 <- ATP_W3_sub
+ATP_W3_sub <- ATP_W3_sub[complete.cases(ATP_W3_sub[, attribute_vars]), ] # Quitamos NA's
+N_atp <- nrow(ATP_W3_sub) # Número de individuos en ATP
+
+# Submuestreo para red 1000 casos.
+set.seed(987)
+
+ATP_W3_sub_1000 <- ATP_W3_sub[sample(nrow(ATP_W3_sub), 1000), ]
+N_atp_1000 <- nrow(ATP_W3_sub_1000)
+sapply(ATP_W3_sub_1000[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
+
 # Creamos el objeto NEtwork (sin lazos, solo nodos y atributos)
 atp_base_network <- network.initialize(N_atp, directed = FALSE)
 set.vertex.attribute(atp_base_network, "age", ATP_W3_sub$age)
@@ -23,13 +39,19 @@ set.vertex.attribute(atp_base_network, "educ_num", ATP_W3_sub$educ_num)
 set.vertex.attribute(atp_base_network, "race", as.character(ATP_W3_sub$race))
 set.vertex.attribute(atp_base_network, "relig", as.character(ATP_W3_sub$relig))
 
-# Fórmula ERGM (el término 'edge' se iterará)
+atp_base_network_1000 <- network.initialize(N_atp_1000, directed = FALSE)
+set.vertex.attribute(atp_base_network_1000, "age", ATP_W3_sub_1000$age)
+set.vertex.attribute(atp_base_network_1000, "sex", as.character(ATP_W3_sub_1000$sex))
+set.vertex.attribute(atp_base_network_1000, "educ_num", ATP_W3_sub_1000$educ_num)
+set.vertex.attribute(atp_base_network_1000, "race", as.character(ATP_W3_sub_1000$race))
+set.vertex.attribute(atp_base_network_1000, "relig", as.character(ATP_W3_sub_1000$relig))
+
+# Fórmula ERGM (el término 'edge' se iterará) # Si se añade gwesp, añadir como coeficiente fijo
 formula_homofilia_only <- ~ nodematch("race") +
                             nodematch("sex") +
                             absdiff("age") +
                             absdiff("educ_num") +
                             nodematch("relig")
-# Si se añade gwesp, también necesitaría un coeficiente fijo
 
 # Smith et al. modelan P(lazo | Diferencia), no P(lazo | Coincidencia).
 # El signo de los coeficientes en ergm para 'nodematch' será POSITIVO si la similitud aumenta la probabilidad.
@@ -82,22 +104,6 @@ control_sim_formula <- control.simulate.formula( # REVISAR convergencia
 )
 
 # --- 2. Bucle de pptimización para 'edges' ---
-
-# Variables de atributos para ergm
-attribute_vars <- c("race", "sex", "age", "educ_num", "relig")
-sapply(ATP_W3_sub[, attribute_vars], function(col) sum(is.na(col))) # verificar NA's
-sapply(ATP_W3_sub[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
-#ATP_W3_sub_2 <- ATP_W3_sub
-ATP_W3_sub <- ATP_W3_sub[complete.cases(ATP_W3_sub[, attribute_vars]), ] # Quitamos NA's
-N_atp <- nrow(ATP_W3_sub) # Número de individuos en ATP
-
-# Cremos base Network (sin lazos, solo información de nodos y atributos)
-atp_base_network <- network.initialize(N_atp, directed = FALSE)
-set.vertex.attribute(atp_base_network, "age", ATP_W3_sub$age)
-set.vertex.attribute(atp_base_network, "sex", as.character(ATP_W3_sub$sex))
-set.vertex.attribute(atp_base_network, "educ_num", ATP_W3_sub$educ_num)
-set.vertex.attribute(atp_base_network, "race", as.character(ATP_W3_sub$race))
-set.vertex.attribute(atp_base_network, "relig", as.character(ATP_W3_sub$relig))
 
 # Agregamos variables estructurales a la fórmula
 full_formula_ergm <- update.formula(formula_homofilia_only, paste("~ edges + ."))
