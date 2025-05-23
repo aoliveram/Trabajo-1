@@ -1,7 +1,7 @@
 library(ergm) # Para simulate.ergm y network
 library(dplyr)
 
-# --- 0. Preparación ---
+# --- 1. Preparación Datos ---
 
 ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_imput.rds")
 N_atp <- nrow(ATP_W3_sub)
@@ -77,114 +77,175 @@ coef_eff_absdiff_educ <- beta_s2014_raw["Education_Difference"] + beta_s2014_raw
 # Es decir, -1 * (coef_eff_diff_race)
 # Los términos `absdiff` ya tienen el signo correcto (negativo indica que mayor diferencia disminuye lazos)
 
-coef_homofilia_fijos_ergm <- c(
-  -coef_eff_diff_race,  # Para nodematch("race")
-  -coef_eff_diff_sex,   # Para nodematch("sex")
-  coef_eff_absdiff_age, # Para absdiff("age")
-  coef_eff_absdiff_educ,# Para absdiff("educ_num")
-  -coef_eff_diff_relig  # Para nodematch("relig")
+coef_homofilia_fijos_ergm_vector <- setNames(
+  c(-coef_eff_diff_race, 
+    -coef_eff_diff_sex,
+    coef_eff_absdiff_age, 
+    coef_eff_absdiff_educ,
+    -coef_eff_diff_relig), 
+  c("nodematch.race",   # Para nodematch("race")
+    "nodematch.sex",    # Para nodematch("sex") # Aquí podría ser nodematch.sex.FEMALE si Male es ref.
+    "absdiff.age",      # Para absdiff("age")
+    "absdiff.educ_num", # Para absdiff("educ_num")
+    "nodematch.relig")  # Para nodematch("relig")
 )
 
-# Asignamos nombres para ergm (REVISAR EN SIMULATE)
-names(coef_homofilia_fijos_ergm) <- c("nodematch.race", "nodematch.sex",
-                                      "absdiff.age", "absdiff.educ_num", "nodematch.relig")
 
-# --- 1. Establecer Parámetros de Búsqueda ---
-target_density <- 0.029
-lower_bound_edges <- -10.0  # Límite inferior para el coeficiente de edges
-upper_bound_edges <- -2.0   # Límite superior
+# --- 1. función de pptimización para 'edges' ---
 
-max_iterations <- 20       # Número máximo de iteraciones
-density_tolerance <- 0.001 # tolerancia al target_density
-num_sim_per_iteration <- 5 # Número de redes a simular en cada paso para promediar densidad
+calibrate_edges_coefficient <- function(
+    atp_base_network_input,
+    target_density_input,
+    formula_homofilia_terms, # Fórmula solo con términos de homofilia (ej. ~ nodematch("race") + ...)
+    fixed_homophily_coefs,   # Vector nombrado con coeficientes para esos términos
+    initial_lower_bound_edges = -10.0,
+    initial_upper_bound_edges = -2.0,
+    max_calib_iterations = 20,
+    density_conv_tolerance = 0.001,
+    num_sim_per_calib_iter = 5,
+    control_simulate_ergm_options, # Objeto de control para simulate()
+    verbose_calibration = TRUE) {
+
+  N_nodes <- network.size(atp_base_network_input)
+  lower_bound <- initial_lower_bound_edges
+  upper_bound <- initial_upper_bound_edges
+  calibrated_edges_val <- NA
+  final_avg_density <- NA
+  
+  # Fórmula ERGM completa que incluye 'edges'
+  full_ergm_formula <- update.formula(formula_homofilia_terms, paste("~ edges + ."))
+  
+  if (verbose_calibration) {
+    cat(paste("Iniciando calibración de 'edges' para N =", N_nodes, "y densidad objetivo =", target_density_input, "\n"))
+    cat("-----------------------------------------------------------------\n")
+  }
+  
+  for (iter in 1:max_calib_iterations) {
+    current_edges_try <- (lower_bound + upper_bound) / 2
+    
+    # Combinar el coeficiente de edges actual con los coeficientes de homofilia fijos
+    current_full_coefs <- c(edges = current_edges_try, fixed_homophily_coefs)
+    
+    if (verbose_calibration) {
+      cat(paste("Iteración", iter, "de", max_calib_iterations, ": Probando coef_edges =", round(current_edges_try, 5), "\n"))
+    }
+    
+    sim_networks_list_iter <- tryCatch({
+      simulate(
+        full_ergm_formula,
+        basis = atp_base_network_input,
+        nsim = num_sim_per_calib_iter,
+        coef = current_full_coefs,
+        control = control_simulate_ergm_options,
+        verbose = FALSE # Evitar el verboso de la simulación interna aquí
+      )
+    }, error = function(e) {
+      if (verbose_calibration) {
+        cat("   Error durante la simulación:", conditionMessage(e), "\n")
+        cat("   Coeficientes probados:", paste(names(current_full_coefs), round(current_full_coefs,3), collapse=", "), "\n")
+      }
+      return(NULL)
+    })
+    
+    if (is.null(sim_networks_list_iter)) {
+      if (verbose_calibration) cat("   Fallo en la simulación. Ajustando límites de búsqueda...\n")
+      if (abs(current_edges_try - lower_bound) < 1e-6 || abs(current_edges_try - upper_bound) < 1e-6) {
+        warning("Límites de búsqueda muy juntos y la simulación sigue fallando. Deteniendo calibración.")
+        calibrated_edges_val <- (lower_bound + upper_bound) / 2 # Mejor intento
+        break
+      }
+      upper_bound <- current_edges_try # Asumir que falló por ser demasiado positivo/denso
+      next
+    }
+    
+    sim_densities_iter <- sapply(sim_networks_list_iter, network.density)
+    avg_sim_density_iter <- mean(sim_densities_iter, na.rm = TRUE)
+    final_avg_density <- avg_sim_density_iter # Guardar la última densidad promedio calculada
+    
+    if(is.nan(avg_sim_density_iter) || is.na(avg_sim_density_iter)){
+      if (verbose_calibration) cat("   Densidad promedio NaN/NA. Ajustando límites de búsqueda...\n")
+      if (abs(current_edges_try - lower_bound) < 1e-6 || abs(current_edges_try - upper_bound) < 1e-6) {
+        warning("Límites de búsqueda muy juntos y la simulación sigue produciendo NaN/NA. Deteniendo calibración.")
+        calibrated_edges_val <- (lower_bound + upper_bound) / 2
+        break
+      }
+      upper_bound <- current_edges_try
+      next
+    }
+    
+    if (verbose_calibration) {
+      cat(paste("   Densidad promedio simulada:", round(avg_sim_density_iter, 5), "\n"))
+    }
+    
+    if (abs(avg_sim_density_iter - target_density_input) < density_conv_tolerance) {
+      calibrated_edges_val <- current_edges_try
+      if (verbose_calibration) {
+        cat(paste("Convergencia alcanzada en iteración", iter, ". Coef_edges calibrado =", round(calibrated_edges_val, 5), "\n"))
+      }
+      break
+    }
+    
+    if (avg_sim_density_iter < target_density_input) {
+      lower_bound <- current_edges_try
+    } else {
+      upper_bound <- current_edges_try
+    }
+    
+    if (iter == max_calib_iterations) {
+      calibrated_edges_val <- current_edges_try
+      if (verbose_calibration) {
+        cat(paste("Máximo de iteraciones alcanzado. Coef_edges final (aproximado) =", round(calibrated_edges_val, 5), "\n"))
+        cat(paste("   Densidad obtenida con este coeficiente:", round(avg_sim_density_iter, 5), "\n"))
+      }
+    }
+  }
+  
+  if (verbose_calibration) cat("-----------------------------------------------------------------\n")
+  
+  return(list(calibrated_coef_edges = calibrated_edges_val, 
+              achieved_density = final_avg_density,
+              iterations_run = iter,
+              N_nodes = N_nodes))
+}
+
+# --- 2. Ejcución función optimización ---
+
 
 control_sim_formula <- control.simulate.formula( # REVISAR convergencia
   MCMC.burnin = 1000 * N_atp,
   MCMC.interval = 100 * N_atp
 )
 
-# --- 2. Bucle de pptimización para 'edges' ---
+edges_var_info <- calibrate_edges_coefficient(
+  atp_base_network_input = atp_base_network,   # base clase network
+  formula_homofilia_terms = formula_homofilia_only,  # Fórmula solo con términos de homofilia (ej. ~ nodematch("race") + ...) 
+  fixed_homophily_coefs = coef_homofilia_fijos_ergm_vector,  # Vector nombrado, con coeficientes para esos términos
+  target_density_input = 0.029,           # Densidad target
+  initial_lower_bound_edges = -10.0,      # Límite inferior para el coeficiente de edges
+  initial_upper_bound_edges = -2.0,       # Límite superior
+  max_calib_iterations = 20,              # Número máximo de iteraciones
+  density_conv_tolerance = 0.001,         # tolerancia al target_density
+  num_sim_per_calib_iter = 5,             # Número de redes a simular en cada paso para promediar densidad
+  control_simulate_ergm_options = control_sim_formula # Objeto de control para simulate()
+)
 
-# Agregamos variables estructurales a la fórmula
-full_formula_ergm <- update.formula(formula_homofilia_only, paste("~ edges + ."))
-# Objeto para alojar coeficientes calibrados
-calibrated_coef_edges <- NA
+print(edges_var_info)
 
-# Iteración para ajustar 'edges' a densidad objetivo target_density
-for (iter in 1:max_iterations) {
-  current_coef_edges <- (lower_bound_edges + upper_bound_edges) / 2
-  
-  current_coefs_named <- c(edges = current_coef_edges, coef_homofilia_fijos_ergm)
-  
-  cat(paste("Iteración", iter, ": Probando coef_edges =", round(current_coef_edges, 4), "\n"))
-  
-  sim_networks_list <- tryCatch({
-    simulate(
-      full_formula_ergm,
-      basis = atp_base_network, # El objeto network base
-      nsim = num_sim_per_iteration,
-      coef = current_coefs_named,
-      control = control_sim_formula,
-      verbose = FALSE
-    )
-  }, error = function(e) {
-    cat("Error durante la simulación en la iteración", iter, ":\n", conditionMessage(e), "\n")
-    cat("Coeficientes actuales:", paste(names(current_coefs_named), round(current_coefs_named,3), collapse=", "), "\n")
-    cat("Nombres esperados por la fórmula (aproximado):",paste(attr(terms(full_formula_ergm),"term.labels"),collapse=", "),"\n")
-    return(NULL)
-  })
-  
-  # Si falla la simulación
-  if (is.null(sim_networks_list)) {
-    cat("Fallo en la simulación, ajustando límites de búsqueda o deteniendo.\n")
-    # Lógica simple para evitar quedarse atascado si el modelo es inestable con ciertos coefs
-    if (abs(current_coef_edges - lower_bound_edges) < 1e-6 || abs(current_coef_edges - upper_bound_edges) < 1e-6) {
-      warning("Los límites de búsqueda están muy juntos y la simulación sigue fallando.")
-      break 
-    }
-    # Si current_coef_edges es más positivo, tendía a dar más lazos. Densidad es "mala" (ej. demasiado alta o el modelo es degenerado)
-    # Si falló, quizás es demasiado positivo. Intentamos hacerlo más negativo.
-    upper_bound_edges <- current_coef_edges 
-    next
-  }
-  
-  # Calculamos densidad media de las redes
-  sim_densities <- sapply(sim_networks_list, network.density)
-  avg_sim_density <- mean(sim_densities, na.rm = TRUE)
-  
-  cat(paste("   Densidad promedio simulada:", round(avg_sim_density, 5), "\n"))
-  
-  # Comparamos con density_tolerance
-  if (abs(avg_sim_density - target_density) < density_tolerance) {
-    calibrated_coef_edges <- current_coef_edges
-    cat(paste("Convergencia alcanzada en iteración", iter, "! Coef_edges calibrado =", round(calibrated_coef_edges, 4), "\n"))
-    break
-  }
-  
-  # Ajustamos nuevos bordes para parámetros 
-  if (avg_sim_density < target_density) {
-    lower_bound_edges <- current_coef_edges
-  } else {
-    upper_bound_edges <- current_coef_edges
-  }
-  
-  # máximo iteraciones
-  if (iter == max_iterations) {
-    calibrated_coef_edges <- current_coef_edges
-    cat(paste("Máximo de iteraciones alcanzado. Coef_edges final (aproximado) =", round(calibrated_coef_edges, 4), "\n"))
-    cat(paste("   Densidad obtenida con este coeficiente:", round(avg_sim_density, 5), "\n"))
-  }
-}
+edges_var_info_1000 <- calibrate_edges_coefficient(
+  atp_base_network_input = atp_base_network_1000,   # base clase network
+  formula_homofilia_terms = formula_homofilia_only, # Fórmula solo con términos de homofilia (ej. ~ nodematch("race") + ...) 
+  fixed_homophily_coefs = coef_homofilia_fijos_ergm_vector,  # Vector nombrado, con coeficientes para esos términos
+  target_density_input = 0.029,           # Densidad target
+  initial_lower_bound_edges = -10.0,      # Límite inferior para el coeficiente de edges
+  initial_upper_bound_edges = -2.0,       # Límite superior
+  max_calib_iterations = 20,              # Número máximo de iteraciones
+  density_conv_tolerance = 0.001,         # tolerancia al target_density
+  num_sim_per_calib_iter = 5,             # Número de redes a simular en cada paso para promediar densidad
+  control_simulate_ergm_options = control_sim_formula # Objeto de control para simulate()
+)
 
-if (!is.na(calibrated_coef_edges)) {
-  cat("\nCalibración exitosa para 'edges'.\n")
-  final_ergm_coefs <- c(edges = calibrated_coef_edges, coef_homofilia_fijos_ergm)
-  print(final_ergm_coefs)
-} else {
-  cat("\nNo se pudo calibrar el coeficiente 'edges'.\n")
-}
 
-# --- 3. Simulación ---
+# --- 3. Simulación nueva red ---
 
 library(network)
 library(sna)
