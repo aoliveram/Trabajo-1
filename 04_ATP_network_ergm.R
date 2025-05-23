@@ -177,3 +177,29 @@ if (!is.na(calibrated_coef_edges)) {
 } else {
   cat("\nNo se pudo calibrar el coeficiente 'edges'.\n")
 }
+
+# --- 3. Simulación ---
+
+library(network)
+library(sna)
+
+# Ejemplo de simulación de UNA red final:
+ATP_network_final_simulated <- simulate(
+  full_formula_ergm,
+  basis = atp_base_network, # --> base con 3168 nodos
+  nsim = 1,
+  coef = final_ergm_coefs,
+  control = control_sim_formula,
+  verbose = TRUE
+)
+
+# Estadísticos Básicos
+print(summary(ATP_network_final_simulated))
+
+network.size(ATP_network_final_simulated)
+network.edgecount(ATP_network_final_simulated)
+network.density(ATP_network_final_simulated)
+
+grados <- degree(ATP_network_final_simulated, gmode="graph") # 'graph' para no dirigida
+print(summary(grados))
+hist(grados, main="Distribución de Grado de la Red Simulada", xlab="Grado", ylab="Frecuencia", breaks=50)
