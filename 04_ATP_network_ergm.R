@@ -259,6 +259,7 @@ edges_var_info_1000 <- calibrate_edges_coefficient(
 print(edges_var_info_1000) # $calibrated_coef_edges -> [1] -4.25 , $achieved_density -> [1] 0.02904545
 
 # Las densidades de ambas bases son prácticamente iguales para 'edges' = -4.25
+# La densidad es controlada principalmente por 'edges' y los efectos relativos de homofilia se mantienen.
 
 
 # --- 3. Simulación nueva red ---
@@ -280,13 +281,24 @@ ATP_network_simulated_1000 <- simulate(
   verbose = TRUE
 )
 
-# Estadísticos Básicos
+# Estadísticos Básicos -- de Red
 print(summary(ATP_network_simulated_1000))
 
 network.size(ATP_network_simulated_1000)
 network.edgecount(ATP_network_simulated_1000)
 network.density(ATP_network_simulated_1000)
 
+# Goodness of Fit
+gof_simulado <- gof(full_formula_ergm,
+                    coef = final_ergm_coefs,
+                    basis = ATP_network_simulated_1000,
+                    control = control.gof(MCMC.burnin=100000, MCMC.interval=10000, nsim=100) # Ajustar según sea necesario
+)
+plot(gof_simulado)
+print(gof_simulado)
+
 # Histograma (gmode="graph" para no dirigida)
 hist(degree(ATP_network_simulated_1000, gmode="graph"), main="Distribución de Grado (ATP Simulada)",
      xlab="Grado", ylab="Frecuencia", breaks=50)
+
+# Estadísticos Básicos -- Demográficos
