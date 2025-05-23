@@ -259,6 +259,8 @@ edges_var_info_1000 <- calibrate_edges_coefficient(
 print(edges_var_info_1000) # $calibrated_coef_edges -> [1] -4.25 , $achieved_density -> [1] 0.02904545
 
 # Las densidades de ambas bases son prácticamente iguales para 'edges' = -4.25
+# Si solo tuviera 'edges': 
+# p = exp(θ_edges) / (1 + exp(θ_edges)) --> coef_edges_teo <- log(0.029 / (1 - 0.029))
 # La densidad es controlada principalmente por 'edges' y los efectos relativos de homofilia se mantienen.
 
 
@@ -281,6 +283,9 @@ ATP_network_simulated_1000 <- simulate(
   verbose = TRUE
 )
 
+save(ATP_network_simulated_1000, file = "trabajo_1_files/ATP_network_simulated_1000.RData")
+load("trabajo_1_files/ATP_network_simulated_1000.RData")
+
 # Estadísticos Básicos -- de Red
 print(summary(ATP_network_simulated_1000))
 
@@ -288,11 +293,81 @@ network.size(ATP_network_simulated_1000)
 network.edgecount(ATP_network_simulated_1000)
 network.density(ATP_network_simulated_1000)
 
+# --- Comparación demográficos ATP original vs. ERGM simulada ---
+
+# Asegúrate que los nombres de los atributos son los mismos que en el dataframe original
+ATP_network_simulated_1000_atr <- data.frame(
+  age = get.vertex.attribute(ATP_network_simulated_1000, "age"),
+  sex = get.vertex.attribute(ATP_network_simulated_1000, "sex"),
+  educ_num = get.vertex.attribute(ATP_network_simulated_1000, "educ_num"),
+  race = get.vertex.attribute(ATP_network_simulated_1000, "race"),
+  relig = get.vertex.attribute(ATP_network_simulated_1000, "relig")
+)
+# Convertir a factores si es necesario para la comparación (ej. si en la red son character)
+ATP_network_simulated_1000_atr$sex <- factor(ATP_network_simulated_1000_atr$sex, levels = c("Male", "Female"))
+ATP_network_simulated_1000_atr$race <- factor(ATP_network_simulated_1000_atr$race, levels = levels(ATP_W3_sub$race))
+ATP_network_simulated_1000_atr$relig <- factor(ATP_network_simulated_1000_atr$relig, levels = levels(ATP_W3_sub$relig))
+
+library(ggplot2)
+
+plots_comparacion <- list()
+
+for (attr_name in attribute_vars) {
+  
+  df_original <- data.frame( # dataframe original ATP
+    valor = ATP_W3_sub[[attr_name]],
+    fuente = "ATP Original (Base N=1000)"
+  )
+  df_simulado <- data.frame( # Datos de la red simulada ERGM
+    valor = ATP_network_simulated_1000_atr[[attr_name]],
+    fuente = "Red ERGM Simulada (N=1000)"
+  )
+  df_combinado <- rbind(df_original, df_simulado)
+  
+  # Para CATEGÓRICOS
+  if (is.factor(df_combinado$valor) || is.character(df_combinado$valor)) {
+    cat("Prop. en original ATP:\n")
+    print(prop.table(table(df_original$valor)))
+    cat("Prop. en ERGM simulado:\n")
+    print(prop.table(table(df_simulado$valor)))
+    
+    # Barras comparativo
+    p <- ggplot(df_combinado, aes(x = valor, fill = fuente)) +
+      geom_bar(position = "dodge", aes(y = ..prop.., group = fuente)) + # ..prop.. --> proporciones
+      labs(title = paste("Distribución de", attr_name), x = attr_name, y = "Proporción") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    plots_comparacion[[paste0(attr_name, "_bar")]] <- p
+    
+  } else if (is.numeric(df_combinado$valor)) { # Para NUMÉRICOS
+    cat("Resumen original ATP:\n"); print(summary(df_original$valor))
+    cat("Resumen ERGM simulado:\n"); print(summary(df_simulado$valor))
+    
+    # Densidad comparativa
+    p <- ggplot(df_combinado, aes(x = valor, fill = fuente, color = fuente)) +
+      geom_density(alpha = 0.5, adjust=1.5) + # adjust para suavizar más o menos
+      labs(title = paste("Distribución de", attr_name), x = attr_name, y = "Densidad") +
+      theme_minimal()
+    plots_comparacion[[paste0(attr_name, "_dens")]] <- p
+  }
+  print(p) # Mostrar el gráfico actual
+  cat("--------------------------------\n")
+}
+
+
+
+
+
+
+
+
 # Goodness of Fit
-gof_simulado <- gof(full_formula_ergm,
-                    coef = final_ergm_coefs,
-                    basis = ATP_network_simulated_1000,
-                    control = control.gof(MCMC.burnin=100000, MCMC.interval=10000, nsim=100) # Ajustar según sea necesario
+gof_simulado <- gof(
+  full_formula_ergm,
+  coef = final_ergm_coefs,
+  basis = ATP_network_simulated_1000,
+  control = control.gof.formula(nsim=100, MCMC.burnin=100000, MCMC.interval=10000), # Ajustar según sea necesario
+  verbose = TRUE
 )
 plot(gof_simulado)
 print(gof_simulado)
