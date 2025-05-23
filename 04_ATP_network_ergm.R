@@ -77,7 +77,7 @@ coef_eff_absdiff_educ <- beta_s2014_raw["Education_Difference"] + beta_s2014_raw
 # Es decir, -1 * (coef_eff_diff_race)
 # Los términos `absdiff` ya tienen el signo correcto (negativo indica que mayor diferencia disminuye lazos)
 
-coef_homofilia_fijos_ergm_vector <- setNames(
+coef_homofilia_fijos <- setNames(
   c(-coef_eff_diff_race, 
     -coef_eff_diff_sex,
     coef_eff_absdiff_age, 
@@ -230,7 +230,7 @@ control_sim_formula <- control.simulate.formula(
 edges_var_info <- calibrate_edges_coefficient(
   atp_base_network_input = atp_base_network,   # base clase network
   formula_homofilia_terms = formula_homofilia_only,  # Fórmula solo con términos de homofilia (ej. ~ nodematch("race") + ...) 
-  fixed_homophily_coefs = coef_homofilia_fijos_ergm_vector,  # Vector nombrado, con coeficientes para esos términos
+  fixed_homophily_coefs = coef_homofilia_fijos,  # Vector nombrado, con coeficientes para esos términos
   target_density_input = 0.029,           # Densidad target
   initial_lower_bound_edges = -10.0,      # Límite inferior para el coeficiente de edges
   initial_upper_bound_edges = -2.0,       # Límite superior
@@ -240,13 +240,13 @@ edges_var_info <- calibrate_edges_coefficient(
   control_simulate_ergm_options = control_sim_formula # Objeto de control para simulate()
 )
 
-print(edges_var_info)
+print(edges_var_info) #$calibrated_coef_edges -> [1] -4.25 , $achieved_density -> [1] 0.02904798
 
 # Para ATP submuestra N=1000 como base
 edges_var_info_1000 <- calibrate_edges_coefficient(
-  atp_base_network_input = atp_base_network_1000,   # base clase network
+  atp_base_network_input = atp_base_network_1000,   # base clase network (N=1000)
   formula_homofilia_terms = formula_homofilia_only, # Fórmula solo con términos de homofilia (ej. ~ nodematch("race") + ...) 
-  fixed_homophily_coefs = coef_homofilia_fijos_ergm_vector,  # Vector nombrado, con coeficientes para esos términos
+  fixed_homophily_coefs = coef_homofilia_fijos,  # Vector nombrado, con coeficientes para esos términos
   target_density_input = 0.029,           # Densidad target
   initial_lower_bound_edges = -10.0,      # Límite inferior para el coeficiente de edges
   initial_upper_bound_edges = -2.0,       # Límite superior
@@ -256,17 +256,24 @@ edges_var_info_1000 <- calibrate_edges_coefficient(
   control_simulate_ergm_options = control_sim_formula # Objeto de control para simulate()
 )
 
-print(edges_var_info_1000)
+print(edges_var_info_1000) # $calibrated_coef_edges -> [1] -4.25 , $achieved_density -> [1] 0.02904545
+
+# Las densidades de ambas bases son prácticamente iguales para 'edges' = -4.25
+
 
 # --- 3. Simulación nueva red ---
 
 library(network)
 library(sna)
 
+# Fórmula completa
+full_formula_ergm <- update.formula(formula_homofilia_only, paste("~ edges + ."))
+final_ergm_coefs <- c(edges = edges_var_info_1000$calibrated_coef_edges, coef_homofilia_fijos)
+
 # Ejemplo de simulación de UNA red final:
-ATP_network_final_simulated <- simulate(
+ATP_network_simulated_1000 <- simulate(
   full_formula_ergm,
-  basis = atp_base_network, # --> base con 3168 nodos
+  basis = atp_base_network_1000, # --> base con 3168 nodos
   nsim = 1,
   coef = final_ergm_coefs,
   control = control_sim_formula,
@@ -274,12 +281,12 @@ ATP_network_final_simulated <- simulate(
 )
 
 # Estadísticos Básicos
-print(summary(ATP_network_final_simulated))
+print(summary(ATP_network_simulated_1000))
 
-network.size(ATP_network_final_simulated)
-network.edgecount(ATP_network_final_simulated)
-network.density(ATP_network_final_simulated)
+network.size(ATP_network_simulated_1000)
+network.edgecount(ATP_network_simulated_1000)
+network.density(ATP_network_simulated_1000)
 
-grados <- degree(ATP_network_final_simulated, gmode="graph") # 'graph' para no dirigida
-print(summary(grados))
-hist(grados, main="Distribución de Grado de la Red Simulada", xlab="Grado", ylab="Frecuencia", breaks=50)
+# Histograma (gmode="graph" para no dirigida)
+hist(degree(ATP_network_simulated_1000, gmode="graph"), main="Distribución de Grado (ATP Simulada)",
+     xlab="Grado", ylab="Frecuencia", breaks=50)
