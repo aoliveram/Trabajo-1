@@ -102,13 +102,16 @@ calibrate_edges_coefficient <- function(
     initial_upper_bound_edges = -2.0,
     max_calib_iterations = 20,
     density_conv_tolerance = 0.001,
-    num_sim_per_calib_iter = 5,
+    num_sim_networks = 5,
     control_simulate_ergm_options, # Objeto de control para simulate()
     verbose_calibration = TRUE) {
-
+  
+  # Número de nodos y bordes
   N_nodes <- network.size(atp_base_network_input)
   lower_bound <- initial_lower_bound_edges
   upper_bound <- initial_upper_bound_edges
+  
+  # Objeto para guardar resultados
   calibrated_edges_val <- NA
   final_avg_density <- NA
   
@@ -120,6 +123,7 @@ calibrate_edges_coefficient <- function(
     cat("-----------------------------------------------------------------\n")
   }
   
+  # Ciclo principal
   for (iter in 1:max_calib_iterations) {
     current_edges_try <- (lower_bound + upper_bound) / 2
     
@@ -130,11 +134,12 @@ calibrate_edges_coefficient <- function(
       cat(paste("Iteración", iter, "de", max_calib_iterations, ": Probando coef_edges =", round(current_edges_try, 5), "\n"))
     }
     
+    # simulación de num_sim_networks redes
     sim_networks_list_iter <- tryCatch({
       simulate(
         full_ergm_formula,
         basis = atp_base_network_input,
-        nsim = num_sim_per_calib_iter,
+        nsim = num_sim_networks,
         coef = current_full_coefs,
         control = control_simulate_ergm_options,
         verbose = FALSE # Evitar el verboso de la simulación interna aquí
@@ -158,6 +163,7 @@ calibrate_edges_coefficient <- function(
       next
     }
     
+    # Cálculo densidades
     sim_densities_iter <- sapply(sim_networks_list_iter, network.density)
     avg_sim_density_iter <- mean(sim_densities_iter, na.rm = TRUE)
     final_avg_density <- avg_sim_density_iter # Guardar la última densidad promedio calculada
@@ -177,6 +183,7 @@ calibrate_edges_coefficient <- function(
       cat(paste("   Densidad promedio simulada:", round(avg_sim_density_iter, 5), "\n"))
     }
     
+    # Revisión convergencia dentro de tolerancia
     if (abs(avg_sim_density_iter - target_density_input) < density_conv_tolerance) {
       calibrated_edges_val <- current_edges_try
       if (verbose_calibration) {
@@ -185,12 +192,14 @@ calibrate_edges_coefficient <- function(
       break
     }
     
+    # Recalcular bordes para próxima iteración
     if (avg_sim_density_iter < target_density_input) {
       lower_bound <- current_edges_try
     } else {
       upper_bound <- current_edges_try
     }
     
+    # Máximo iteraciones
     if (iter == max_calib_iterations) {
       calibrated_edges_val <- current_edges_try
       if (verbose_calibration) {
@@ -208,14 +217,16 @@ calibrate_edges_coefficient <- function(
               N_nodes = N_nodes))
 }
 
+
 # --- 2. Ejcución función optimización ---
 
-
-control_sim_formula <- control.simulate.formula( # REVISAR convergencia
+# REVISAR convergencia
+control_sim_formula <- control.simulate.formula( 
   MCMC.burnin = 1000 * N_atp,
   MCMC.interval = 100 * N_atp
 )
 
+# Para ATP completa como base
 edges_var_info <- calibrate_edges_coefficient(
   atp_base_network_input = atp_base_network,   # base clase network
   formula_homofilia_terms = formula_homofilia_only,  # Fórmula solo con términos de homofilia (ej. ~ nodematch("race") + ...) 
@@ -225,12 +236,13 @@ edges_var_info <- calibrate_edges_coefficient(
   initial_upper_bound_edges = -2.0,       # Límite superior
   max_calib_iterations = 20,              # Número máximo de iteraciones
   density_conv_tolerance = 0.001,         # tolerancia al target_density
-  num_sim_per_calib_iter = 5,             # Número de redes a simular en cada paso para promediar densidad
+  num_sim_networks = 5,             # Número de redes a simular en cada paso para promediar densidad
   control_simulate_ergm_options = control_sim_formula # Objeto de control para simulate()
 )
 
 print(edges_var_info)
 
+# Para ATP submuestra N=1000 como base
 edges_var_info_1000 <- calibrate_edges_coefficient(
   atp_base_network_input = atp_base_network_1000,   # base clase network
   formula_homofilia_terms = formula_homofilia_only, # Fórmula solo con términos de homofilia (ej. ~ nodematch("race") + ...) 
@@ -240,10 +252,11 @@ edges_var_info_1000 <- calibrate_edges_coefficient(
   initial_upper_bound_edges = -2.0,       # Límite superior
   max_calib_iterations = 20,              # Número máximo de iteraciones
   density_conv_tolerance = 0.001,         # tolerancia al target_density
-  num_sim_per_calib_iter = 5,             # Número de redes a simular en cada paso para promediar densidad
+  num_sim_networks = 5,             # Número de redes a simular en cada paso para promediar densidad
   control_simulate_ergm_options = control_sim_formula # Objeto de control para simulate()
 )
 
+print(edges_var_info_1000)
 
 # --- 3. Simulación nueva red ---
 
