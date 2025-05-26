@@ -1,5 +1,6 @@
 library(ergm) # Para simulate.ergm y network
 library(dplyr)
+library(haven)
 
 # --- 1. Preparación Datos ---
 
@@ -16,7 +17,24 @@ if (!is.factor(ATP_W3_sub$race)) ATP_W3_sub$race <- factor(ATP_W3_sub$race)
 if (!is.factor(ATP_W3_sub$relig)) ATP_W3_sub$relig <- factor(ATP_W3_sub$relig)
 
 # Variables de atributos para ergm
-attribute_vars <- c("race", "sex", "age", "educ_num", "relig")
+demographic_vars <- c("age", "sex", "educ_num", "race", "relig")
+metech_vars <- c("METECH_A_W3", "METECH_B_W3", "METECH_C_W3", 
+                 "METECH_D_W3", "METECH_E_W3", "METECH_F_W3")
+attribute_vars <- c(demographic_vars, metech_vars)
+
+for (m_var in metech_vars) {
+  if (m_var %in% names(ATP_W3_sub)) {
+    
+    # obtenemos valores numéricos
+    numeric_values <- haven::zap_labels(ATP_W3_sub[[m_var]])
+    
+    ATP_W3_sub[[m_var]] <- case_when(
+      numeric_values == 0 ~ 0,
+      numeric_values == 1 ~ 1,
+      TRUE ~ NA_real_ # NA's y 99
+    )
+  }
+}
 
 sapply(ATP_W3_sub[, attribute_vars], function(col) sum(is.na(col))) # verificar NA's
 sapply(ATP_W3_sub[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
@@ -38,6 +56,12 @@ set.vertex.attribute(atp_base_network, "sex", as.character(ATP_W3_sub$sex)) # er
 set.vertex.attribute(atp_base_network, "educ_num", ATP_W3_sub$educ_num)
 set.vertex.attribute(atp_base_network, "race", as.character(ATP_W3_sub$race))
 set.vertex.attribute(atp_base_network, "relig", as.character(ATP_W3_sub$relig))
+set.vertex.attribute(atp_base_network, "metech_a", as.numeric(ATP_W3_sub$METECH_A_W3))
+set.vertex.attribute(atp_base_network, "metech_b", as.numeric(ATP_W3_sub$METECH_B_W3))
+set.vertex.attribute(atp_base_network, "metech_c", as.numeric(ATP_W3_sub$METECH_C_W3))
+set.vertex.attribute(atp_base_network, "metech_d", as.numeric(ATP_W3_sub$METECH_D_W3))
+set.vertex.attribute(atp_base_network, "metech_e", as.numeric(ATP_W3_sub$METECH_E_W3))
+set.vertex.attribute(atp_base_network, "metech_f", as.numeric(ATP_W3_sub$METECH_F_W3))
 
 atp_base_network_1000 <- network.initialize(N_atp_1000, directed = FALSE)
 set.vertex.attribute(atp_base_network_1000, "age", ATP_W3_sub_1000$age)
@@ -45,6 +69,12 @@ set.vertex.attribute(atp_base_network_1000, "sex", as.character(ATP_W3_sub_1000$
 set.vertex.attribute(atp_base_network_1000, "educ_num", ATP_W3_sub_1000$educ_num)
 set.vertex.attribute(atp_base_network_1000, "race", as.character(ATP_W3_sub_1000$race))
 set.vertex.attribute(atp_base_network_1000, "relig", as.character(ATP_W3_sub_1000$relig))
+set.vertex.attribute(atp_base_network_1000, "metech_a", as.numeric(ATP_W3_sub_1000$METECH_A_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_b", as.numeric(ATP_W3_sub_1000$METECH_B_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_c", as.numeric(ATP_W3_sub_1000$METECH_C_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_d", as.numeric(ATP_W3_sub_1000$METECH_D_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_e", as.numeric(ATP_W3_sub_1000$METECH_E_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_f", as.numeric(ATP_W3_sub_1000$METECH_F_W3))
 
 # Fórmula ERGM (el término 'edge' se iterará) # Si se añade gwesp, añadir como coeficiente fijo
 formula_homofilia_only <- ~ nodematch("race") +
