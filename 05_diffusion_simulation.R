@@ -81,12 +81,8 @@ df_metech_attr <- df_metech_attr %>%
     alpha_innov_prop = new_tech_pref_raw_index / 6
   )
 
-# --- 5. Estudiar Distribución del Índice Creado y Guardar Histograma ---
-cat("\nResumen del índice alpha_innov_prop:\n")
-print(summary(df_metech_attr$alpha_innov_prop))
-cat("\nTabla de frecuencia para el índice crudo (0-6):\n")
+# --- 5. Distribución del Índice ---
 print(table(df_metech_attr$new_tech_pref_raw_index, useNA = "ifany"))
-
 
 # Histograma del índice normalizado (0-1)
 hist_alpha <- ggplot(df_metech_attr, aes(x = alpha_innov_prop)) +
@@ -97,3 +93,12 @@ hist_alpha <- ggplot(df_metech_attr, aes(x = alpha_innov_prop)) +
   theme_minimal()
 print(hist_alpha)
 ggsave("trabajo_1_plots/metech_alpha_distribution_ATP.pdf", plot = hist_alpha, width = 8, height = 6)
+
+# --- 6. Agregarmos índice como atributo a los nodos de la red ---
+set.vertex.attribute(ATP_network_simulated_1000, 
+                     "alpha_innov_prop", 
+                     df_metech_attr$alpha_innov_prop)
+
+print(list.vertex.attributes(ATP_network_simulated_1000))
+
+save(ATP_network_simulated_1000, file = "trabajo_1_files/ATP_network_simulated_1000_alpha.RData")
