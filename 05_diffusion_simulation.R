@@ -84,13 +84,21 @@ df_metech_attr <- df_metech_attr %>%
 # --- 5. Distribución del Índice ---
 print(table(df_metech_attr$new_tech_pref_raw_index, useNA = "ifany"))
 
-# Histograma del índice normalizado (0-1)
-hist_alpha <- ggplot(df_metech_attr, aes(x = alpha_innov_prop)) +
-  geom_histogram(binwidth = 1/6 / 2, fill = "darkgreen", color = "black", boundary = 0) + # binwidth ajustado
-  scale_x_continuous(breaks = seq(0, 1, by = 1/6), labels = scales::percent_format(accuracy = 1)) +
+# Crear una columna factor para graficar, y asegurar que los NAs se manejen
+df_metech_attr <- df_metech_attr %>% 
+  mutate(alpha_innov_prop_factor = factor(alpha_innov_prop,
+                                          levels = seq(0, 1, by = 1/6),
+                                          labels = round(seq(0, 1, by = 1/6),3)))
+
+# Gráfico de barras corregido usando geom_bar y el factor
+hist_alpha <- ggplot(df_metech_attr, aes(x = alpha_innov_prop_factor)) +
+  geom_bar(fill = "green", color = "black", stat = "count") + # stat="count" es el default para geom_bar
   labs(title = "Distribución del Índice de Propensión a la Innovación (alpha_innov_prop)",
-       x = "Índice Normalizado (0-1)", y = "Frecuencia") +
-  theme_minimal()
+       x = "Alpha Index", 
+       y = "Frecuencia") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5)) # Ajusta el ángulo si es necesario
+
 print(hist_alpha)
 ggsave("trabajo_1_plots/metech_alpha_distribution_ATP.pdf", plot = hist_alpha, width = 8, height = 6)
 
