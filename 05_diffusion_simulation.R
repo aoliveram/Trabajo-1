@@ -53,3 +53,47 @@ for (i in seq_along(metech_vars)) {
 pdf("trabajo_1_plots/metech_distribution_ATP.pdf", width = 10, height = 7)
 do.call(grid.arrange, c(plots_metech_original, ncol = 3))
 dev.off()
+
+# --- 4. Índice de Propensión a la Innovación ---
+# a. Usually try new products before others do (METECH_A_W3): 1 = pro-innovación
+# b. Prefer my tried and trusted brands (METECH_B_W3): 1 = ANTI-innovación (invertir)
+# c. Like being able to tell others about new brands and products I have tried (METECH_C_W3): 1 = pro-innovación
+# d. Like the variety of trying new products (METECH_D_W3): 1 = pro-innovación
+# e. Feel more comfortable using familiar brands and products (METECH_E_W3): 1 = ANTI-innovación (invertir)
+# f. Wait until I hear about others' experiences before I try new products (METECH_F_W3): 1 = ANTI-innovación (invertir)
+
+df_metech_attr <- df_metech_attr %>%
+  mutate(
+    # Si el valor original es NA, el resultado de la recodificación también será NA
+    score_A = ifelse(is.na(metech_a), NA, metech_a),                             # Pro
+    score_B = ifelse(is.na(metech_b), NA, 1 - metech_b),                         # ANTI
+    score_C = ifelse(is.na(metech_c), NA, metech_c),                             # Pro
+    score_D = ifelse(is.na(metech_d), NA, metech_d),                             # Pro
+    score_E = ifelse(is.na(metech_e), NA, 1 - metech_e),                         # ANTI
+    score_F = ifelse(is.na(metech_f), NA, 1 - metech_f))                         # ANTI
+
+df_metech_attr <- df_metech_attr %>%
+  mutate(
+    # sumamos los scores (0-6). # si hay entrada NA en alguna, el resultado es NA.
+    new_tech_pref_raw_index = rowSums(select(., starts_with("score_"))),
+    
+    # Normalizar el índice para que esté entre 0 y 1
+    alpha_innov_prop = new_tech_pref_raw_index / 6
+  )
+
+# --- 5. Estudiar Distribución del Índice Creado y Guardar Histograma ---
+cat("\nResumen del índice alpha_innov_prop:\n")
+print(summary(df_metech_attr$alpha_innov_prop))
+cat("\nTabla de frecuencia para el índice crudo (0-6):\n")
+print(table(df_metech_attr$new_tech_pref_raw_index, useNA = "ifany"))
+
+
+# Histograma del índice normalizado (0-1)
+hist_alpha <- ggplot(df_metech_attr, aes(x = alpha_innov_prop)) +
+  geom_histogram(binwidth = 1/6 / 2, fill = "darkgreen", color = "black", boundary = 0) + # binwidth ajustado
+  scale_x_continuous(breaks = seq(0, 1, by = 1/6), labels = scales::percent_format(accuracy = 1)) +
+  labs(title = "Distribución del Índice de Propensión a la Innovación (alpha_innov_prop)",
+       x = "Índice Normalizado (0-1)", y = "Frecuencia") +
+  theme_minimal()
+print(hist_alpha)
+ggsave("trabajo_1_plots/metech_alpha_distribution_ATP.pdf", plot = hist_alpha, width = 8, height = 6)
