@@ -36,6 +36,7 @@ for (m_var in metech_vars) {
   }
 }
 
+# Seleccionamos casos completos
 sapply(ATP_W3_sub[, attribute_vars], function(col) sum(is.na(col))) # verificar NA's
 sapply(ATP_W3_sub[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
 #ATP_W3_sub_2 <- ATP_W3_sub
