@@ -270,7 +270,7 @@ edges_var_info <- calibrate_edges_coefficient(
   control_simulate_ergm_options = control_sim_formula # Objeto de control para simulate()
 )
 
-print(edges_var_info) #$calibrated_coef_edges -> [1] -4.25 , $achieved_density -> [1] 0.02904798
+print(edges_var_info) #$calibrated_coef_edges -> [1] -4.3125 , $achieved_density -> [1] 0.0290549
 
 # Para ATP submuestra N=1000 como base
 edges_var_info_1000 <- calibrate_edges_coefficient(
@@ -286,9 +286,9 @@ edges_var_info_1000 <- calibrate_edges_coefficient(
   control_simulate_ergm_options = control_sim_formula # Objeto de control para simulate()
 )
 
-print(edges_var_info_1000) # $calibrated_coef_edges -> [1] -4.25 , $achieved_density -> [1] 0.02904545
+print(edges_var_info_1000) # $calibrated_coef_edges -> [1] -4.3125 , $achieved_density -> [1] 0.02851892
 
-# Las densidades de ambas bases son prácticamente iguales para 'edges' = -4.25
+# Las densidades de ambas bases son prácticamente iguales para 'edges' = -4.3125
 # Si solo tuviera 'edges': 
 # p = exp(θ_edges) / (1 + exp(θ_edges)) --> coef_edges_teo <- log(0.029 / (1 - 0.029))
 # La densidad es controlada principalmente por 'edges' y los efectos relativos de homofilia se mantienen.
