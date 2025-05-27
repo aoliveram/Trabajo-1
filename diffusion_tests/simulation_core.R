@@ -105,10 +105,10 @@ for (current_threshold_base in threshold_values_list_sim) {
       degrees <- degree(current_graph, mode = "total")
       thresholds_sim <- round(thresholds_sim * degrees)
     }
-    # Asegurar que los umbrales no sean cero o negativos si son absolutos
+    # Asegurar que los umbrales no sean cero o negativos
     thresholds_sim[thresholds_sim <= 0] <- 1 
     
-    # num_seeds_to_add se usa en get_PLci para determinar el "tamaño" inicial del cluster de siembra
+    # Determinamos núemro de nodos para comenzar contagio
     num_seeds_to_add_sim <- thresholds_sim - 1
     num_seeds_to_add_sim[num_seeds_to_add_sim < 0] <- 0
     
@@ -116,8 +116,6 @@ for (current_threshold_base in threshold_values_list_sim) {
     seeds_to_run_simulation <- c()
     if (SEEDING_STRATEGY == "PLci_top") {
       # Calcular PLci para todos los nodos
-      # Nota: get_PLci espera una lista 'model_output_list' que no se usa realmente.
-      # Se puede simplificar en la función o pasar NULL si no causa error.
       temp_adj_matrix <- as.matrix(as_adjacency_matrix(current_graph))
       complex_centrality_values <- sapply(1:N_nodes_global, function(node_idx) {
         # Asegúrate de que 'model_output_list' no sea un problema aquí o modifica get_PLci
@@ -132,7 +130,7 @@ for (current_threshold_base in threshold_values_list_sim) {
       # y se promediarían, o se tomaría una muestra representativa.
       # Por simplicidad para testeo rápido, solo tomamos un conjunto.
       set.seed(graph_idx * current_threshold_base * 100) # Semilla variable
-      seeds_to_run_simulation <- sample(V(current_graph), NUM_SUCCESSFUL_SIMS_PER_GRAPH) # O un número fijo de nodos aleatorios a probar
+      seeds_to_run_simulation <- sample(V(current_graph), NUM_SUCCESSFUL_SIMS_PER_GRAPH)
       cat(paste("      Nodos semilla (random):", paste(seeds_to_run_simulation, collapse=", "), "\n"))
     }
     
@@ -145,10 +143,7 @@ for (current_threshold_base in threshold_values_list_sim) {
       
       cat(paste("        Simulando con semilla:", seed_node_sim, "...\n"))
       
-      # Ejecutar el barrido de parámetros para esta semilla
-      # El parámetro 'plot' se quita de la llamada y de la función sweep_homoph_parameter
-      # 'file_dir' y 'centrality' tampoco son necesarios para el testeo rápido sin guardado.
-      # 'i' en la llamada original a sweep_homoph_parameter era el índice del grafo, ahora es graph_idx
+      # Ejecutamos el barrido de parámetros para esta semilla
       temp_results_df <- sweep_homoph_parameter(
         seed_node = seed_node_sim, 
         homoph_values = homoph_values_sim, 
@@ -157,16 +152,15 @@ for (current_threshold_base in threshold_values_list_sim) {
         thresholds = thresholds_sim, 
         num_seeds_to_add = num_seeds_to_add_sim, 
         alpha_values = alpha_values_sim,
-        graph_idx_for_saving = graph_idx # 'i' en tu código original
+        graph_idx_for_saving = graph_idx #índice del grafo, antes 'i', ahora graph_idx
       )
       
-      # Añadir info de la corrida actual
+      # Añadimos info de la corrida actual
       temp_results_df$graph_type <- current_graph_type_label
       temp_results_df$base_threshold <- current_threshold_base
       temp_results_df$graph_instance_idx <- graph_idx
       
       # Verificar si la simulación fue "exitosa" (para estrategia PLci_top)
-      # o simplemente guardar los resultados (para estrategia random)
       if (SEEDING_STRATEGY == "PLci_top") {
         if (any(temp_results_df$num_adopters / N_nodes_global > num_adopters_min_sim)) {
           simulation_results_for_threshold[[length(simulation_results_for_threshold) + 1]] <- temp_results_df
@@ -179,17 +173,18 @@ for (current_threshold_base in threshold_values_list_sim) {
         simulation_results_for_threshold[[length(simulation_results_for_threshold) + 1]] <- temp_results_df
         successful_sim_count_for_graph <- successful_sim_count_for_graph + 1 # Contamos todas
       }
-    } # Fin bucle seed_node_sim
-  } # Fin bucle graph_idx
+    } # Fin LOOP seed_node_sim
+  } # Fin LOOP graph_idx
   
-  # Combinar resultados para este umbral y añadirlos a la lista general
   if (length(simulation_results_for_threshold) > 0) {
+    # Recopilamos resultados para este umbral
     combined_df_for_threshold <- bind_rows(simulation_results_for_threshold)
+    # añadirlos a la lista general
     all_simulation_results[[T_str_sim]] <- combined_df_for_threshold
   } else {
     cat(paste("    No se obtuvieron resultados para el umbral:", T_str_sim, "\n"))
   }
   
-} # Fin bucle current_threshold_base
+} # Fin LOOP current_threshold_base
 
 cat("Todas las simulaciones completadas.\n")
