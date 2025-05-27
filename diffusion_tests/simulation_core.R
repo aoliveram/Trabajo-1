@@ -53,11 +53,11 @@ if (USE_SDA_FROM_FILES) { # Carga de redes Small-World SDA desde archivos
   # graphs_list_to_simulate <- generate_small_world_networks(N_nodes_sim, num_edges_sim, p_rewire_sim)
   # current_graph_type_label <- "Small-World"
   
-  # graphs_list_to_simulate <- generate_scale_free_networks(N_nodes_sim, m_sim)
-  # current_graph_type_label <- "Scale-Free"
+  graphs_list_to_simulate <- generate_scale_free_networks(N_nodes_sim, m_sim)
+  current_graph_type_label <- "Scale-Free"
   
-  graphs_list_to_simulate <- generate_erdos_renyi_networks(N_nodes_sim, num_edges_sim)
-  current_graph_type_label <- "Erdos-Renyi"
+  # graphs_list_to_simulate <- generate_erdos_renyi_networks(N_nodes_sim, num_edges_sim)
+  # current_graph_type_label <- "Erdos-Renyi"
 }
 
 # -----------------------------------------------------------------------------
@@ -215,7 +215,8 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
       if (inherits(df_from_a_seed_run_parallel, "simpleError")) {
         next 
       }
-      if (is.null(df_from_a_seed_run_parallel) || nrow(df_from_a_seed_run_parallel) == 0) next
+      #if (is.null(df_from_a_seed_run_parallel) || nrow(df_from_a_seed_run_parallel) == 0) next
+      if (is.null(df_from_a_seed_run_parallel)) next
       
       process_this_df = FALSE
       if (SEEDING_STRATEGY == "PLci_top") {
@@ -296,7 +297,7 @@ if (length(all_simulation_results_collection) > 0) {
       # fig_single_tau <- fig_single_tau + facet_wrap(~graph_instance_idx, ncol=5)
       
       plots_per_tau_threshold[[plot_title_text]] <- fig_single_tau
-      print(fig_single_tau) 
+      #print(fig_single_tau) 
       
     } else {
       cat(paste("No hay datos suficientes o faltan columnas para graficar el umbral τ:", tau_label_for_plot_str, "\n"))
