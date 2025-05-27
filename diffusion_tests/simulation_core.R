@@ -187,4 +187,50 @@ for (current_threshold_base in threshold_values_list_sim) {
   
 } # Fin LOOP current_threshold_base
 
-cat("Todas las simulaciones completadas.\n")
+
+# -----------------------------------------------------------------------------
+# 4. Visualización Resultados
+# -----------------------------------------------------------------------------
+
+if (length(all_simulation_results) > 0) {
+  plots_per_threshold <- list()
+  
+  for (t_label in names(all_simulation_results)) {
+    data_for_plot <- all_simulation_results[[t_label]]
+    
+    # Asegurarse que las columnas necesarias existan
+    if (!is.null(data_for_plot) && nrow(data_for_plot) > 0 &&
+        all(c("alpha_1", "num_adopters", "seed", "homophily") %in% names(data_for_plot))) {
+      
+      plot_title <- paste(current_graph_type_label, "- Umbral Base:", t_label)
+      
+      fig_single_threshold <- ggplot(data = data_for_plot, aes(x = alpha_1, y = num_adopters / N_nodes_global)) +
+        geom_line(aes(group = interaction(seed, homophily, graph_instance_idx), color = as.factor(homophily)), linewidth = 0.5, alpha = 0.4) +
+        geom_point(aes(color = as.factor(homophily)), size = 1.5, alpha = 0.4) +
+        scale_color_viridis_d(option = "plasma", begin = 0.2, end = 0.9, direction = -1, 
+                              labels = sprintf("%.2f", unique(sort(data_for_plot$homophily)))) +
+        labs(x = expression(Gamma), y = "Proporción de Adoptadores", color = "Homofilia", title = plot_title) +
+        theme_minimal() +
+        theme(legend.position = "right")
+      
+      plots_per_threshold[[plot_title]] <- fig_single_threshold
+      print(fig_single_threshold) # Mostrar el gráfico
+      
+    } else {
+      cat(paste("No hay datos suficientes o faltan columnas para graficar el umbral:", t_label, "\n"))
+    }
+  }
+  
+  # Si quieres combinar los plots de diferentes umbrales para el TIPO de red actual en un solo panel:
+  if (length(plots_per_threshold) > 1) {
+    final_combined_plot <- wrap_plots(plots_per_threshold, ncol = 1) + 
+      plot_layout(guides = "collect") &
+      theme(legend.position = "bottom")
+    print(final_combined_plot)
+    # Guardamos
+    # ggsave(paste0("quick_plot_", current_graph_type_label, ".pdf"), final_combined_plot, width=7, height=3*length(plots_per_threshold)))
+  }
+  
+} else {
+  cat("No se generaron resultados para visualizar.\n")
+}
