@@ -192,3 +192,35 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
     num_steps = simulation_step
   ))
 }
+
+sweep_homoph_parameter <- function(primary_seed_id_arg, 
+                                   N_nodes_arg, 
+                                   graph_obj_arg, 
+                                   node_individual_thresholds_tau_arg, # Vector τ_i
+                                   node_mur_q_arg,                     # Vector q_i
+                                   all_innovation_iul_Gamma_values,  # Vector de Γ a probar
+                                   all_social_distance_h_values,     # Vector de h a probar
+                                   initial_infectors_vector_arg) {   # Semillas para ESTA simulación
+  
+  results_for_this_primary_seed <- list()
+  
+  for (current_Gamma in all_innovation_iul_Gamma_values) {
+    for (current_h in all_social_distance_h_values) {
+      
+      sim_output <- get_complex_plot(
+        seed_node = primary_seed_id_arg, # Para identificar la corrida
+        N_nodes = N_nodes_arg,
+        graph_obj = graph_obj_arg,
+        node_individual_thresholds_tau = node_individual_thresholds_tau_arg,
+        node_mur_q = node_mur_q_arg,
+        innovation_iul_Gamma = current_Gamma,
+        social_distance_h = current_h,
+        initial_seed_nodes_vector = initial_infectors_vector_arg
+      )
+      results_for_this_primary_seed[[length(results_for_this_primary_seed) + 1]] <- as.data.frame(sim_output)
+    }
+  }
+  
+  df_for_this_primary_seed <- bind_rows(results_for_this_primary_seed)
+  return(df_for_this_primary_seed)
+}
