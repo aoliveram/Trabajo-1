@@ -85,160 +85,234 @@ NUM_SUCCESSFUL_SIMS_PER_GRAPH <- 1 # Cuántas simulaciones "exitosas" guardar po
 # -----------------------------------------------------------------------------
 # 3. Bucle Principal de Simulación
 # -----------------------------------------------------------------------------
-all_simulation_results <- list() # almacena los resultados
+
+all_simulation_results_collection <- list() 
 
 cat(paste("Iniciando simulaciones para tipo de red:", current_graph_type_label, "\n"))
 
-for (current_threshold_base in threshold_values_list_sim) {
-  T_str_sim <- as.character(current_threshold_base)
-  cat(paste("  Corriendo para Umbral Base:", T_str_sim, "\n"))
+for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ base (fraccional 0-1)
+  T_str_sim <- as.character(current_threshold_base_tau_fractional)
+  cat(paste("  Corriendo para Umbral Base τ (fraccional):", T_str_sim, "\n"))
   
-  simulation_results_for_threshold <- list()
+  results_for_this_base_tau_and_all_graphs <- list() 
   
   for (graph_idx in seq_along(graphs_list_to_simulate)) {
-    current_graph <- graphs_list_to_simulate[[graph_idx]]
-    cat(paste("    Procesando grafo #", graph_idx, "de 5...\n"))
+    current_graph_obj_sim <- graphs_list_to_simulate[[graph_idx]]
+    cat(paste("    Procesando grafo #", graph_idx, "de", length(graphs_list_to_simulate), "...\n"))
     
-    # Calcular umbrales para los nodos
-    thresholds_sim <- rep(current_threshold_base, N_nodes_global)
-    if (T_type_sim == "frac") {
-      degrees <- degree(current_graph, mode = "total")
-      thresholds_sim <- round(thresholds_sim * degrees)
-    }
-    # Asegurar que los umbrales no sean cero o negativos
-    thresholds_sim[thresholds_sim <= 0] <- 1 
+    node_mur_q_for_sim <- V(current_graph_obj_sim)$alpha # q_i (MUR)
+    node_degrees_for_sim <- degree(current_graph_obj_sim, mode = "total")
     
-    # Determinamos núemro de nodos para comenzar contagio
-    num_seeds_to_add_sim <- thresholds_sim - 1
-    num_seeds_to_add_sim[num_seeds_to_add_sim < 0] <- 0
+    # Calcular umbrales individuales τ_i
+    node_individual_thresholds_tau_frac_for_sim <- rep(current_threshold_base_tau_fractional, N_nodes_global)
+    # (Aquí iría lógica para τ_i heterogéneos si T_dist_sim == "hetero")
+    node_individual_thresholds_tau_frac_for_sim[node_individual_thresholds_tau_frac_for_sim <= 0 & current_threshold_base_tau_fractional > 0] <- 1e-6
+    node_individual_thresholds_tau_frac_for_sim[node_individual_thresholds_tau_frac_for_sim > 1] <- 1.0
     
-    # Selección de nodos semilla
-    seeds_to_run_simulation <- c()
+    # Calcular umbrales de CONTEO para PLCI y para determinar el tamaño del clúster inicial
+    # Estos son τ_conteo = τ_fraccional * grado_nodo (redondeado)
+    node_thresholds_count_for_plci_and_cluster <- round(node_individual_thresholds_tau_frac_for_sim * node_degrees_for_sim)
+    node_thresholds_count_for_plci_and_cluster[node_thresholds_count_for_plci_and_cluster <= 0] <- 1 # Mínimo 1
+    
+    # Selección de qué nodos semilla principales se van a probar
+    seed_nodes_to_test_as_primary <- c()
     if (SEEDING_STRATEGY == "PLci_top") {
-      # Calcular PLci para todos los nodos
-      temp_adj_matrix <- as.matrix(as_adjacency_matrix(current_graph))
-      complex_centrality_values <- sapply(1:N_nodes_global, function(node_idx) {
-        # Asegúrate de que 'model_output_list' no sea un problema aquí o modifica get_PLci
-        get_PLci(node_idx, N_nodes_global, current_graph, temp_adj_matrix, thresholds_sim, num_seeds_to_add_sim, model_output_list = NULL)[5] # El 5to elemento es PLci
+      adj_mat_for_plci_calc <- as.matrix(as_adjacency_matrix(current_graph_obj_sim))
+      plci_values <- sapply(1:N_nodes_global, function(node_idx_for_plci) {
+        get_PLci(
+          seed_node = node_idx_for_plci, N_nodes = N_nodes_global, graph_obj = current_graph_obj_sim, 
+          adj_matrix = adj_mat_for_plci_calc, 
+          node_thresholds = node_thresholds_count_for_plci_and_cluster, # Umbral de CONTEO para PLCI
+          num_initial_cluster_seeds_for_node = node_thresholds_count_for_plci_and_cluster[node_idx_for_plci], # Tamaño CONTEO para PLCI
+          model_output_list_placeholder = NULL
+        )[5] 
       })
-      top_PLci_nodes_indices <- order(as.numeric(complex_centrality_values), decreasing = TRUE)[1:NUM_TOP_PLCI_NODES_TO_TEST]
-      seeds_to_run_simulation <- top_PLci_nodes_indices
-      cat(paste("      Nodos semilla (PLci_top):", paste(seeds_to_run_simulation, collapse=", "), "\n"))
-      
+      seed_nodes_to_test_as_primary <- order(as.numeric(plci_values), decreasing = TRUE)[1:min(N_nodes_global, NUM_TOP_PLCI_NODES_TO_TEST)]
+      cat(paste("      Nodos semilla principales (PLci_top):", paste(seed_nodes_to_test_as_primary, collapse=", "), "\n"))
     } else if (SEEDING_STRATEGY == "random") {
-      # Para robustez con semillas aleatorias, idealmente se harían MÚLTIPLES corridas aquí
-      # y se promediarían, o se tomaría una muestra representativa.
-      # Por simplicidad para testeo rápido, solo tomamos un conjunto.
-      set.seed(graph_idx * current_threshold_base * 100) # Semilla variable
-      seeds_to_run_simulation <- sample(V(current_graph), NUM_SUCCESSFUL_SIMS_PER_GRAPH)
-      cat(paste("      Nodos semilla (random):", paste(seeds_to_run_simulation, collapse=", "), "\n"))
+      set.seed(graph_idx * sum(as.numeric(charToRaw(T_str_sim))) * 7) 
+      num_random_runs_per_graph = NUM_SUCCESSFUL_SIMS_PER_GRAPH 
+      seed_nodes_to_test_as_primary <- sample(V(current_graph_obj_sim), num_random_runs_per_graph, replace = FALSE)
+      cat(paste("      Nodos semilla principales (random):", paste(seed_nodes_to_test_as_primary, collapse=", "), "\n"))
     }
     
-    successful_sim_count_for_graph <- 0
+    if (length(seed_nodes_to_test_as_primary) == 0) {
+      cat("      No se seleccionaron nodos semilla principales para este grafo. Saltando.\n")
+      next
+    }
     
-    for (seed_node_sim in seeds_to_run_simulation) {
-      if (successful_sim_count_for_graph >= NUM_SUCCESSFUL_SIMS_PER_GRAPH && SEEDING_STRATEGY == "PLci_top") {
-        break # Ya tenemos suficientes simulaciones exitosas para esta estrategia
-      }
+    cl <- makeCluster(detectCores() - 1, type = "FORK") 
+    registerDoParallel(cl)
+    
+    list_of_dfs_from_parallel_seeds <- foreach(
+      current_primary_seed_id = seed_nodes_to_test_as_primary, 
+      .combine = 'list', 
+      .packages = c('igraph', 'dplyr'), 
+      .export = c('sweep_homoph_parameter', 'get_complex_plot', 
+                  'N_nodes_global', 'current_graph_obj_sim', 
+                  'node_individual_thresholds_tau_frac_for_sim', # τ fraccional para get_complex_plot
+                  'node_thresholds_count_for_plci_and_cluster', # τ conteo para clúster inicial
+                  'node_mur_q_for_sim', 'node_degrees_for_sim',
+                  'alpha_values_sim', 'homoph_values_sim'),
+      .errorhandling = 'pass' 
+    ) %dopar% {
       
-      # En simulation_core.R, dentro del bucle de graph_idx
-      cl <- makeCluster(detectCores() - 1) # o un número fijo
-      registerDoParallel(cl)
+      # Determinar el vector de semillas iniciales para ESTA simulación concreta
+      # El tamaño del clúster inicial será el umbral de CONTEO del nodo semilla principal.
+      # Esto asegura que la semilla principal "recibe" suficiente refuerzo inicial.
+      num_seeds_for_initial_cluster = node_thresholds_count_for_plci_and_cluster[current_primary_seed_id]
+      # Asegurar que no sea mayor que el número de nodos o grado + 1
+      num_seeds_for_initial_cluster = min(num_seeds_for_initial_cluster, N_nodes_global, node_degrees_for_sim[current_primary_seed_id] + 1)
+      if(num_seeds_for_initial_cluster < 1) num_seeds_for_initial_cluster <- 1
       
-      results_for_this_graph_list <- foreach(seed_node_sim = seeds_to_run_simulation, .combine = 'list', .packages=c('igraph', 'dplyr')) %dopar% {
-        # Cargar funciones de nuevo dentro del worker si es necesario o exportarlas
-        # source("simulation_functions.R") # Ojo con rutas relativas en workers
+      
+      initial_infectors_for_this_run <- c(current_primary_seed_id) # Empezar con la semilla principal
+      
+      if (num_seeds_for_initial_cluster > 1) {
+        neighbors_of_primary <- as.numeric(neighbors(current_graph_obj_sim, current_primary_seed_id, mode="total"))
+        # Necesitamos seleccionar (num_seeds_for_initial_cluster - 1) vecinos adicionales
+        num_additional_needed = num_seeds_for_initial_cluster - 1
         
-        cat(paste("        Simulando con semilla:", seed_node_sim, "...\n"))
-        # Ejecutamos el barrido de parámetros para esta semilla
-        temp_results_df <- sweep_homoph_parameter(
-          seed_node = seed_node_sim, 
-          homoph_values = homoph_values_sim, 
-          N = N_nodes_global, 
-          graph = current_graph, 
-          thresholds = thresholds_sim, 
-          num_seeds_to_add = num_seeds_to_add_sim, 
-          alpha_values = alpha_values_sim,
-          graph_idx_for_saving = graph_idx #índice del grafo, antes 'i', ahora graph_idx
-        )
-        
-        # Añadimos info de la corrida actual
-        temp_results_df$graph_type <- current_graph_type_label
-        temp_results_df$base_threshold <- current_threshold_base
-        temp_results_df$graph_instance_idx <- graph_idx
-        
-        if (SEEDING_STRATEGY == "PLci_top") {
-          if (any(temp_results_df$num_adopters / N_nodes_global > num_adopters_min_sim)) {
-            return(temp_results_df) # Devolver el DF
-          } else {
-            return(NULL) # O un DF vacío para filtrar después
+        if (length(neighbors_of_primary) >= num_additional_needed) {
+          initial_infectors_for_this_run <- c(initial_infectors_for_this_run, sample(neighbors_of_primary, num_additional_needed))
+        } else { # No hay suficientes vecinos, tomar todos y luego aleatorios si aún faltan
+          initial_infectors_for_this_run <- c(initial_infectors_for_this_run, neighbors_of_primary)
+          still_needed_more <- num_seeds_for_initial_cluster - length(initial_infectors_for_this_run)
+          if (still_needed_more > 0) {
+            potential_others <- setdiff(1:N_nodes_global, initial_infectors_for_this_run)
+            if (length(potential_others) > 0) {
+              initial_infectors_for_this_run <- c(initial_infectors_for_this_run, sample(potential_others, min(length(potential_others), still_needed_more)))
+            }
           }
-        } else {
-          return(temp_results_df)
         }
       }
-      stopCluster(cl)
+      initial_infectors_for_this_run <- unique(initial_infectors_for_this_run)
       
-      # Filtrar NULLs y combinar
-      valid_results <- Filter(Negate(is.null), results_for_this_graph_list)
-      if (length(valid_results) > 0) {
-        if (length(simulation_results_for_threshold) > 0) {
-          # Recopilamos resultados para este umbral
-          combined_df_for_threshold <- bind_rows(simulation_results_for_threshold)
-          # añadirlos a la lista general
-          all_simulation_results[[T_str_sim]] <- combined_df_for_threshold
-        } else {
-          cat(paste("    No se obtuvieron resultados para el umbral:", T_str_sim, "\n"))
-        }
-      }
-    } # Fin LOOP seed_node_sim
-  } # Fin LOOP graph_idx
-} # Fin LOOP current_threshold_base
-
-
-# -----------------------------------------------------------------------------
-# 4. Visualización Resultados
-# -----------------------------------------------------------------------------
-
-if (length(all_simulation_results) > 0) {
-  plots_per_threshold <- list()
-  
-  for (t_label in names(all_simulation_results)) {
-    data_for_plot <- all_simulation_results[[t_label]]
+      df_from_worker <- sweep_homoph_parameter(
+        primary_seed_id_arg = current_primary_seed_id,
+        N_nodes_arg = N_nodes_global,
+        graph_obj_arg = current_graph_obj_sim,
+        node_individual_thresholds_tau_arg = node_individual_thresholds_tau_frac_for_sim, # τ fraccional para get_complex_plot
+        node_mur_q_arg = node_mur_q_for_sim,
+        all_innovation_iul_Gamma_values = alpha_values_sim, 
+        all_social_distance_h_values = homoph_values_sim,   
+        initial_infectors_vector_arg = initial_infectors_for_this_run # El clúster inicial
+      )
+      
+      df_from_worker$graph_type <- current_graph_type_label
+      df_from_worker$base_threshold_tau_frac <- current_threshold_base_tau_fractional 
+      df_from_worker$graph_instance_idx <- graph_idx
+      
+      return(df_from_worker)
+    } 
     
-    # Asegurarse que las columnas necesarias existan
-    if (!is.null(data_for_plot) && nrow(data_for_plot) > 0 &&
-        all(c("alpha_1", "num_adopters", "seed", "homophily") %in% names(data_for_plot))) {
+    stopCluster(cl)
+    
+    final_dfs_to_combine_for_this_graph_instance <- list()
+    successful_runs_count_for_filter = 0
+    
+    for(df_from_a_seed_run_parallel in list_of_dfs_from_parallel_seeds){
+      if (inherits(df_from_a_seed_run_parallel, "simpleError")) {
+        next 
+      }
+      if (is.null(df_from_a_seed_run_parallel) || nrow(df_from_a_seed_run_parallel) == 0) next
       
-      plot_title <- paste(current_graph_type_label, "- Umbral Base:", t_label)
+      process_this_df = FALSE
+      if (SEEDING_STRATEGY == "PLci_top") {
+        if (successful_runs_count_for_filter < NUM_SUCCESSFUL_SIMS_PER_GRAPH) {
+          if (any(df_from_a_seed_run_parallel$num_adopters / N_nodes_global > num_adopters_min_sim, na.rm=TRUE)) {
+            process_this_df = TRUE
+          }
+        }
+      } else { 
+        if (successful_runs_count_for_filter < NUM_SUCCESSFUL_SIMS_PER_GRAPH) {
+          process_this_df = TRUE
+        }
+      }
       
-      fig_single_threshold <- ggplot(data = data_for_plot, aes(x = alpha_1, y = num_adopters / N_nodes_global)) +
-        geom_line(aes(group = interaction(seed, homophily, graph_instance_idx), color = as.factor(homophily)), linewidth = 0.5, alpha = 0.4) +
-        geom_point(aes(color = as.factor(homophily)), size = 1.5, alpha = 0.4) +
-        scale_color_viridis_d(option = "plasma", begin = 0.2, end = 0.9, direction = -1, 
-                              labels = sprintf("%.2f", unique(sort(data_for_plot$homophily)))) +
-        labs(x = expression(Gamma), y = "Proporción de Adoptadores", color = "Homofilia", title = plot_title) +
-        theme_minimal() +
-        theme(legend.position = "right")
+      if(process_this_df){
+        final_dfs_to_combine_for_this_graph_instance[[length(final_dfs_to_combine_for_this_graph_instance) + 1]] <- df_from_a_seed_run_parallel
+        successful_runs_count_for_filter <- successful_runs_count_for_filter + 1
+      }
+    }
+    
+    if (length(final_dfs_to_combine_for_this_graph_instance) > 0) {
+      results_for_this_base_tau_and_all_graphs[[paste0("graph_", graph_idx)]] <- bind_rows(final_dfs_to_combine_for_this_graph_instance)
+    } else {
+      cat(paste("    No se obtuvieron resultados válidos para el grafo #", graph_idx, "y umbral τ", T_str_sim, "\n"))
+    }
+  } 
+  
+  if (length(results_for_this_base_tau_and_all_graphs) > 0) {
+    all_simulation_results_collection[[T_str_sim]] <- bind_rows(results_for_this_base_tau_and_all_graphs)
+  }
+} 
+
+cat("Todas las simulaciones completadas.\n")
+
+# -----------------------------------------------------------------------------
+# 4. Visualización Rápida de Resultados 
+# -----------------------------------------------------------------------------
+if (length(all_simulation_results_collection) > 0) {
+  plots_per_tau_threshold <- list()
+  
+  # Definir nombres para la faceta si vas a usar múltiples tipos de grafos en un solo plot
+  # graph_type_labels_for_plot <- c("Erdos-Renyi", "Scale-Free", "Small-World", "Small-World-SDA") # Ejemplo
+  # names(graph_type_labels_for_plot) <- unique(sapply(all_simulation_results_collection, function(df) df$graph_type[1]))
+  
+  
+  for (tau_label_for_plot_str in names(all_simulation_results_collection)) {
+    data_for_this_tau_plot <- all_simulation_results_collection[[tau_label_for_plot_str]]
+    
+    # Asegurar que las columnas de resultados de get_complex_plot tengan los nombres correctos
+    # (innovation_iul_Gamma, social_distance_h, seed, num_adopters)
+    if (!is.null(data_for_this_tau_plot) && nrow(data_for_this_tau_plot) > 0 &&
+        all(c("innovation_iul_Gamma", "num_adopters", "seed", "social_distance_h") %in% names(data_for_this_tau_plot))) {
       
-      plots_per_threshold[[plot_title]] <- fig_single_threshold
-      print(fig_single_threshold) # Mostrar el gráfico
+      plot_title_text <- paste(current_graph_type_label, "- Umbral Base τ (frac):", tau_label_for_plot_str)
+      
+      data_for_this_tau_plot$social_distance_h_factor <- as.factor(sprintf("%.2f", data_for_this_tau_plot$social_distance_h))
+      h_labels_for_legend <- sprintf("%.2f", unique(sort(data_for_this_tau_plot$social_distance_h)))
+      
+      fig_single_tau <- ggplot(data = data_for_this_tau_plot, 
+                               aes(x = innovation_iul_Gamma, y = num_adopters / N_nodes_global, 
+                                   color = social_distance_h_factor, group = social_distance_h_factor)) +
+        # Quitar líneas individuales para claridad si hay muchas corridas
+        # geom_line(aes(group = interaction(seed, graph_instance_idx)), linewidth = 0.3, alpha = 0.15) +
+        stat_summary(fun = mean, geom = "line", linewidth = 1.0) +
+        stat_summary(fun.data = mean_se, geom = "ribbon", alpha = 0.2, aes(fill=social_distance_h_factor), show.legend = FALSE) + # Intervalo de confianza (opcional)
+        scale_color_viridis_d(option = "plasma", name = "Distancia Social (h)", labels = h_labels_for_legend) +
+        scale_fill_viridis_d(option = "plasma") + # Para el ribbon
+        labs(x = expression(paste("Utilidad Intrínseca Innovación (", Gamma, ")")), 
+             y = "Proporción Media de Adoptadores", 
+             title = plot_title_text) +
+        ylim(0,1) + 
+        theme_minimal(base_size = 10) +
+        theme(legend.position = "bottom", legend.direction = "horizontal", 
+              plot.title = element_text(hjust = 0.5, size=11),
+              strip.text = element_text(size=10)) # Para facet_wrap si se usa
+      
+      # Si quieres separar por graph_instance_idx (las 5 redes de la misma topología)
+      # fig_single_tau <- fig_single_tau + facet_wrap(~graph_instance_idx, ncol=5)
+      
+      plots_per_tau_threshold[[plot_title_text]] <- fig_single_tau
+      print(fig_single_tau) 
       
     } else {
-      cat(paste("No hay datos suficientes o faltan columnas para graficar el umbral:", t_label, "\n"))
+      cat(paste("No hay datos suficientes o faltan columnas para graficar el umbral τ:", tau_label_for_plot_str, "\n"))
+      if(!is.null(data_for_this_tau_plot)) print(head(names(data_for_this_tau_plot))) # Ayuda a debuggear nombres de columnas
     }
   }
   
-  # Si quieres combinar los plots de diferentes umbrales para el TIPO de red actual en un solo panel:
-  if (length(plots_per_threshold) > 1) {
-    final_combined_plot <- wrap_plots(plots_per_threshold, ncol = 1) + 
-      plot_layout(guides = "collect") &
+  if (length(plots_per_tau_threshold) > 1) {
+    final_combined_plot_for_type <- wrap_plots(plots_per_tau_threshold, ncol = 1, guides = "collect") &
       theme(legend.position = "bottom")
-    print(final_combined_plot)
-    # Guardamos
-    # ggsave(paste0("quick_plot_", current_graph_type_label, ".pdf"), final_combined_plot, width=7, height=3*length(plots_per_threshold)))
+    print(final_combined_plot_for_type)
+    # ggsave(paste0("quick_plot_summary_", current_graph_type_label, ".pdf"), final_combined_plot_for_type, width=7, height=2.5*length(plots_per_tau_threshold), units="in")
+  } else if (length(plots_per_tau_threshold) == 1) {
+    # ggsave(paste0("quick_plot_summary_", current_graph_type_label, "_tau", names(plots_per_tau_threshold)[1] , ".pdf"), plots_per_tau_threshold[[1]], width=7, height=3, units="in")
   }
   
 } else {
-  cat("No se generaron resultados para visualizar.\n")
+  cat("No se generaron resultados consolidados para visualizar.\n")
 }
