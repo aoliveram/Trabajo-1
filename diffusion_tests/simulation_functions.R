@@ -52,3 +52,43 @@ generate_erdos_renyi_networks <- function(N, num_edges_total) {
   }
   return(erdos_renyi_graphs)
 }
+
+# -----------------------------------------------------------------------------
+# Funciones Auxiliares y de Simulación
+# -----------------------------------------------------------------------------
+
+State <- function(value = "State1") {
+  if (!value %in% c("State1", "State2")) {
+    stop("Estado no válido. Use 'State1' o 'State2'.")
+  }
+  return(value)
+}
+
+clustered_seeding <- function(current_seeds, graph_obj, num_total_seeds_needed) {
+  # Asegurar que current_seeds sea numérico si viene de V(g)
+  if (inherits(current_seeds, "igraph.vs")) {
+    current_seeds <- as.numeric(current_seeds)
+  }
+  
+  num_additional_seeds_needed <- num_total_seeds_needed - length(current_seeds)
+  
+  if (num_additional_seeds_needed > 0) {
+    potential_new_seeds <- setdiff(as.numeric(V(graph_obj)), current_seeds)
+    if (length(potential_new_seeds) < num_additional_seeds_needed) {
+      # No hay suficientes nodos únicos para agregar, tomar todos los disponibles
+      new_seeds_selected <- potential_new_seeds
+      warning("No hay suficientes nodos únicos para agregar como semillas adicionales.")
+    } else {
+      new_seeds_selected <- sample(potential_new_seeds, num_additional_seeds_needed)
+    }
+    return(unique(c(current_seeds, new_seeds_selected)))
+  } else {
+    if (length(current_seeds) > num_total_seeds_needed && num_total_seeds_needed > 0) {
+      
+      # Para una lógica más general:
+      # return(sample(current_seeds, num_total_seeds_needed))
+      return(current_seeds) # Devolver las semillas actuales si ya son suficientes/más
+    }
+    return(unique(current_seeds))
+  }
+}
