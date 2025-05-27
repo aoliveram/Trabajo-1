@@ -59,3 +59,25 @@ if (USE_SDA_FROM_FILES) { # Carga de redes Small-World SDA desde archivos
   graphs_list_to_simulate <- generate_erdos_renyi_networks(N_nodes_sim, num_edges_sim)
   current_graph_type_label <- "Erdos-Renyi"
 }
+
+# -----------------------------------------------------------------------------
+# 2. Definición de Parámetros Globales para la Simulación
+# -----------------------------------------------------------------------------
+N_nodes_global <- vcount(graphs_list_to_simulate[[1]])
+
+# Parámetros del espacio de simulación
+homoph_values_sim <- seq(0.0, 0.3, length.out = 6) 
+alpha_values_sim  <- seq(0.0, 1.0, by = 0.04) # Reducido para testeo más rápido
+num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
+
+# Tipo de umbral y distribución
+T_dist_sim <- "homo"  # "homo" o "hetero"
+T_type_sim <- "frac"  # "abs" o "frac"
+
+threshold_values_list_sim <- c(0.10, 0.15, 0.20) 
+
+# Estrategia de selección de semillas: "PLci_top" o "random"
+SEEDING_STRATEGY <- "PLci_top" # o "random"
+NUM_INITIAL_SEEDS_RANDOM <- 5 # Si SEEDING_STRATEGY es "random"
+NUM_TOP_PLCI_NODES_TO_TEST <- 5 # Cuántos de los top PLci probar como semilla
+NUM_SUCCESSFUL_SIMS_PER_GRAPH <- 1 # Cuántas simulaciones "exitosas" guardar por grafo/umbral
