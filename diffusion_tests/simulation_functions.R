@@ -158,12 +158,7 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
           
           exposure_Ei_tilde_value <- numerator_Ei_tilde / denominator_Ei_tilde
           
-          # Comparar con el umbral individual τ_i
-          # La tesis dice τ_i ≤ Ẽ_i. En tu código, los umbrales son generalmente enteros (conteo).
-          # Si Ẽ_i es una proporción (0 a 1) y τ_i es un conteo, la comparación directa no es correcta.
-          # Si τ_i también es una proporción (0 a 1), entonces sí.
-          # Tu código original y `threshold_values_list_sim` sugieren que τ_i son fracciones del grado,
-          # o valores pequeños como 0.10, 0.15. Si son fracciones (0 a 1), la comparación es válida.
+          # Comparar con el umbral individual τ_i (fraccionario)
           if (exposure_Ei_tilde_value >= node_individual_thresholds_tau[i]) {
             newly_infected_this_step_idx <- c(newly_infected_this_step_idx, i)
           }
