@@ -78,7 +78,7 @@ threshold_values_list_sim <- c(0.10, 0.15, 0.20)
 
 # Estrategia de selección de semillas: "PLci_top" o "random"
 SEEDING_STRATEGY <- "PLci_top" # o "random"
-NUM_INITIAL_SEEDS_RANDOM <- 5 # Si SEEDING_STRATEGY es "random"
+#NUM_INITIAL_SEEDS_RANDOM <- 5 # Si SEEDING_STRATEGY es "random"
 NUM_TOP_PLCI_NODES_TO_TEST <- 5 # Cuántos de los top PLci probar como semilla
 NUM_SUCCESSFUL_SIMS_PER_GRAPH <- 1 # Cuántas simulaciones "exitosas" guardar por grafo/umbral
 
@@ -255,63 +255,79 @@ cat("Todas las simulaciones completadas.\n")
 # 4. Visualización Rápida de Resultados 
 # -----------------------------------------------------------------------------
 if (length(all_simulation_results_collection) > 0) {
-  plots_per_tau_threshold <- list()
-  
-  # Definir nombres para la faceta si vas a usar múltiples tipos de grafos en un solo plot
-  # graph_type_labels_for_plot <- c("Erdos-Renyi", "Scale-Free", "Small-World", "Small-World-SDA") # Ejemplo
-  # names(graph_type_labels_for_plot) <- unique(sapply(all_simulation_results_collection, function(df) df$graph_type[1]))
-  
+  plots_per_tau_threshold_comparison <- list()
   
   for (tau_label_for_plot_str in names(all_simulation_results_collection)) {
     data_for_this_tau_plot <- all_simulation_results_collection[[tau_label_for_plot_str]]
     
-    # Asegurar que las columnas de resultados de get_complex_plot tengan los nombres correctos
-    # (innovation_iul_Gamma, social_distance_h, seed, num_adopters)
     if (!is.null(data_for_this_tau_plot) && nrow(data_for_this_tau_plot) > 0 &&
-        all(c("innovation_iul_Gamma", "num_adopters", "seed", "social_distance_h") %in% names(data_for_this_tau_plot))) {
+        all(c("innovation_iul_Gamma", "num_adopters", "seed", "social_distance_h", "graph_instance_idx") %in% names(data_for_this_tau_plot))) {
       
       plot_title_text <- paste(current_graph_type_label, "- Umbral Base τ (frac):", tau_label_for_plot_str)
       
-      data_for_this_tau_plot$social_distance_h_factor <- as.factor(sprintf("%.2f", data_for_this_tau_plot$social_distance_h))
-      h_labels_for_legend <- sprintf("%.2f", unique(sort(data_for_this_tau_plot$social_distance_h)))
+      # Asegurar que social_distance_h sea factor para colores discretos
+      # Y que los niveles estén ordenados para que la leyenda y colores coincidan
+      h_levels <- unique(sort(data_for_this_tau_plot$social_distance_h))
+      data_for_this_tau_plot$social_distance_h_factor <- factor(
+        sprintf("%.2f", data_for_this_tau_plot$social_distance_h),
+        levels = sprintf("%.2f", h_levels) 
+      )
+      h_labels_for_legend <- sprintf("%.2f", h_levels)
       
-      fig_single_tau <- ggplot(data = data_for_this_tau_plot, 
-                               aes(x = innovation_iul_Gamma, y = num_adopters / N_nodes_global, 
-                                   color = social_distance_h_factor, group = social_distance_h_factor)) +
-        # Quitar líneas individuales para claridad si hay muchas corridas
-        # geom_line(aes(group = interaction(seed, graph_instance_idx)), linewidth = 0.3, alpha = 0.15) +
-        stat_summary(fun = mean, geom = "line", linewidth = 1.0) +
-        stat_summary(fun.data = mean_se, geom = "ribbon", alpha = 0.2, aes(fill=social_distance_h_factor), show.legend = FALSE) + # Intervalo de confianza (opcional)
-        scale_color_viridis_d(option = "plasma", name = "Distancia Social (h)", labels = h_labels_for_legend) +
-        scale_fill_viridis_d(option = "plasma") + # Para el ribbon
-        labs(x = expression(paste("Utilidad Intrínseca Innovación (", Gamma, ")")), 
-             y = "Proporción Media de Adoptadores", 
-             title = plot_title_text) +
+      fig_single_tau_comparison <- ggplot(
+        data = data_for_this_tau_plot, 
+        aes(x = innovation_iul_Gamma, 
+            y = num_adopters / N_nodes_global, # Proporción de adoptadores
+            color = social_distance_h_factor, 
+            group = interaction(seed, social_distance_h_factor, graph_instance_idx) # Agrupar por corrida
+        )
+      ) +
+        geom_line(linewidth = 0.4, alpha = 0.5) + # Líneas para cada corrida individual
+        geom_point(size = 1.0, alpha = 0.5) +    # Puntos para cada dato individual
+        
+        # Paleta de colores Viridis "plasma", con dirección invertida para que amarillo sea h=0.00
+        # El valor original de 'direction = -1' hacía que 0.00 fuera el color más oscuro (morado/azul).
+        # 'direction = 1' debería invertirlo.
+        # Ajustar 'begin' y 'end' puede ser necesario para afinar los colores exactos.
+        scale_color_viridis_d(
+          option = "plasma", 
+          name = "Distancia Social (h)", 
+          labels = h_labels_for_legend,
+          direction = -1,  # Invertir la dirección de la paleta
+          begin = 0.0,    # Empezar desde el inicio de la paleta (amarillo en plasma)
+          end = 0.9       # Terminar un poco antes para evitar el morado más oscuro si se desea
+        ) +
+        labs(
+          x = expression(paste("Utilidad Intrínseca Innovación (", Gamma, ")")), 
+          y = "Proporción de Adoptadores", # Ya no es "Media"
+          title = plot_title_text
+        ) +
         ylim(0,1) + 
         theme_minimal(base_size = 10) +
-        theme(legend.position = "bottom", legend.direction = "horizontal", 
-              plot.title = element_text(hjust = 0.5, size=11),
-              strip.text = element_text(size=10)) # Para facet_wrap si se usa
+        theme(
+          legend.position = "bottom", 
+          legend.direction = "horizontal", 
+          plot.title = element_text(hjust = 0.5, size=11)
+        )
       
-      # Si quieres separar por graph_instance_idx (las 5 redes de la misma topología)
-      # fig_single_tau <- fig_single_tau + facet_wrap(~graph_instance_idx, ncol=5)
-      
-      plots_per_tau_threshold[[plot_title_text]] <- fig_single_tau
-      #print(fig_single_tau) 
+      plots_per_tau_threshold_comparison[[plot_title_text]] <- fig_single_tau_comparison
+      print(fig_single_tau_comparison) 
       
     } else {
       cat(paste("No hay datos suficientes o faltan columnas para graficar el umbral τ:", tau_label_for_plot_str, "\n"))
-      if(!is.null(data_for_this_tau_plot)) print(head(names(data_for_this_tau_plot))) # Ayuda a debuggear nombres de columnas
+      if(!is.null(data_for_this_tau_plot)) print(paste("Nombres de columnas:", paste(names(data_for_this_tau_plot), collapse=", ")))
     }
   }
   
-  if (length(plots_per_tau_threshold) > 1) {
-    final_combined_plot_for_type <- wrap_plots(plots_per_tau_threshold, ncol = 1, guides = "collect") &
+  # Combinar los gráficos para el tipo de red actual (si hay más de un umbral τ)
+  if (length(plots_per_tau_threshold_comparison) > 0) {
+    final_combined_plot_for_comparison <- wrap_plots(plots_per_tau_threshold_comparison, ncol = 1, guides = "collect") &
       theme(legend.position = "bottom")
-    print(final_combined_plot_for_type)
-    # ggsave(paste0("quick_plot_summary_", current_graph_type_label, ".pdf"), final_combined_plot_for_type, width=7, height=2.5*length(plots_per_tau_threshold), units="in")
-  } else if (length(plots_per_tau_threshold) == 1) {
-    # ggsave(paste0("quick_plot_summary_", current_graph_type_label, "_tau", names(plots_per_tau_threshold)[1] , ".pdf"), plots_per_tau_threshold[[1]], width=7, height=3, units="in")
+    print(final_combined_plot_for_comparison)
+    # Podrías guardar este gráfico combinado también:
+    # filename_comparison_plot <- paste0("comparison_plot_", gsub("[:/ ]", "_", Sys.time()), "_", current_graph_type_label, ".pdf")
+    # ggsave(filename_comparison_plot, final_combined_plot_for_comparison, width=7, height=2.5*length(plots_per_tau_threshold_comparison), units="in")
+    cat(paste("Gráfico de comparación generado para:", current_graph_type_label, "\n"))
   }
   
 } else {
