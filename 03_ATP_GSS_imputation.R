@@ -13,12 +13,34 @@ unique(gss_egos$relig)
 
 # Cargamos datos ATP W3
 
-ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_sub.rds")
-labels <- sapply(ATP_W3_sub, function(x) attr(x, "label"))
-
-# ATP raw
 library(haven)
 ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav")
+
+ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_sub.rds")
+labels <- sapply(ATP_W3_sub, function(x) attr(x, "label")) # same as sapply(ATP_W4_sub, function(x) attr(x, "label"))
+
+ATP_W4_sub <- readRDS("trabajo_1_files/ATP_W4_sub.rds")
+
+diff_W3_not_in_W4 <- setdiff(ATP_W3_sub$QKEY, ATP_W4_sub$QKEY)
+diff_W4_not_in_W3 <- setdiff(ATP_W4_sub$QKEY, ATP_W3_sub$QKEY)
+
+# Eliminar sufijos _W3 y _W4 de los nombres de columnas variables
+names(ATP_W3_sub) <- gsub("_W3$", "", names(ATP_W3_sub))
+names(ATP_W4_sub) <- gsub("_W4$", "", names(ATP_W4_sub))
+
+# Agregamos columna de ola
+ATP_W3_sub$WAVE <- "W3"
+ATP_W4_sub$WAVE <- "W4"
+
+# Unimos data frames
+ATP_W3_W4 <- rbind(ATP_W3_sub, ATP_W4_sub)
+
+# Quitamos duplicados de QKEY, quedándose con la fila más reciente (W4)
+ATP_W3_W4 <- ATP_W3_W4[!duplicated(ATP_W3_W4$QKEY, fromLast = TRUE), ]
+ATP_W3_W4 <- ATP_W3_W4[order(ATP_W3_W4$QKEY), ]
+
+# Guardamos
+saveRDS(ATP_W3_W4, file = "trabajo_1_files/ATP_W3_W4.rds")
 
 # Qué datos tenemos ---------------------------------
 
