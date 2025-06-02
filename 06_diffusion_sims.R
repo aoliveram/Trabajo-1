@@ -108,6 +108,16 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
     node_mur_q_for_sim <- V(current_graph_obj_sim)$alpha # q_i (MUR) [CAMBIAR ALPHA --> Q_I EN LAS REDES SINTÉTICAS !!!!!]
     node_degrees_for_sim <- igraph::degree(current_graph_obj_sim)
     
+    # Calcular la matriz de disimilitud de Gower
+    attributes_for_distance <- data.frame(
+      age = V(current_graph_obj_sim)$age,
+      educ_num = V(current_graph_obj_sim)$educ_num,
+      race = as.factor(V(current_graph_obj_sim)$race), # de 'character' a 'factor'
+      relig = as.factor(V(current_graph_obj_sim)$relig),
+      sex = as.factor(V(current_graph_obj_sim)$sex)
+    )
+    social_distance_matrix_d_ij <- as.matrix(daisy(attributes_for_distance, metric = "gower"))
+    
     # Calcular umbrales individuales τ_i
     node_individual_thresholds_tau_frac_for_sim <- rep(current_threshold_base_tau_fractional, N_nodes_global)
     # (Aquí iría lógica para τ_i heterogéneos si T_dist_sim == "hetero")
@@ -158,7 +168,7 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
                   'node_individual_thresholds_tau_frac_for_sim', # τ fraccional para get_complex_plot
                   'node_thresholds_count_for_plci_and_cluster', # τ conteo para clúster inicial
                   'node_mur_q_for_sim', 'node_degrees_for_sim',
-                  'alpha_values_sim', 'homoph_values_sim'),
+                  'alpha_values_sim', 'homoph_values_sim', 'social_distance_matrix_d_ij'),
       .errorhandling = 'pass' 
     ) %dopar% {
       
@@ -201,7 +211,8 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
         node_mur_q_arg = node_mur_q_for_sim,
         all_innovation_iul_Gamma_values = alpha_values_sim, 
         all_social_distance_h_values = homoph_values_sim,   
-        initial_infectors_vector_arg = initial_infectors_for_this_run # El clúster inicial
+        initial_infectors_vector_arg = initial_infectors_for_this_run, # El clúster inicial de nodos
+        d_ij_matrix = social_distance_matrix_d_ij
       )
       
       df_from_worker$graph_type <- current_graph_type_label
