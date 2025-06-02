@@ -157,7 +157,9 @@ columnas_demograficas_atp <- c(
 # --- Columnas de Innovación ATP ---
 columnas_innovacion_atp_w3 <- c(
   "METECH_A_W3", "METECH_B_W3", "METECH_C_W3",
-  "METECH_D_W3", "METECH_E_W3", "METECH_F_W3"
+  "METECH_D_W3", "METECH_E_W3", "METECH_F_W3",
+  "MEFOOD_A_W3", "MEFOOD_B_W3", "MEFOOD_C_W3",
+  "MEFOOD_D_W3", "MEFOOD_E_W3", "MEFOOD_F_W3"
 )
 
 # --- Combinamos ---
@@ -172,7 +174,7 @@ ATP_W3_sub <- ATP_W3_df %>%
 saveRDS(ATP_W3_sub, file = "trabajo_1_files/ATP_W3_sub.rds")
 
 # Convertir columnas que son factores (o etiquetadas por haven) a character para CSV
-ATP_W3_sub_csv <- ATP_subset_df
+ATP_W3_sub_csv <- ATP_W3_sub
 for (col_name in names(ATP_W3_sub_csv)) {
   if (is.factor(ATP_W3_sub_csv[[col_name]]) || inherits(ATP_W3_sub_csv[[col_name]], "haven_labelled")) {
     ATP_W3_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W3[[col_name]])) # Usar as_factor para obtener etiquetas
@@ -280,7 +282,9 @@ columnas_demograficas_atp <- c(
 # --- Columnas de Innovación ATP ---
 columnas_innovacion_atp_w4 <- c(
   "METECH_A_W4", "METECH_B_W4", "METECH_C_W4",
-  "METECH_D_W4", "METECH_E_W4", "METECH_F_W4"
+  "METECH_D_W4", "METECH_E_W4", "METECH_F_W4",
+  "MEFOOD_A_W4", "MEFOOD_B_W4", "MEFOOD_C_W4",
+  "MEFOOD_D_W4", "MEFOOD_E_W4", "MEFOOD_F_W4"
 )
 
 # --- Combinamos ---
