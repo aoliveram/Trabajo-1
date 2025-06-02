@@ -19,10 +19,10 @@ source("diffusion_tests/simulation_functions.R")
 # 1. Generación e Importación de Topologías de Red
 # -----------------------------------------------------------------------------
 
-USE_SDA_FROM_FILES <- FALSE
+USE_SDA_FROM_FILES <- TRUE
 
 if (USE_SDA_FROM_FILES) { # Carga de redes Small-World SDA desde archivos
-  networks_dir <- "Talaga-homophily-network/"
+  networks_dir <- "diffusion_tests/Talaga-homophily-network/"
   graphs_sda <- list()
   attributes_sda <- list()
   
