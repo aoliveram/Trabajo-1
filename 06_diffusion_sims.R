@@ -20,29 +20,32 @@ source("diffusion_tests/simulation_functions.R")
 ATP_NETWORK <- TRUE
 
 if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
-  networks_dir <- "diffusion_tests/Talaga-homophily-network/"
-  graphs_sda <- list()
-  attributes_sda <- list()
+  # networks_dir <- "diffusion_tests/Talaga-homophily-network/"
+  # graphs_sda <- list()
+  # attributes_sda <- list()
+  # 
+  # for (i in 1:5) {
+  #   # edge_file <- paste0(networks_dir, "talaga-homophily-network-edges-N324_", i, ".csv")
+  #   # edges <- read.csv(edge_file)
+  #   # attribute_file <- paste0(networks_dir, "talaga-homophily-network-node-attributes-N324_", i, ".csv")
+  #   # node_attributes <- read.csv(attribute_file)
+  #   
+  #   g <- graph_from_data_frame(d = edges, directed = FALSE, vertices = node_attributes)
+  #   V(g)$alpha <- node_attributes$relevant_dim # REVISAR si 'relevant_dim' es 'alpha'
+  #   
+  #   graphs_sda[[i]] <- g
+  #   attributes_sda[[i]] <- node_attributes # Guardar atributos
+  # }
   
-  for (i in 1:5) {
-    # edge_file <- paste0(networks_dir, "talaga-homophily-network-edges-N324_", i, ".csv")
-    # edges <- read.csv(edge_file)
-    # attribute_file <- paste0(networks_dir, "talaga-homophily-network-node-attributes-N324_", i, ".csv")
-    # node_attributes <- read.csv(attribute_file)
-    
-    ATP_net <- load("trabajo_1_files/ATP_network_simulated_1000.RData")
-    
-    ATP_net <- asIgraph(ATP_net)
-    
-    g <- graph_from_data_frame(d = edges, directed = FALSE, vertices = node_attributes)
-    V(g)$alpha <- node_attributes$relevant_dim # REVISAR si 'relevant_dim' es 'alpha'
-    
-    graphs_sda[[i]] <- g
-    attributes_sda[[i]] <- node_attributes # Guardar atributos
-  }
+  graphs_ATP <- list()
   
-  graphs_list_to_simulate <- graphs_sda
-  current_graph_type_label <- "Small-World-SDA"
+  ATP_net <- readRDS("trabajo_1_files/ATP_network_simulated_1000_alpha.rds")
+  ATP_net <- asIgraph(ATP_net)
+  V(ATP_net)$alpha <- V(ATP_net)$alpha_innov_prop
+  graphs_ATP[[1]] <- ATP_net
+  
+  graphs_list_to_simulate <- graphs_ATP
+  current_graph_type_label <- "ATP-net"
   
 } else { # Generación de redes sintéticas
   
@@ -102,8 +105,8 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
     current_graph_obj_sim <- graphs_list_to_simulate[[graph_idx]]
     cat(paste("    Procesando grafo #", graph_idx, "de", length(graphs_list_to_simulate), "...\n"))
     
-    node_mur_q_for_sim <- V(current_graph_obj_sim)$alpha # q_i (MUR)
-    node_degrees_for_sim <- degree(current_graph_obj_sim, mode = "total")
+    node_mur_q_for_sim <- V(current_graph_obj_sim)$alpha # q_i (MUR) [CAMBIAR ALPHA --> Q_I EN LAS REDES SINTÉTICAS !!!!!]
+    node_degrees_for_sim <- igraph::degree(current_graph_obj_sim)
     
     # Calcular umbrales individuales τ_i
     node_individual_thresholds_tau_frac_for_sim <- rep(current_threshold_base_tau_fractional, N_nodes_global)
