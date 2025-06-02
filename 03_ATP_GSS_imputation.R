@@ -17,8 +17,6 @@ library(haven)
 ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav")
 
 ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_sub.rds")
-labels <- sapply(ATP_W3_sub, function(x) attr(x, "label")) # same as sapply(ATP_W4_sub, function(x) attr(x, "label"))
-
 ATP_W4_sub <- readRDS("trabajo_1_files/ATP_W4_sub.rds")
 
 diff_W3_not_in_W4 <- setdiff(ATP_W3_sub$QKEY, ATP_W4_sub$QKEY)
@@ -42,7 +40,11 @@ ATP_W3_W4 <- ATP_W3_W4[order(ATP_W3_W4$QKEY), ]
 # Guardamos
 saveRDS(ATP_W3_W4, file = "trabajo_1_files/ATP_W3_W4.rds")
 
+ATP_W3_W4 <- readRDS("trabajo_1_files/ATP_W3_W4.rds")
+
 # Qué datos tenemos ---------------------------------
+
+labels <- sapply(ATP_W3_W4, function(x) attr(x, "label")) # same as sapply(ATP_W4_sub, function(x) attr(x, "label"))
 
 # Edad
 labels[["F_AGECAT_TYPOLOGY"]]
@@ -66,7 +68,7 @@ ATP_W3$F_RELIG_TYPOLOGY
 
 # Ver las primeras filas del data frame
 head(ATP_W3)
-head(ATP_W3_sub)
+head(ATP_W3_W4)
 
 # ------------------------------------------------------------------------------
 # EDAD
@@ -89,9 +91,9 @@ gss_age_proportions <- prop.table(table(gss_egos$age_category_gss))
 print(gss_age_proportions)
 
 # Proporciones de las categorías de edad en ATP  -(Ya es un factor con etiquetas de haven)
-ATP_W3_sub$F_AGECAT_TYPOLOGY_factor <- haven::as_factor(ATP_W3$F_AGECAT_TYPOLOGY[ATP_W3$QKEY %in% ATP_W3_sub$QKEY])
+ATP_W3_W4$F_AGECAT_TYPOLOGY_factor <- haven::as_factor(ATP_W3_W4$F_AGECAT_TYPOLOGY)
 
-atp_age_proportions <- prop.table(table(ATP_W3_sub$F_AGECAT_TYPOLOGY_factor))
+atp_age_proportions <- prop.table(table(ATP_W3_W4$F_AGECAT_TYPOLOGY_factor))
 print(atp_age_proportions)
 
 # Comparación VISUAL
@@ -107,12 +109,12 @@ print(ggplot(ages_gss_atp, aes(x = category, y = proportion, fill = source)) +
              x = "Categoría de Edad", y = "Proporción") +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 45, hjust = 1)))
-ggsave("trabajo_1_plots/age_GSS_vs_ATP.pdf", width = 8, height = 5)
+ggsave("trabajo_1_plots/age_GSS_vs_ATP.pdf", width = 8*0.85, height = 5*0.85)
 
 # Comparación Chi-Cuadrado
 # Necesitamos las cuentas, no las proporciones
 gss_counts <- table(gss_egos$age_category_gss)
-atp_counts_raw <- table(ATP_W3_sub$F_AGECAT_TYPOLOGY_factor)
+atp_counts_raw <- table(ATP_W3_W4$F_AGECAT_TYPOLOGY_factor)
 
 # tabla de contingencia para el test
 contingency_table_age <- rbind(GSS = as.numeric(gss_counts), ATP = as.numeric(atp_counts_raw))
@@ -143,16 +145,16 @@ nrow(gss_egos)
 
 print(lapply(gss_ages_by_category, head, 5))
 
-# Crear la nueva columna en ATP_W3_sub
-ATP_W3_sub$age <- NA_integer_ # Inicializar con NA
+# Crear la nueva columna en ATP_W3_W4
+ATP_W3_W4$age <- NA_integer_ # Inicializar con NA
 
 # Establecer una semilla para reproducibilidad de la imputación
 set.seed(999)
 
 # Iterar para cada individuo de ATP
-for (i in 1:nrow(ATP_W3_sub)) {
+for (i in 1:nrow(ATP_W3_W4)) {
   # Obtenmos su categoría de edad
-  atp_category <- as.character(ATP_W3_sub$F_AGECAT_TYPOLOGY_factor[i])
+  atp_category <- as.character(ATP_W3_W4$F_AGECAT_TYPOLOGY_factor[i])
   
   # Verificar si la categoría existe
   if (atp_category %in% names(gss_ages_by_category)) {
@@ -160,22 +162,22 @@ for (i in 1:nrow(ATP_W3_sub)) {
     possible_gss_ages <- gss_ages_by_category[[atp_category]]
     
     imputed_age <- sample(possible_gss_ages, 1)
-    ATP_W3_sub$age[i] <- imputed_age
+    ATP_W3_W4$age[i] <- imputed_age
     
   } else {
     warning(paste("Categoría de edad ATP no mapeada:", atp_category, "en la fila", i))
-    ATP_W3_sub$age[i] <- NA # O alguna otra estrategia
+    ATP_W3_W4$age[i] <- NA # O alguna otra estrategia
   }
 }
 
-summary(ATP_W3_sub$age)
+summary(ATP_W3_W4$age)
 
 pdf(file = "trabajo_1_plots/age_distribution_GSS.pdf", width = 6, height = 5)
 hist(gss_egos$age, main = "Edades en GSS (EGO)", xlab = "Edad", ylab = "Frecuencia")
 dev.off()
 
 pdf(file = "trabajo_1_plots/age_distribution_ATP.pdf", width = 6, height = 5)
-hist(ATP_W3_sub$age, main = "Edades Imputadas en ATP", xlab = "Edad", ylab = "Frecuencia")
+hist(ATP_W3_W4$age, main = "Edades Imputadas en ATP", xlab = "Edad", ylab = "Frecuencia")
 dev.off()
 
 # ------------------------------------------------------------------------------
@@ -185,25 +187,25 @@ dev.off()
 # --- Veamos cómo se comparan los niveles de EDUCACIÖN en GSS y en ATP ---------
 
 # Crear categoría colapsada en GSS
-gss_egos$degree_atp3cat <- case_when(
+gss_egos$degree_atp_cat <- case_when(
   gss_egos$degree %in% c("Bach", "Grad") ~ "College graduate+",
   gss_egos$degree == "Assoc" ~ "Some college",
   gss_egos$degree %in% c("HS", "LTHS") ~ "HS graduate or less",
   TRUE ~ NA_character_
 )
-gss_egos$degree_atp3cat <- factor(gss_egos$degree_atp3cat,
+gss_egos$degree_atp_cat <- factor(gss_egos$degree_atp_cat,
                                   levels = c("College graduate+", "Some college", "HS graduate or less"))
 
 # ATP ya tiene la variable F_EDUCCAT_TYPOLOGY: 1=College graduate+, 2=Some college, 3=HS graduate or less
-ATP_W3_sub$F_EDUCCAT_TYPOLOGY_factor <- factor(
-  ATP_W3_sub$F_EDUCCAT_TYPOLOGY,
+ATP_W3_W4$F_EDUCCAT_TYPOLOGY_factor <- factor(
+  ATP_W3_W4$F_EDUCCAT_TYPOLOGY,
   levels = c(1, 2, 3),
   labels = c("College graduate+", "Some college", "HS graduate or less")
 )
 
 # plot -----------
-gss_counts <- table(gss_egos$degree_atp3cat)
-atp_counts <- table(ATP_W3_sub$F_EDUCCAT_TYPOLOGY_factor)
+gss_counts <- table(gss_egos$degree_atp_cat)
+atp_counts <- table(ATP_W3_W4$F_EDUCCAT_TYPOLOGY_factor)
 
 gss_educ_proportions <- gss_counts / sum(gss_counts)
 atp_educ_proportions <- atp_counts / sum(atp_counts)
@@ -243,7 +245,7 @@ ggsave("trabajo_1_plots/educ_GSS_vs_ATP.pdf", plot = plot_educ, width = 8, heigh
 
 # Tabla de contingencia
 contingency_table_educ <- rbind(GSS = as.numeric(gss_counts), ATP = as.numeric(atp_counts))
-colnames(contingency_table_educ) <- levels(gss_egos$degree_atp3cat)
+colnames(contingency_table_educ) <- levels(gss_egos$degree_atp_cat)
 print(contingency_table_educ)
 
 # Test Chi-cuadrado
@@ -261,30 +263,30 @@ if (chi_sq_test_educ$p.value < 0.05) {
 # ---------- Imputación de educ_num en ATP -------------------------------------
 
 # Creando una lista por cada categoría colapsada
-gss_educ_by_cat <- split(gss_egos$educ_num, gss_egos$degree_atp3cat)
+gss_educ_by_cat <- split(gss_egos$educ_num, gss_egos$degree_atp_cat)
 
 # Inicializamos columna 
-ATP_W3_sub$educ_num <- NA_real_
+ATP_W3_W4$educ_num <- NA_real_
 
 set.seed(123)
-for (i in 1:nrow(ATP_W3_sub)) {
-  atp_cat <- as.character(ATP_W3_sub$F_EDUCCAT_TYPOLOGY_factor[i])
+for (i in 1:nrow(ATP_W3_W4)) {
+  atp_cat <- as.character(ATP_W3_W4$F_EDUCCAT_TYPOLOGY_factor[i])
   if (atp_cat %in% names(gss_educ_by_cat)) {
     possible_vals <- gss_educ_by_cat[[atp_cat]]
-    ATP_W3_sub$educ_num[i] <- sample(possible_vals, 1)
+    ATP_W3_W4$educ_num[i] <- sample(possible_vals, 1)
   } else {
-    ATP_W3_sub$educ_num[i] <- NA
+    ATP_W3_W4$educ_num[i] <- NA
   }
 }
 
-summary(ATP_W3_sub$educ_num)
+summary(ATP_W3_W4$educ_num)
 
 pdf(file = "trabajo_1_plots/educ_distribution_GSS.pdf", width = 6, height = 5)
 hist(gss_egos$educ_num, main = "Años de educación en GSS (EGO)", xlab = "Edad", ylab = "Frecuencia")
 dev.off()
 
 pdf(file = "trabajo_1_plots/educ_distribution_ATP.pdf", width = 6, height = 5)
-hist(ATP_W3_sub$educ_num, main = "Años de educación imputados en ATP", xlab = "Edad", ylab = "Frecuencia")
+hist(ATP_W3_W4$educ_num, main = "Años de educación imputados en ATP", xlab = "Edad", ylab = "Frecuencia")
 dev.off()
 
 # ------------------------------------------------------------------------------
@@ -295,7 +297,7 @@ dev.off()
 # --- Veamos cómo se comparan los niveles de RAZA en GSS y en ATP ---------
 
 # Los niveles objetivo de GSS son: "Asian", "Black", "Hispanic", "White", "Other"
-# ATP_W3_sub$F_RACETHN_TYPOLOGY:
+# ATP_W3_W4$F_RACETHN_TYPOLOGY:
 # 1=White non-Hispanic, 2=Black non-Hispanic, 3=Hispanic, 4=Other, 9=DK/Ref
 
 library(forcats)
@@ -306,7 +308,7 @@ gss_egos <- gss_egos %>%
   )
 print(table(gss_egos$race_4cat, useNA = "ifany"))
 
-ATP_W3_sub <- ATP_W3_sub %>%
+ATP_W3_W4 <- ATP_W3_W4 %>%
   mutate(
     race_harmonized = case_when(
       F_RACETHN_TYPOLOGY == 1 ~ "White",
@@ -322,7 +324,7 @@ ATP_W3_sub <- ATP_W3_sub %>%
 
 # plot -----------
 gss_race_counts_4cat <- table(gss_egos$race_4cat)
-atp_race_counts_4cat <- table(ATP_W3_sub$race_harmonized)
+atp_race_counts_4cat <- table(ATP_W3_W4$race_harmonized)
 
 gss_race_counts_4cat_proportions <- gss_race_counts_4cat / sum(gss_race_counts_4cat)
 atp_race_counts_4cat_proportions <- atp_race_counts_4cat / sum(atp_race_counts_4cat)
@@ -363,7 +365,7 @@ ggsave("trabajo_1_plots/race_GSS_vs_ATP.pdf", plot = plot_educ, width = 8, heigh
 # Tabla de contingencia
 contingency_table_race_4cat <- rbind(
   GSS = gss_race_counts_4cat[levels(gss_egos$race_4cat)],
-  ATP = atp_race_counts_4cat[levels(ATP_W3_sub$race_harmonized)]
+  ATP = atp_race_counts_4cat[levels(ATP_W3_W4$race_harmonized)]
 )
 print(contingency_table_race_4cat)
 
@@ -388,17 +390,17 @@ prob_other <- prop.table(table(gss_asian_other_subset$race))["Other"]
 if (prob_asian + prob_other != 1) {cat("Cuidado, las probabilidades suman", prob_asian + prob_other, " ,y no 1")}
 
 # nuevas columnas de raza imputada en ATP
-ATP_W3_sub <- ATP_W3_sub %>%
+ATP_W3_W4 <- ATP_W3_W4 %>%
   mutate(
     race = as.character(race_harmonized) # Empezar con las 4 categorías como character
   )
-atp_other_indices <- which(ATP_W3_sub$race_harmonized == "Other") # índices de ATP que son "Other"
+atp_other_indices <- which(ATP_W3_W4$race_harmonized == "Other") # índices de ATP que son "Other"
 
 set.seed(456)
 
 # Imputamos "Asian" u "Other" a los que tienen solo "Other" en ATP
 for (i in atp_other_indices) {
-  ATP_W3_sub$race[i] <- sample(
+  ATP_W3_W4$race[i] <- sample(
     x = c("Asian", "Other"),       
     size = 1,                      # Asignar una sola categoría
     replace = TRUE,
@@ -406,7 +408,7 @@ for (i in atp_other_indices) {
   )
 }
 # Convertimos la nueva columna a factor con los 5 niveles
-ATP_W3_sub$race <- factor(ATP_W3_sub$race,
+ATP_W3_W4$race <- factor(ATP_W3_W4$race,
                                        levels = c("Asian", "Black", "Hispanic", "White", "Other"))
 
 pdf(file = "trabajo_1_plots/race_distribution_GSS.pdf", width = 6, height = 5)
@@ -414,7 +416,7 @@ plot(gss_egos$race, main = "Raza en GSS (EGO)", xlab = "Raza", ylab = "Frecuenci
 dev.off()
 
 pdf(file = "trabajo_1_plots/race_distribution_ATP.pdf", width = 6, height = 5)
-plot(ATP_W3_sub$race, main = "Raza imputada en ATP", xlab = "Raza", ylab = "Frecuencia")
+plot(ATP_W3_W4$race, main = "Raza imputada en ATP", xlab = "Raza", ylab = "Frecuencia")
 dev.off()
 
 
@@ -426,7 +428,7 @@ dev.off()
 
 # Los niveles objetivo de GSS para religión son: "Catholic", "Jewish", "None", "OtherRelig", "Protestant"
 
-ATP_W3_sub <- ATP_W3_sub %>%
+ATP_W3_W4 <- ATP_W3_W4 %>%
   mutate(
     relig = case_when(
       F_RELIG_TYPOLOGY == 1 ~ "Protestant", # ATP: 1 = Protestant (Baptist, Methodist, etc.)
@@ -451,7 +453,7 @@ ATP_W3_sub <- ATP_W3_sub %>%
 
 # plot -----------
 gss_relig_counts <- table(gss_egos$relig)
-atp_relig_counts <- table(ATP_W3_sub$relig)
+atp_relig_counts <- table(ATP_W3_W4$relig)
 
 gss_relig_proportions <- gss_relig_counts / sum(gss_relig_counts)
 atp_relig_proportions <- atp_relig_counts / sum(atp_relig_counts)
@@ -487,12 +489,12 @@ plot_relig <- ggplot(relig_gss_atp, aes(x = category, y = proportion, fill = sou
   theme(axis.text.x = element_text(angle = 0, hjust = 0.5), # Puedes ajustar angle y hjust
         plot.title = element_text(hjust = 0.5)) # Centrar el título
 print(plot_relig)
-ggsave("trabajo_1_plots/relig_GSS_vs_ATP.pdf", plot = plot_relig, width = 8, height = 5)
+ggsave("trabajo_1_plots/relig_GSS_vs_ATP.pdf", plot = plot_relig, width = 8*0.85, height = 5*0.85)
 
 # Tabla de contingencia
 contingency_table_relig <- rbind(
   GSS = gss_relig_counts[levels(gss_egos$relig)],
-  ATP = atp_relig_counts[levels(ATP_W3_sub$relig)]
+  ATP = atp_relig_counts[levels(ATP_W3_W4$relig)]
 )
 print(contingency_table_relig)
 
@@ -509,28 +511,28 @@ if (chi_sq_test_relig$p.value < 0.05) {
 
 # En GSS tengo MÁs razas
 unique(gss_egos$racecen1)
-unique(ATP_W3_sub$F_RACETHN_TYPOLOGY)
-levels(ATP_W3_sub$race_harmonized)
+unique(ATP_W3_W4$F_RACETHN_TYPOLOGY)
+levels(ATP_W3_W4$race_harmonized)
 
 # En GSS tengo MENOS relig
 levels(gss_egos$relig)
-unique(ATP_W3_sub$F_RELIG_TYPOLOGY)
+unique(ATP_W3_W4$F_RELIG_TYPOLOGY)
 
 # Como tengo más granuliadad de relig en ATP, entonces no tengo que imputar datos
-# de religión a ATP, sino que solo debo agrupar relig --->> ATP_W3_sub$relig
+# de religión a ATP, sino que solo debo agrupar relig --->> ATP_W3_W4$relig
 # 
 # En resumen, las variables 'armonizadas' son:
 #   
-#   1. gss_egos$age , ATP_W3_sub$age --->>> sort(unique(gss_egos$age))==sort(unique(ATP_W3_sub$age))
-#   2. gss_egos$educ_num , ATP_W3_sub$educ_num --->>> sort(unique(gss_egos$educ_num))[5:21]==sort(unique(ATP_W3_sub$educ_num))[(5-2):(21-2)]
-#   3. gss_egos$race , ATP_W3_sub$race -->> levels(gss_egos$race)==levels(ATP_W3_sub$race)
-#   4. gss_egos$relig , ATP_W3_sub$relig -->> levels(gss_egos$relig)==levels(ATP_W3_sub$relig)
+#   1. gss_egos$age , ATP_W3_W4$age --->>> sort(unique(gss_egos$age))==sort(unique(ATP_W3_W4$age))
+#   2. gss_egos$educ_num , ATP_W3_W4$educ_num --->>> sort(unique(gss_egos$educ_num))[5:21]==sort(unique(ATP_W3_W4$educ_num))[(5-2):(21-2)]
+#   3. gss_egos$race , ATP_W3_W4$race -->> levels(gss_egos$race)==levels(ATP_W3_W4$race)
+#   4. gss_egos$relig , ATP_W3_W4$relig -->> levels(gss_egos$relig)==levels(ATP_W3_W4$relig)
 #   
 # La variable 'sexo' no fue modificada.
 
-ATP_W3_sub <- ATP_W3_sub %>%
+ATP_W3_W4 <- ATP_W3_W4 %>%
   rename(
-    weight_ATP = WEIGHT_W3
+    weight_ATP = WEIGHT
   ) %>%
   mutate(
     sex = factor(F_SEX_FINAL,
@@ -550,5 +552,5 @@ ATP_W3_sub <- ATP_W3_sub %>%
     .after = last_col()
   )
 
-write.csv(ATP_W3_sub, "trabajo_1_files/ATP_W3_imput.csv", row.names = FALSE)
-saveRDS(ATP_W3_sub, "trabajo_1_files/ATP_W3_imput.rds")
+write.csv(ATP_W3_W4, "trabajo_1_files/ATP_W3_imput.csv", row.names = FALSE)
+saveRDS(ATP_W3_W4, "trabajo_1_files/ATP_W3_imput.rds")
