@@ -1,34 +1,35 @@
 library(ergm) # Para simulate.ergm y network
 library(dplyr)
 library(haven)
+library(doParallel)
 
 # --- 1. Preparación Datos ---
 
-ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_imput.rds")
-N_atp <- nrow(ATP_W3_sub)
+ATP_W3_W4 <- readRDS("trabajo_1_files/ATP_W3_W4_input.rds")
+N_atp <- nrow(ATP_W3_W4)
 
 gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
 gss_egos <- gss_egor$ego
 gss_alters <- gss_egor$alter
 
 # Nos aseguramos que las categorías sean factores
-if (!is.factor(ATP_W3_sub$sex)) ATP_W3_sub$sex <- factor(ATP_W3_sub$sex, labels = c("Male", "Female")) # Ajusta si es necesario
-if (!is.factor(ATP_W3_sub$race)) ATP_W3_sub$race <- factor(ATP_W3_sub$race)
-if (!is.factor(ATP_W3_sub$relig)) ATP_W3_sub$relig <- factor(ATP_W3_sub$relig)
+if (!is.factor(ATP_W3_W4$sex)) ATP_W3_W4$sex <- factor(ATP_W3_W4$sex, labels = c("Male", "Female")) # Ajusta si es necesario
+if (!is.factor(ATP_W3_W4$race)) ATP_W3_W4$race <- factor(ATP_W3_W4$race)
+if (!is.factor(ATP_W3_W4$relig)) ATP_W3_W4$relig <- factor(ATP_W3_W4$relig)
 
 # Variables de atributos para ergm
 demographic_vars <- c("age", "sex", "educ_num", "race", "relig")
-metech_vars <- c("METECH_A_W3", "METECH_B_W3", "METECH_C_W3", 
-                 "METECH_D_W3", "METECH_E_W3", "METECH_F_W3")
+metech_vars <- c("METECH_A", "METECH_B", "METECH_C", 
+                 "METECH_D", "METECH_E", "METECH_F")
 attribute_vars <- c(demographic_vars, metech_vars)
 
 for (m_var in metech_vars) {
-  if (m_var %in% names(ATP_W3_sub)) {
+  if (m_var %in% names(ATP_W3_W4)) {
     
     # obtenemos valores numéricos
-    numeric_values <- haven::zap_labels(ATP_W3_sub[[m_var]])
+    numeric_values <- haven::zap_labels(ATP_W3_W4[[m_var]])
     
-    ATP_W3_sub[[m_var]] <- case_when(
+    ATP_W3_W4[[m_var]] <- case_when(
       numeric_values == 0 ~ 0,
       numeric_values == 1 ~ 1,
       TRUE ~ NA_real_ # NA's y 99
@@ -37,45 +38,45 @@ for (m_var in metech_vars) {
 }
 
 # Seleccionamos casos completos
-sapply(ATP_W3_sub[, attribute_vars], function(col) sum(is.na(col))) # verificar NA's
-sapply(ATP_W3_sub[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
-#ATP_W3_sub_2 <- ATP_W3_sub
-ATP_W3_sub <- ATP_W3_sub[complete.cases(ATP_W3_sub[, attribute_vars]), ] # Quitamos NA's
-N_atp <- nrow(ATP_W3_sub) # Número de individuos en ATP
+sapply(ATP_W3_W4[, attribute_vars], function(col) sum(is.na(col))) # verificar NA's
+sapply(ATP_W3_W4[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
+#ATP_W3_W4_2 <- ATP_W3_W4
+ATP_W3_W4 <- ATP_W3_W4[complete.cases(ATP_W3_W4[, attribute_vars]), ] # Quitamos NA's
+N_atp <- nrow(ATP_W3_W4) # Número de individuos en ATP
 
 # Submuestreo para red 1000 casos.
 set.seed(987)
 
-ATP_W3_sub_1000 <- ATP_W3_sub[sample(nrow(ATP_W3_sub), 1000), ]
-N_atp_1000 <- nrow(ATP_W3_sub_1000)
-sapply(ATP_W3_sub_1000[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
+ATP_W3_W4_1000 <- ATP_W3_W4[sample(nrow(ATP_W3_W4), 1000), ]
+N_atp_1000 <- nrow(ATP_W3_W4_1000)
+sapply(ATP_W3_W4_1000[, attribute_vars], function(col) mean(is.na(col)) * 100) # porcentaje NA's
 
 # Creamos el objeto NEtwork (sin lazos, solo nodos y atributos)
 atp_base_network <- network.initialize(N_atp, directed = FALSE)
-set.vertex.attribute(atp_base_network, "age", ATP_W3_sub$age)
-set.vertex.attribute(atp_base_network, "sex", as.character(ATP_W3_sub$sex)) # ergm a veces prefiere character para nodematch
-set.vertex.attribute(atp_base_network, "educ_num", ATP_W3_sub$educ_num)
-set.vertex.attribute(atp_base_network, "race", as.character(ATP_W3_sub$race))
-set.vertex.attribute(atp_base_network, "relig", as.character(ATP_W3_sub$relig))
-set.vertex.attribute(atp_base_network, "metech_a", as.numeric(ATP_W3_sub$METECH_A_W3))
-set.vertex.attribute(atp_base_network, "metech_b", as.numeric(ATP_W3_sub$METECH_B_W3))
-set.vertex.attribute(atp_base_network, "metech_c", as.numeric(ATP_W3_sub$METECH_C_W3))
-set.vertex.attribute(atp_base_network, "metech_d", as.numeric(ATP_W3_sub$METECH_D_W3))
-set.vertex.attribute(atp_base_network, "metech_e", as.numeric(ATP_W3_sub$METECH_E_W3))
-set.vertex.attribute(atp_base_network, "metech_f", as.numeric(ATP_W3_sub$METECH_F_W3))
+set.vertex.attribute(atp_base_network, "age", ATP_W3_W4$age)
+set.vertex.attribute(atp_base_network, "sex", as.character(ATP_W3_W4$sex)) # ergm a veces prefiere character para nodematch
+set.vertex.attribute(atp_base_network, "educ_num", ATP_W3_W4$educ_num)
+set.vertex.attribute(atp_base_network, "race", as.character(ATP_W3_W4$race))
+set.vertex.attribute(atp_base_network, "relig", as.character(ATP_W3_W4$relig))
+set.vertex.attribute(atp_base_network, "metech_a", as.numeric(ATP_W3_W4$METECH_A_W3))
+set.vertex.attribute(atp_base_network, "metech_b", as.numeric(ATP_W3_W4$METECH_B_W3))
+set.vertex.attribute(atp_base_network, "metech_c", as.numeric(ATP_W3_W4$METECH_C_W3))
+set.vertex.attribute(atp_base_network, "metech_d", as.numeric(ATP_W3_W4$METECH_D_W3))
+set.vertex.attribute(atp_base_network, "metech_e", as.numeric(ATP_W3_W4$METECH_E_W3))
+set.vertex.attribute(atp_base_network, "metech_f", as.numeric(ATP_W3_W4$METECH_F_W3))
 
 atp_base_network_1000 <- network.initialize(N_atp_1000, directed = FALSE)
-set.vertex.attribute(atp_base_network_1000, "age", ATP_W3_sub_1000$age)
-set.vertex.attribute(atp_base_network_1000, "sex", as.character(ATP_W3_sub_1000$sex))
-set.vertex.attribute(atp_base_network_1000, "educ_num", ATP_W3_sub_1000$educ_num)
-set.vertex.attribute(atp_base_network_1000, "race", as.character(ATP_W3_sub_1000$race))
-set.vertex.attribute(atp_base_network_1000, "relig", as.character(ATP_W3_sub_1000$relig))
-set.vertex.attribute(atp_base_network_1000, "metech_a", as.numeric(ATP_W3_sub_1000$METECH_A_W3))
-set.vertex.attribute(atp_base_network_1000, "metech_b", as.numeric(ATP_W3_sub_1000$METECH_B_W3))
-set.vertex.attribute(atp_base_network_1000, "metech_c", as.numeric(ATP_W3_sub_1000$METECH_C_W3))
-set.vertex.attribute(atp_base_network_1000, "metech_d", as.numeric(ATP_W3_sub_1000$METECH_D_W3))
-set.vertex.attribute(atp_base_network_1000, "metech_e", as.numeric(ATP_W3_sub_1000$METECH_E_W3))
-set.vertex.attribute(atp_base_network_1000, "metech_f", as.numeric(ATP_W3_sub_1000$METECH_F_W3))
+set.vertex.attribute(atp_base_network_1000, "age", ATP_W3_W4_1000$age)
+set.vertex.attribute(atp_base_network_1000, "sex", as.character(ATP_W3_W4_1000$sex))
+set.vertex.attribute(atp_base_network_1000, "educ_num", ATP_W3_W4_1000$educ_num)
+set.vertex.attribute(atp_base_network_1000, "race", as.character(ATP_W3_W4_1000$race))
+set.vertex.attribute(atp_base_network_1000, "relig", as.character(ATP_W3_W4_1000$relig))
+set.vertex.attribute(atp_base_network_1000, "metech_a", as.numeric(ATP_W3_W4_1000$METECH_A_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_b", as.numeric(ATP_W3_W4_1000$METECH_B_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_c", as.numeric(ATP_W3_W4_1000$METECH_C_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_d", as.numeric(ATP_W3_W4_1000$METECH_D_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_e", as.numeric(ATP_W3_W4_1000$METECH_E_W3))
+set.vertex.attribute(atp_base_network_1000, "metech_f", as.numeric(ATP_W3_W4_1000$METECH_F_W3))
 
 # Fórmula ERGM (el término 'edge' se iterará) # Si se añade gwesp, añadir como coeficiente fijo
 formula_homofilia_only <- ~ nodematch("race") +
@@ -304,20 +305,40 @@ library(sna)
 full_formula_ergm <- update.formula(formula_homofilia_only, paste("~ edges + ."))
 final_ergm_coefs <- c(edges = edges_var_info_1000$calibrated_coef_edges, coef_homofilia_fijos)
 
-# Ejemplo de simulación de UNA red final:
-ATP_network_simulated_1000 <- simulate(
-  full_formula_ergm,
-  basis = atp_base_network_1000, # --> base con 1000 nodos
-  nsim = 1,
-  coef = final_ergm_coefs,
-  control = control_sim_formula,
-  verbose = TRUE
+n_simulaciones <- 100
+
+cl <- makeCluster(8, type = "FORK") 
+registerDoParallel(cl)
+
+# --- Loop paralelo ---
+invisible(
+  foreach(i = 1:n_simulaciones, 
+          .packages = c("network", "ergm"), 
+          .errorhandling = "pass") %dopar% {
+            
+            # Fijar semilla única por iteración
+            set.seed(123 + i)
+            
+            # Simular red
+            ATP_network_simulated_1000 <- simulate(
+              full_formula_ergm,
+              basis = atp_base_network_1000,
+              nsim = 1,
+              coef = final_ergm_coefs,
+              control = control_sim_formula,
+              verbose = FALSE
+            )
+            
+            # Guardar
+            saveRDS(ATP_network_simulated_1000, sprintf("trabajo_1_files/ATP_network_ergm/ATP_network_simulated_1000_%03d.rds", i))
+          }
 )
 
-saveRDS(ATP_network_simulated_1000, "trabajo_1_files/ATP_network_simulated_1000.rds")
-ATP_network_simulated_1000 <- readRDS("trabajo_1_files/ATP_network_simulated_1000.rds")
+stopCluster(cl)
+
 
 # Estadísticos Básicos -- de Red
+ATP_network_simulated_1000 <- readRDS("trabajo_1_files/ATP_network_ergm/ATP_network_simulated_1000_001.rds")
 summary(ATP_network_simulated_1000) # Attrs: age - educ_num - race - relig - sex - (and vertex.names)
 
 network.size(ATP_network_simulated_1000)
@@ -336,8 +357,8 @@ ATP_network_simulated_1000_atr <- data.frame(
 )
 # Convertir a factores si es necesario para la comparación (ej. si en la red son character)
 ATP_network_simulated_1000_atr$sex <- factor(ATP_network_simulated_1000_atr$sex, levels = c("Male", "Female"))
-ATP_network_simulated_1000_atr$race <- factor(ATP_network_simulated_1000_atr$race, levels = levels(ATP_W3_sub$race))
-ATP_network_simulated_1000_atr$relig <- factor(ATP_network_simulated_1000_atr$relig, levels = levels(ATP_W3_sub$relig))
+ATP_network_simulated_1000_atr$race <- factor(ATP_network_simulated_1000_atr$race, levels = levels(ATP_W3_W4$race))
+ATP_network_simulated_1000_atr$relig <- factor(ATP_network_simulated_1000_atr$relig, levels = levels(ATP_W3_W4$relig))
 
 library(ggplot2)
 
@@ -346,7 +367,7 @@ plots_comparacion <- list()
 for (attr_name in attribute_vars) {
   
   df_original <- data.frame( # dataframe original ATP
-    valor = ATP_W3_sub[[attr_name]],
+    valor = ATP_W3_W4[[attr_name]],
     fuente = "ATP Original (Base N=1000)"
   )
   df_simulado <- data.frame( # Datos de la red simulada ERGM
