@@ -307,15 +307,15 @@ final_ergm_coefs <- c(edges = edges_var_info_1000$calibrated_coef_edges, coef_ho
 # Ejemplo de simulación de UNA red final:
 ATP_network_simulated_1000 <- simulate(
   full_formula_ergm,
-  basis = atp_base_network_1000, # --> base con 3168 nodos
+  basis = atp_base_network_1000, # --> base con 1000 nodos
   nsim = 1,
   coef = final_ergm_coefs,
   control = control_sim_formula,
   verbose = TRUE
 )
 
-save(ATP_network_simulated_1000, file = "trabajo_1_files/ATP_network_simulated_1000.RData")
-load("trabajo_1_files/ATP_network_simulated_1000.RData")
+saveRDS(ATP_network_simulated_1000, "trabajo_1_files/ATP_network_simulated_1000.rds")
+ATP_network_simulated_1000 <- readRDS("trabajo_1_files/ATP_network_simulated_1000.rds")
 
 # Estadísticos Básicos -- de Red
 summary(ATP_network_simulated_1000) # Attrs: age - educ_num - race - relig - sex - (and vertex.names)
