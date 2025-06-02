@@ -98,7 +98,8 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
                              node_mur_q,                     # q_i (V(g)$alpha)
                              innovation_iul_Gamma,           # Γ 
                              social_distance_h,              # h 
-                             initial_seed_nodes_vector) {    # Vector de nodos semilla iniciales
+                             initial_seed_nodes_vector,
+                             d_ij_matrix) {    # Vector de nodos semilla iniciales
   
   node_states_activated <- rep("State1", N_nodes)
   if (length(initial_seed_nodes_vector) > 0) {
@@ -146,7 +147,10 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
         
         if (denominator_Ei_tilde > 0 && length(active_neighbors_of_i_idx) > 0) {
           for (j in active_neighbors_of_i_idx) { # Iterar solo sobre vecinos ACTIVOS
-            social_dist_ij <- abs(node_mur_q[i] - node_mur_q[j]) # d_ij
+            #social_dist_ij <- abs(node_mur_q[i] - node_mur_q[j]) # d_ij
+            
+            social_dist_ij <- d_ij_matrix[i, j]
+            
             if (social_dist_ij <= social_distance_h) {
               # El vecino 'j' es activo Y socialmente cercano.
               # X_ij es 1 (porque es vecino), a_j (tilde) es 1 (porque es activo y cercano)
@@ -198,7 +202,9 @@ sweep_homoph_parameter <- function(primary_seed_id_arg,
                                    node_mur_q_arg,                     # Vector q_i
                                    all_innovation_iul_Gamma_values,  # Vector de Γ a probar
                                    all_social_distance_h_values,     # Vector de h a probar
-                                   initial_infectors_vector_arg) {   # Semillas para ESTA simulación
+                                   initial_infectors_vector_arg,     # Semillas para ESTA simulación
+                                   d_ij_matrix                       # Matriz distancia social
+                                   ) {   
   
   results_for_this_primary_seed <- list()
   
@@ -213,7 +219,8 @@ sweep_homoph_parameter <- function(primary_seed_id_arg,
         node_mur_q = node_mur_q_arg,
         innovation_iul_Gamma = current_Gamma,
         social_distance_h = current_h,
-        initial_seed_nodes_vector = initial_infectors_vector_arg
+        initial_seed_nodes_vector = initial_infectors_vector_arg,
+        d_ij_matrix = d_ij_matrix
       )
       results_for_this_primary_seed[[length(results_for_this_primary_seed) + 1]] <- as.data.frame(sim_output)
     }
