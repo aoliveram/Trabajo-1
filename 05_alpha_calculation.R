@@ -6,7 +6,7 @@ library(gridExtra)
 
 # --- 1. Cargamos datos ---
 
-load("trabajo_1_files/ATP_network_simulated_1000.RData")
+ATP_network_simulated_1000 <- readRDS("trabajo_1_files/ATP_network_simulated_1000.rds")
 
 # --- 2. Extraer los atributos METECH_ de la red a un dataframe para facilitar el cálculo ---
 metech_vars <- c("metech_a", "metech_b", "metech_c", 
@@ -108,4 +108,5 @@ set.vertex.attribute(ATP_network_simulated_1000,
 
 print(list.vertex.attributes(ATP_network_simulated_1000))
 
-save(ATP_network_simulated_1000, file = "trabajo_1_files/ATP_network_simulated_1000_alpha.RData")
+saveRDS(ATP_network_simulated_1000, "trabajo_1_files/ATP_network_simulated_1000_alpha.rds")
+ATP_network_simulated_1000_alpha <- readRDS("trabajo_1_files/ATP_network_simulated_1000_alpha.rds")
