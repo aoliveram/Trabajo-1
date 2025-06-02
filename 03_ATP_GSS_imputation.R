@@ -552,5 +552,5 @@ ATP_W3_W4 <- ATP_W3_W4 %>%
     .after = last_col()
   )
 
-write.csv(ATP_W3_W4, "trabajo_1_files/ATP_W3_imput.csv", row.names = FALSE)
-saveRDS(ATP_W3_W4, "trabajo_1_files/ATP_W3_imput.rds")
+write.csv(ATP_W3_W4, "trabajo_1_files/ATP_W3_W4_input.csv", row.names = FALSE)
+saveRDS(ATP_W3_W4, "trabajo_1_files/ATP_W3_W4_input.rds")
