@@ -4,8 +4,8 @@
 
 library(haven)
 
-ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav") # Leer el archivo como tibble
-ATP_W3_df <- as.data.frame(ATP_W3)        # Convertir a data frame (opcional si prefieres este formato)
+ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav")
+ATP_W3_df <- as.data.frame(ATP_W3)
 
 # Extract labels
 labels <- sapply(ATP_W3_df, function(x) attr(x, "label"))
@@ -135,6 +135,58 @@ suma_respuestas_1 <- sum(ATP_W3_df[columnas] == 1, na.rm = TRUE)
 print(suma_respuestas_1)
 
 
+# ----------------------------- Cramos .rds -----------------------------------
+
+library(haven) 
+library(dplyr)
+
+ATP_W3 <- read_sav("B - Surveys Data/Datos A. Trends Panel/American-Trends-Panel-Wave-3-May-5-May-27/W3_May14/ATP W3.sav")
+ATP_W3_df <- as.data.frame(ATP_W3)
+
+# --- Columnas Demográficas ATP ---
+columnas_demograficas_atp <- c(
+  "QKEY",                  # Identificador único del encuestado
+  "F_AGECAT_TYPOLOGY",     # Edad
+  "F_EDUCCAT_TYPOLOGY",    # Educación
+  "F_RACETHN_TYPOLOGY",    # Raza
+  "F_SEX_FINAL",           # Sexo
+  "F_RELIG_TYPOLOGY",      # Religión
+  "WEIGHT_W3"              # La variable de peso
+)
+
+# --- Columnas de Innovación ATP ---
+columnas_innovacion_atp_w3 <- c(
+  "METECH_A_W3", "METECH_B_W3", "METECH_C_W3",
+  "METECH_D_W3", "METECH_E_W3", "METECH_F_W3"
+)
+
+# --- Combinamos ---
+columnas_seleccionadas_total_w3 <- c(columnas_demograficas_atp, columnas_innovacion_atp_w3)
+
+# --- Creamos DataFrame ---
+ATP_W3_sub <- ATP_W3_df %>%
+  select(all_of(columnas_seleccionadas_total_w3))
+
+# --- Guardar el DataFrame de subconjunto ---
+
+saveRDS(ATP_W3_sub, file = "trabajo_1_files/ATP_W3_sub.rds")
+
+# Convertir columnas que son factores (o etiquetadas por haven) a character para CSV
+ATP_W3_sub_csv <- ATP_subset_df
+for (col_name in names(ATP_W3_sub_csv)) {
+  if (is.factor(ATP_W3_sub_csv[[col_name]]) || inherits(ATP_W3_sub_csv[[col_name]], "haven_labelled")) {
+    ATP_W3_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W3[[col_name]])) # Usar as_factor para obtener etiquetas
+  }
+}
+# También convierte las variables METECH a character si aún son etiquetadas
+for (col_name in columnas_innovacion_atp) {
+  if (col_name %in% names(ATP_W3_sub_csv) && inherits(ATP_W3[[col_name]], "haven_labelled")){
+    ATP_W3_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W3[[col_name]]))
+  }
+}
+
+write.csv(ATP_W3_sub_csv, file = "trabajo_1_files/ATP_W3_sub.csv", row.names = FALSE)
+
 # -----------------------------------------------------------------------------
 # ATP W4
 # -----------------------------------------------------------------------------
@@ -162,7 +214,7 @@ write.csv(ATP_W4_df_2, file = "B - Surveys Data/Datos A. Trends Panel/ATP_W4.csv
 
 # Exploración Variables -------------------------------------------------------
 
-ATP_W4_df <- as.data.frame(ATP_W3)
+ATP_W4_df <- as.data.frame(ATP_W4)
 labels <- sapply(ATP_W4_df , function(x) attr(x, "label"))
 
 # Edad
@@ -205,10 +257,6 @@ ATP_W4_df$F_SEX_FINAL
 labels[["F_RELIG_TYPOLOGY"]]
 ATP_W4_df$F_RELIG_TYPOLOGY
 
-# Openness to innovation
-columnas <- c("METECH_A_W3", "METECH_B_W3", "METECH_C_W3", 
-              "METECH_D_W3", "METECH_E_W3", "METECH_F_W3")
-
 # Ver las primeras filas del data frame
 head(ATP_W4)
 head(ATP_W4_df)
@@ -218,9 +266,6 @@ head(ATP_W4_df)
 library(haven) 
 library(dplyr)
 
-ATP_W3 <- read_sav("ruta/a/tu/ATP W3.sav")
-ATP_W3_df <- as.data.frame(ATP_W3)
-
 # --- Columnas Demográficas ATP ---
 columnas_demograficas_atp <- c(
   "QKEY",                  # Identificador único del encuestado
@@ -229,38 +274,38 @@ columnas_demograficas_atp <- c(
   "F_RACETHN_TYPOLOGY",    # Raza
   "F_SEX_FINAL",           # Sexo
   "F_RELIG_TYPOLOGY",      # Religión
-  "WEIGHT_W3"              # La variable de peso
+  "WEIGHT_W4"              # La variable de peso
 )
 
 # --- Columnas de Innovación ATP ---
-columnas_innovacion_atp <- c(
-  "METECH_A_W3", "METECH_B_W3", "METECH_C_W3",
-  "METECH_D_W3", "METECH_E_W3", "METECH_F_W3"
+columnas_innovacion_atp_w4 <- c(
+  "METECH_A_W4", "METECH_B_W4", "METECH_C_W4",
+  "METECH_D_W4", "METECH_E_W4", "METECH_F_W4"
 )
 
 # --- Combinamos ---
-columnas_seleccionadas_total <- c(columnas_demograficas_atp, columnas_innovacion_atp)
+columnas_seleccionadas_total_w4 <- c(columnas_demograficas_atp, columnas_innovacion_atp_w4)
 
 # --- Creamos DataFrame ---
-ATP_W3_sub <- ATP_W3_df %>%
-  select(all_of(columnas_existentes))
+ATP_W4_sub <- ATP_W4_df %>%
+  select(all_of(columnas_seleccionadas_total_w4))
 
 # --- Guardar el DataFrame de subconjunto ---
 
-saveRDS(ATP_W3_sub, file = "trabajo_1_files/ATP_W3_sub.rds")
+saveRDS(ATP_W4_sub, file = "trabajo_1_files/ATP_W4_sub.rds")
 
 # Convertir columnas que son factores (o etiquetadas por haven) a character para CSV
-ATP_W3_sub_csv <- ATP_subset_df
-for (col_name in names(ATP_W3_sub_csv)) {
-  if (is.factor(ATP_W3_sub_csv[[col_name]]) || inherits(ATP_W3_sub_csv[[col_name]], "haven_labelled")) {
-    ATP_W3_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W3[[col_name]])) # Usar as_factor para obtener etiquetas
+ATP_W4_sub_csv <- ATP_W4_sub
+for (col_name in names(columnas_demograficas_atp)) {
+  if (is.factor(ATP_W4_sub_csv[[col_name]]) || inherits(ATP_W4_sub_csv[[col_name]], "haven_labelled")) {
+    ATP_W4_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W4[[col_name]])) # Usar as_factor para obtener etiquetas
   }
 }
 # También convierte las variables METECH a character si aún son etiquetadas
 for (col_name in columnas_innovacion_atp) {
-  if (col_name %in% names(ATP_W3_sub_csv) && inherits(ATP_W3[[col_name]], "haven_labelled")){
-    ATP_W3_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W3[[col_name]]))
+  if (col_name %in% names(ATP_W4_sub_csv) && inherits(ATP_W4[[col_name]], "haven_labelled")){
+    ATP_W4_sub_csv[[col_name]] <- as.character(haven::as_factor(ATP_W4[[col_name]]))
   }
 }
 
-write.csv(ATP_W3_sub_csv, file = "trabajo_1_files/ATP_W3_sub.csv", row.names = FALSE)
+write.csv(ATP_W4_sub_csv, file = "trabajo_1_files/ATP_W4_sub.csv", row.names = FALSE)
