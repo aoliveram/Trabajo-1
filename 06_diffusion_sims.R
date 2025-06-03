@@ -59,15 +59,13 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
 N_nodes_global <- vcount(graphs_list_to_simulate[[1]])
 
 # Parámetros del espacio de simulación
-homoph_values_sim <- seq(0.3, 0.6, length.out = 6) 
-mur_values_sim  <- seq(0.0, 1.0, by = 0.01) # Reducido para testeo más rápido
+homoph_values_sim <- seq(0.0, 0.3, length.out = 6) 
+IUL_values_sim  <- seq(0.0, 1.0, by = 0.01) # Reducido para testeo más rápido
 num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
 
-# Tipo de umbral y distribución
-T_dist_sim <- "homo"  # "homo" o "hetero"
-T_type_sim <- "frac"  # "abs" o "frac"
-
-threshold_values_list_sim <- c(0.10, 0.15, 0.20) 
+# Thresholds
+threshold_mean_list <- c(0.10, 0.15, 0.20) 
+TAU_NORMAL_DISTRIBUTION_SD <- 0.10 
 
 # Estrategia de selección de semillas: "PLci_top" o "random"
 SEEDING_STRATEGY <- "random" # o "PLci_top"
@@ -82,9 +80,11 @@ all_simulation_results_collection <- list()
 
 cat(paste("Iniciando simulaciones para tipo de red:", current_graph_type_label, "\n"))
 
-for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ base (fraccional 0-1)
-  T_str_sim <- as.character(current_threshold_base_tau_fractional)
-  cat(paste("  Corriendo para Umbral Base τ (fraccional):", T_str_sim, "\n"))
+for (current_threshold_mean in threshold_mean_list) { # τ base (fraccional 0-1)
+  # T_str_sim <- as.character(current_threshold_mean)
+  # cat(paste("  Corriendo para Umbral Base τ (fraccional):", T_str_sim, "\n"))
+  T_str_sim <- paste0("norm_mean", sprintf("%.2f", current_threshold_mean), "_sd", sprintf("%.2f", TAU_NORMAL_DISTRIBUTION_SD))
+  cat(paste("  Corriendo para Umbral τ ~ Normal(μ=", sprintf("%.2f", current_threshold_mean), ", σ=", TAU_NORMAL_DISTRIBUTION_SD, ")\n"))
   
   results_for_this_base_tau_and_all_graphs <- list() 
   
@@ -105,11 +105,22 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
     )
     social_distance_matrix_d_ij <- as.matrix(daisy(attributes_for_distance, metric = "gower"))
     
-    # Calcular umbrales individuales τ_i
-    node_individual_thresholds_tau_frac_for_sim <- rep(current_threshold_base_tau_fractional, N_nodes_global)
-    # (Aquí iría lógica para τ_i heterogéneos si T_dist_sim == "hetero")
-    node_individual_thresholds_tau_frac_for_sim[node_individual_thresholds_tau_frac_for_sim <= 0 & current_threshold_base_tau_fractional > 0] <- 1e-6
-    node_individual_thresholds_tau_frac_for_sim[node_individual_thresholds_tau_frac_for_sim > 1] <- 1.0
+    
+    
+    # Umbrales τ_i usando la distribución Normal
+    set.seed(123 + graph_idx) 
+    
+    node_individual_thresholds_tau_frac_for_sim <- rnorm(
+      n = N_nodes_global, # Número de nodos del grafo actual
+      mean = current_threshold_mean,
+      sd = TAU_NORMAL_DISTRIBUTION_SD
+    )
+    
+    node_individual_thresholds_tau_frac_for_sim[node_individual_thresholds_tau_frac_for_sim < 0] <- 0
+    node_individual_thresholds_tau_frac_for_sim[node_individual_thresholds_tau_frac_for_sim > 1] <- 1
+    
+    
+    
     
     # Calcular umbrales de CONTEO para PLCI y para determinar el tamaño del clúster inicial
     # Estos son τ_conteo = τ_fraccional * grado_nodo (redondeado)
@@ -155,7 +166,7 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
                   'node_individual_thresholds_tau_frac_for_sim', # τ fraccional para get_complex_plot
                   'node_thresholds_count_for_plci_and_cluster', # τ conteo para clúster inicial
                   'node_mur_q_for_sim', 'node_degrees_for_sim',
-                  'mur_values_sim', 'homoph_values_sim', 'social_distance_matrix_d_ij'),
+                  'IUL_values_sim', 'homoph_values_sim', 'social_distance_matrix_d_ij'),
       .errorhandling = 'pass' 
     ) %dopar% {
       
@@ -196,14 +207,14 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
         graph_obj_arg = current_graph_obj_sim,
         node_individual_thresholds_tau_arg = node_individual_thresholds_tau_frac_for_sim, # τ fraccional para get_complex_plot
         node_mur_q_arg = node_mur_q_for_sim,
-        all_innovation_iul_Gamma_values = mur_values_sim, 
+        all_innovation_iul_Gamma_values = IUL_values_sim, 
         all_social_distance_h_values = homoph_values_sim,   
         initial_infectors_vector_arg = initial_infectors_for_this_run, # El clúster inicial de nodos
         d_ij_matrix = social_distance_matrix_d_ij
       )
       
       df_from_worker$graph_type <- current_graph_type_label
-      df_from_worker$base_threshold_tau_frac <- current_threshold_base_tau_fractional 
+      df_from_worker$base_threshold_tau_frac <- current_threshold_mean 
       df_from_worker$graph_instance_idx <- graph_idx
       
       return(df_from_worker)
