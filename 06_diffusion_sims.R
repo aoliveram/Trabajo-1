@@ -25,7 +25,7 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
   networks_dir <- "trabajo_1_files/ATP_network_ergm/"
   graphs_ATP <- list()
 
-  for (i in 1:5) {
+  for (i in 1:2) {
     ATP_net <- readRDS(paste0(networks_dir, "ATP_network_simulated_1000_mur_", sprintf("%03d", i), ".rds"))
     ATP_net <- asIgraph(ATP_net)
     
@@ -59,19 +59,19 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
 N_nodes_global <- vcount(graphs_list_to_simulate[[1]])
 
 # Parámetros del espacio de simulación
-homoph_values_sim <- seq(0.0, 0.3, length.out = 6) 
-mur_values_sim  <- seq(0.0, 1.0, by = 0.04) # Reducido para testeo más rápido
+homoph_values_sim <- seq(0.0, 0.3, length.out = 3) 
+mur_values_sim  <- seq(0.0, 1.0, by = 0.1) # Reducido para testeo más rápido
 num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
 
 # Tipo de umbral y distribución
 T_dist_sim <- "homo"  # "homo" o "hetero"
 T_type_sim <- "frac"  # "abs" o "frac"
 
-threshold_values_list_sim <- c(0.10, 0.15, 0.20) 
+threshold_values_list_sim <- c(0.10, 0.15)#, 0.20) 
 
 # Estrategia de selección de semillas: "PLci_top" o "random"
 SEEDING_STRATEGY <- "random" # o "PLci_top"
-NUM_INITIAL_SEEDS <- 5 # Cuántos de los top PLci probar como semilla
+NUM_INITIAL_SEEDS <- 4 # Cuántos de los top PLci probar como semilla
 NUM_SUCCESSFUL_SIMS_PER_GRAPH <- 1 # Cuántas simulaciones "exitosas" guardar por grafo/umbral
 
 # -----------------------------------------------------------------------------
@@ -133,7 +133,7 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
       cat(paste("      Nodos semilla principales (PLci_top):", paste(seed_nodes_to_test_as_primary, collapse=", "), "\n"))
     } else if (SEEDING_STRATEGY == "random") {
       set.seed(graph_idx * sum(as.numeric(charToRaw(T_str_sim))) * 7) 
-      seed_nodes_to_test_as_primary <- as.numeric(sample(V(current_graph_obj_sim), NUM_INITIAL_SEEDS, replace = FALSE))
+      seed_nodes_to_test_as_primary <- as.integer(sample(V(current_graph_obj_sim), NUM_INITIAL_SEEDS, replace = FALSE))
       cat(paste("      Nodos semilla principales (random):", paste(seed_nodes_to_test_as_primary, collapse=", "), "\n"))
     }
     
@@ -142,12 +142,13 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
       next
     }
     
-    cl <- makeCluster(8, type = "FORK") 
+    cl <- makeCluster(NUM_INITIAL_SEEDS, type = "FORK") # makeCluster(8, type = "FORK") M4
     registerDoParallel(cl)
     
     list_of_dfs_from_parallel_seeds <- foreach(
       current_primary_seed_id = seed_nodes_to_test_as_primary, 
-      .combine = 'list', 
+      .combine = 'list',
+      .multicombine = TRUE,
       .packages = c('igraph', 'dplyr'), 
       .export = c('sweep_homoph_parameter', 'get_complex_plot', 
                   'N_nodes_global', 'current_graph_obj_sim', 
@@ -207,6 +208,30 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
       
       return(df_from_worker)
     } 
+    
+    
+    
+    cat("Estructura de list_of_dfs_from_parallel_seeds:\n")
+    print(str(list_of_dfs_from_parallel_seeds))
+    
+    cat("Clases de los elementos en list_of_dfs_from_parallel_seeds:\n")
+    for(k_elem in seq_along(list_of_dfs_from_parallel_seeds)) {
+      elem_actual <- list_of_dfs_from_parallel_seeds[[k_elem]]
+      cat(paste("Elemento", k_elem, "clase:", paste(class(elem_actual), collapse=", "), "\n"))
+      if (is.list(elem_actual) && !is.data.frame(elem_actual)) {
+        cat("  Es una lista (no df), su estructura interna:\n")
+        print(str(elem_actual))
+        cat("  Clases de sus sub-elementos:\n")
+        for(sub_k in seq_along(elem_actual)){
+          cat(paste("    Sub-elemento", sub_k, "clase:", paste(class(elem_actual[[sub_k]]), collapse=", "), "\n"))
+        }
+      } else if (!is.data.frame(elem_actual) && !inherits(elem_actual, "simpleError")) {
+        cat("  No es df ni error. Contenido:\n")
+        print(elem_actual)
+      }
+    }
+    
+    
     
     stopCluster(cl)
     
