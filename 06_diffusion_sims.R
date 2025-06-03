@@ -25,7 +25,7 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
   networks_dir <- "trabajo_1_files/ATP_network_ergm/"
   graphs_ATP <- list()
 
-  for (i in 1:2) {
+  for (i in 1:5) {
     ATP_net <- readRDS(paste0(networks_dir, "ATP_network_simulated_1000_mur_", sprintf("%03d", i), ".rds"))
     ATP_net <- asIgraph(ATP_net)
     
@@ -59,8 +59,8 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
 N_nodes_global <- vcount(graphs_list_to_simulate[[1]])
 
 # Parámetros del espacio de simulación
-homoph_values_sim <- seq(0.0, 0.3, length.out = 6) 
-mur_values_sim  <- seq(0.0, 1.0, by = 0.005) # Reducido para testeo más rápido
+homoph_values_sim <- seq(0.3, 0.6, length.out = 6) 
+mur_values_sim  <- seq(0.0, 1.0, by = 0.01) # Reducido para testeo más rápido
 num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
 
 # Tipo de umbral y distribución
@@ -253,7 +253,8 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
 } 
 
 # Guardamos
-saveRDS(all_simulation_results_collection, "trabajo_1_files/diffusion_ATP_nets_1.rds")
+saveRDS(all_simulation_results_collection, "trabajo_1_files/diffusion_simulation_files/diffusion_ATP_nets_1.rds")
+all_simulation_results_collection <- readRDS("trabajo_1_files/diffusion_simulation_files/diffusion_ATP_nets_Random_h03-06_BIG.rds")
 
 # -----------------------------------------------------------------------------
 # 4. Visualización Rápida de Resultados 
