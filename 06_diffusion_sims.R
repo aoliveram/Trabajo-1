@@ -9,6 +9,7 @@ library(ggplot2)
 library(dplyr)
 library(readr)
 library(patchwork) # Para el plot final
+library(intergraph)
 
 # Cargar el script con las funciones (asegúrate de que esté en el mismo directorio o ajusta la ruta)
 source("diffusion_tests/simulation_functions.R") 
@@ -20,29 +21,16 @@ source("diffusion_tests/simulation_functions.R")
 ATP_NETWORK <- TRUE
 
 if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
-  # networks_dir <- "diffusion_tests/Talaga-homophily-network/"
-  # graphs_sda <- list()
-  # attributes_sda <- list()
-  # 
-  # for (i in 1:5) {
-  #   # edge_file <- paste0(networks_dir, "talaga-homophily-network-edges-N324_", i, ".csv")
-  #   # edges <- read.csv(edge_file)
-  #   # attribute_file <- paste0(networks_dir, "talaga-homophily-network-node-attributes-N324_", i, ".csv")
-  #   # node_attributes <- read.csv(attribute_file)
-  #   
-  #   g <- graph_from_data_frame(d = edges, directed = FALSE, vertices = node_attributes)
-  #   V(g)$alpha <- node_attributes$relevant_dim # REVISAR si 'relevant_dim' es 'alpha'
-  #   
-  #   graphs_sda[[i]] <- g
-  #   attributes_sda[[i]] <- node_attributes # Guardar atributos
-  # }
-  
+  networks_dir <- "trabajo_1_files/ATP_network_ergm/"
   graphs_ATP <- list()
-  
-  ATP_net <- readRDS("trabajo_1_files/ATP_network_simulated_1000_alpha.rds")
-  ATP_net <- asIgraph(ATP_net)
-  V(ATP_net)$alpha <- V(ATP_net)$alpha_innov_prop
-  graphs_ATP[[1]] <- ATP_net
+
+  for (i in 1:5) {
+    ATP_net <- readRDS(paste0(networks_dir, "ATP_network_simulated_1000_mur_", sprintf("%03d", i), ".rds"))
+    ATP_net <- asIgraph(ATP_net)
+    
+    V(ATP_net)$alpha <- V(ATP_net)$alpha_innov_prop
+    graphs_ATP[[i]] <- ATP_net
+  }
   
   graphs_list_to_simulate <- graphs_ATP
   current_graph_type_label <- "ATP-net"
