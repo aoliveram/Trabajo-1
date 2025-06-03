@@ -70,15 +70,14 @@ T_type_sim <- "frac"  # "abs" o "frac"
 threshold_values_list_sim <- c(0.10, 0.15, 0.20) 
 
 # Estrategia de selección de semillas: "PLci_top" o "random"
-SEEDING_STRATEGY <- "PLci_top" # o "random"
-#NUM_INITIAL_SEEDS_RANDOM <- 5 # Si SEEDING_STRATEGY es "random"
-NUM_TOP_PLCI_NODES_TO_TEST <- 5 # Cuántos de los top PLci probar como semilla
+SEEDING_STRATEGY <- "random" # o "PLci_top"
+NUM_INITIAL_SEEDS <- 5 # Cuántos de los top PLci probar como semilla
 NUM_SUCCESSFUL_SIMS_PER_GRAPH <- 1 # Cuántas simulaciones "exitosas" guardar por grafo/umbral
 
 # -----------------------------------------------------------------------------
 # 3. Bucle Principal de Simulación
 # -----------------------------------------------------------------------------
-
+       
 all_simulation_results_collection <- list() 
 
 cat(paste("Iniciando simulaciones para tipo de red:", current_graph_type_label, "\n"))
@@ -130,12 +129,11 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
           model_output_list_placeholder = NULL
         )[5] 
       })
-      seed_nodes_to_test_as_primary <- order(as.numeric(plci_values), decreasing = TRUE)[1:min(N_nodes_global, NUM_TOP_PLCI_NODES_TO_TEST)]
+      seed_nodes_to_test_as_primary <- order(as.numeric(plci_values), decreasing = TRUE)[1:min(N_nodes_global, NUM_INITIAL_SEEDS)]
       cat(paste("      Nodos semilla principales (PLci_top):", paste(seed_nodes_to_test_as_primary, collapse=", "), "\n"))
     } else if (SEEDING_STRATEGY == "random") {
       set.seed(graph_idx * sum(as.numeric(charToRaw(T_str_sim))) * 7) 
-      num_random_runs_per_graph = NUM_SUCCESSFUL_SIMS_PER_GRAPH 
-      seed_nodes_to_test_as_primary <- sample(V(current_graph_obj_sim), num_random_runs_per_graph, replace = FALSE)
+      seed_nodes_to_test_as_primary <- as.numeric(sample(V(current_graph_obj_sim), NUM_INITIAL_SEEDS, replace = FALSE))
       cat(paste("      Nodos semilla principales (random):", paste(seed_nodes_to_test_as_primary, collapse=", "), "\n"))
     }
     
@@ -167,7 +165,7 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
       # Asegurar que no sea mayor que el número de nodos o grado + 1
       num_seeds_for_initial_cluster = min(num_seeds_for_initial_cluster, N_nodes_global, node_degrees_for_sim[current_primary_seed_id] + 1)
       if(num_seeds_for_initial_cluster < 1) num_seeds_for_initial_cluster <- 1
-      
+
       
       initial_infectors_for_this_run <- c(current_primary_seed_id) # Empezar con la semilla principal
       
