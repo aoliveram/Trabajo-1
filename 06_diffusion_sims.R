@@ -64,8 +64,8 @@ IUL_values_sim  <- seq(0.0, 1.0, by = 0.01) # Reducido para testeo más rápido
 num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
 
 # Thresholds
-threshold_mean_list <- c(0.10, 0.15, 0.20) 
-TAU_NORMAL_DISTRIBUTION_SD <- 0.10 
+threshold_mean_list <- c(0.25, 0.30, 0.35) 
+TAU_NORMAL_DISTRIBUTION_SD <- 0.16 
 
 # Estrategia de selección de semillas: "PLci_top" o "random"
 SEEDING_STRATEGY <- "random" # o "PLci_top"
