@@ -10,6 +10,7 @@ library(dplyr)
 library(readr)
 library(patchwork) # Para el plot final
 library(intergraph)
+library(cluster)
 
 # Cargar el script con las funciones (asegúrate de que esté en el mismo directorio o ajusta la ruta)
 source("diffusion_tests/simulation_functions.R") 
@@ -28,7 +29,7 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
     ATP_net <- readRDS(paste0(networks_dir, "ATP_network_simulated_1000_mur_", sprintf("%03d", i), ".rds"))
     ATP_net <- asIgraph(ATP_net)
     
-    V(ATP_net)$alpha <- V(ATP_net)$alpha_innov_prop
+    V(ATP_net)$alpha <- V(ATP_net)$q_i
     graphs_ATP[[i]] <- ATP_net
   }
   
@@ -60,7 +61,7 @@ N_nodes_global <- vcount(graphs_list_to_simulate[[1]])
 
 # Parámetros del espacio de simulación
 homoph_values_sim <- seq(0.0, 0.3, length.out = 6) 
-alpha_values_sim  <- seq(0.0, 1.0, by = 0.04) # Reducido para testeo más rápido
+mur_values_sim  <- seq(0.0, 1.0, by = 0.04) # Reducido para testeo más rápido
 num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
 
 # Tipo de umbral y distribución
@@ -93,7 +94,7 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
     current_graph_obj_sim <- graphs_list_to_simulate[[graph_idx]]
     cat(paste("    Procesando grafo #", graph_idx, "de", length(graphs_list_to_simulate), "...\n"))
     
-    node_mur_q_for_sim <- V(current_graph_obj_sim)$alpha # q_i (MUR) [CAMBIAR ALPHA --> Q_I EN LAS REDES SINTÉTICAS !!!!!]
+    node_mur_q_for_sim <- V(current_graph_obj_sim)$q_i # q_i (MUR) [CAMBIAR ALPHA --> Q_I EN LAS REDES SINTÉTICAS !!!!!]
     node_degrees_for_sim <- igraph::degree(current_graph_obj_sim)
     
     # Calcular la matriz de disimilitud de Gower
@@ -144,7 +145,7 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
       next
     }
     
-    cl <- makeCluster(detectCores() - 1, type = "FORK") 
+    cl <- makeCluster(8, type = "FORK") 
     registerDoParallel(cl)
     
     list_of_dfs_from_parallel_seeds <- foreach(

@@ -21,7 +21,9 @@ if (!is.factor(ATP_W3_W4$relig)) ATP_W3_W4$relig <- factor(ATP_W3_W4$relig)
 demographic_vars <- c("age", "sex", "educ_num", "race", "relig")
 metech_vars <- c("METECH_A", "METECH_B", "METECH_C", 
                  "METECH_D", "METECH_E", "METECH_F")
-attribute_vars <- c(demographic_vars, metech_vars)
+mefood_vars <- c("MEFOOD_A", "MEFOOD_B", "MEFOOD_C", 
+                 "MEFOOD_D", "MEFOOD_E", "MEFOOD_F")
+attribute_vars <- c(demographic_vars, metech_vars) #, mefood_vars)
 
 for (m_var in metech_vars) {
   if (m_var %in% names(ATP_W3_W4)) {
