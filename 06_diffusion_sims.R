@@ -37,7 +37,7 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
   
 } else { # Generación de redes sintéticas
   
-  N_nodes_sim <- 324
+  N_nodes_sim <- 1000
   density_sim <- 0.029
   num_edges_sim <- round(density_sim * N_nodes_sim * (N_nodes_sim - 1) / 2)
   m_sim <- 5          # Para Barabasi-Albert
@@ -59,19 +59,19 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
 N_nodes_global <- vcount(graphs_list_to_simulate[[1]])
 
 # Parámetros del espacio de simulación
-homoph_values_sim <- seq(0.0, 0.3, length.out = 3) 
-mur_values_sim  <- seq(0.0, 1.0, by = 0.1) # Reducido para testeo más rápido
+homoph_values_sim <- seq(0.0, 0.3, length.out = 6) 
+mur_values_sim  <- seq(0.0, 1.0, by = 0.005) # Reducido para testeo más rápido
 num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
 
 # Tipo de umbral y distribución
 T_dist_sim <- "homo"  # "homo" o "hetero"
 T_type_sim <- "frac"  # "abs" o "frac"
 
-threshold_values_list_sim <- c(0.10, 0.15)#, 0.20) 
+threshold_values_list_sim <- c(0.10, 0.15, 0.20) 
 
 # Estrategia de selección de semillas: "PLci_top" o "random"
 SEEDING_STRATEGY <- "random" # o "PLci_top"
-NUM_INITIAL_SEEDS <- 4 # Cuántos de los top PLci probar como semilla
+NUM_INITIAL_SEEDS <- 8 # Cuántos de los top PLci probar como semilla
 NUM_SUCCESSFUL_SIMS_PER_GRAPH <- 1 # Cuántas simulaciones "exitosas" guardar por grafo/umbral
 
 # -----------------------------------------------------------------------------
@@ -208,30 +208,6 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
       
       return(df_from_worker)
     } 
-    
-    
-    
-    cat("Estructura de list_of_dfs_from_parallel_seeds:\n")
-    print(str(list_of_dfs_from_parallel_seeds))
-    
-    cat("Clases de los elementos en list_of_dfs_from_parallel_seeds:\n")
-    for(k_elem in seq_along(list_of_dfs_from_parallel_seeds)) {
-      elem_actual <- list_of_dfs_from_parallel_seeds[[k_elem]]
-      cat(paste("Elemento", k_elem, "clase:", paste(class(elem_actual), collapse=", "), "\n"))
-      if (is.list(elem_actual) && !is.data.frame(elem_actual)) {
-        cat("  Es una lista (no df), su estructura interna:\n")
-        print(str(elem_actual))
-        cat("  Clases de sus sub-elementos:\n")
-        for(sub_k in seq_along(elem_actual)){
-          cat(paste("    Sub-elemento", sub_k, "clase:", paste(class(elem_actual[[sub_k]]), collapse=", "), "\n"))
-        }
-      } else if (!is.data.frame(elem_actual) && !inherits(elem_actual, "simpleError")) {
-        cat("  No es df ni error. Contenido:\n")
-        print(elem_actual)
-      }
-    }
-    
-    
     
     stopCluster(cl)
     
