@@ -3,6 +3,61 @@ library(dplyr)
 library(ggplot2)
 library(gridExtra)
 
+# --- Variables y parámetros iniciales ---
+metech_vars <- c("metech_a", "metech_b", "metech_c", 
+                 "metech_d", "metech_e", "metech_f")
+
+networks_dir <- "trabajo_1_files/ATP_network_ergm/"
+output_prefix <- "ATP_network_simulated_1000_mur_"
+N_networks <- 100 # Cambiar si tienes un número distinto de redes
+
+# --- Loop sobre las redes simuladas ---
+for (i in 1:N_networks) {
+  
+  # Cargar red
+  filename <- sprintf("%sATP_network_simulated_1000_%03d.rds", networks_dir, i)
+  ATP_network_simulated_1000 <- readRDS(filename)
+  
+  # --- 2. Extraer atributos METECH ---
+  df_metech_attr <- data.frame(QKEY = 1:network.size(ATP_network_simulated_1000)) # ID temporal
+  
+  for (m_var in metech_vars) {
+    if (m_var %in% list.vertex.attributes(ATP_network_simulated_1000)) {
+      df_metech_attr[[m_var]] <- get.vertex.attribute(ATP_network_simulated_1000, m_var)
+    } else {
+      warning(paste("Atributo", m_var, "no encontrado en la red", i, ". Se creará con NAs."))
+      df_metech_attr[[m_var]] <- NA
+    }
+  }
+  
+  # --- 4. Índice de Propensión a la Innovación ---
+  df_metech_attr <- df_metech_attr %>%
+    mutate(
+      score_A = ifelse(is.na(metech_a), NA, metech_a),
+      score_B = ifelse(is.na(metech_b), NA, 1 - metech_b),
+      score_C = ifelse(is.na(metech_c), NA, metech_c),
+      score_D = ifelse(is.na(metech_d), NA, metech_d),
+      score_E = ifelse(is.na(metech_e), NA, 1 - metech_e),
+      score_F = ifelse(is.na(metech_f), NA, 1 - metech_f)
+    ) %>%
+    mutate(
+      new_tech_pref_raw_index = rowSums(select(., starts_with("score_"))),
+      q_i = new_tech_pref_raw_index / 6
+    )
+  
+  # --- 5. Asignar atributo a la red ---
+  set.vertex.attribute(ATP_network_simulated_1000, "q_i", df_metech_attr$q_i)
+  
+  # --- 6. Guardar nueva red con el atributo alpha ---
+  output_filename <- sprintf("%s%s%03d.rds", networks_dir, output_prefix, i)
+  saveRDS(ATP_network_simulated_1000, output_filename)
+}
+
+
+# -----------------------------------------------------------------------------
+# Para solo la red ATP simulada original
+# -----------------------------------------------------------------------------
+
 
 # --- 1. Cargamos datos ---
 
