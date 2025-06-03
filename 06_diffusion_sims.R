@@ -29,7 +29,6 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
     ATP_net <- readRDS(paste0(networks_dir, "ATP_network_simulated_1000_mur_", sprintf("%03d", i), ".rds"))
     ATP_net <- asIgraph(ATP_net)
     
-    V(ATP_net)$alpha <- V(ATP_net)$q_i
     graphs_ATP[[i]] <- ATP_net
   }
   
@@ -157,7 +156,7 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
                   'node_individual_thresholds_tau_frac_for_sim', # τ fraccional para get_complex_plot
                   'node_thresholds_count_for_plci_and_cluster', # τ conteo para clúster inicial
                   'node_mur_q_for_sim', 'node_degrees_for_sim',
-                  'alpha_values_sim', 'homoph_values_sim', 'social_distance_matrix_d_ij'),
+                  'mur_values_sim', 'homoph_values_sim', 'social_distance_matrix_d_ij'),
       .errorhandling = 'pass' 
     ) %dopar% {
       
@@ -198,7 +197,7 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
         graph_obj_arg = current_graph_obj_sim,
         node_individual_thresholds_tau_arg = node_individual_thresholds_tau_frac_for_sim, # τ fraccional para get_complex_plot
         node_mur_q_arg = node_mur_q_for_sim,
-        all_innovation_iul_Gamma_values = alpha_values_sim, 
+        all_innovation_iul_Gamma_values = mur_values_sim, 
         all_social_distance_h_values = homoph_values_sim,   
         initial_infectors_vector_arg = initial_infectors_for_this_run, # El clúster inicial de nodos
         d_ij_matrix = social_distance_matrix_d_ij
@@ -254,7 +253,8 @@ for (current_threshold_base_tau_fractional in threshold_values_list_sim) { # τ 
   }
 } 
 
-cat("Todas las simulaciones completadas.\n")
+# Guardamos
+saveRDS(all_simulation_results_collection, "trabajo_1_files/diffusion_ATP_nets_1.rds")
 
 # -----------------------------------------------------------------------------
 # 4. Visualización Rápida de Resultados 
