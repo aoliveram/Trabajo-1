@@ -58,19 +58,18 @@ if (ATP_NETWORK) { # Carga de redes Small-World SDA desde archivos
 # -----------------------------------------------------------------------------
 N_nodes_global <- vcount(graphs_list_to_simulate[[1]])
 
-# Parámetros del espacio de simulación
-homoph_values_sim <- seq(0.0, 0.3, length.out = 6) 
-IUL_values_sim  <- seq(0.0, 1.0, by = 0.01) # Reducido para testeo más rápido
-num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
-
+ # Parámetros del espacio de simulación
+h_values_sim <- seq(1/6, 5/6, length.out = 5) 
+IUL_values_sim  <- seq(0.0, 1.0, by = 0.025) # Reducido para testeo más rápido
 # Thresholds
-threshold_mean_list <- c(0.25, 0.30, 0.35) 
+threshold_mean_list <- c(0.4, 0.5, 0.6) 
 TAU_NORMAL_DISTRIBUTION_SD <- 0.16 
 
 # Estrategia de selección de semillas: "PLci_top" o "random"
 SEEDING_STRATEGY <- "random" # o "PLci_top"
 NUM_INITIAL_SEEDS <- 8 # Cuántos de los top PLci probar como semilla
 NUM_SUCCESSFUL_SIMS_PER_GRAPH <- 1 # Cuántas simulaciones "exitosas" guardar por grafo/umbral
+num_adopters_min_sim <- 0.1 # Proporción mínima para considerar éxito
 
 # -----------------------------------------------------------------------------
 # 3. Bucle Principal de Simulación
@@ -166,7 +165,7 @@ for (current_threshold_mean in threshold_mean_list) { # τ base (fraccional 0-1)
                   'node_individual_thresholds_tau_frac_for_sim', # τ fraccional para get_complex_plot
                   'node_thresholds_count_for_plci_and_cluster', # τ conteo para clúster inicial
                   'node_mur_q_for_sim', 'node_degrees_for_sim',
-                  'IUL_values_sim', 'homoph_values_sim', 'social_distance_matrix_d_ij'),
+                  'IUL_values_sim', 'h_values_sim', 'social_distance_matrix_d_ij'),
       .errorhandling = 'pass' 
     ) %dopar% {
       
@@ -208,7 +207,7 @@ for (current_threshold_mean in threshold_mean_list) { # τ base (fraccional 0-1)
         node_individual_thresholds_tau_arg = node_individual_thresholds_tau_frac_for_sim, # τ fraccional para get_complex_plot
         node_mur_q_arg = node_mur_q_for_sim,
         all_innovation_iul_Gamma_values = IUL_values_sim, 
-        all_social_distance_h_values = homoph_values_sim,   
+        all_social_distance_h_values = h_values_sim,   
         initial_infectors_vector_arg = initial_infectors_for_this_run, # El clúster inicial de nodos
         d_ij_matrix = social_distance_matrix_d_ij
       )
@@ -264,8 +263,8 @@ for (current_threshold_mean in threshold_mean_list) { # τ base (fraccional 0-1)
 } 
 
 # Guardamos
-saveRDS(all_simulation_results_collection, "trabajo_1_files/diffusion_simulation_files/diffusion_ATP_nets_1.rds")
-all_simulation_results_collection <- readRDS("trabajo_1_files/diffusion_simulation_files/diffusion_ATP_nets_Random_h03-06_BIG.rds")
+saveRDS(all_simulation_results_collection, "trabajo_1_files/diffusion_simulation_files/diff_ATP_Random_h016-083_tau04-06.rds")
+all_simulation_results_collection <- readRDS("trabajo_1_files/diffusion_simulation_files/diff_ATP_Random_h016-083_tau04-06.rds")
 
 # -----------------------------------------------------------------------------
 # 4. Visualización Rápida de Resultados 
