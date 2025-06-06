@@ -62,7 +62,7 @@ N_nodes_global <- vcount(graphs_list_to_simulate[[1]])
 h_values_sim <- seq(1/6, 5/6, length.out = 5) 
 IUL_values_sim  <- seq(0.0, 1.0, by = 0.025) # Reducido para testeo más rápido
 # Thresholds
-threshold_mean_list <- c(0.4, 0.5, 0.6) 
+threshold_mean_list <- c(0.55, 0.60, 0.65) 
 TAU_NORMAL_DISTRIBUTION_SD <- 0.16 
 
 # Estrategia de selección de semillas: "PLci_top" o "random"
@@ -263,8 +263,8 @@ for (current_threshold_mean in threshold_mean_list) { # τ base (fraccional 0-1)
 } 
 
 # Guardamos
-saveRDS(all_simulation_results_collection, "trabajo_1_files/diffusion_simulation_files/diff_ATP_Random_h016-083_tau04-06.rds")
-all_simulation_results_collection <- readRDS("trabajo_1_files/diffusion_simulation_files/diff_ATP_Random_h016-083_tau04-06.rds")
+saveRDS(all_simulation_results_collection, "trabajo_1_files/diffusion_simulation_files/diff_ATP_Random_h016-083_Normal055-065_SD016.rds")
+all_simulation_results_collection <- readRDS("trabajo_1_files/diffusion_simulation_files/diff_ATP_Random_h016-083_Normal055-065_SD016.rds")
 
 # -----------------------------------------------------------------------------
 # 4. Visualización Rápida de Resultados 
