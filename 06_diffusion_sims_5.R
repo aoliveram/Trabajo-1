@@ -27,19 +27,20 @@ CURRENT_GRAPH_TYPE_LABEL <- "ATP-net"
 NETWORKS_DIR <- "trabajo_1_files/ATP_network_ergm/"
 # Ensure you have 100 network files if NUM_SEED_RUNS_TOTAL is 100
 # Or adjust NUM_NETWORK_INSTANCES_AVAILABLE if you have fewer
-NUM_NETWORK_INSTANCES_AVAILABLE <- 96 # Max number of unique network files
-NUM_SEED_RUNS_TOTAL <- 96 # Total number of simulation runs (network+seed pairs) per (Mean, SD) combo
+NUM_NETWORK_INSTANCES_AVAILABLE <- 96/6 # Max number of unique network files
+NUM_SEED_RUNS_TOTAL <- 96/6 # Total number of simulation runs (network+seed pairs) per (Mean, SD) combo
 N_NODES_GLOBAL <- 1000
 
 # Means for Normal Threshold Distribution (τ_i) - INNER SWEEP
 THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 
 # Standard Deviations for Normal Threshold Distribution (τ_i) - OUTER SWEEP
-TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20) # Your point 2
+#TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20) # Your point 2
+TAU_NORMAL_SD_SWEEP_LIST <- c(0.12) # Your point 2
 
 SEEDING_STRATEGY_FIXED <- "random"
 PHASE_TRANSITION_THRESHOLD_JUMP <- 0.50
-NUM_CORES_TO_USE <- 12
+NUM_CORES_TO_USE <- 8
 
 # Output directories
 RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files/"
@@ -134,7 +135,14 @@ for (sd_idx in 1:total_sd_iterations) {
       graph_for_this_run <- asIgraph(graph_for_this_run_ergm)
       N_NODES_SPECIFIC_GRAPH <- vcount(graph_for_this_run)
       
+      set.seed(run_idx * 3000 + round(current_threshold_mean * 100) + round(current_tau_sd * 100)) # Ajustar si current_tau_sd no está aquí
       node_mur_q_specific <- V(graph_for_this_run)$q_i
+      # epsilon_q_i <- runif(N_NODES_SPECIFIC_GRAPH, min = -0.005, max = 0.005)
+      # node_mur_q_specific <- node_mur_q_specific + epsilon_q_i
+      # # Asegurar que q_i ruidoso esté entre 0 y 1
+      # node_mur_q_specific[node_mur_q_specific < 0] <- 0
+      # node_mur_q_specific[node_mur_q_specific > 1] <- 1
+      
       node_degrees_specific <- igraph::degree(graph_for_this_run)
       
       attributes_for_distance_specific <- data.frame(
@@ -142,8 +150,23 @@ for (sd_idx in 1:total_sd_iterations) {
         race = as.factor(V(graph_for_this_run)$race), relig = as.factor(V(graph_for_this_run)$relig),
         sex = as.factor(V(graph_for_this_run)$sex)
       )
-      social_distance_matrix_d_ij_specific <- as.matrix(daisy(attributes_for_distance_specific, metric = "gower"))
+      d_ij_matrix <- as.matrix(daisy(attributes_for_distance_specific, metric = "gower"))
       
+      # set.seed(run_idx * 4000 + round(current_threshold_mean * 100) + round(current_tau_sd * 100)) # Semilla diferente
+      # epsilon_matrix_d_ij <- matrix(0, nrow = N_NODES_SPECIFIC_GRAPH, ncol = N_NODES_SPECIFIC_GRAPH)
+      # upper_triangle_indices <- upper.tri(epsilon_matrix_d_ij)
+      # noise_values_for_upper_triangle <- runif(sum(upper_triangle_indices), min = -0.025, max = 0.025)
+      # epsilon_matrix_d_ij[upper_triangle_indices] <- noise_values_for_upper_triangle
+      # epsilon_matrix_d_ij <- epsilon_matrix_d_ij + t(epsilon_matrix_d_ij) # Hacerla simétrica
+      # 
+      # d_ij_matrix <- d_ij_matrix + epsilon_matrix_d_ij
+      # 
+      # # Asegurar que d_ij ruidoso esté entre 0 y 1 (o el rango máximo de Gower, que es 1)
+      # d_ij_matrix[d_ij_matrix < 0] <- 0
+      # d_ij_matrix[d_ij_matrix > 1] <- 1
+      # diag(d_ij_matrix) <- 0 # Asegurar que la diagonal sea cero
+      
+      # Thresholds
       set.seed(run_idx * 1000 + round(current_threshold_mean * 100) + round(current_tau_sd * 1000)) 
       node_thresholds_tau_frac_specific <- rnorm(
         n = N_NODES_SPECIFIC_GRAPH, mean = current_threshold_mean, sd = current_tau_sd
@@ -190,7 +213,7 @@ for (sd_idx in 1:total_sd_iterations) {
         all_innovation_iul_Gamma_values = IUL_VALUES_SWEEP,
         all_social_distance_h_values = H_VALUES_SWEEP,
         initial_infectors_vector_arg = initial_infectors_for_this_sim_run,
-        d_ij_matrix = social_distance_matrix_d_ij_specific
+        d_ij_matrix = d_ij_matrix
       )
       
       df_one_full_run$run_id <- run_idx 
@@ -288,14 +311,14 @@ for (sd_idx in 1:total_sd_iterations) {
           strip.text = element_text(face="bold", size=9) 
         )
       
-      plot_filename_current_sd <- paste0(PLOTS_DIR, "phase_transition_sd", sprintf("%.2f", current_tau_sd), "_means03-06.pdf")
+      plot_filename_current_sd <- paste0(PLOTS_DIR, "phase_transition_sd", sprintf("%.2f", current_tau_sd), "_means03-06_borrar.pdf")
       ggsave(plot_filename_current_sd, plot_for_current_sd, width = 10, height = 8) # Adjusted for potentially 4 means
       cat(paste0("    Saved plot: ", plot_filename_current_sd, "\n"))
     }
   }
   
   # --- Save Raw Data for CURRENT SD ---
-  raw_data_filename_current_sd <- paste0(RESULTS_DIR, "phase_transition_raw_sd", sprintf("%.2f", current_tau_sd), "_means03-06.rds")
+  raw_data_filename_current_sd <- paste0(RESULTS_DIR, "phase_transition_raw_sd", sprintf("%.2f", current_tau_sd), "_means03-06borrar.rds")
   saveRDS(current_sd_all_means_raw_results, raw_data_filename_current_sd) # Save list of DFs (one per mean)
   cat(paste0("    Saved raw data: ", raw_data_filename_current_sd, "\n"))
   
