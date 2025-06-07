@@ -106,6 +106,10 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
     node_states_activated[initial_seed_nodes_vector] <- "State2"
   }
   
+  # Inicializar vectores para rastrear el mecanismo de adopción
+  adopted_by_rational_choice <- rep(FALSE, N_nodes)
+  adopted_by_social_influence <- rep(FALSE, N_nodes)
+  
   adj_matrix <- as_adjacency_matrix(graph_obj, sparse = FALSE) 
   
   spread_continues <- TRUE
@@ -134,6 +138,7 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
       if (length(active_neighbors_of_i_idx) > 0) { # El nodo 'i' se entera
         if (node_mur_q[i] <= innovation_iul_Gamma) { # Regla 3: Elección Racional
           newly_infected_this_step_idx <- c(newly_infected_this_step_idx, i)
+          adopted_by_rational_choice[i] <- TRUE # NUEVO: Marcar
           next 
         }
         
@@ -163,6 +168,7 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
           # Comparar con el umbral individual τ_i (fraccionario)
           if (exposure_Ei_tilde_value >= node_individual_thresholds_tau[i]) {
             newly_infected_this_step_idx <- c(newly_infected_this_step_idx, i)
+            adopted_by_social_influence[i] <- TRUE # NUEVO: Marcar
           }
         } else {
           # Si no tiene vecinos (denominator_Ei_tilde == 0) o no tiene vecinos activos,
@@ -186,12 +192,25 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
   } 
   
   num_final_adopters <- sum(node_states_activated == "State2")
+  
+  # NUEVO: Contar cuántos adoptaron por cada mecanismo
+  # Excluimos las semillas iniciales de estos conteos,
+  non_initial_seeds_mask <- rep(TRUE, N_nodes)
+  if(length(initial_seed_nodes_vector) > 0) {
+    non_initial_seeds_mask[initial_seed_nodes_vector] <- FALSE
+  }
+  num_adopted_rational <- sum(adopted_by_rational_choice & non_initial_seeds_mask)
+  num_adopted_social <- sum(adopted_by_social_influence & non_initial_seeds_mask)
+  
   return(list(
-    innovation_iul_Gamma = innovation_iul_Gamma, # Cambiado de alpha_1
-    social_distance_h = social_distance_h,    # Cambiado de homophily
-    seed = seed_node, 
+    innovation_iul_Gamma = innovation_iul_Gamma,
+    social_distance_h = social_distance_h,
+    seed = seed_node, # Esto es el primary_seed_id_arg, no el vector de semillas iniciales
     num_adopters = num_final_adopters, 
-    num_steps = simulation_step
+    num_steps = simulation_step,
+    num_adopted_rational = num_adopted_rational,     # NUEVA COLUMNA
+    num_adopted_social = num_adopted_social,       # NUEVA COLUMNA
+    initial_cluster_size = length(initial_seed_nodes_vector) # NUEVA COLUMNA (útil para verificar)
   ))
 }
 
