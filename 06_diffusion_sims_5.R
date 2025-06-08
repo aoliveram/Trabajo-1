@@ -27,16 +27,15 @@ CURRENT_GRAPH_TYPE_LABEL <- "ATP-net"
 NETWORKS_DIR <- "trabajo_1_files/ATP_network_ergm/"
 # Ensure you have 100 network files if NUM_SEED_RUNS_TOTAL is 100
 # Or adjust NUM_NETWORK_INSTANCES_AVAILABLE if you have fewer
-NUM_NETWORK_INSTANCES_AVAILABLE <- 96/6 # Max number of unique network files
-NUM_SEED_RUNS_TOTAL <- 96/6 # Total number of simulation runs (network+seed pairs) per (Mean, SD) combo
+NUM_NETWORK_INSTANCES_AVAILABLE <- 96 # Max number of unique network files
+NUM_SEED_RUNS_TOTAL <- 96 # Total number of simulation runs (network+seed pairs) per (Mean, SD) combo
 N_NODES_GLOBAL <- 1000
 
 # Means for Normal Threshold Distribution (τ_i) - INNER SWEEP
 THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 
 # Standard Deviations for Normal Threshold Distribution (τ_i) - OUTER SWEEP
-#TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20) # Your point 2
-TAU_NORMAL_SD_SWEEP_LIST <- c(0.12) # Your point 2
+TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20) # Your point 2
 
 SEEDING_STRATEGY_FIXED <- "random"
 PHASE_TRANSITION_THRESHOLD_JUMP <- 0.50
@@ -311,14 +310,14 @@ for (sd_idx in 1:total_sd_iterations) {
           strip.text = element_text(face="bold", size=9) 
         )
       
-      plot_filename_current_sd <- paste0(PLOTS_DIR, "phase_transition_sd", sprintf("%.2f", current_tau_sd), "_means03-06_borrar.pdf")
+      plot_filename_current_sd <- paste0(PLOTS_DIR, "phase_transition_sd", sprintf("%.2f", current_tau_sd), "_means03-06_2.pdf")
       ggsave(plot_filename_current_sd, plot_for_current_sd, width = 10, height = 8) # Adjusted for potentially 4 means
       cat(paste0("    Saved plot: ", plot_filename_current_sd, "\n"))
     }
   }
   
   # --- Save Raw Data for CURRENT SD ---
-  raw_data_filename_current_sd <- paste0(RESULTS_DIR, "phase_transition_raw_sd", sprintf("%.2f", current_tau_sd), "_means03-06borrar.rds")
+  raw_data_filename_current_sd <- paste0(RESULTS_DIR, "phase_transition_raw_sd", sprintf("%.2f", current_tau_sd), "_means03-06_2.rds")
   saveRDS(current_sd_all_means_raw_results, raw_data_filename_current_sd) # Save list of DFs (one per mean)
   cat(paste0("    Saved raw data: ", raw_data_filename_current_sd, "\n"))
   
@@ -338,9 +337,9 @@ cat("Saving grand combined data objects...\n")
 
 # Grand combined heatmap data (all SDs and all Means)
 grand_combined_heatmap_df <- bind_rows(all_sds_heatmap_data_list)
-saveRDS(grand_combined_heatmap_df, paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_heatmap_data_all_sds_means.rds"))
+saveRDS(grand_combined_heatmap_df, paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_heatmap_data_all_sds_means_2.rds"))
 
 # Grand combined raw results (list of lists)
-saveRDS(all_sds_raw_results_list, paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_raw_results_all_sds_means.rds"))
+saveRDS(all_sds_raw_results_list, paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_raw_results_all_sds_means_2.rds"))
 
 cat("All data saved. Script finished.\n")
