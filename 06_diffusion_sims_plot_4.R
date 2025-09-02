@@ -21,7 +21,7 @@ H_VALUES_SWEEP <- seq(0/12, 12/12, by = 1/12)
 THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 
-SEEDING_STRATEGY_FIXED <- "closeness"#"closeness" #"marginal" #"eigen" #"central" #"random"
+SEEDING_STRATEGY_FIXED <- "random"#"closeness" #"marginal" #"eigen" #"central" #"random"
 PHASE_TRANSITION_THRESHOLD_JUMP <- 1/3 
 SUCCESSFUL_DIFFUSION_THRESHOLD_PROP <- 0.50 
 # MIN_PROP_SUCCESSFUL_RUNS_FOR_TILE_CELL ya no se usa para el heatmap de transiciones (heatmap 2)
@@ -324,7 +324,7 @@ for (current_threshold_mean_plot in THRESHOLD_MEAN_SWEEP_LIST) {
     pdf_width <- 7.5  # Mantenido de tu ejemplo
     pdf_height <- 7.0 # Ligeramente ajustado para el espaciado
     
-    plot_filename_consolidated_final <- paste0(PLOTS_DIR, "heatmaps_mean_tau_", sprintf("%.2f", current_threshold_mean_plot), "_seed_",SEEDING_STRATEGY_FIXED, ".pdf")
+    plot_filename_consolidated_final <- paste0(PLOTS_DIR, "heatmaps__seed_",SEEDING_STRATEGY_FIXED, "_mean_tau_", sprintf("%.2f", current_threshold_mean_plot), ".pdf")
     ggsave(plot_filename_consolidated_final, final_plot_with_annotation, width = pdf_width, height = pdf_height, limitsize = FALSE)
     cat(paste0("  Saved consolidated PDF: ", plot_filename_consolidated_final, "\n"))
     
