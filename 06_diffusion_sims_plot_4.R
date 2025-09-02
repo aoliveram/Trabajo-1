@@ -1,8 +1,20 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Script para Analizar Resultados CRUDOS y Generar PDF Consolidados con 16 Heatmaps
-# Heatmaps 3 y 4 AHORA muestran:
-#   "Proporción Media de la POBLACIÓN Adoptada por Elección Racional"
-#   "Proporción Media de la POBLACIÓN Adoptada por Influencia Social"
+# Script para Analizar Resultados raw y generar PDF con 16 Heatmaps
+#
+# Entradas (RDS crudos):
+#   - trabajo_1_files/diffusion_simulation_files/phase_transition_GRAND_COMBINED_raw_results_all_sds_means_XXX.rds
+#
+# Umbrales/convenciones:
+#   - PHASE_TRANSITION_THRESHOLD_JUMP = 1/3 (salto mínimo para marcar transición).
+#   - SUCCESSFUL_DIFFUSION_THRESHOLD_PROP = 0.50 (no se usa como filtro de celda para TM en este script).
+#
+# Plots:
+#   1) Avg. Adoption (proporción media TOTAL de adoptantes por celda).
+#   2) Phase Trans Prob. (No acumulativa y sin filtro de "celda exitosa").
+#   3) Avg. Adopt. by Rational (of population): media de num_adopted_rational / N_nodes_actual.
+#   4) Avg. Adopt. by Social (of population): media de num_adopted_social / N_nodes_actual.
+#
+#   - Nombre de salida: PLOTS_DIR/heatmaps__seed_<SEEDING_STRATEGY_FIXED>_mean_tau_<XX>.pdf
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 library(ggplot2)
@@ -21,7 +33,7 @@ H_VALUES_SWEEP <- seq(0/12, 12/12, by = 1/12)
 THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 
-SEEDING_STRATEGY_FIXED <- "random"#"closeness" #"marginal" #"eigen" #"central" #"random"
+SEEDING_STRATEGY_FIXED <- "random" #"closeness" #"marginal" #"eigen" #"central" #"random"
 PHASE_TRANSITION_THRESHOLD_JUMP <- 1/3 
 SUCCESSFUL_DIFFUSION_THRESHOLD_PROP <- 0.50 
 # MIN_PROP_SUCCESSFUL_RUNS_FOR_TILE_CELL ya no se usa para el heatmap de transiciones (heatmap 2)
@@ -334,11 +346,3 @@ for (current_threshold_mean_plot in THRESHOLD_MEAN_SWEEP_LIST) {
 } 
 cat("\nGeneración de todos los PDFs consolidados completada.\n")
  
-# Guardar los datos pre-plot finales
-# all_sds_transition_metric_heatmap_df_list no cambió su LÓGICA de cálculo, solo que ya no se filtra por éxito de celda
-saveRDS(all_sds_transition_metric_heatmap_df_list, paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_TM_NO_CELL_FILTER_heatmap_data_all_sds.rds"))
-saveRDS(all_sds_avg_adoption_heatmap_df_list, paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_AVG_ADOPTION_heatmap_data_all_sds_v3.rds")) # v3 para indicar que es de este run
-saveRDS(all_sds_avg_rational_adopt_pop_heatmap_df_list, paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_AVG_RATIONAL_POP_heatmap_data_all_sds.rds"))
-saveRDS(all_sds_avg_social_adopt_pop_heatmap_df_list, paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_AVG_SOCIAL_POP_heatmap_data_all_sds.rds"))
-
-cat("Datos para heatmaps (New Rational/Social metrics) guardados.\n")
