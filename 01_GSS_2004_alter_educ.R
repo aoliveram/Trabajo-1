@@ -1,3 +1,9 @@
+# ------------------------------------------------------------------------------
+# Unifica los niveles de educación de egos y alters en la encuesta GSS, creando
+# una variable común para ambos: "LTHS", "HS", "SomeCollege/Assoc", "Bach", "Grad".
+# No guarda archivos.
+# ------------------------------------------------------------------------------
+
 library(dplyr)
 
 gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")

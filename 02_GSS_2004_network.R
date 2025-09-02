@@ -1,3 +1,8 @@
+# ------------------------------------------------------------------------------
+# Ajusta modelos ERGM a datos ego-red GSS 2004, usando atributos como educación,
+# raza, sexo, edad y religión. Simula redes a partir de los modelos ajustados.
+# No guarda ni modifica archivos.
+# ------------------------------------------------------------------------------
 # Crearemos la red. Los datos de 
 # gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
 # gss_egos <- gss_egor$ego

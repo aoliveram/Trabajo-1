@@ -1,3 +1,22 @@
+# ------------------------------------------------------------------------------
+# Imputa variables sociodemográficas (edad, educación, raza, religión) en ATP
+# usando distribuciones observadas en GSS. Armoniza variables entre ambos datasets.
+# Archivos generados (rds / csv):
+#   - trabajo_1_files/ATP_W3_W4.rds
+#   - trabajo_1_files/ATP_W3_W4_input.csv
+#   - trabajo_1_files/ATP_W3_W4_input.rds
+# Archivos generados (pdf):
+#   - trabajo_1_plots/age_GSS_vs_ATP.pdf
+#   - trabajo_1_plots/age_distribution_GSS.pdf
+#   - trabajo_1_plots/age_distribution_ATP.pdf
+#   - trabajo_1_plots/educ_GSS_vs_ATP.pdf
+#   - trabajo_1_plots/educ_distribution_GSS.pdf
+#   - trabajo_1_plots/educ_distribution_ATP.pdf
+#   - trabajo_1_plots/race_GSS_vs_ATP.pdf
+#   - trabajo_1_plots/race_distribution_GSS.pdf
+#   - trabajo_1_plots/race_distribution_ATP.pdf
+#   - trabajo_1_plots/relig_GSS_vs_ATP.pdf
+# ------------------------------------------------------------------------------
 library(dplyr)
 library(ggplot2)
 

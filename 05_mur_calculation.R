@@ -1,3 +1,14 @@
+# ------------------------------------------------------------------------------
+# Calcula y asigna el índice de propensión a la innovación (METECH) a nodos de
+# redes simuladas 'ATP'. Procesa 100 redes y la red original.
+# Genera (rds):
+#   trabajo_1_files/ATP_network_simulated_1000_alpha.rds
+# Modifica:
+#   trabajo_1_files/ATP_network_ergm/ATP_network_simulated_1000_mur_XXX.rds
+# Genera (pdf):
+#   trabajo_1_plots/metech_distribution_ATP.pdf
+#   trabajo_1_plots/metech_alpha_distribution_ATP.pdf
+# ------------------------------------------------------------------------------
 library(network)
 library(dplyr)
 library(ggplot2)

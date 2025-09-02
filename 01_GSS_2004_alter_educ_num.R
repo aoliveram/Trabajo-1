@@ -1,3 +1,10 @@
+# ------------------------------------------------------------------------------
+# Genera una distribución sintética de años de educación para alters
+# usando datos de la encuesta GSS (ego y alter). Utiliza mezclas de normales
+# (2 y 3 componentes) y optimización para ajustar parámetros. 
+# No guarda archivos. 
+# ------------------------------------------------------------------------------
+
 # Import dataset
 gss_egor <- readRDS("trabajo_1_files/gss_egor.rds")
 gss_egos <- gss_egor$ego

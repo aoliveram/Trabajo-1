@@ -1,3 +1,9 @@
+# ------------------------------------------------------------------------------
+# Construye una matriz de probabilidades de lazo (P) entre individuos ATP usando
+# coeficientes de modelos publicados, y genera una red simulada por sorteo Bernoulli.
+# Genera (NO se usa en otros scripts):
+#   - trabajo_1_files/P_Matrix.rds
+# ------------------------------------------------------------------------------
 library(dplyr)
 
 ATP_W3_sub <- readRDS("trabajo_1_files/ATP_W3_imput.rds")

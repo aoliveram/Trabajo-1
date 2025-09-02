@@ -1,3 +1,11 @@
+# ------------------------------------------------------------------------------
+# Genera redes simuladas 'ATP' mediante ERGM calibrados para reproducir la 
+# densidad y patrones de homofilia observados en los datos ATP.
+# Las redes (N=1000, 100 realizaciones) contienen atributos sociodemográficos.
+# Gráficos comparativos y análisis de ajuste (GOF). 
+# Genera:
+#   trabajo_1_files/ATP_network_ergm/ATP_network_simulated_1000_XXX.rds
+# ------------------------------------------------------------------------------
 library(ergm) # Para simulate.ergm y network
 library(dplyr)
 library(haven)
