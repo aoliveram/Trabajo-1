@@ -26,10 +26,13 @@ library(doParallel)
 library(foreach)
 library(patchwork)    # para combinar plots (lineal + log-log en una sola figura)
 
-
-# ---------- Config ----------
 dir_input <- "trabajo_1_files/ATP_network_ergm"
 pattern_rds <- "^ATP_network_simulated_1000_\\d{3}\\.rds$"
+
+# ==============================================================================
+# Estadísticos
+# ==============================================================================
+
 
 # Control de tamaños de submuestreo para small-world (Estrategia A)
 subsample_sizes <- c(200, 400, 600, 800, 1000)
@@ -487,11 +490,14 @@ percolation_summary <- percolation_all %>%
 # write_csv(percolation_summary, "results/percolation_summary.csv")
 
 
-# ---------- Figuras  ----------
+# ==============================================================================
+# PLOTS
+# ==============================================================================
 
-# ==============================================================================
+
+# ------------------------------------------------------------------------------
 # 0) Distribuciones de grado
-# ==============================================================================
+# ------------------------------------------------------------------------------
 
 # Colores solicitados
 col_ER <- "#2ECC71"   # verde
@@ -621,11 +627,11 @@ p_log <- ggplot() +
 (p_lin | p_log) #+ plot_annotation(title = "Distribución de grado: ATP (rojo) vs ER (verde) y BA (morado; teóricos)")
 ggsave("trabajo_1_plots/ATP_network_tests/degree_dist.pdf", width = 11, height = 4.8, dpi = 300)
 
-# ==============================================================================
+# ------------------------------------------------------------------------------
 # 1) Propiedad Small-world
-# ==============================================================================
+# ------------------------------------------------------------------------------
 
-# 1) Small-world por submuestreo (condensado)
+# A) Small-world por submuestreo (condensado)
 # Deducción: L_ER ≈ log(N)/log(<k>). Con N=1000 y <k>≈28 → L_ER ≈ log(1000)/log(28) ≈ 2.6
 L_ER <- 2.6
 ggplot(sw_scaling, aes(x = logN, y = L, group = id)) +
@@ -640,7 +646,7 @@ ggplot(sw_scaling, aes(x = logN, y = L, group = id)) +
 # ggsave("trabajo_1_plots/ATP_network_tests/smallworld_subsampling.pdf", width = 7, height = 4.5, dpi = 300)
 
 #
-# 2) Rewiring: antes vs después
+# B) Rewiring: antes vs después
 p1 <- metrics_by_net %>%
   select(id, L, C_global, assort_deg) %>%
   left_join(rewiring_tbl %>% select(id, L_rw, C_rw, rdeg_rw), by = "id")
@@ -658,11 +664,11 @@ ggplot(p1) +
   theme_minimal()
 # ggsave("trabajo_1_plots/ATP_network_tests/rewiring_C.pdf", width = 5, height = 4, dpi = 300)
 
-# ==============================================================================
+# ------------------------------------------------------------------------------
 # 2) ATP vs BA
-# ==============================================================================
+# ------------------------------------------------------------------------------
 
-# 3) CCDF log-log de grados: ATP (condensado) vs BA
+# C) CCDF log-log de grados: ATP (condensado) vs BA
 deg_df <- map_dfr(res_list, ~{
   d <- degree(.x$g)
   tibble(k = as.integer(d))
@@ -719,11 +725,11 @@ m_ln$setXmin(m_pl$getXmin())
 cmp <- compare_distributions(m_pl, m_ln)
 print(cmp)
 
-# ==============================================================================
+# ------------------------------------------------------------------------------
 # 3) Censo triádico
-# ==============================================================================
+# ------------------------------------------------------------------------------
 
-# 4) Censo triádico (sin p0) + referencia ER
+# D) Censo triádico (sin p0) + referencia ER
 # En ER con probabilidad de arista p ≈ densidad, las probabilidades por triada son:
 #   P(3 aristas) = p^3
 #   P(2 aristas) = 3 p^2 (1-p)
@@ -771,29 +777,136 @@ ggplot(triad_long, aes(x = triad, y = prop)) +
 # Referencia ER: p_bar = mean(density); p1=3p(1-p)^2, p2=3p^2(1-p), p3=p^3.
 # ggsave("trabajo_1_plots/ATP_network_tests/triadic_census_summary.pdf", width = 7, height = 4, dpi = 300)
 
-# ==============================================================================
+# ------------------------------------------------------------------------------
 # 4) C(k) vs k y percolación
-# ==============================================================================
+# ------------------------------------------------------------------------------
 
-# 5) C(k) vs k (condensado)
+# E) C(k) vs k (condensado)
 # Deducción: en ER, C ≈ p y p ≈ <k>/N → C_ER ≈ 28/1000 = 0.028
 C_ER <- 28/1000
 ggplot(Ck_summary, aes(x = k, y = Ck_med)) +
-  geom_ribbon(aes(ymin = Ck_p25, ymax = Ck_p75), alpha = 0.2) +
-  geom_line() +
-  geom_hline(yintercept = C_ER, linetype = "dashed", color = "red") +
+  geom_ribbon(aes(ymin = Ck_p25, ymax = Ck_p75), fill = "#E74C3C", alpha = 0.5, color = NA) +
+  geom_line(color = "#E74C3C", linewidth = 1.1) +
+  geom_hline(yintercept = C_ER, linetype = "dashed", color = "#2ECC71", linewidth = 1.1) +
   annotate("text", x = min(Ck_summary$k, na.rm = TRUE), y = C_ER, vjust = -0.51, hjust = -1.5,
-           label = "C_ER = <k>/N = 0.028") +
+           label = "C_ER = <k>/N = 0.028", color = "#2ECC71") +
   labs(title = "C(k) vs k (ATP, mediana y bandas [p25,p75])",
        x = "k", y = "C(k)") + theme_minimal()
 ggsave("trabajo_1_plots/ATP_network_tests/Ck_vs_k.pdf", width = 6.5, height = 4, dpi = 300)
 
 # print(Ck_summary %>% arrange(desc(k)) %>% select(k, n) %>% head(10)) # conteo colas
 
-# 6) Percolación: fallas aleatorias vs ataques dirigidos (condensado)
+# F) Percolación: fallas aleatorias vs ataques dirigidos (condensado)
 ggplot(percolation_summary, aes(x = p, y = S_med, color = mode)) +
   geom_line(linewidth = 1) +
   labs(title = "Percolación del GCC: fallas aleatorias vs ataques por grado",
        x = "Fracción removida (p)", y = "Tamaño relativo GCC") +
   theme_minimal()
 # ggsave("trabajo_1_plots/ATP_network_tests/percolation_curves.pdf", width = 6.5, height = 4, dpi = 300)
+
+
+
+# ==============================================================================
+# REPORTE
+# ==============================================================================
+
+# ---------- Utilidades de formateo ----------
+fmt_pm <- function(mu, sd, digits = 3) {
+  if (is.na(mu) || is.na(sd)) return("--")
+  paste0(format(round(mu, digits), nsmall = digits), " $\\pm$ ", format(round(sd, digits), nsmall = digits))
+}
+fmt_num <- function(x, digits = 3) {
+  if (is.na(x)) return("--")
+  format(round(x, digits), nsmall = digits)
+}
+
+# ---------- Rescatar/derivar estadísticas ----------
+# metrics_summary ya contiene mean/median/sd/p25/p75 por métrica
+ms <- metrics_summary %>% select(metric, mean, sd, median, p25, p75) %>% tidyr::pivot_wider(names_from = metric, values_from = c(mean, sd, median, p25, p75))
+
+# Sigma (small-world): media y sd
+sigma_mu <- mean(sigma_tbl$sigma, na.rm = TRUE)
+sigma_sd <- sd(sigma_tbl$sigma, na.rm = TRUE)
+
+# Triadic census: medianas por p1,p2,p3 (sobre 100 redes)
+tri_mu_med <- triad_summary %>% transmute(
+  p1_med = p1_median, p2_med = p2_median, p3_med = p3_median,
+  p1_sd  = p1_sd,     p2_sd  = p2_sd,     p3_sd  = p3_sd
+)
+p1_med <- tri_mu_med$p1_med; p2_med <- tri_mu_med$p2_med; p3_med <- tri_mu_med$p3_med
+p1_sd  <- tri_mu_med$p1_sd;  p2_sd  <- tri_mu_med$p2_sd;  p3_sd  <- tri_mu_med$p3_sd
+
+# Referencias ER (basadas en densidad promedio p_bar)
+p_bar <- mean(metrics_by_net$density, na.rm = TRUE)
+p1_ER <- 3 * p_bar * (1 - p_bar)^2
+p2_ER <- 3 * p_bar^2 * (1 - p_bar)
+p3_ER <- p_bar^3
+
+# Ratios triádicos vs ER (usar medianas ATP)
+r1 <- p1_med / p1_ER
+r2 <- p2_med / p2_ER
+r3 <- p3_med / p3_ER
+
+# Baselines ER adicionales
+N0_rep  <- as.integer(ms$median_N)
+kbar_rep <- ms$mean_k_mean
+dens_rep <- ms$mean_density
+L_ER_baseline <- log(N0_rep) / log(kbar_rep)  # aproximación clásica L_ER ≈ log N / log <k>
+C_ER_baseline <- kbar_rep / N0_rep           # C_ER ≈ <k> / N
+# Nota: estos baselines se informan al pie de la tabla.
+
+# ---------- Construir LaTeX (standalone) ----------
+tex_lines <- c(
+  "\\documentclass[11pt]{article}",
+  "\\usepackage[margin=2.5cm]{geometry}",
+  "\\usepackage{booktabs}",
+  "\\usepackage{siunitx}",
+  "\\usepackage{amsmath}",
+  "\\usepackage{array}",
+  "\\usepackage{caption}",
+  "\\captionsetup[table]{labelfont=bf}",
+  "\\begin{document}",
+  "\\begin{table}[ht]",
+  "\\centering",
+  "\\caption{Resumen topológico de 100 redes ATP (N=1000). Medias y desviaciones estándar entre réplicas. Se excluyen comparaciones de distribución de grados por requerimiento.}",
+  "\\vspace{0.5em}",
+  "\\begin{tabular}{l@{\\hspace{1em}}c@{\\hspace{3em}}l}",
+  "\\toprule",
+  "\\textbf{Métrica} & \\textbf{Valor resumen (ATP)} & \\textbf{Referencia / Interpretación} \\\\",
+  "\\midrule",
+  sprintf("N & %s & tamaño de red (fijo). \\\\", fmt_num(ms$median_N, 0)),
+  sprintf("$\\langle k \\rangle$ & %s & grado medio. \\\\", fmt_pm(ms$mean_k_mean, ms$sd_k_mean, 2)),
+  sprintf("Densidad & %s & fracción de enlaces presentes. \\\\", fmt_pm(ms$mean_density, ms$sd_density, 4)),
+  sprintf("$L$ (camino medio) & %s & pequeño; cf. $L_{\\mathrm{ER}}\\approx$ %s. \\\\", fmt_pm(ms$mean_L, ms$sd_L, 3), fmt_num(L_ER_baseline, 2)),
+  sprintf("$D$ (diámetro) & %s & muy bajo. \\\\", fmt_pm(ms$mean_D, ms$sd_D, 2)),
+  sprintf("$C_{\\mathrm{global}}$ & %s & $\\gg C_{\\mathrm{ER}}\\approx$ %s. \\\\", fmt_pm(ms$mean_C_global, ms$sd_C_global, 4), fmt_num(C_ER_baseline, 3)),
+  sprintf("$C_{\\mathrm{avg}}$ & %s & coherente con clustering elevado. \\\\", fmt_pm(ms$mean_C_avg, ms$sd_C_avg, 4)),
+  sprintf("Asortatividad (grado) & %s & positiva (homofilia por grado). \\\\", fmt_pm(ms$mean_assort_deg, ms$sd_assort_deg, 3)),
+  sprintf("Gini (grado) & %s & heterogeneidad moderada. \\\\", fmt_pm(ms$mean_gini_deg, ms$sd_gini_deg, 3)),
+  sprintf("Small-world $\\sigma$ & %s & $(C/C_{\\mathrm{ER}})/(L/L_{\\mathrm{ER}})$. \\\\", fmt_pm(sigma_mu, sigma_sd, 2)),
+  "\\midrule",
+  sprintf("$p_1$ (1 arista) & %s & ER: %s; $p_1/p_1^{\\mathrm{ER}}$ = %s. \\\\",
+          fmt_pm(p1_med, p1_sd, 4), fmt_num(p1_ER, 4), fmt_num(r1, 2)),
+  sprintf("$p_2$ (2 aristas) & %s & ER: %s; $p_2/p_2^{\\mathrm{ER}}$ = %s. \\\\",
+          fmt_pm(p2_med, p2_sd, 5), fmt_num(p2_ER, 5), fmt_num(r2, 2)),
+  sprintf("$p_3$ (3 aristas) & %s & ER: %s; $p_3/p_3^{\\mathrm{ER}}$ = %s. \\\\",
+          fmt_pm(p3_med, p3_sd, 6), fmt_num(p3_ER, 6), fmt_num(r3, 2)),
+  "\\bottomrule",
+  "\\end{tabular}",
+  "\\vspace{0.75em}",
+  "\\captionsetup{justification=raggedright,singlelinecheck=false}",
+  "\\small \\textit{Notas de referencia y cálculos:}",
+  "\\begin{itemize}",
+  sprintf("\\item $p=\\overline{\\text{density}}= %s$. Para ER: $p_1=3p(1-p)^2$, $p_2=3p^2(1-p)$, $p_3=p^3$.", fmt_num(p_bar, 4)),
+  sprintf("\\item $C_{\\mathrm{ER}}\\approx \\langle k \\rangle/N = %s / %s = %s$ (aprox.).", fmt_num(kbar_rep, 2), fmt_num(N0_rep, 0), fmt_num(C_ER_baseline, 3)),
+  sprintf("\\item $L_{\\mathrm{ER}}\\approx \\log N / \\log \\langle k \\rangle = \\log(%s)/\\log(%s) \\approx %s$ (aprox.).", fmt_num(N0_rep, 0), fmt_num(kbar_rep, 2), fmt_num(L_ER_baseline, 2)),
+  "\\item $\\sigma = (C/C_{\\mathrm{ER}})/(L/L_{\\mathrm{ER}})$ (Humphries \\& Gurney, 2008).",
+  "\\end{itemize}",
+  "\\end{table}",
+  "\\end{document}"
+)
+
+# Escribir archivo .tex
+writeLines(tex_lines, con = "trabajo_1_files/ATP_network_tests/tabla_resumen_ATP.tex")
+
+message('Archivo LaTeX escrito en: results/tabla_resumen_ATP.tex. Compila con: pdflatex results/tabla_resumen_ATP.tex')
