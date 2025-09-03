@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{caption}
+\captionsetup[table]{labelfont=bf}
+\begin{document}
+\begin{table}[ht]
+\centering
+\caption{Resumen topológico de 100 redes ATP (N=1000). Medias y desviaciones estándar entre réplicas. Se excluyen comparaciones de distribución de grados por requerimiento.}
+\vspace{0.5em}
+\begin{tabular}{l@{\hspace{1em}}c@{\hspace{3em}}l}
+\toprule
+\textbf{Métrica} & \textbf{Valor resumen (ATP)} & \textbf{Referencia / Interpretación} \\
+\midrule
+N & 1000 & tamaño de red (fijo). \\
+$\langle k \rangle$ & 28.22 $\pm$ 0.19 & grado medio. \\
+Densidad & 0.0283 $\pm$ 2e-04 & fracción de enlaces presentes. \\
+$L$ (camino medio) & 2.489 $\pm$ 0.005 & pequeño; cf. $L_{\mathrm{ER}}\approx$ 2.07. \\
+$D$ (diámetro) & 5.06 $\pm$ 0.24 & muy bajo. \\
+$C_{\mathrm{global}}$ & 0.0617 $\pm$ 0.0010 & $\gg C_{\mathrm{ER}}\approx$ 0.028. \\
+$C_{\mathrm{avg}}$ & 0.0533 $\pm$ 0.0011 & coherente con clustering elevado. \\
+Asortatividad (grado) & 0.260 $\pm$ 0.009 & positiva (homofilia por grado). \\
+Gini (grado) & 0.292 $\pm$ 0.003 & heterogeneidad moderada. \\
+Small-world $\sigma$ & 2.11 $\pm$ 0.05 & $(C/C_{\mathrm{ER}})/(L/L_{\mathrm{ER}})$. \\
+\midrule
+$p_1$ (1 arista) & 0.0791 $\pm$ 5e-04 & ER: 0.0800; $p_1/p_1^{\mathrm{ER}}$ = 0.99. \\
+$p_2$ (2 aristas) & 0.00276 $\pm$ 4e-05 & ER: 0.00233; $p_2/p_2^{\mathrm{ER}}$ = 1.19. \\
+$p_3$ (3 aristas) & 6e-05 $\pm$ 2e-06 & ER: 2.3e-05; $p_3/p_3^{\mathrm{ER}}$ = 2.68. \\
+\bottomrule
+\end{tabular}
+\vspace{0.75em}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\small \textit{Notas de referencia y cálculos:}
+\begin{itemize}
+\item $p=\overline{\text{density}}= 0.0283$. Para ER: $p_1=3p(1-p)^2$, $p_2=3p^2(1-p)$, $p_3=p^3$.
+\item $C_{\mathrm{ER}}\approx \langle k \rangle/N = 28.22 / 1000 = 0.028$ (aprox.).
+\item $L_{\mathrm{ER}}\approx \log N / \log \langle k \rangle = \log(1000)/\log(28.22) \approx 2.07$ (aprox.).
+\item $\sigma = (C/C_{\mathrm{ER}})/(L/L_{\mathrm{ER}})$ (Humphries \& Gurney, 2008).
+\end{itemize}
+\end{table}
+\end{document}
