@@ -150,30 +150,50 @@ get_complex_plot <- function(seed_node, N_nodes, graph_obj,
         # Denominador: Suma de X_ij (es decir, el grado del nodo i)
         denominator_Ei_tilde <- length(neighbors_of_i_idx) # Grado del nodo i
         
+        T_param <- 0.02
+        
         if (denominator_Ei_tilde > 0 && length(active_neighbors_of_i_idx) > 0) {
-          for (j in active_neighbors_of_i_idx) { # Iterar solo sobre vecinos ACTIVOS
-            #social_dist_ij <- abs(node_mur_q[i] - node_mur_q[j]) # d_ij
-            
-            social_dist_ij <- d_ij_matrix[i, j]
-            
-            if (social_dist_ij <= social_distance_h) {
-              # El vecino 'j' es activo Y socialmente cercano.
-              # X_ij es 1 (porque es vecino), a_j (tilde) es 1 (porque es activo y cercano)
-              numerator_Ei_tilde <- numerator_Ei_tilde + 1 
-            }
-          }
+          # Distancias sociales d_ij para los vecinos activos
+          d_ij_vec <- d_ij_matrix[i, active_neighbors_of_i_idx]
+          
+          # Probabilidad sigmoidal (Muestreo Bernoulli)
+          w_vec <- 1 / (1 + exp((d_ij_vec - social_distance_h) / T_param))
+          a_tilde <- rbinom(n = length(w_vec), size = 1, prob = w_vec)
+          
+          numerator_Ei_tilde <- sum(a_tilde)
           
           exposure_Ei_tilde_value <- numerator_Ei_tilde / denominator_Ei_tilde
           
-          # Comparar con el umbral individual τ_i (fraccionario)
           if (exposure_Ei_tilde_value >= node_individual_thresholds_tau[i]) {
             newly_infected_this_step_idx <- c(newly_infected_this_step_idx, i)
-            adopted_by_social_influence[i] <- TRUE # NUEVO: Marcar
+            adopted_by_social_influence[i] <- TRUE
           }
         } else {
           # Si no tiene vecinos (denominator_Ei_tilde == 0) o no tiene vecinos activos,
           # exposure_Ei_tilde_value será 0 o NaN, y no se activará por esta regla.
         }
+        
+        # if (denominator_Ei_tilde > 0 && length(active_neighbors_of_i_idx) > 0) {
+        #   for (j in active_neighbors_of_i_idx) { # Iterar solo sobre vecinos ACTIVOS
+        #     #social_dist_ij <- abs(node_mur_q[i] - node_mur_q[j]) # d_ij
+        #     
+        #     social_dist_ij <- d_ij_matrix[i, j]
+        #     
+        #     if (social_dist_ij <= social_distance_h) {
+        #       # El vecino 'j' es activo Y socialmente cercano.
+        #       # X_ij es 1 (porque es vecino), a_j (tilde) es 1 (porque es activo y cercano)
+        #       numerator_Ei_tilde <- numerator_Ei_tilde + 1
+        #     }
+        #   }
+        #   
+        #   exposure_Ei_tilde_value <- numerator_Ei_tilde / denominator_Ei_tilde
+        #   
+        #   # Comparar con el umbral individual τ_i (fraccionario)
+        #   if (exposure_Ei_tilde_value >= node_individual_thresholds_tau[i]) {
+        #     newly_infected_this_step_idx <- c(newly_infected_this_step_idx, i)
+        #     adopted_by_social_influence[i] <- TRUE # NUEVO: Marcar
+        #   }
+        # }
       } 
     } 
     
