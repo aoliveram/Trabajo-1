@@ -25,7 +25,7 @@ library(viridis)
 
 # --- Parámetros de Análisis ---
 RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files_sigm/"
-PLOTS_DIR <- "trabajo_1_plots/diffusion_simulation_plots/"
+PLOTS_DIR <- "trabajo_1_plots/diffusion_simulation_plots_sigm/"
 dir.create(PLOTS_DIR, showWarnings = FALSE, recursive = TRUE)
 
 IUL_VALUES_SWEEP <- seq(0.0, 1.0, by = 0.025)
