@@ -24,7 +24,7 @@ library(patchwork)
 library(viridis) 
 
 # --- Parámetros de Análisis ---
-RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files/"
+RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files_sigm/"
 PLOTS_DIR <- "trabajo_1_plots/diffusion_simulation_plots/"
 dir.create(PLOTS_DIR, showWarnings = FALSE, recursive = TRUE)
 

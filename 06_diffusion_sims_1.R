@@ -57,10 +57,10 @@ THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 # Standard Deviations for Normal Threshold Distribution (τ_i) - OUTER SWEEP
 TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 
-NUM_CORES_TO_USE <- 8
+NUM_CORES_TO_USE <- 16 # 8 --> CHPC
 
 # Output directory for raw results
-RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files/"
+RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files_sigm/"
 
 # -----------------------------------------------------------------------------
 # 2. Parameters to Sweep (IUL and h - within each simulation run)
@@ -73,7 +73,8 @@ H_VALUES_SWEEP <- seq(0/12, 12/12, by = 1/12)
 # -----------------------------------------------------------------------------
 cat("Starting grand simulation sweep...\n")
 
-SEEDING_STRATEGY_FIXED <- "closeness" #"marginal" #"eigen" #"central" #"random"
+strategies <- c("random", "central", "marginal", "eigen", "closeness")
+SEEDING_STRATEGY_FIXED <- strategies[2] # --> Change !!
 
 # This will store all raw results, one list element per SD, 
 # where each element is itself a list of results per Mean
