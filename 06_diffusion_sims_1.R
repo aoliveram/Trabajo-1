@@ -74,7 +74,7 @@ H_VALUES_SWEEP <- seq(0/12, 12/12, by = 1/12)
 cat("Starting grand simulation sweep...\n")
 
 strategies <- c("random", "central", "marginal", "eigen", "closeness")
-SEEDING_STRATEGY_FIXED <- strategies[2] # --> Change !!
+SEEDING_STRATEGY_FIXED <- strategies[5] # --> Change !!
 
 # This will store all raw results, one list element per SD, 
 # where each element is itself a list of results per Mean
