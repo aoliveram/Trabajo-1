@@ -22,6 +22,8 @@ library(dplyr)
 library(readr)
 library(patchwork) 
 library(viridis) 
+library(foreach)
+library(doParallel)
 
 # --- Parámetros de Análisis ---
 RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files_sigm/"
@@ -33,9 +35,11 @@ H_VALUES_SWEEP <- seq(0/12, 12/12, by = 1/12)
 THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 
-SEEDING_STRATEGY_FIXED <- "random" #"closeness" #"marginal" #"eigen" #"central" #"random"
+strategies <- c("random", "central", "marginal", "eigen", "closeness")
+SEEDING_STRATEGY_FIXED <- strategies[5] # --> Change !!
 PHASE_TRANSITION_THRESHOLD_JUMP <- 1/3 
 SUCCESSFUL_DIFFUSION_THRESHOLD_PROP <- 0.50 
+NUM_CORES_TO_USE <- 8 # M4
 # MIN_PROP_SUCCESSFUL_RUNS_FOR_TILE_CELL ya no se usa para el heatmap de transiciones (heatmap 2)
 
 cat("Cargando resultados crudos guardados...\n")
@@ -46,20 +50,27 @@ if (!file.exists(grand_raw_results_path)) {
 all_sds_raw_results_list_from_file <- readRDS(grand_raw_results_path)
 cat("Resultados cargados.\n")
 
-# --- PASO 0: Pre-procesar los datos crudos ---
-all_sds_transition_metric_heatmap_df_list <- list()
-all_sds_avg_adoption_heatmap_df_list    <- list()
-all_sds_avg_rational_adopt_pop_heatmap_df_list <- list() # NUEVO NOMBRE
-all_sds_avg_social_adopt_pop_heatmap_df_list   <- list() # NUEVO NOMBRE
+# --- PASO 0: Pre-procesar los datos crudos (EN PARALELO) ---
+cat("\nPre-procesando datos crudos para todos los heatmaps (usando ", NUM_CORES_TO_USE, " nucleos)...\n")
 
-cat("\nPre-procesando datos crudos para todos los heatmaps...\n")
-for (current_tau_sd_proc in TAU_NORMAL_SD_SWEEP_LIST) {
+cl <- makeCluster(NUM_CORES_TO_USE, type = "FORK")
+registerDoParallel(cl)
+
+time_init <- Sys.time()
+
+processed_results_by_sd <- foreach(current_tau_sd_proc = TAU_NORMAL_SD_SWEEP_LIST, .packages=c("dplyr", "tidyr")) %dopar% {
+  
   sd_label_proc <- paste0("sd_", sprintf("%.2f", current_tau_sd_proc))
   current_sd_all_means_raw_results_proc <- all_sds_raw_results_list_from_file[[sd_label_proc]]
-  if (is.null(current_sd_all_means_raw_results_proc)) { next }
   
-  heatmap_data_tm_this_sd_list_proc <- list(); heatmap_data_aa_this_sd_list_proc <- list()
-  heatmap_data_ar_pop_this_sd_list_proc <- list(); heatmap_data_as_pop_this_sd_list_proc <- list() # NUEVO
+  if (is.null(current_sd_all_means_raw_results_proc)) {
+    return(NULL) # Devolver NULL si no hay datos para este SD
+  }
+  
+  heatmap_data_tm_this_sd_list_proc <- list()
+  heatmap_data_aa_this_sd_list_proc <- list()
+  heatmap_data_ar_pop_this_sd_list_proc <- list()
+  heatmap_data_as_pop_this_sd_list_proc <- list()
   
   for (current_threshold_mean_proc in THRESHOLD_MEAN_SWEEP_LIST) {
     mean_label_proc <- paste0("mean_", sprintf("%.2f", current_threshold_mean_proc))
@@ -148,10 +159,38 @@ for (current_tau_sd_proc in TAU_NORMAL_SD_SWEEP_LIST) {
     heatmap_data_ar_pop_this_sd_list_proc[[mean_label_proc]] <- bind_rows(panel_data_ar_pop_list_proc) %>% mutate(tau_mean_param = current_threshold_mean_proc, avg_rational_adopt_pop_to_plot = val, tau_sd_param = current_tau_sd_proc) %>% select(-val) # NUEVO
     heatmap_data_as_pop_this_sd_list_proc[[mean_label_proc]] <- bind_rows(panel_data_as_pop_list_proc) %>% mutate(tau_mean_param = current_threshold_mean_proc, avg_social_adopt_pop_to_plot = val, tau_sd_param = current_tau_sd_proc) %>% select(-val)   # NUEVO
   }
-  all_sds_transition_metric_heatmap_df_list[[sd_label_proc]] <- bind_rows(heatmap_data_tm_this_sd_list_proc[!sapply(heatmap_data_tm_this_sd_list_proc, is.null)])
-  all_sds_avg_adoption_heatmap_df_list[[sd_label_proc]]    <- bind_rows(heatmap_data_aa_this_sd_list_proc[!sapply(heatmap_data_aa_this_sd_list_proc, is.null)])
-  all_sds_avg_rational_adopt_pop_heatmap_df_list[[sd_label_proc]] <- bind_rows(heatmap_data_ar_pop_this_sd_list_proc[!sapply(heatmap_data_ar_pop_this_sd_list_proc, is.null)]) # NUEVO
-  all_sds_avg_social_adopt_pop_heatmap_df_list[[sd_label_proc]]   <- bind_rows(heatmap_data_as_pop_this_sd_list_proc[!sapply(heatmap_data_as_pop_this_sd_list_proc, is.null)])   # NUEVO
+  
+  # Devolver una lista con los 4 dataframes consolidados para este SD
+  list(
+    tm = bind_rows(heatmap_data_tm_this_sd_list_proc[!sapply(heatmap_data_tm_this_sd_list_proc, is.null)]),
+    aa = bind_rows(heatmap_data_aa_this_sd_list_proc[!sapply(heatmap_data_aa_this_sd_list_proc, is.null)]),
+    ar_pop = bind_rows(heatmap_data_ar_pop_this_sd_list_proc[!sapply(heatmap_data_ar_pop_this_sd_list_proc, is.null)]),
+    as_pop = bind_rows(heatmap_data_as_pop_this_sd_list_proc[!sapply(heatmap_data_as_pop_this_sd_list_proc, is.null)])
+  )
+}
+
+stopCluster(cl)
+
+time_fin <- Sys.time()
+time_total <- difftime(time_fin, time_init, units = "auto")
+cat("Tiempo total de pre-procesamiento en paralelo: ", format(time_total), "\n")
+
+# Re-ensamblar los resultados de la lista `processed_results_by_sd`
+all_sds_transition_metric_heatmap_df_list <- list()
+all_sds_avg_adoption_heatmap_df_list    <- list()
+all_sds_avg_rational_adopt_pop_heatmap_df_list <- list()
+all_sds_avg_social_adopt_pop_heatmap_df_list   <- list()
+
+for (i in 1:length(TAU_NORMAL_SD_SWEEP_LIST)) {
+  current_tau_sd_val <- TAU_NORMAL_SD_SWEEP_LIST[i]
+  sd_label <- paste0("sd_", sprintf("%.2f", current_tau_sd_val))
+  
+  if (!is.null(processed_results_by_sd[[i]])) {
+    all_sds_transition_metric_heatmap_df_list[[sd_label]] <- processed_results_by_sd[[i]]$tm
+    all_sds_avg_adoption_heatmap_df_list[[sd_label]]    <- processed_results_by_sd[[i]]$aa
+    all_sds_avg_rational_adopt_pop_heatmap_df_list[[sd_label]] <- processed_results_by_sd[[i]]$ar_pop
+    all_sds_avg_social_adopt_pop_heatmap_df_list[[sd_label]]   <- processed_results_by_sd[[i]]$as_pop
+  }
 }
 cat("Pre-procesamiento de todos los datos para heatmaps completado (con nuevas métricas de tipo de adopción).\n")
 
@@ -344,5 +383,3 @@ for (current_threshold_mean_plot in THRESHOLD_MEAN_SWEEP_LIST) {
     cat(paste0("  No se generaron suficientes plots para el PDF consolidado de Mean τ = ", current_threshold_mean_plot, ".\n"))
   }
 } 
-cat("\nGeneración de todos los PDFs consolidados completada.\n")
- 
