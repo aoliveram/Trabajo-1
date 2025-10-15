@@ -2,7 +2,7 @@
 # Script para Analizar Resultados raw y generar PDF con 16 Heatmaps
 #
 # Entradas (RDS crudos):
-#   - trabajo_1_files/diffusion_simulation_files/phase_transition_GRAND_COMBINED_raw_results_all_sds_means_XXX.rds
+#   - trabajo_1_files/ATP_diffusion_simulation_files_sigm/phase_transition_GRAND_COMBINED_raw_results_all_sds_means_XXX.rds
 #
 # Umbrales/convenciones:
 #   - PHASE_TRANSITION_THRESHOLD_JUMP = 1/3 (salto mínimo para marcar transición).
@@ -24,8 +24,8 @@ library(patchwork)
 library(viridis) 
 
 # --- Parámetros de Análisis ---
-RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files_sigm/"
-PLOTS_DIR <- "trabajo_1_plots/diffusion_simulation_plots_sigm/"
+RESULTS_DIR <- "trabajo_1_files/ATP_diffusion_simulation_files_sigm/"
+PLOTS_DIR <- "trabajo_1_plots/ATP_diffusion_simulation_files_sigm/"
 dir.create(PLOTS_DIR, showWarnings = FALSE, recursive = TRUE)
 
 IUL_VALUES_SWEEP <- seq(0.0, 1.0, by = 0.025)
