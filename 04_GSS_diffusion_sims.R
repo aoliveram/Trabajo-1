@@ -53,13 +53,10 @@ THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 
 # Configuración de paralelización
-NUM_CORES_TO_USE <- detectCores() - 1 # O un número fijo como 16
-if (is.na(NUM_CORES_TO_USE) || NUM_CORES_TO_USE < 1) {
-  NUM_CORES_TO_USE <- 1 # Fallback a un solo core
-}
+NUM_CORES_TO_USE <- 8 # M4
 
 # Directorio de salida
-RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files_sigm/"
+RESULTS_DIR <- "trabajo_1_files/GSS_diffusion_simulation_files_sigm/"
 if (!dir.exists(RESULTS_DIR)) {
   dir.create(RESULTS_DIR, recursive = TRUE)
 }

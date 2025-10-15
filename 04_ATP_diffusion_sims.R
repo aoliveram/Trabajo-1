@@ -60,7 +60,7 @@ TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 NUM_CORES_TO_USE <- 16 # 8 --> CHPC
 
 # Output directory for raw results
-RESULTS_DIR <- "trabajo_1_files/diffusion_simulation_files_sigm/"
+RESULTS_DIR <- "trabajo_1_files/ATP_diffusion_simulation_files_sigm/"
 
 # -----------------------------------------------------------------------------
 # 2. Parameters to Sweep (IUL and h - within each simulation run)
