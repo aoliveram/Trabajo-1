@@ -1,0 +1,120 @@
+883) SIGNDPET
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Signed a petition.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	2.128	1.12
+1) Have done it in the past year	515	35.0
+2) Have done it in the more distant past	458	31.1
+3) Have not done it but might do it	338	23.0
+4) Have not done it and would never do it	151	10.3
+8) Can't choose	6	0.4
+9) No answer	4	0.3
+Missing	1340
+
+884) AVOIDBUY
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Boycotted, or deliberately bought, certain products for political, ethical or environmental reasons.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	2.704	1.254
+1) Have done it in the past year	351	23.8
+2) Have done it in the more distant past	215	14.6
+3) Have not done it but might do it	488	33.2
+4) Have not done it and would never do it	403	27.4
+8) Can't choose	11	0.7
+9) No answer	4	0.3
+Missing	1340
+
+885) JOINDEM
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Took part in a demonstration.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	3.187	0.936
+1) Have done it in the past year	77	5.2
+2) Have done it in the more distant past	197	13.4
+3) Have not done it but might do it	609	41.4
+4) Have not done it and would never do it	581	39.5
+8) Can't choose	3	0.2
+9) No answer	5	0.3
+Missing	1340
+
+886) ATTRALLY
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Attended a political meeting or rally.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	2.848	1.032
+1) Have done it in the past year	183	12.4
+2) Have done it in the more distant past	293	19.9
+3) Have not done it but might do it	585	39.7
+4) Have not done it and would never do it	406	27.6
+8) Can't choose	1	0.1
+9) No answer	4	0.3
+Missing	1340
+
+
+887) CNTCTGOV
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Contacted, or attempted to contact, a politician or a civil servant to express your views.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	2.564	1.088
+1) Have done it in the past year	321	21.8
+2) Have done it in the more distant past	313	21.3
+3) Have not done it but might do it	544	37.0
+4) Have not done it and would never do it	290	19.7
+8) Can't choose	1	0.1
+9) No answer	3	0.2
+Missing	1340
+
+
+888) POLFUNDS
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Donated money or raised funds for a social or political activity.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	2.417	1.191
+1) Have done it in the past year	451	30.6
+2) Have done it in the more distant past	284	19.3
+3) Have not done it but might do it	438	29.8
+4) Have not done it and would never do it	293	19.9
+8) Can't choose	1	0.1
+9) No answer	5	0.3
+Missing	1340
+
+
+889) USEMEDIA
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Contacted or appeared in the media to express your views.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	3.224	0.88
+1) Have done it in the past year	75	5.1
+2) Have done it in the more distant past	137	9.3
+3) Have not done it but might do it	671	45.6
+4) Have not done it and would never do it	583	39.6
+8) Can't choose	2	0.1
+9) No answer	4	0.3
+Missing	1340
+
+
+890) INTERPOL
+Here are some forms of political and social action that people can take. Please indicate, for each one, (1) whether you have done any of these things in the past year, (2) have done it in the more distant past, (3) have not done it but might do it, (4) or have not done it and would never, under any circumstances, do it--Joined an Internet political forum or discussion group.
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	3.503	0.841
+1) Have done it in the past year	81	5.5
+2) Have done it in the more distant past	28	1.9
+3) Have not done it but might do it	455	30.9
+4) Have not done it and would never do it	903	61.3
+8) Can't choose	2	0.1
+9) No answer	3	0.2
+Missing	1340
+
+905) ACTLAW
+Suppose a law were being considered by the Congress that you considered to be unjust or harmful. If such a case arose, how likely is it that you, acting along or together with others, would be able to try to do something about it?
+RANGE: 1 to 9
+	N	Mean	Std. Deviation
+Total	1472	2.382	1.146
+1) Very likely	289	19.6
+2) Fairly likely	589	40.0
+3) Not very likely	427	29.0
+4) Not at all likely	146	9.9
+8) Can't choose	14	1.0
+9) No answer	7	0.5
+Missing	1340
