@@ -386,17 +386,57 @@ metrics_summary <- metrics_by_net %>%
     .groups = "drop"
   )
 
+
 # Número de componentes por red (y tamaño de la GCC)
 # La mitad son conexas. El resto tiene 1 o 2 aislados. 
 components_by_net <- map_dfr(res_list, ~{
   comps <- igraph::components(.x$g)
+  sizes <- sort(as.integer(comps$csize), decreasing = TRUE)
   tibble(
     id           = .x$id,
-    n_components = comps$no,
-    gcc_size     = max(comps$csize)
+    n_components = length(sizes),
+    gcc_size     = sizes[1],
+    sizes        = list(sizes)
   )
 })
 
+# Tamaño medio de componentes pequeñas cuando n_components > 1
+small_comps_by_net <- components_by_net %>%
+  filter(n_components > 1) %>%
+  transmute(
+    id,
+    small_sizes = purrr::map(sizes, ~ if (length(.x) >= 2) .x[-1] else integer(0)),
+    n_small     = purrr::map_int(small_sizes, length),
+    mean_small  = purrr::map_dbl(small_sizes, ~ if (length(.x) > 0) mean(.x) else NA_real_),
+    med_small   = purrr::map_dbl(small_sizes, ~ if (length(.x) > 0) median(.x) else NA_real_),
+    prop_isol   = purrr::map_dbl(small_sizes, ~ if (length(.x) > 0) mean(.x == 1) else NA_real_)
+  )
+
+small_comps_summary <- small_comps_by_net %>%
+  summarise(
+    n_redes_gt1     = dplyr::n(),
+    n_small_total  = sum(n_small, na.rm = TRUE),
+    mean_small_mu  = mean(mean_small, na.rm = TRUE),
+    mean_small_sd  = sd(mean_small,   na.rm = TRUE),
+    med_small_mu   = mean(med_small,  na.rm = TRUE),
+    prop_isol_mu   = mean(prop_isol,  na.rm = TRUE),
+    prop_isol_med  = median(prop_isol, na.rm = TRUE)
+  )
+
+print(small_comps_summary) # Resumen componentes pequeñas cuando n_components > 1
+
+# hay componentes no aislados?
+non_isolate_examples <- small_comps_by_net %>%
+  filter(prop_isol < 1) %>%
+  select(id, small_sizes, prop_isol) %>%
+  head(10)
+
+if (nrow(non_isolate_examples) > 0) {
+  message("Ejemplos con pequeñas > 1 nodo:")
+  print(non_isolate_examples)
+} else {
+  message("Todas las componentes pequeñas son aislados (tamaño 1).")
+}
 
 # Small-world por submuestreo (pendiente L ~ log N')
 sw_scaling <- map_dfr(res_list, ~ .x$sw_sub %>% mutate(id = .x$id))
