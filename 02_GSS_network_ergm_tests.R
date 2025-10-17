@@ -387,7 +387,7 @@ metrics_summary <- metrics_by_net %>%
   )
 
 
-# Número de componentes por red (y tamaño de la GCC)
+# Número de componentes por red
 # La mitad son conexas. El resto tiene 1 o 2 aislados. 
 components_by_net <- map_dfr(res_list, ~{
   comps <- igraph::components(.x$g)
@@ -894,6 +894,19 @@ L_ER_baseline <- log(N0_rep) / log(kbar_rep)  # aproximación clásica L_ER ≈ 
 C_ER_baseline <- kbar_rep / N0_rep           # C_ER ≈ <k> / N
 # Nota: estos baselines se informan al pie de la tabla.
 
+gini_summary <- degree_cmp_tbl %>% 
+  filter(model %in% c("ER","BA")) %>% 
+  group_by(model) %>% 
+  summarise(
+    mean_gini   = mean(gini, na.rm = TRUE),
+    sd_gini     = sd(gini, na.rm = TRUE),
+    median_gini = median(gini, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+gini_BA <- gini_summary$mean_gini[1]
+gini_ER <- gini_summary$mean_gini[2]
+
 # ---------- Construir LaTeX (standalone) ----------
 tex_lines <- c(
   "\\documentclass[11pt]{article}",
@@ -921,7 +934,10 @@ tex_lines <- c(
   sprintf("$C_{\\mathrm{global}}$ & %s & $\\gg C_{\\mathrm{ER}}\\approx$ %s. \\\\", fmt_pm(ms$mean_C_global, ms$sd_C_global, 4), fmt_num(C_ER_baseline, 3)),
   sprintf("$C_{\\mathrm{avg}}$ & %s & coherente con clustering elevado. \\\\", fmt_pm(ms$mean_C_avg, ms$sd_C_avg, 4)),
   sprintf("Asortatividad (grado) & %s & positiva (homofilia por grado). \\\\", fmt_pm(ms$mean_assort_deg, ms$sd_assort_deg, 3)),
-  sprintf("Gini (grado) & %s & heterogeneidad moderada. \\\\", fmt_pm(ms$mean_gini_deg, ms$sd_gini_deg, 3)),
+  sprintf("$G$ (Gini grado) & %s & Heterog. moderada; cf. $G_{\\mathrm{ER}}\\approx %s$, $G_{\\mathrm{SF}}\\approx %s$. \\\\", 
+        fmt_pm(ms$mean_gini_deg, ms$sd_gini_deg, 3),
+        fmt_num(gini_ER, 2),
+        fmt_num(gini_BA, 2)),
   sprintf("Small-world $\\sigma$ & %s & $(C/C_{\\mathrm{ER}})/(L/L_{\\mathrm{ER}})$. \\\\", fmt_pm(sigma_mu, sigma_sd, 2)),
   "\\midrule",
   sprintf("$p_1$ (1 arista) & %s & ER: %s; $p_1/p_1^{\\mathrm{ER}}$ = %s. \\\\",
