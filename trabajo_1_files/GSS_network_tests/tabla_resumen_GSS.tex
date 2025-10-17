@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{caption}
+\captionsetup[table]{labelfont=bf}
+\begin{document}
+\begin{table}[ht]
+\centering
+\caption{Resumen topológico de 100 redes GSS (N=1000). Medias y desviaciones estándar entre réplicas. Se excluyen comparaciones de distribución de grados por requerimiento.}
+\vspace{0.5em}
+\begin{tabular}{l@{\hspace{1em}}c@{\hspace{3em}}l}
+\toprule
+\textbf{Métrica} & \textbf{Valor resumen (GSS)} & \textbf{Referencia / Interpretación} \\
+\midrule
+N & 1000 & tamaño de red (fijo). \\
+$\langle k \rangle$ & 28.93 $\pm$ 0.23 & grado medio. \\
+Densidad & 0.0290 $\pm$ 2e-04 & fracción de enlaces presentes. \\
+$L$ (camino medio) & 2.482 $\pm$ 0.006 & pequeño; cf. $L_{\mathrm{ER}}\approx$ 2.05. \\
+$D$ (diámetro) & 5.23 $\pm$ 0.45 & muy bajo. \\
+$C_{\mathrm{global}}$ & 0.0648 $\pm$ 0.0010 & $\gg C_{\mathrm{ER}}\approx$ 0.029. \\
+$C_{\mathrm{avg}}$ & 0.0557 $\pm$ 0.0011 & coherente con clustering elevado. \\
+Asortatividad (grado) & 0.291 $\pm$ 0.008 & positiva (homofilia por grado). \\
+Gini (grado) & 0.299 $\pm$ 0.003 & heterogeneidad moderada. \\
+Small-world $\sigma$ & 2.16 $\pm$ 0.04 & $(C/C_{\mathrm{ER}})/(L/L_{\mathrm{ER}})$. \\
+\midrule
+$p_1$ (1 arista) & 0.0808 $\pm$ 6e-04 & ER: 0.0819; $p_1/p_1^{\mathrm{ER}}$ = 0.99. \\
+$p_2$ (2 aristas) & 0.00292 $\pm$ 4e-05 & ER: 0.00244; $p_2/p_2^{\mathrm{ER}}$ = 1.20. \\
+$p_3$ (3 aristas) & 6.7e-05 $\pm$ 2e-06 & ER: 2.4e-05; $p_3/p_3^{\mathrm{ER}}$ = 2.78. \\
+\bottomrule
+\end{tabular}
+\vspace{0.75em}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\small \textit{Notas de referencia y cálculos:}
+\begin{itemize}
+\item $p=\overline{\text{density}}= 0.0290$. Para ER: $p_1=3p(1-p)^2$, $p_2=3p^2(1-p)$, $p_3=p^3$.
+\item $C_{\mathrm{ER}}\approx \langle k \rangle/N = 28.93 / 1000 = 0.029$ (aprox.).
+\item $L_{\mathrm{ER}}\approx \log N / \log \langle k \rangle = \log(1000)/\log(28.93) \approx 2.05$ (aprox.).
+\item $\sigma = (C/C_{\mathrm{ER}})/(L/L_{\mathrm{ER}})$ (Humphries \& Gurney, 2008).
+\end{itemize}
+\end{table}
+\end{document}
