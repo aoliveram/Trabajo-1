@@ -29,14 +29,14 @@ RESULTS_DIR_LIST <- c(
   "trabajo_1_files/ATP_ER_diffusion_simulation_files_sigm/",
   "trabajo_1_files/ATP_ER_degseq_diffusion_simulation_files_sigm/"
 )
-RESULTS_DIR <- RESULTS_DIR_LIST[3]
+RESULTS_DIR <- RESULTS_DIR_LIST[2]
 
 PLOTS_DIR_LIST <- c(
   "trabajo_1_plots/ATP_diffusion_simulation_files_sigm/",
   "trabajo_1_plots/ATP_ER_diffusion_simulation_files_sigm/",
   "trabajo_1_plots/ATP_ER_degseq_diffusion_simulation_files_sigm/"
 )
-PLOTS_DIR <- PLOTS_DIR_LIST[3]
+PLOTS_DIR <- PLOTS_DIR_LIST[2]
 dir.create(PLOTS_DIR, showWarnings = FALSE, recursive = TRUE)
 
 # For annotation purposes only

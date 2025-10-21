@@ -58,7 +58,7 @@ THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 # Standard Deviations for Normal Threshold Distribution (τ_i) - OUTER SWEEP
 TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 
-NUM_CORES_TO_USE <- 16 # 8 --> CHPC
+NUM_CORES_TO_USE <- 8 # 8 --> CHPC
 
 # Output directory for raw results
 RESULTS_DIR <- "trabajo_1_files/ATP_ER_diffusion_simulation_files_sigm/"
@@ -106,7 +106,7 @@ random_degree_preserving <- function(g_base, niter_factor = 20) {
 cat("Starting grand simulation sweep...\n")
 
 strategies <- c("random", "central", "marginal", "eigen", "closeness")
-SEEDING_STRATEGY_FIXED <- strategies[1] # --> Change !!
+SEEDING_STRATEGY_FIXED <- strategies[3] # --> Change !!
 
 # This will store all raw results, one list element per SD, 
 # where each element is itself a list of results per Mean
@@ -115,7 +115,7 @@ all_sds_raw_results_list <- list()
 total_sd_iterations <- length(TAU_NORMAL_SD_SWEEP_LIST)
 
 time_init <- Sys.time()
-for (sd_idx in 2:total_sd_iterations) {
+for (sd_idx in 1:total_sd_iterations) {
   current_tau_sd <- TAU_NORMAL_SD_SWEEP_LIST[sd_idx]
   
   cat(paste0("\n####################################################################\n"))

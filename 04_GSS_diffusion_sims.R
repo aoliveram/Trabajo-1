@@ -39,7 +39,8 @@ source("diffusion_tests/simulation_functions.R")
 cat("Configurando los parámetros principales de la simulación...\n")
 
 # ---- MODIFICACIÓN 1: Cambiar etiquetas y directorios de ATP a GSS ----
-CURRENT_GRAPH_TYPE_LABEL <- "GSS-net"
+CURRENT_GRAPH_TYPE_LABEL_list <- c("GSS", "ER", "ER_degseq")
+CURRENT_GRAPH_TYPE_LABEL <- CURRENT_GRAPH_TYPE_LABEL_list[2]
 NETWORKS_DIR <- "trabajo_1_files/GSS_network_ergm/" # Directorio donde están las redes GSS con el score
 # --------------------------------------------------------------------
 
@@ -53,10 +54,10 @@ THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 
 # Configuración de paralelización
-NUM_CORES_TO_USE <- 8 # M4
+NUM_CORES_TO_USE <- 16 # CHPC
 
 # Directorio de salida
-RESULTS_DIR <- "trabajo_1_files/GSS_diffusion_simulation_files_sigm/"
+RESULTS_DIR <- "trabajo_1_files/GSS_ER_diffusion_simulation_files_sigm/"
 if (!dir.exists(RESULTS_DIR)) {
   dir.create(RESULTS_DIR, recursive = TRUE)
 }
@@ -68,13 +69,43 @@ IUL_VALUES_SWEEP <- seq(0.0, 1.0, by = 0.025)
 H_VALUES_SWEEP <- seq(0/12, 12/12, by = 1/12)
 
 # -----------------------------------------------------------------------------
+# 2.5 Network topology construction (GSS vs ER vs ER_degseq)
+# -----------------------------------------------------------------------------
+# These helpers create alternative topologies using the SAME individuals
+# (we copy vertex attributes from the base GSS graph).
+
+graph_density_target <- function(g) {
+  igraph::ecount(g) / (igraph::vcount(g) * (igraph::vcount(g) - 1) / 2)
+}
+
+# ER (same N and density)
+random_er_same_density <- function(g_base) {
+  n <- igraph::vcount(g_base)
+  p <- graph_density_target(g_base)
+  gr <- igraph::erdos.renyi.game(n = n, p.or.m = p, type = "gnp", directed = FALSE, loops = FALSE)
+  # copy vertex attributes (same individuals)
+  if (!is.null(igraph::V(g_base)$name)) igraph::V(gr)$name <- igraph::V(g_base)$name
+  for (attr in igraph::vertex_attr_names(g_base)) {
+    igraph::vertex_attr(gr, attr) <- igraph::vertex_attr(g_base, attr)
+  }
+  gr
+}
+
+# Degree-preserving randomization via double-edge swaps
+random_degree_preserving <- function(g_base, niter_factor = 20) {
+  m <- igraph::ecount(g_base)
+  gr <- igraph::rewire(g_base, with = igraph::keeping_degseq(niter = niter_factor * m))
+  gr
+}
+
+# -----------------------------------------------------------------------------
 # 3. Bucle Principal de Simulación
 # -----------------------------------------------------------------------------
 cat("Iniciando el gran barrido de simulación para redes GSS...\n")
 
 # Seleccionar la estrategia de siembra. Cambia el valor aquí si es necesario.
 strategies <- c("random", "central", "marginal", "eigen", "closeness")
-SEEDING_STRATEGY_FIXED <- strategies[3] # Ejemplo: empezar con 'random'
+SEEDING_STRATEGY_FIXED <- strategies[1]
 
 all_sds_raw_results_list <- list()
 total_sd_iterations <- length(TAU_NORMAL_SD_SWEEP_LIST)
@@ -121,6 +152,27 @@ for (sd_idx in 1:total_sd_iterations) {
       
       graph_for_this_run_ergm <- readRDS(current_network_path)
       graph_for_this_run <- asIgraph(graph_for_this_run_ergm)
+      
+      # --- Topology selection (GSS vs ER vs ER_degseq) ---
+      base_graph_for_attributes <- graph_for_this_run
+      if (CURRENT_GRAPH_TYPE_LABEL == "ER") {
+        graph_for_this_run <- random_er_same_density(base_graph_for_attributes)
+      } else if (CURRENT_GRAPH_TYPE_LABEL == "ER_degseq") {
+        graph_for_this_run <- random_degree_preserving(base_graph_for_attributes, niter_factor = 20)
+        # ensure vertex names retained
+        if (!is.null(igraph::V(base_graph_for_attributes)$name)) {
+          igraph::V(graph_for_this_run)$name <- igraph::V(base_graph_for_attributes)$name
+        }
+        # copy over any missing vertex attributes (rewire should preserve, but be safe)
+        for (attr in igraph::vertex_attr_names(base_graph_for_attributes)) {
+          if (!(attr %in% igraph::vertex_attr_names(graph_for_this_run))) {
+            igraph::vertex_attr(graph_for_this_run, attr) <- igraph::vertex_attr(base_graph_for_attributes, attr)
+          }
+        }
+      } else {
+        # GSS: keep loaded topology as-is
+      }
+      
       N_NODES_SPECIFIC_GRAPH <- vcount(graph_for_this_run)
       
       # ---- MODIFICACIÓN 3: Usar 'propensity_score' en lugar de 'q_i' ----
