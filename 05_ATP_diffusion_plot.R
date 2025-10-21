@@ -24,9 +24,26 @@ library(patchwork)
 library(viridis) 
 
 # --- Parámetros de Análisis ---
-RESULTS_DIR <- "trabajo_1_files/ATP_diffusion_simulation_files_sigm/"
-PLOTS_DIR <- "trabajo_1_plots/ATP_diffusion_simulation_files_sigm/"
+RESULTS_DIR_LIST <- c(
+  "trabajo_1_files/ATP_diffusion_simulation_files_sigm/",
+  "trabajo_1_files/ATP_ER_diffusion_simulation_files_sigm/",
+  "trabajo_1_files/ATP_ER_degseq_diffusion_simulation_files_sigm/"
+)
+RESULTS_DIR <- RESULTS_DIR_LIST[3]
+
+PLOTS_DIR_LIST <- c(
+  "trabajo_1_plots/ATP_diffusion_simulation_files_sigm/",
+  "trabajo_1_plots/ATP_ER_diffusion_simulation_files_sigm/",
+  "trabajo_1_plots/ATP_ER_degseq_diffusion_simulation_files_sigm/"
+)
+PLOTS_DIR <- PLOTS_DIR_LIST[3]
 dir.create(PLOTS_DIR, showWarnings = FALSE, recursive = TRUE)
+
+# For annotation purposes only
+DATASET_LABEL <- if (grepl("ATP_ER", RESULTS_DIR)) {
+  if (grepl("ATP_ER_degseq", RESULTS_DIR)) {
+    "ER degseq"} else {"ER"}
+} else {"ATP-net"}
 
 IUL_VALUES_SWEEP <- seq(0.0, 1.0, by = 0.025)
 H_VALUES_SWEEP <- seq(0/12, 12/12, by = 1/12)
@@ -34,10 +51,9 @@ THRESHOLD_MEAN_SWEEP_LIST <- c(0.3, 0.4, 0.5, 0.6)
 TAU_NORMAL_SD_SWEEP_LIST <- c(0.08, 0.12, 0.16, 0.20)
 
 strategies <- c("random", "central", "marginal", "eigen", "closeness")
-SEEDING_STRATEGY_FIXED <- strategies[2] # --> Change !!
+SEEDING_STRATEGY_FIXED <- strategies[1]
 PHASE_TRANSITION_THRESHOLD_JUMP <- 1/3 
-SUCCESSFUL_DIFFUSION_THRESHOLD_PROP <- 0.50 
-# MIN_PROP_SUCCESSFUL_RUNS_FOR_TILE_CELL ya no se usa para el heatmap de transiciones (heatmap 2)
+#SUCCESSFUL_DIFFUSION_THRESHOLD_PROP <- 0.50 
 
 cat("Cargando resultados crudos guardados...\n")
 grand_raw_results_path <- paste0(RESULTS_DIR, "phase_transition_GRAND_COMBINED_raw_results_all_sds_means_", SEEDING_STRATEGY_FIXED, ".rds") 
@@ -326,7 +342,7 @@ for (current_threshold_mean_plot in THRESHOLD_MEAN_SWEEP_LIST) {
     # Añadir título y subtítulo general al PDF
     final_plot_with_annotation <- final_combined_layout + 
       plot_annotation(
-        title = paste("Consolidated Heatmaps for ATP-net - Mean threshold =", sprintf("%.2f", current_threshold_mean_plot)),
+        title = paste("Consolidated Heatmaps for", DATASET_LABEL, "- Mean threshold =", sprintf("%.2f", current_threshold_mean_plot)),
         subtitle = paste("Thresholds ~ N(mu=", sprintf("%.2f", current_threshold_mean_plot), ", SD=var). ", 
                          num_runs_val_subtitle, " runs per (IUL,h) per individual panel. Seeding strategy: ", SEEDING_STRATEGY_FIXED,
                          sep=""),
