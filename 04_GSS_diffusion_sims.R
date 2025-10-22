@@ -105,7 +105,7 @@ cat("Iniciando el gran barrido de simulación para redes GSS...\n")
 
 # Seleccionar la estrategia de siembra. Cambia el valor aquí si es necesario.
 strategies <- c("random", "central", "marginal", "eigen", "closeness")
-SEEDING_STRATEGY_FIXED <- strategies[1]
+SEEDING_STRATEGY_FIXED <- strategies[2]
 
 all_sds_raw_results_list <- list()
 total_sd_iterations <- length(TAU_NORMAL_SD_SWEEP_LIST)
