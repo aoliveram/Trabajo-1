@@ -1,0 +1,27 @@
+
+Family: binomial 
+Link function: logit 
+
+Formula:
+adopt_rational ~ s(IUL, MSP, k = 10, by = contagion_type) + tau_mean + tau_sd + 	seed_type + network_type
+
+Parametric coefficients:
+                     Estimate  OR  Std.Error  z value Pr(>|z|)    
+(Intercept)           0.584    -   1.214e-04  4818.2   <2e-16 ***
+tau_mean             -0.216    -   1.904e-04 -1138.0   <2e-16 ***
+tau_sd                0.058    -   4.759e-04   122.5   <2e-16 ***
+seed_typecentral     -0.053  0.948 6.733e-05  -789.0   <2e-16 ***
+seed_typecloseness   -0.050  0.950 6.734e-05  -753.2   <2e-16 ***
+seed_typeeigen       -0.051  0.950 6.733e-05  -772.0   <2e-16 ***
+seed_typemarginal    -0.008  0.991 6.740e-05  -129.2   <2e-16 ***
+network_typeER        0.056  1.058 4.257e-05  1317.5   <2e-16 ***
+---
+Approximate significance of smooth terms:
+                                          k' edf k-index p-value    
+s(IUL,MSP):contagion_typeInnovation        9   9     0.6  <2e-16 ***
+s(IUL,MSP):contagion_typeCollectiveAction  9   9     0.6  <2e-16 ***
+---
+R-sq.(adj) =  0.986   Deviance explained = 98.2%
+fREML = 7.8107e+07  Scale est. = 1         n = 170560
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
